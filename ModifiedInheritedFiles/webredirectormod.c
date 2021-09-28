@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <netinet/tcp.h>
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/time.h>
 #include <time.h>
@@ -78,7 +79,7 @@ int redirector(int fd) {
 	if (pos > 0) {
 		*pos = '\0'; //terminate at line break
 		//fprintf(stderr, "new buffer:\n%s\n", buffer);
-		char substring[] = "GET /index"; // "GET /" + locationPrefix; 
+		char substring[] = "GET /index"; // "GET /" + locationPrefix;
 		pos = strstr(buffer, substring);
 		//assume it is found...
 		sprintf(oldTimestampStr, pos+strlen(substring), sizeof(oldTimestampStr));
@@ -105,6 +106,7 @@ int redirector(int fd) {
 
 	//compose new redirect with current time
 	sprintf(newLocation, "%s%d-%d%s", locationPrefix, currentTime.tv_sec, currentTime.tv_usec, locationSuffix);
+	fprintf(stderr, "Redirect to: %s\n", newLocation);
 
 	//fprintf(stderr, "Started!\n");
 	//fprintf(stderr, "Ready to roll\n");
@@ -115,15 +117,16 @@ int redirector(int fd) {
 		write(fd,buffer,strlen(buffer));*/
 	//sprintf(buffer,"HTTP/1.1 301\r\nContent-Type: text/html\r\nLocation: %s\r\n\r\n", (location == NULL)? NULLREDIRECT : location);
 	sprintf(buffer,"HTTP/1.1 301\r\nContent-Type: text/html\r\nLocation: %s\r\n\r\n", newLocation);
+	//fprintf(stderr, "Writing to client:\n---\n%s\n---\n", buffer);
 	write(fd,buffer,strlen(buffer));
 	//fprintf(stderr, "%s\n", buffer);
 	//fprintf(stderr, buffer);
 	sprintf(buffer,"<html>boooooo!</html>\r\n\r\n");
 	write(fd,buffer,strlen(buffer));
 	//fprintf(stderr, buffer);
-	fflush((FILE*)fd);
+	//fflush((FILE*)fd);
 #ifdef LINUX
-	sleep(1);       /* to allow socket to drain */
+	sleep(1);		/* to allow socket to drain */
 #endif
 	//fprintf(stderr, "Finished!\n");
 	return 0;
@@ -144,9 +147,9 @@ main(int argc, char **argv) {
 	struct timeval currentTime; //for filename
 	char filename[32] = {0};
 
-	if(argc !=  2) {
-		printf("usage: %s <port>\n\n", argv[0]);
-		return 0;
+	if(argc != 2) {
+		printf("usage: %s <port>\n", argv[0]);
+		return 1;
 	}
 
 	//signal(SIGCLD, SIG_IGN); /* ignore child death */
@@ -154,12 +157,16 @@ main(int argc, char **argv) {
 
 	/* setup the network socket */
 	if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
-	{ 
+	{
 		fprintf(stderr, "Unable to listen on socket\n");
 		return 1;
 	}
 
+#ifdef __linux
 	if (setsockopt(listenfd, SOL_TCP, TCP_NODELAY, &true_val, sizeof(int)) == -1) {
+#elif __APPLE__
+	if (setsockopt(listenfd, IPPROTO_TCP, TCP_NODELAY, &true_val, sizeof(int)) == -1) {
+#endif
 		fprintf(stderr, "Unable to set socket options\n");
 		return 1;
 	}
@@ -237,28 +244,23 @@ main(int argc, char **argv) {
 			fprintf(stderr, "Fork failed\n");
 			return 2;
 		} else {
-			if(pid == 0) {  /* child */
+			if(pid == 0) {	/* child */
 				close(listenfd);
 				redirector(socketfd);
 				//redirector(socketfd, NULL);
+
+				served++;
+				fprintf(stderr, "Victim: %s\n", inet_ntoa(cli_addr.sin_addr));
+				fprintf(stderr, "Served %d victim connections\n", served);
+
 				close(socketfd);
 				return 0;
-			} else {        /* parent */
+			} else {			/* parent */
 				close(socketfd);
 				//waitpid(pid);
 				//close(listenfd);
 				//exit(0);
 			}
 		}
-		served++;
-
-        	//This reminds me why I haven't learned C yet
-	      	//struct sockaddr_in* pV4Addr = (struct sockaddr_in*)&cli_addr;
-                //struct in_addr ipAddr = pV4Addr->sin_addr;
-                //char str[INET_ADDRSTRLEN];
-                //inet_ntop( AF_INET, &ipAddr, str, INET_ADDRSTRLEN );
-		fprintf(stderr, "Served %d victim connections - ", served);
-		//I tried
-		printf("%s\n", inet_ntoa(cli_addr.sin_addr)); 
 	}
 }
