@@ -259,6 +259,6 @@ main(int argc, char **argv) {
                 //inet_ntop( AF_INET, &ipAddr, str, INET_ADDRSTRLEN );
 		fprintf(stderr, "Served %d victim connections - ", served);
 		//I tried
-		printf("%d\n", inet_ntoa(cli_addr.sin_addr)); 
+		printf("%s\n", inet_ntoa(cli_addr.sin_addr)); 
 	}
 }
