@@ -29,6 +29,11 @@ int main(int argc, char *argv[]) {
   struct servent *servaddr;
   struct protoent *protocol;
 
+  if(argc != 3) {
+	  printf("usage: %s hostname port\n", argv[0]);
+	  return 1;
+  }
+
   strcpy(host, argv[1]);
 
   /* Resolve the host name */
@@ -60,7 +65,11 @@ int main(int argc, char *argv[]) {
   }
 
   int true_val = 1;
+#ifdef __linux
   if (setsockopt(sockid, SOL_TCP, TCP_NODELAY, &true_val, sizeof(int)) == -1) {
+#elif __APPLE__
+  if (setsockopt(sockid, IPPROTO_TCP, TCP_NODELAY, &true_val, sizeof(int)) == -1) {
+#endif
     fprintf(stderr, "Unable to set socket options\n");
   }
 	
