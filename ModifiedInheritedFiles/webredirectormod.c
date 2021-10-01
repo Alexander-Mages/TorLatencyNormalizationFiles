@@ -249,9 +249,7 @@ main(int argc, char **argv) {
 				redirector(socketfd);
 				//redirector(socketfd, NULL);
 
-				served++;
 				fprintf(stderr, "Victim: %s\n", inet_ntoa(cli_addr.sin_addr));
-				fprintf(stderr, "Served %d victim connections\n", served);
 
 				close(socketfd);
 				return 0;
@@ -262,5 +260,7 @@ main(int argc, char **argv) {
 				//exit(0);
 			}
 		}
+		served++;
+		fprintf(stderr, "Served %d victim connections\n", served);
 	}
 }
