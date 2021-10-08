@@ -221,7 +221,7 @@ main(int argc, char **argv) {
 		return 3;
 	}
 
-	fprintf(file, "----------------------------------\nStarted listening on port %d\nOld Timestamp (received),New Timestamp (current)\n", port);
+	fprintf(file, "----------------------------------\nStarted listening on port %d\nOld Timestamp (received),New Timestamp (current),Latency (difference)\n", port);
 	fflush(file);
 
 	fprintf(stderr, "Ready\n");

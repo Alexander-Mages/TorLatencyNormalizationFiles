@@ -4,17 +4,24 @@ from scipy.stats import ttest_ind, ttest_ind_from_stats, ks_2samp, mannwhitneyu
 from scipy.special import stdtr
 import sys
 import time
-import csv
+import pandas as pd
+
+
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]
-ksorttest = sys.argv[3]
+whattest = sys.argv[3]
 
-if not arg1 or not arg2 or not ksorttest:
+if not arg1 or not arg2 or not whattest:
     print("usage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test/mannwhitneyu)")
 
-#by default deals with line or space seperated numbers
-a = np.genfromtxt(sys.argv[1])
-b = np.genfromtxt(sys.argv[2])
+a = pd.read_csv(arg1, usecols = ['Latency (difference)'], sep=',')
+b = pd.read_csv(arg2, usecols = ['Latency (difference)'], sep=',')
+print(a)
+print(b)
+
+#deals with line or space seperated numbers
+#a = np.genfromtxt(sys.argv[1])
+#b = np.genfromtxt(sys.argv[2])
 
 if ksorttest == "t-test":
     t, p = ttest_ind(a, b, equal_var=False)
