@@ -96,7 +96,9 @@ int redirector(int fd) {
 		}
 		else {
 			fprintf(stderr, "CHILD: no periods in buffer. Initial request?\n");
-			fprintf(file, "start @ %d.%d\n", currentTime.tv_sec, currentTime.tv_usec);
+		//csv parser was not happy with the start time being under the column names, should be redundant with the first number in next row anyway
+		//(writes to standard error and not file)
+			fprintf(stderr, "start @ %d.%d\n", currentTime.tv_sec, currentTime.tv_usec);
 		}
 	} else {
 		fprintf(stderr, "CHILD: no periods in buffer. Initial request?\n");

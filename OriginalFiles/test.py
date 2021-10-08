@@ -14,23 +14,22 @@ whattest = sys.argv[3]
 if not arg1 or not arg2 or not whattest:
     print("usage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test/mannwhitneyu)")
 
-a = pd.read_csv(arg1, usecols = ['Latency (difference)'], sep=',')
-b = pd.read_csv(arg2, usecols = ['Latency (difference)'], sep=',')
+a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
+b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
 print(a)
 print(b)
-
 #deals with line or space seperated numbers
 #a = np.genfromtxt(sys.argv[1])
 #b = np.genfromtxt(sys.argv[2])
 
-if ksorttest == "t-test":
+if whattest == "t-test":
     t, p = ttest_ind(a, b, equal_var=False)
     print("t-test: t= %g\np=%g" % (t,p))
-elif ksorttest == "ks-test":
+elif whattest == "ks-test":
     #kstest
     x = ks_2samp(a, b)
     print(x)
-elif ksorttest == "mannwhitneyu":
+elif whattest == "mannwhitneyu":
     x = mannwhitneyu(a, b)
     print(x)
 else:
