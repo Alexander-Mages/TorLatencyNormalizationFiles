@@ -16,8 +16,8 @@ if not arg1 or not arg2 or not whattest:
 
 a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
 b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
-print(a)
-print(b)
+#print(a)
+#print(b)
 #deals with line or space seperated numbers
 #a = np.genfromtxt(sys.argv[1])
 #b = np.genfromtxt(sys.argv[2])
