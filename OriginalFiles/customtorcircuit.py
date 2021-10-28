@@ -45,8 +45,16 @@ def startTor(loglevel):
             ],
             'MaxOnionsPending': '0',
             '__DisablePredictedCircuits': '1',
+            'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
             'newcircuitperiod': '999999',
-            'maxcircuitdirtiness': '999999'
+            'maxcircuitdirtiness': '999999',
+            #config params for navigaTor
+            'SocksListenAddress': '127.0.0.1:9050',
+            'WarnUnsafeSocks': '0',
+            'CircuitBuildTimeout': '120',
+            'LearnCircuitBuildTimeout': '0',
+            #'UseMicrodescriptors': '0',
+            'SafeLogging': '0'
         }, completion_percent=0, take_ownership=True, close_output=False, init_msg_handler=printsum
     )
     return tor_process
