@@ -4,6 +4,7 @@ import getpass
 import subprocess
 import argparse
 from termcolor import colored
+import time
 
 #makes a new circuit with custom path and stops tor from creating new ones
 #note: if you add more than 3 fingerprints, the circuit just extends to whatever size you want
@@ -68,7 +69,7 @@ def ConnectControlPort():
       sys.exit(1)
 
     try:
-      controller.authenticate(controller)
+      control.Controller.authenticate(controller)
     except connection.IncorrectSocketType:
       print('Please check in your torrc that 9051 is the ControlPort.')
       print('Maybe you configured it to be the ORPort or SocksPort instead?')
@@ -77,7 +78,7 @@ def ConnectControlPort():
       controller_password = getpass.getpass('Controller password: ')
 
       try:
-        connection.authenticate(password = controller_password)
+        connection.authenticate(controller, password = controller_password)
       except connection.PasswordAuthFailed:
         print('Unable to authenticate, password is incorrect')
         sys.exit(1)
@@ -97,9 +98,9 @@ print("Circuit extended along custom path ",selectedPath)
 print(colored("established status: " + controller.get_info('circuit-status'), 'green'))
 
 
-#launch_tor returns a subprocess.popen object, this waits on its completion so tor actually stays open
+#blocking stdout watcher
 for line in tor_process.stdout:
-    print(line)
-for i in iter(lambda: tor_process.stdout.read(1)):
-    sys.stdout.buffer.write(c)
+    print("systime:", time.time(), line)
+#for i in iter(lambda: tor_process.stdout.read(1)):
+ #   sys.stdout.buffer.write(c)
 #tor_process.wait()
