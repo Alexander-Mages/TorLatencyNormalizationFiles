@@ -34,8 +34,8 @@ else:
 #for future stuff
 num_circs = 3
 
-def streamAnomaly():
-    alert = "ANOMALY: Unexpected Stream Event Detected. Investigate Further\nTime Of Event: " + time.time()
+def circuitAnomaly():
+    alert = "ANOMALY: Unexpected Circuit Event Detected. Investigate Further\nTime Of Event: " + time.time()
     print(colored(alert, 'red'))
     #log alert to file at some point along with the other output
 
@@ -116,16 +116,13 @@ controller.add_event_listener(attachStream, control.EventType.STREAM)
 print("1")
 #here is the actual experiment stuff,
 #two ideas pop up: launch firefox here and it will give it a stream,
-#or conduct the experiment right here using pycurl or something of that sort, currently I am going to do the latter
+#or conduct the experiment right here using pycurl or something of that sort, this does the latter: 
 #visits the webredirector.c server on localhost
-requests.get('http://127.0.0.1:4444',
-             proxies={'http': "socks5://127.0.0.1:9050"})
-print("2")
-controller.remove_event_listener(attachStream)
-print("3")
+#requests.get('http://127.0.0.1:4444',
+             #proxies={'http': "socks5://127.0.0.1:9050"})
 #watches to ensure no other streams are attached
 #I am not sure how to get the details of the event, but if logging is at DEBUG verbosity, it will include it
-controller.add_event_listener(streamAnomaly, control.EventType.STREAM)
+controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
 
 
 
