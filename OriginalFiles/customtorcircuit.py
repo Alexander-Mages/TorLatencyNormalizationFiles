@@ -10,6 +10,7 @@ import functools
 
 #script takes one argument: the path selection.
 #should be in this format: '','','' -vv. e.g. '00240ECB2B535AA4C1E1874D744DFA6AF2E5E941','00283B5564E3072DCDDAB31D6EF622DD49BF524F','0011BD2485AD45D984EC4159C88FC066E5E3300E' -vv
+print("Note: default location of the log is /tmp/tor_error_log. Positional argument after path can specify a custom location")
 if len(sys.argv[0]) < 1:
     print("ERR: No Argument\nusage: script.py -v [2-3 (one is default)] 'guard','middleman','exit'")
     sys.exit(1)
@@ -17,9 +18,11 @@ if len(sys.argv[0]) < 1:
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', type=int)
 parser.add_argument('path', type=str)
+parser.add_argument('logfile', type=str)
 args = parser.parse_args()
 
 selectedPath = args.path
+logfilepath = args.logfile
 
 #select verbosity
 if args.v == 2:
@@ -37,13 +40,13 @@ def circuitAnomaly(event):
 def UneccecarilyVerboseAndRedundantPrintFunctionSinceUsingPythonsNormalPrintFunctionSomehowBreaksStemsMsgHandler(line):
     print(line)
 
-def startTor(loglevel):
+def startTor(loglevel, logfilepath):
     tor_process = process.launch_tor_with_config(
         config = {
             'ControlPort': '9051',
             'Log': [
                 loglevel+' stdout',
-                'ERR file /tmp/tor_error_log',
+                loglevel+' file '+logfilepath,
             ],
             'MaxOnionsPending': '0',
             #'__DisablePredictedCircuits': '1',
@@ -94,7 +97,7 @@ def ConnectControlPort():
     return controller
 
 
-tor_process = startTor(log_level)
+tor_process = startTor(log_level, logfilepath)
 controller = ConnectControlPort()
 
 #creating custom circuit
