@@ -1,0 +1,557 @@
+Binary files tor-0.1.1.24 (modified?)/.DS_Store and tor-0.1.1.24/.DS_Store differ
+Only in tor-0.1.1.24 (modified?): Makefile
+Only in tor-0.1.1.24 (modified?): autom4te.cache
+Only in tor-0.1.1.24 (modified?): config.log
+Only in tor-0.1.1.24 (modified?): config.status
+Only in tor-0.1.1.24/contrib: .DS_Store
+Only in tor-0.1.1.24 (modified?)/contrib: Makefile
+Only in tor-0.1.1.24 (modified?)/contrib/osx: Makefile
+Only in tor-0.1.1.24 (modified?)/contrib/osx: TorBundleDesc.plist
+Only in tor-0.1.1.24 (modified?)/contrib/osx: TorBundleInfo.plist
+Only in tor-0.1.1.24 (modified?)/contrib/osx: TorDesc.plist
+Only in tor-0.1.1.24 (modified?)/contrib/osx: TorInfo.plist
+Only in tor-0.1.1.24 (modified?)/contrib/osx: TorStartupDesc.plist
+Only in tor-0.1.1.24 (modified?)/contrib/suse: Makefile
+diff -r tor-0.1.1.24 (modified?)/contrib/suse/tor.sh tor-0.1.1.24/contrib/suse/tor.sh
+43c43
+< TORCTL=/home/grad01/dchantin/bin/torctl
+---
+> TORCTL=/usr/local/bin/torctl
+Only in tor-0.1.1.24 (modified?)/contrib: tor.logrotate
+diff -r tor-0.1.1.24 (modified?)/contrib/tor.sh tor-0.1.1.24/contrib/tor.sh
+29c29
+< TORCTL=/home/grad01/dchantin/bin/torctl
+---
+> TORCTL=/usr/local/bin/torctl
+diff -r tor-0.1.1.24 (modified?)/contrib/torctl tor-0.1.1.24/contrib/torctl
+27c27
+< TORBIN="/home/grad01/dchantin/bin/$EXEC"
+---
+> TORBIN="/usr/local/bin/$EXEC"
+30c30
+< TORCONF="/home/grad01/dchantin/etc/tor/torrc"
+---
+> TORCONF="/usr/local/etc/tor/torrc"
+33c33
+< PIDFILE="/home/grad01/dchantin/var/run/tor/tor.pid"
+---
+> PIDFILE="/usr/local/var/run/tor/tor.pid"
+36c36
+< LOGFILE="/home/grad01/dchantin/var/log/tor/tor.log"
+---
+> LOGFILE="/usr/local/var/log/tor/tor.log"
+39c39
+< TORDATA="/home/grad01/dchantin/var/lib/tor"
+---
+> TORDATA="/usr/local/var/lib/tor"
+Only in tor-0.1.1.24 (modified?)/contrib: torify
+Only in tor-0.1.1.24/doc: .DS_Store
+Only in tor-0.1.1.24 (modified?)/doc: Makefile
+Only in tor-0.1.1.24 (modified?)/doc/design-paper: Makefile
+Only in tor-0.1.1.24 (modified?)/doc: tor.1
+Only in tor-0.1.1.24 (modified?): orconfig.h
+Only in tor-0.1.1.24/src: .DS_Store
+Only in tor-0.1.1.24 (modified?)/src: Makefile
+Only in tor-0.1.1.24 (modified?)/src/common: Makefile
+diff -r tor-0.1.1.24 (modified?)/src/common/Makefile.in tor-0.1.1.24/src/common/Makefile.in
+208a209,226
+> aes.o: aes.c ../../orconfig.h aes.h ../common/torint.h util.h torint.h \
+> 	compat.h log.h ../common/compat.h
+> compat.o: compat.c ../../orconfig.h compat.h torint.h log.h \
+> 	../common/compat.h util.h strlcpy.c strlcat.c
+> container.o: container.c compat.h ../../orconfig.h torint.h util.h log.h \
+> 	../common/compat.h container.h crypto.h ht.h
+> crypto.o: crypto.c ../../orconfig.h crypto.h log.h ../common/compat.h \
+> 	../common/torint.h aes.h util.h torint.h compat.h container.h
+> log.o: log.c ../../orconfig.h util.h torint.h compat.h log.h \
+> 	../common/compat.h
+> torgzip.o: torgzip.c ../../orconfig.h util.h torint.h compat.h log.h \
+> 	../common/compat.h torgzip.h
+> tortls.o: tortls.c ../../orconfig.h crypto.h tortls.h ../common/crypto.h \
+> 	../common/compat.h ../common/torint.h util.h torint.h compat.h \
+> 	log.h
+> util.o: util.c ../../orconfig.h util.h torint.h compat.h log.h \
+> 	../common/compat.h crypto.h container.h
+> 
+Only in tor-0.1.1.24 (modified?)/src/common: aes.o
+Only in tor-0.1.1.24 (modified?)/src/common: compat.o
+Only in tor-0.1.1.24 (modified?)/src/common: container.o
+Only in tor-0.1.1.24 (modified?)/src/common: crypto.o
+Only in tor-0.1.1.24 (modified?)/src/common: libor-crypto.a
+Only in tor-0.1.1.24 (modified?)/src/common: libor.a
+Only in tor-0.1.1.24 (modified?)/src/common: log.o
+Only in tor-0.1.1.24 (modified?)/src/common: torgzip.o
+Only in tor-0.1.1.24 (modified?)/src/common: tortls.o
+Only in tor-0.1.1.24 (modified?)/src/common: util.o
+Only in tor-0.1.1.24 (modified?)/src/config: Makefile
+Only in tor-0.1.1.24 (modified?)/src/config: torrc.sample
+Only in tor-0.1.1.24 (modified?)/src/or: .circuitbuild.c.swp
+Only in tor-0.1.1.24 (modified?)/src/or: .main.c.swp
+Only in tor-0.1.1.24 (modified?)/src/or: .or.h.swp
+Only in tor-0.1.1.24 (modified?)/src/or: Makefile
+diff -r tor-0.1.1.24 (modified?)/src/or/Makefile.in tor-0.1.1.24/src/or/Makefile.in
+124c124
+< DIST_COMMON =  README Makefile.am Makefile.in
+---
+> DIST_COMMON =  Makefile.am Makefile.in
+249a250,364
+> buffers.o: buffers.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> circuitbuild.o: circuitbuild.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> circuitlist.o: circuitlist.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h ../common/ht.h
+> circuituse.o: circuituse.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> command.o: command.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> config.o: config.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h ../common/aes.h ../common/ht.h \
+> 	../common/test.h
+> connection.o: connection.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> connection_edge.o: connection_edge.c or.h ../../orconfig.h \
+> 	../common/torint.h ../common/crypto.h ../common/tortls.h \
+> 	../common/compat.h ../common/log.h ../common/container.h \
+> 	../common/util.h ../common/torgzip.h
+> connection_or.o: connection_or.c or.h ../../orconfig.h \
+> 	../common/torint.h ../common/crypto.h ../common/tortls.h \
+> 	../common/compat.h ../common/log.h ../common/container.h \
+> 	../common/util.h ../common/torgzip.h
+> control.o: control.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> cpuworker.o: cpuworker.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> directory.o: directory.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> dirserv.o: dirserv.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> dns.o: dns.c or.h ../../orconfig.h ../common/torint.h ../common/crypto.h \
+> 	../common/tortls.h ../common/compat.h ../common/log.h \
+> 	../common/container.h ../common/util.h ../common/torgzip.h \
+> 	../common/ht.h
+> hibernate.o: hibernate.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> main.o: main.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> onion.o: onion.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> policies.o: policies.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> relay.o: relay.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> rendclient.o: rendclient.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> rendcommon.o: rendcommon.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> rendmid.o: rendmid.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> rendservice.o: rendservice.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> rephist.o: rephist.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> router.o: router.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> routerlist.o: routerlist.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> routerparse.o: routerparse.c or.h ../../orconfig.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h
+> test.o: test.c ../../orconfig.h or.h ../common/torint.h \
+> 	../common/crypto.h ../common/tortls.h ../common/compat.h \
+> 	../common/log.h ../common/container.h ../common/util.h \
+> 	../common/torgzip.h ../common/test.h
+> tor_main.o: tor_main.c
+> 
+Only in tor-0.1.1.24 (modified?)/src/or: README
+diff -r tor-0.1.1.24 (modified?)/src/or/buffers.c tor-0.1.1.24/src/or/buffers.c
+992c992
+<             /*log_warn(LD_APP,
+---
+>             log_warn(LD_APP,
+999c999
+<                 safe_socks ? " Rejecting." : "");*/
+---
+>                 safe_socks ? " Rejecting." : "");
+Only in tor-0.1.1.24 (modified?)/src/or: buffers.o
+diff -r tor-0.1.1.24 (modified?)/src/or/circuitbuild.c tor-0.1.1.24/src/or/circuitbuild.c
+1356,1358c1356
+< //  state->desired_path_len = DESIRED_PATH_LENGTH;
+< //  state->desired_path_len = r;
+<     state->desired_path_len = 3;
+---
+>   state->desired_path_len = r;
+1665,1749c1663,1665
+<   /*
+<   //XXXX: SERVER PORTION
+<   if (state->desired_path_len == 1) { //should be 2 - just a test for now
+<     printf("Now in path length = 1\n");
+<     routerinfo_t *r1 = router_get_by_nickname("shalmirane", 1);
+<     if (r1) {
+<       info = extend_info_from_router(r1);
+<     } else {
+<       printf("No ROUTER found\n");
+<     }
+<   } else if (state->desired_path_len == 2) {
+<     printf("Now in path length = 2\n");
+<     routerinfo_t *r1 = router_get_by_nickname("snark", 1);
+<     if (r1) {
+<       info = extend_info_from_router(r1);
+<     } else {
+<       printf("No first ROUTER found\n");
+<     }
+<     printf("First router found");
+<     routerinfo_t *r2 = router_get_by_nickname("sillyrabbit", 1);
+<     if (r2) {
+<       info = extend_info_from_router(r2);
+<     } else {
+<       printf("No second ROUTER found\n");
+<     }
+<     printf("Second router found");
+<   } else if (state->desired_path_len == 3) {
+<     printf("Now in path length = 3\n");
+<     routerinfo_t *r1 = router_get_by_nickname("snark", 1);
+<     if (r1) {
+<       info = extend_info_from_router(r1);
+<     } else {
+<       printf("No first ROUTER found\n");
+<     }
+<     routerinfo_t *r2 = router_get_by_nickname("sillyrabbit", 1);
+<     if (r2) {
+<       info = extend_info_from_router(r2);
+<     } else {
+<       printf("No second ROUTER found\n");
+<     }
+<     routerinfo_t *r3 = router_get_by_nickname("shalmirane", 1);
+<     if (r3) {
+<       info = extend_info_from_router(r3);
+<     } else {
+<       printf("No third ROUTER found\n");
+<     }   
+<   }*/
+< 
+<   //XXXX: CLIENT PORTION
+< 	/*XXX: (server)
+< 		x: immediately select ourselves as exit node at (a)
+< 		y: if we want path of 2
+< 			select hard-coded node at (b)
+< 			do (x)
+< 		z: if we want path of 3
+< 			pick from hard-coded nodes twice at (b)
+< 			do (x)
+< 	*/
+< 	/*XXX: (client)
+< 		alwayz (z) except do (b) three times instead of two
+< 	*/
+< 
+< 	//			1	2	3
+< 	//list_t *paths = {{a,b,c}, {x,y,z}, {m,o,p}};
+< 	//path_selected = random(1,3);
+< 	//printf("selected path %l", paths[path_selected]);
+< 	
+< 	//choose_good_exit_server returns self
+< 	//choose_good_middle_server returns paths[path_selected][2]
+< 	//choose_good_entry_server returns paths[path_selected][1]
+< 
+<   if (cur_len == state->desired_path_len - 1) { // picking last node
+<     info = extend_info_dup(state->chosen_exit); //choose_good_exit_server
+< 	//XXX: (a) we always want to be the last node (server)
+< //printf("Third path%s\n", paths[SELECTED_PATH][2]);
+<     //routerinfo_t *r = router_get_by_nickname(paths[SELECTED_PATH][2], 1);
+<     //routerinfo_t *r = router_get_by_nickname("snark", 1);
+<     //if (r) {
+<       //info = extend_info_dup(extend_info_from_router(r)); //choose_good_exit_server
+<  //     info = extend_info_from_router(r);
+< //    } else {
+< //      printf("No exit router found\n");
+< //    }
+<   } else if (cur_len == 0) { // picking first node
+< 	//XXX: (b) pick from hard-coded list!!
+---
+>   if (cur_len == state->desired_path_len - 1) { /* Picking last node */
+>     info = extend_info_dup(state->chosen_exit);
+>   } else if (cur_len == 0) { /* picking first node */
+1751,1754c1667
+< //printf("First path%s\n", paths[SELECTED_PATH][0]);
+<     //routerinfo_t *r = router_get_by_nickname(paths[SELECTED_PATH][0], 1); 
+<     //routerinfo_t *r = router_get_by_nickname("shalmirane", 1);
+<     if (r) {
+---
+>     if (r)
+1756,1758d1668
+<     } else {
+<       printf("No Route here\n");
+<     }
+1760,1769c1670,1672
+< 
+< 	//XXX: (c) we don't always want this to execute
+< //    routerinfo_t *r =
+< //      choose_good_middle_server(purpose, state, *head_ptr, cur_len);
+< //printf("Second path%s\n", paths[SELECTED_PATH][1]);
+< //    routerinfo_t *r = router_get_by_nickname(paths[SELECTED_PATH][1], 1); 
+<     or_options_t *options = get_options();
+< //    routerinfo_t *r = router_get_by_nickname("shamborfosi", 0);
+<     routerinfo_t *r = router_get_by_nickname(options->MiddleNode, 0);
+<     if (r) {
+---
+>     routerinfo_t *r =
+>       choose_good_middle_server(purpose, state, *head_ptr, cur_len);
+>     if (r)
+1771,1773d1673
+<     } else {
+<       printf("No route here either\n");
+<     }
+1977d1876
+<     //router = router_get_by_nickname("shalmirane", 1);
+Only in tor-0.1.1.24 (modified?)/src/or: circuitbuild.o
+Only in tor-0.1.1.24 (modified?)/src/or: circuitlist.o
+Only in tor-0.1.1.24 (modified?)/src/or: circuituse.o
+Only in tor-0.1.1.24 (modified?)/src/or: command.o
+diff -r tor-0.1.1.24 (modified?)/src/or/config.c tor-0.1.1.24/src/or/config.c
+158d157
+<   VAR("MiddleNode",	     STRING,   MiddleNode,           NULL),
+2437d2435
+<   //XXXX
+Only in tor-0.1.1.24 (modified?)/src/or: config.o
+Only in tor-0.1.1.24 (modified?)/src/or: connection.o
+Only in tor-0.1.1.24 (modified?)/src/or: connection_edge.o
+Only in tor-0.1.1.24 (modified?)/src/or: connection_or.o
+Only in tor-0.1.1.24 (modified?)/src/or: control.o
+diff -r tor-0.1.1.24 (modified?)/src/or/cpuworker.c tor-0.1.1.24/src/or/cpuworker.c
+49,55d48
+< /*
+< 	spawn_func(webserver, 1);
+< 	log_notice(LD_NET,"just spawned the web server 1, hopefully it's working.");
+< 	spawn_func(webserver, 2);
+< 	log_notice(LD_NET,"just spawned the web server 2, hopefully it's working.");
+< */
+< 
+496a490
+> 
+Only in tor-0.1.1.24 (modified?)/src/or: cpuworker.o
+Only in tor-0.1.1.24 (modified?)/src/or: directory.o
+Only in tor-0.1.1.24 (modified?)/src/or: dirserv.o
+Only in tor-0.1.1.24 (modified?)/src/or: dns.o
+Only in tor-0.1.1.24 (modified?)/src/or: helper.c
+Only in tor-0.1.1.24 (modified?)/src/or: helper.h
+Only in tor-0.1.1.24 (modified?)/src/or: hibernate.o
+diff -r tor-0.1.1.24 (modified?)/src/or/main.c tor-0.1.1.24/src/or/main.c
+9,23d8
+< /*
+<   parts ffor webserver Copyright Paul Griffiths 1999
+<   Email: mail@paulgriffiths.net
+< */
+< int webserver(int);
+< 
+< #define SERVER_PORT1            (5190)
+< #define SERVER_PORT2            (6667)
+< 
+< #include "helper.h"
+< #include "reqhead.h"
+< #include "resource.h"
+< #include "resphead.h"
+< #include "servreq.h"
+< 
+35,38d19
+< //GIANT hack
+< static char* connected_client1 = 0;
+< static char* connected_client2 = 0;
+< 
+1190,1194d1170
+<    spawn_func(webserver, 1);
+<    log_notice(LD_NET,"just spawned the web server 1, hopefully it's working.");
+<    spawn_func(webserver, 2);
+<    log_notice(LD_NET,"just spawned the web server 2, hopefully it's working.");
+< 
+2181,2184d2156
+<  /*XXXX   if (argc >= 1) {
+<       DESIRED_PATH_LENGTH = atoi(argv[1]);
+<       printf("%s\n", DESIRED_PATH_LENGTH);
+<     }*/
+2204,2276d2175
+< /* for webserver functionality */
+< 
+< int webserver(int number) {
+<     int    listener, conn;
+<     struct sockaddr_in servaddr, cliaddr;
+<     int clilen = sizeof(cliaddr);
+<     char* client;
+< 
+<    if ((client = calloc(32, sizeof(int))) == NULL)
+<       Error_Quit("calloc failed.");
+< 
+<     /*  Create socket  */
+<     if ( (listener = socket(AF_INET, SOCK_STREAM, 0)) < 0 )
+<    Error_Quit("Couldn't create listening socket.");
+< 
+<    log_notice(LD_NET, "webserver socket created...");
+< 
+<     /*  Populate socket address structure  */
+<     memset(&servaddr, 0, sizeof(servaddr));
+<     servaddr.sin_family      = AF_INET;
+<     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+<     if (number == 1) servaddr.sin_port = htons(SERVER_PORT1);
+<     else if (number == 2) servaddr.sin_port = htons(SERVER_PORT2);
+< 
+<     /*  Assign socket address to socket  */
+<     if ( bind(listener, (struct sockaddr *) &servaddr, sizeof(servaddr)) < 0 )
+<    Error_Quit("Couldn't bind listening socket.");
+< 
+<     /*  Make socket a listening socket  */
+<     if ( listen(listener, LISTENQ) < 0 )
+<    Error_Quit("Call to listen failed.");
+< 
+<    log_notice(LD_NET, "webserver listening...");
+< 
+<     /*  Loop infinitely to accept and service connections  */
+<     while ( 1 ) {
+< 
+<    /*  Wait for connection  */
+<    if ( (conn = accept(listener, (struct sockaddr*) &cliaddr, &clilen)) < 0 )
+<        Error_Quit("Error calling accept()");
+< 
+<       /* identify our client */
+<    strncpy(client, inet_ntoa(cliaddr.sin_addr), 31);
+<    client[31] = 0; //NULL-terminate
+< 
+<     if (number == 1) {
+<       if (connected_client1) {
+<          free(connected_client1); //no memory leaks, please!
+<       }
+<       connected_client1 = client;
+<       //log_notice(LD_NET, "%s just connected on port %d\n", client, SERVER_PORT1);
+<     }
+<     else if (number == 2) {
+<       if (connected_client2) {
+<          free(connected_client2); //no memory leaks, please!
+<       }
+<       connected_client2 = client;
+<       //log_notice(LD_NET, "%s just connected on port %d\n", client, SERVER_PORT2);
+<     }
+<     else Error_Quit("I knew who I am, but no longer!");
+< 
+<       //actually, we don't much care about serving this guy! :)
+<        Service_Request(conn);
+< 
+<    /*    close the connected socket, clean up child processes,
+<        and go back to accept a new connection.                   */
+<    if ( close(conn) < 0 )
+<        Error_Quit("Error closing connection socket in parent.");
+<     }
+< 
+<     return EXIT_FAILURE;    /*  We shouldn't get here  */
+< }
+< 
+Only in tor-0.1.1.24 (modified?)/src/or: main.o
+Only in tor-0.1.1.24 (modified?)/src/or: onion.o
+diff -r tor-0.1.1.24 (modified?)/src/or/or.h tor-0.1.1.24/src/or/or.h
+11,12d10
+< //XXXX Our external variable
+< //extern int DESIRED_PATH_LENGTH = 3;
+1243d1240
+<   char *MiddleNode; /**The middle node to be used for this circuit*/
+2328d2324
+< routerinfo_t *router_get_by_ip(const char *address);
+Only in tor-0.1.1.24 (modified?)/src/or: policies.o
+Only in tor-0.1.1.24 (modified?)/src/or: relay.o
+Only in tor-0.1.1.24 (modified?)/src/or: rendclient.o
+Only in tor-0.1.1.24 (modified?)/src/or: rendcommon.o
+Only in tor-0.1.1.24 (modified?)/src/or: rendmid.o
+Only in tor-0.1.1.24 (modified?)/src/or: rendservice.o
+Only in tor-0.1.1.24 (modified?)/src/or: rephist.o
+Only in tor-0.1.1.24 (modified?)/src/or: reqhead.c
+Only in tor-0.1.1.24 (modified?)/src/or: reqhead.h
+Only in tor-0.1.1.24 (modified?)/src/or: resource.c
+Only in tor-0.1.1.24 (modified?)/src/or: resource.h
+Only in tor-0.1.1.24 (modified?)/src/or: resphead.c
+Only in tor-0.1.1.24 (modified?)/src/or: resphead.h
+Only in tor-0.1.1.24 (modified?)/src/or: router.o
+diff -r tor-0.1.1.24 (modified?)/src/or/routerlist.c tor-0.1.1.24/src/or/routerlist.c
+1099,1119d1098
+< /** Return the router in our routerlist with an IP address matching
+<  * the one passed in. Return NULL if no such router is known.
+< 	(copied from router_find_exact_exit_enclave) */
+< routerinfo_t *
+< router_get_by_ip(const char *address)
+< {
+<   uint32_t addr;
+<   struct in_addr in;
+< 
+<   if (!tor_inet_aton(address, &in))
+<     return NULL; /* it's not an IP already */
+<   addr = ntohl(in.s_addr);
+< 
+<   SMARTLIST_FOREACH(routerlist->routers, routerinfo_t *, router,
+<   {
+<     if (router->addr == addr)
+<       return router;
+<   });
+<   return NULL;
+< }
+< 
+Only in tor-0.1.1.24 (modified?)/src/or: routerlist.o
+Only in tor-0.1.1.24 (modified?)/src/or: routerparse.o
+Only in tor-0.1.1.24 (modified?)/src/or: servreq.c
+Only in tor-0.1.1.24 (modified?)/src/or: servreq.h
+Only in tor-0.1.1.24 (modified?)/src/or: test
+Only in tor-0.1.1.24 (modified?)/src/or: test.o
+Only in tor-0.1.1.24 (modified?)/src/or: tor
+Only in tor-0.1.1.24 (modified?)/src/or: tor_main.o
+Only in tor-0.1.1.24 (modified?)/src/or: webserv.c
+Only in tor-0.1.1.24 (modified?)/src/tools: Makefile
+Only in tor-0.1.1.24 (modified?)/src/tools: tor-resolve
+Only in tor-0.1.1.24 (modified?)/src/tools: tor-resolve.o
+Only in tor-0.1.1.24 (modified?)/src/win32: Makefile
+Only in tor-0.1.1.24 (modified?): stamp-h
+diff -r tor-0.1.1.24 (modified?)/tor.spec tor-0.1.1.24/tor.spec
+110c110
+< %define _localstatedir /home/grad01/dchantin/var
+---
+> %define _localstatedir /usr/local/var
