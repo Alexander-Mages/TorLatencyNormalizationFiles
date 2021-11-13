@@ -7,10 +7,16 @@ from termcolor import colored
 import time
 import requests
 import functools
+from tbselenium.tbdriver import TorBrowserDriver
+from tbselenium.utils import launch_tbb_tor_with_stem
+from selenium.webdriver.support.ui import Select
 
 #script takes one argument: the path selection.
 #should be in this format: '','','' -vv. e.g. '00240ECB2B535AA4C1E1874D744DFA6AF2E5E941','00283B5564E3072DCDDAB31D6EF622DD49BF524F','0011BD2485AD45D984EC4159C88FC066E5E3300E' -vv
-print("Note: default location of the log is /tmp/tor_error_log. Positional argument after path can specify a custom location")
+#print("Note: default location of the log is /tmp/tor_error_log. Positional argument after path can specify a custom location")
+
+tbb_dir = '/home/alex/tor-browser_en-US/'
+
 if len(sys.argv[0]) < 1:
     print("ERR: No Argument\nusage: script.py -v [2-3 (one is default)] 'guard','middleman','exit'")
     sys.exit(1)
@@ -18,11 +24,14 @@ if len(sys.argv[0]) < 1:
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', type=int)
 parser.add_argument('path', type=str)
-parser.add_argument('logfile', type=str)
+parser.add_argument('-logfile', type=str)
 args = parser.parse_args()
 
 selectedPath = args.path
-logfilepath = args.logfile
+if args.logfile:
+    logfilepath = args.logfile
+else:
+    logfilepath = '/tmp/torerror'
 
 #select verbosity
 if args.v == 2:
@@ -48,30 +57,34 @@ def startTor(loglevel, logfilepath):
                 loglevel+' stdout',
                 loglevel+' file '+logfilepath,
             ],
-            'MaxOnionsPending': '0',
             #'__DisablePredictedCircuits': '1',
             '__LeaveStreamsUnattached': '1',
             'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
-    #might be able to live without the following two, but I havent tried yet \/
-            'newcircuitperiod': '999999',
             'SocksPort': '9050 IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth',
-            #'maxcircuitdirtiness': '999999',
-            #config params for navigaTor
-            #'SocksListenAddress': '127.0.0.1:9050',
-            #'WarnUnsafeSocks': '0',
-            #'CircuitBuildTimeout': '120',
-            #'LearnCircuitBuildTimeout': '0',
-            #'UseMicrodescriptors': '0',
-            #'SafeLogging': '0'
         }, completion_percent=0, take_ownership=True, close_output=False, init_msg_handler=UneccecarilyVerboseAndRedundantPrintFunctionSinceUsingPythonsNormalPrintFunctionSomehowBreaksStemsMsgHandler
     )
     #returns POPEN subprocess so I can communicate with it
     return tor_process
 
+def startTorBrowser():
+    with open('/home/alex/TorLatencyNormalizationFiles/OriginalFiles/customtorcircuit.py') as file:
+        contents = file.read()
+        search_word = "__LeaveStreamsUnattached 1"
+        if search_word in contents:
+            print("config modifications are verified: streams will not be attached automatically")
+        else:
+            print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
+            sys.exit(1)
+    subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
+
+def visitWebRedirector():
+    with TorBrowserDriver("/home/alex/tor-browser_en-US/") as driver:
+        driver.get('http://127.0.0.1:8080')
+
 #connect to tor control port using optional password authentication
 def ConnectControlPort():
     try:
-      controller = control.Controller.from_port("127.0.0.1",9051)
+      controller = control.Controller.from_port("127.0.0.1",9151)
     except SocketError as exc:
       print('Unable to connect to port 9051 ', exc)
       sys.exit(1)
@@ -97,7 +110,9 @@ def ConnectControlPort():
     return controller
 
 
-tor_process = startTor(log_level, logfilepath)
+#tor_process = startTor(log_level, logfilepath)
+startTorBrowser()
+time.sleep(5)
 controller = ConnectControlPort()
 
 #creating custom circuit
@@ -119,23 +134,17 @@ controller.add_event_listener(attachStream, control.EventType.STREAM)
 #listens for circuit events to log
 controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
 
-#watches the POPEN subprocess stdout indefinately
-for line in tor_process.stdout:
-    print("systime:", time.time(), line)
+visitWebRedirector()
+while True:
+    time.sleep(30)
 
+
+#the following is for command line tor.
+
+#watches the POPEN subprocess stdout indefinately
+#for line in tor_process.stdout:
+    #print("systime:", time.time(), line)
 #I dont see any reason why the program would hit this line, but just for redundancy this will block the program
 #since the tor process is terminated upon exit
-tor_process.wait()
-
-
-
-#NOT NEEDED NOW \/
-
-#here is the actual experiment stuff,
-#two ideas pop up: launch firefox here and it will give it a stream,
-#or conduct the experiment right here using pycurl or something of that sort, this does the latter:
-#visits the webredirector.c server on localhost
-#requests.get('http://127.0.0.1:4444',
-             #proxies={'http': "socks5://127.0.0.1:9050"})
-#watches to ensure no other streams are attached
-#I am not sure how to get the details of the event, but if logging is at DEBUG verbosity, it will include it
+#tor_process.wait()
+#
