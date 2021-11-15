@@ -18,7 +18,7 @@ from selenium.webdriver.support.ui import Select
 tbb_dir = '/home/alex/tor-browser_en-US/'
 
 if len(sys.argv[0]) < 1:
-    print("ERR: No Argument\nusage: script.py -v [2-3 (one is default)] 'guard','middleman','exit'")
+    print("ERR: No Argument\nusage: script.py -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
     sys.exit(1)
 
 parser = argparse.ArgumentParser()
@@ -31,7 +31,7 @@ selectedPath = args.path
 if args.logfile:
     logfilepath = args.logfile
 else:
-    logfilepath = '/tmp/torerror'
+    logfilepath = '/tmp/'+time.time()+'tor_error'
 
 #select verbosity
 if args.v == 2:
