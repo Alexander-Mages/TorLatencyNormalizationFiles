@@ -7,13 +7,8 @@ from termcolor import colored
 import time
 import requests
 import functools
-from tbselenium.tbdriver import TorBrowserDriver
-from tbselenium.utils import launch_tbb_tor_with_stem
-from selenium.webdriver.support.ui import Select
-
-#script takes one argument: the path selection.
-#should be in this format: '','','' -vv. e.g. '00240ECB2B535AA4C1E1874D744DFA6AF2E5E941','00283B5564E3072DCDDAB31D6EF622DD49BF524F','0011BD2485AD45D984EC4159C88FC066E5E3300E' -vv
-#print("Note: default location of the log is /tmp/tor_error_log. Positional argument after path can specify a custom location")
+import tbselenium
+import os
 
 tbb_dir = '/home/alex/tor-browser_en-US/'
 
@@ -41,21 +36,23 @@ elif args.v == 3:
 else:
     log_level = "NOTICE"
 
-#prints out and (eventually) logs circuit and stream events. Relies on event listener
-def circuitAnomaly(event):
-    print(colored(f"CIRCUIT EVENT:\nTime Of Event: {time.time()}\nDetails: {event}", "yellow"))
-    #log alert to file at some point along with the other output
+
+#theres a couple different functions in here that do the same thing differently, primarmily in regard to launching tor
+#startTor() does so using stem and not with the tor browser.
+#startTorBrowser() does so using the tor browser bundle through a subprocess
+#startCustomTorBrowser() does so using tbselenium using a custom config and returns a subprocess. Also allows selenium to be used
+
 
 def UneccecarilyVerboseAndRedundantPrintFunctionSinceUsingPythonsNormalPrintFunctionSomehowBreaksStemsMsgHandler(line):
     print(line)
-
-def startTor(loglevel, logfilepath):
+#starts tor directly through stem, no browser
+def startTor(log_level, logfilepath):
     tor_process = process.launch_tor_with_config(
         config = {
             'ControlPort': '9051',
             'Log': [
-                loglevel+' stdout',
-                loglevel+' file '+logfilepath,
+                log_level+' stdout',
+                log_level+' file '+logfilepath,
             ],
             #'__DisablePredictedCircuits': '1',
             '__LeaveStreamsUnattached': '1',
@@ -66,20 +63,37 @@ def startTor(loglevel, logfilepath):
     #returns POPEN subprocess so I can communicate with it
     return tor_process
 
-def startTorBrowser():
-    with open('/home/alex/TorLatencyNormalizationFiles/OriginalFiles/customtorcircuit.py') as file:
-        contents = file.read()
-        search_word = "__LeaveStreamsUnattached 1"
-        if search_word in contents:
-            print("config modifications are verified: streams will not be attached automatically")
-        else:
-            print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
-            sys.exit(1)
-    subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
 
-def visitWebRedirector():
-    with TorBrowserDriver("/home/alex/tor-browser_en-US/") as driver:
-        driver.get('http://127.0.0.1:8080')
+#Launches Tor Browser using POPEN, does not use selenium but works well
+ def startTorBrowser():
+     with open('/home/alex/TorLatencyNormalizationFiles/OriginalFiles/customtorcircuit.py') as file:
+         contents = file.read()
+         search_word = "__LeaveStreamsUnattached 1"
+         if search_word in contents:
+             print("config modifications are verified: streams will not be attached automatically")
+         else:
+             print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
+             sys.exit(1)
+     subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
+
+
+#Launches tor browser with custom config using stem and selenium
+#allows use of selenium AND the subprocess stuff
+def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
+    tor_binary = os.path.join(tbb_dir, tbselenium.common.DEFAULT_TOR_BINARY_PATH)
+    torrc = {
+        'ControlPort': '9051',
+        'Log': [
+            loglevel + ' stdout',
+            loglevel + ' file ' + logfilepath,
+        ],
+        # '__DisablePredictedCircuits': '1',
+        '__LeaveStreamsUnattached': '1',
+        #'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+    }
+    tor_process = tbselenium.utils.launch_tbb_tor_with_stem(tbb_path=tbb_dir, torrc=torrc, tor_binary=tor_binary)
+    return tor_process
+
 
 #connect to tor control port using optional password authentication
 def ConnectControlPort():
@@ -109,34 +123,50 @@ def ConnectControlPort():
     print("Tor version", controller.get_version())
     return controller
 
+def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
+    # creating custom circuit
+    print("initial status: ", controller.get_info('circuit-status'))
+    customcircid = controller.new_circuit(selectedPath, 'general')
+    print("Creating Circuit " + customcircid + " on custom path ", selectedPath)
+    print(colored("established status: " + controller.get_info('circuit-status'), 'green'))
+    # when passed a stream, it attaches it to the custom circuit. Always.
+    # allows other circuits to be present but not used for application traffic
+    def attachStream(stream):
+        if stream.status == 'NEW':
+            # stream is returned as a list of objects, regardless of the size
+            print(colored(
+                f"STREAM EVENT:\nstream + {stream.id} attached to circuit {customcircid}\nTime Of Event: {time.time()}\nDetails: {stream[0]}",
+                'blue'))
+            controller.attach_stream(stream.id, customcircid)
+    # prints out and (eventually) logs circuit and stream events. Relies on event listener
+    def circuitAnomaly(event):
+        print(colored(f"CIRCUIT EVENT:\nTime Of Event: {time.time()}\nDetails: {event}", "yellow"))
+        # log alert to file at some point along with the other output
+    # watches for streams and calls the preceding function
+    controller.add_event_listener(attachStream, control.EventType.STREAM)
+    # listens for circuit events to log
+    controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
+
+
+def VisitUrl(tbb_dir):
+    with tbselenium.tbdriver.TorBrowserDriver(tbb_dir, tor_cfg=tbselenium.common.USE_STEM) as driver:
+        driver.get('http://127.0.0.1:8080')
+
 
 #tor_process = startTor(log_level, logfilepath)
-startTorBrowser()
-time.sleep(5)
+tor_process = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
+time.sleep(3)
 controller = ConnectControlPort()
+BuildCustomCircAndOpenStreamListener(controller, selectedPath)
+VisitUrl(tbb_dir)
 
-#creating custom circuit
-print("initial status: ", controller.get_info('circuit-status'))
-customcircid = controller.new_circuit(selectedPath,'general')
-print("Creating Circuit " + customcircid + " on custom path ",selectedPath)
-print(colored("established status: " + controller.get_info('circuit-status'), 'green'))
 
-#when passed a stream, it attaches it to the custom circuit. Always.
-#allows other circuits to be present but not used for application traffic
-def attachStream(stream):
-    if stream.status == 'NEW':
-        #stream is returned as a list of objects, regardless of the size
-        print(colored(f"STREAM EVENT:\nstream + {stream.id} attached to circuit {customcircid}\nTime Of Event: {time.time()}\nDetails: {stream[0]}", 'blue'))
-        controller.attach_stream(stream.id, customcircid)
-#watches for streams and calls the preceding function
-controller.add_event_listener(attachStream, control.EventType.STREAM)
-
-#listens for circuit events to log
-controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
-
-visitWebRedirector()
-while True:
-    time.sleep(30)
+#watches the POPEN subprocess stdout indefinately
+for line in tor_process.stdout:
+    print("systime:", time.time(), line)
+#I dont see any reason why the program would hit this line, but just for redundancy this will block the program
+#since the tor process is terminated upon exit
+tor_process.wait()
 
 
 #the following is for command line tor.
