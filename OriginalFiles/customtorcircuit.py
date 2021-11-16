@@ -7,7 +7,9 @@ from termcolor import colored
 import time
 import requests
 import functools
-import tbselenium
+import tbselenium.common as cm
+from tbselenium.tbdriver import TorBrowserDriver
+from tbselenium.utils import launch_tbb_tor_with_stem
 import os
 
 tbb_dir = '/home/alex/tor-browser_en-US/'
@@ -26,7 +28,7 @@ selectedPath = args.path
 if args.logfile:
     logfilepath = args.logfile
 else:
-    logfilepath = '/tmp/'+time.time()+'tor_error'
+    logfilepath = '/tmp/'+str(time.time())+'tor_error'
 
 #select verbosity
 if args.v == 2:
@@ -65,7 +67,7 @@ def startTor(log_level, logfilepath):
 
 
 #Launches Tor Browser using POPEN, does not use selenium but works well
- def startTorBrowser():
+def startTorBrowser():
      with open('/home/alex/TorLatencyNormalizationFiles/OriginalFiles/customtorcircuit.py') as file:
          contents = file.read()
          search_word = "__LeaveStreamsUnattached 1"
@@ -80,9 +82,10 @@ def startTor(log_level, logfilepath):
 #Launches tor browser with custom config using stem and selenium
 #allows use of selenium AND the subprocess stuff
 def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
-    tor_binary = os.path.join(tbb_dir, tbselenium.common.DEFAULT_TOR_BINARY_PATH)
+    tor_binary = os.path.join(tbb_dir, cm.DEFAULT_TOR_BINARY_PATH)
     torrc = {
         'ControlPort': '9051',
+        'SOCKSPort': '9050',
         'Log': [
             loglevel + ' stdout',
             loglevel + ' file ' + logfilepath,
@@ -91,14 +94,14 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
         '__LeaveStreamsUnattached': '1',
         #'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
     }
-    tor_process = tbselenium.utils.launch_tbb_tor_with_stem(tbb_path=tbb_dir, torrc=torrc, tor_binary=tor_binary)
+    tor_process = launch_tbb_tor_with_stem(tbb_path=tbb_dir, torrc=torrc, tor_binary=tor_binary)
     return tor_process
 
 
 #connect to tor control port using optional password authentication
 def ConnectControlPort():
     try:
-      controller = control.Controller.from_port("127.0.0.1",9151)
+      controller = control.Controller.from_port("127.0.0.1",9051)
     except SocketError as exc:
       print('Unable to connect to port 9051 ', exc)
       sys.exit(1)
@@ -149,13 +152,13 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
 
 
 def VisitUrl(tbb_dir):
-    with tbselenium.tbdriver.TorBrowserDriver(tbb_dir, tor_cfg=tbselenium.common.USE_STEM) as driver:
-        driver.get('http://127.0.0.1:8080')
+    with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
+        driver.get('http://24.255.241.98:8080')
+        time.sleep(99999)
 
 
 #tor_process = startTor(log_level, logfilepath)
 tor_process = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
-time.sleep(3)
 controller = ConnectControlPort()
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
 VisitUrl(tbb_dir)
