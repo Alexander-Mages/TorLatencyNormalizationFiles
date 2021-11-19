@@ -44,6 +44,17 @@ else:
 #startTorBrowser() does so using the tor browser bundle through a subprocess
 #startCustomTorBrowser() does so using tbselenium using a custom config and returns a subprocess. Also allows selenium to be used
 
+def CheckTorrc():
+    with open('/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults') as file:
+         contents = file.read()
+         search_word = "__LeaveStreamsUnattached 1"
+         if search_word in contents:
+             print("config modifications are verified: streams will not be attached automatically")
+             return true
+         else:
+             print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
+             sys.exit(1)
+
 
 def UneccecarilyVerboseAndRedundantPrintFunctionSinceUsingPythonsNormalPrintFunctionSomehowBreaksStemsMsgHandler(line):
     print(line)
@@ -68,14 +79,6 @@ def startTor(log_level, logfilepath):
 
 #Launches Tor Browser using POPEN, does not use selenium but works well
 def startTorBrowser():
-     with open('/home/alex/TorLatencyNormalizationFiles/OriginalFiles/customtorcircuit.py') as file:
-         contents = file.read()
-         search_word = "__LeaveStreamsUnattached 1"
-         if search_word in contents:
-             print("config modifications are verified: streams will not be attached automatically")
-         else:
-             print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
-             sys.exit(1)
      subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
 
 
@@ -158,6 +161,8 @@ def VisitUrl(tbb_dir):
 
 
 #tor_process = startTor(log_level, logfilepath)
+if CheckTorrc() == False:
+    sys.exit()
 tor_process = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
 controller = ConnectControlPort()
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
