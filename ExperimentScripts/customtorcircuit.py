@@ -1,4 +1,4 @@
-import sys
+Aimport sys
 from stem import *
 import getpass
 import subprocess
@@ -50,7 +50,7 @@ def CheckTorrc():
          search_word = "__LeaveStreamsUnattached 1"
          if search_word in contents:
              print("config modifications are verified: streams will not be attached automatically")
-             return true
+             return True
          else:
              print("config is not customized. Please add  __LeaveStreamsUnattached 1  to ~/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults")
              sys.exit(1)

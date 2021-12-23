@@ -17,12 +17,7 @@ if not arg1 or not arg2 or not whattest:
 
 a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
 b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
-<<<<<<< HEAD
-#print(a)
-#print(b)
-=======
 
->>>>>>> 1c3d8af7d915d36971ae234cc21fe0252e3a208d
 #deals with line or space seperated numbers
 #a = np.genfromtxt(sys.argv[1])
 #b = np.genfromtxt(sys.argv[2])
@@ -31,7 +26,6 @@ if whattest == "t-test":
     t, p = ttest_ind(a, b, equal_var=False)
     print("t-test: t= %g\np=%g" % (t,p))
 elif whattest == "ks-test":
-    #kstest
     x = ks_2samp(a, b)
     print(x)
 elif whattest == "mannwhitneyu":
@@ -53,15 +47,15 @@ else:
 # plt.legend(loc='upper right')
 # plt.show()
 
-colors = ['b','g']
+#colors = ['b','g']
 
 #plots the histogram
-fig, ax1 = plt.subplots()
-ax1.hist([a,b],color=colors)
-ax1.set_xlim(-3,3)
-ax1.set_ylabel("Count")
-plt.tight_layout()
-plt.show()
+#fig, ax1 = plt.subplots()
+#ax1.hist([a,b],color=colors)
+#ax1.set_xlim(-3,3)
+#ax1.set_ylabel("Count")
+#plt.tight_layout()
+#plt.show()
 
 # #
 # bins = np.linspace(0, 1, 100)
