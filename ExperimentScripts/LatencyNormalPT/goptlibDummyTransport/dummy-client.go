@@ -28,6 +28,30 @@ var ptInfo pt.ClientInfo
 // ends, -1 is written.
 var handlerChan = make(chan int)
 
+type customConn struct {
+	net.Conn
+
+	isServer bool
+
+	delay int
+}
+
+func newClientConn(conn net.Conn, int delay) (c *customConn, err error) {
+	c = &customConn{conn, false, delay}
+	return
+}
+
+
+func (conn *customConn) Read(b []byte) (n int, err error) {
+	conn.Read(b)
+	return
+}
+func (conn *customConn) Write(b []byte) (n int, err error) {
+	time.Sleep(5000 * time.Millisecond)
+	_, err = conn .Write(b)
+	return
+}
+
 func copyLoop(a, b net.Conn) {
 	var wg sync.WaitGroup
 	wg.Add(2)
@@ -61,7 +85,6 @@ func handler(conn *pt.SocksConn) error {
 	if err != nil {
 		return err
 	}
-
 	copyLoop(conn, remote)
 
 	return nil

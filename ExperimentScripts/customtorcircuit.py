@@ -1,4 +1,4 @@
-Aimport sys
+import sys
 from stem import *
 import getpass
 import subprocess
@@ -68,6 +68,9 @@ def startTor(log_level, logfilepath):
                 log_level+' file '+logfilepath,
             ],
             #'__DisablePredictedCircuits': '1',
+            #'UseBridges': '1',
+            #'Bridge': 'dummy 65.21.66.166:9001 0022C7399DE3E5C8F6B74CE2A28399D52726485F',
+            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
             '__LeaveStreamsUnattached': '1',
             'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
             'SocksPort': '9050 IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth',
@@ -156,7 +159,7 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
 
 def VisitUrl(tbb_dir):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
-        driver.get('http://24.255.241.98:8080')
+        driver.get('https://www.whatismyip.com/')
         time.sleep(99999)
 
 
