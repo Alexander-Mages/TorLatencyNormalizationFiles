@@ -17,6 +17,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 )
 
 import "git.torproject.org/pluggable-transports/goptlib.git"
@@ -26,6 +27,26 @@ var ptInfo pt.ClientInfo
 // When a connection handler starts, +1 is written to this channel; when it
 // ends, -1 is written.
 var handlerChan = make(chan int)
+
+type customConn struct {
+	net.Conn
+}
+
+func newClientConn(conn net.Conn) (c *customConn) {
+	c = &customConn{conn}
+	return
+}
+
+//func (conn *customConn) Read(b []byte) (n int, err error) {
+//	_, err = conn.Read(b)
+//	return
+//
+//}
+func (conn *customConn) Write(b []byte) (n int, err error) {
+	time.Sleep(200 * time.Millisecond)
+	n, err = conn.Conn.Write(b)
+	return n, err
+}
 
 func copyLoop(a, b net.Conn) {
 	var wg sync.WaitGroup
@@ -50,17 +71,17 @@ func handler(conn *pt.SocksConn) error {
 	}()
 
 	defer conn.Close()
-	remote, err := net.Dial("tcp", conn.Req.Target)
+	FirstRemote, err := net.Dial("tcp", conn.Req.Target)
 	if err != nil {
 		conn.Reject()
 		return err
 	}
+	remote := newClientConn(FirstRemote)
 	defer remote.Close()
 	err = conn.Grant(remote.RemoteAddr().(*net.TCPAddr))
 	if err != nil {
 		return err
 	}
-
 	copyLoop(conn, remote)
 
 	return nil
@@ -82,7 +103,7 @@ func acceptLoop(ln *pt.SocksListener) error {
 
 func main() {
 	var err error
-
+	time.Sleep(7 * time.Second)
 	ptInfo, err = pt.ClientSetup([]string{"dummy"})
 	if err != nil {
 		os.Exit(1)

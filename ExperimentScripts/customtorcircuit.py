@@ -1,5 +1,6 @@
 import sys
 from stem import *
+import stem.descriptor.remote
 import getpass
 import subprocess
 import argparse
@@ -91,7 +92,7 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     #fingerprint of guard node for bridge configuration
     guardFP = selectedPath.split(",")[0]
     #in order to integrate with the pluggable transport, we need the IP of the guard node
-    guardDescriptor = stem.descriptor.remote.Query(resource='/tor/server/fp/' + guardFP).run()[0]
+    guardDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP).run()[0]
     guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
     torrc = {
         'ControlPort': '9051',
