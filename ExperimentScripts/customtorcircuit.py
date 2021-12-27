@@ -69,7 +69,6 @@ def startTor(log_level, logfilepath):
             ],
             #'__DisablePredictedCircuits': '1',
             #'UseBridges': '1',
-            #'Bridge': 'dummy 65.21.66.166:9001 0022C7399DE3E5C8F6B74CE2A28399D52726485F',
             'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
             '__LeaveStreamsUnattached': '1',
             'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
@@ -89,6 +88,11 @@ def startTorBrowser():
 #allows use of selenium AND the subprocess stuff
 def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     tor_binary = os.path.join(tbb_dir, cm.DEFAULT_TOR_BINARY_PATH)
+    #fingerprint of guard node for bridge configuration
+    guardFP = selectedPath.split(",")[0]
+    #in order to integrate with the pluggable transport, we need the IP of the guard node
+    guardDescriptor = stem.descriptor.remote.Query(resource='/tor/server/fp/' + guardFP).run()[0]
+    guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
     torrc = {
         'ControlPort': '9051',
         'SOCKSPort': '9050',
@@ -96,6 +100,11 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
             loglevel + ' stdout',
             loglevel + ' file ' + logfilepath,
         ],
+        'UseBridges': '1',
+        #setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
+        #this has no effect on circuit length or construction
+        'Bridge': 'dummy ' + guardDir_Port + ' ' + guardFP,
+        'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
         # '__DisablePredictedCircuits': '1',
         '__LeaveStreamsUnattached': '1',
         #'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
