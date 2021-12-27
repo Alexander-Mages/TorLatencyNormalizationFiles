@@ -30,26 +30,22 @@ var handlerChan = make(chan int)
 
 type customConn struct {
 	net.Conn
-
-	isServer bool
-
-	delay int
 }
 
-func newClientConn(conn net.Conn, int delay) (c *customConn, err error) {
-	c = &customConn{conn, false, delay}
+func newClientConn(conn net.Conn) (c *customConn) {
+	c = &customConn{conn}
 	return
 }
 
-
-func (conn *customConn) Read(b []byte) (n int, err error) {
-	conn.Read(b)
-	return
-}
+//func (conn *customConn) Read(b []byte) (n int, err error) {
+//	_, err = conn.Read(b)
+//	return
+//
+//}
 func (conn *customConn) Write(b []byte) (n int, err error) {
-	time.Sleep(5000 * time.Millisecond)
-	_, err = conn .Write(b)
-	return
+	//time.Sleep(500 * time.Millisecond)
+	n, err = conn.Conn.Write(b)
+	return n, err
 }
 
 func copyLoop(a, b net.Conn) {
@@ -75,11 +71,12 @@ func handler(conn *pt.SocksConn) error {
 	}()
 
 	defer conn.Close()
-	remote, err := net.Dial("tcp", conn.Req.Target)
+	FirstRemote, err := net.Dial("tcp", conn.Req.Target)
 	if err != nil {
 		conn.Reject()
 		return err
 	}
+	remote := newClientConn(FirstRemote)
 	defer remote.Close()
 	err = conn.Grant(remote.RemoteAddr().(*net.TCPAddr))
 	if err != nil {
@@ -106,7 +103,7 @@ func acceptLoop(ln *pt.SocksListener) error {
 
 func main() {
 	var err error
-
+	time.Sleep(7 * time.Second)
 	ptInfo, err = pt.ClientSetup([]string{"dummy"})
 	if err != nil {
 		os.Exit(1)
