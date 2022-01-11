@@ -94,6 +94,11 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     #in order to integrate with the pluggable transport, we need the IP of the guard node
     guardDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP).run()[0]
     guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
+    #only returns once command finishes, python command simmilar to unix 'time'?
+    #fallbacktoauthority makes it fail if it cannot query the relay directly
+    rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP, fall_back_to_authority=False, endpoints=guardDir_Port).run(True)[0]
+    print(rtttest.runtime)
+    
     torrc = {
         'ControlPort': '9051',
         'SOCKSPort': '9050',
