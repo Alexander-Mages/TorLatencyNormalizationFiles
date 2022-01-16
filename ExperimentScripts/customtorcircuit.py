@@ -1,5 +1,6 @@
 import sys
 from stem import *
+from stem import ORPort
 import stem.descriptor.remote
 import getpass
 import subprocess
@@ -96,7 +97,9 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
     #only returns once command finishes, python command simmilar to unix 'time'?
     #fallbacktoauthority makes it fail if it cannot query the relay directly
-    rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP, fall_back_to_authority=False, endpoints=guardDir_Port).run(True)[0]
+    testtuple = (guardDescriptor.address, guardDescriptor.or_port)
+    testdirport = stem.ORPort(guardDescriptor.address, guardDescriptor.or_port)
+    rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP, fall_back_to_authority=False, endpoints=testdirport).run(True)[0]
     print(rtttest.runtime)
     
     torrc = {
