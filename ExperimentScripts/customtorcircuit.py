@@ -13,6 +13,8 @@ import tbselenium.common as cm
 from tbselenium.tbdriver import TorBrowserDriver
 from tbselenium.utils import launch_tbb_tor_with_stem
 import os
+#this might be a mistake, but I'll keep it simple
+import threading
 
 tbb_dir = '/home/alex/tor-browser_en-US/'
 
@@ -27,6 +29,7 @@ parser.add_argument('-logfile', type=str)
 args = parser.parse_args()
 
 selectedPath = args.path
+selectedPathList = selectedPath.split(",")
 if args.logfile:
     logfilepath = args.logfile
 else:
@@ -90,17 +93,11 @@ def startTorBrowser():
 #allows use of selenium AND the subprocess stuff
 def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     tor_binary = os.path.join(tbb_dir, cm.DEFAULT_TOR_BINARY_PATH)
-    #fingerprint of guard node for bridge configuration
-    guardFP = selectedPath.split(",")[0]
+    #get exit node descriptor, useful later
+    exitDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + selectedPathList[2]).run()[0]
     #in order to integrate with the pluggable transport, we need the IP of the guard node
-    guardDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP).run()[0]
+    guardDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + selectedPathList[0]).run()[0]
     guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
-    #only returns once command finishes, python command simmilar to unix 'time'?
-    #fallbacktoauthority makes it fail if it cannot query the relay directly
-    testdirport = []
-    testdirport = [stem.DirPort(guardDescriptor.address, guardDescriptor.or_port)]
-    rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + guardFP, fall_back_to_authority=False, endpoints=testdirport).run(True)[0]
-    print(rtttest.runtime)
     
     torrc = {
         'ControlPort': '9051',
@@ -112,14 +109,14 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
         'UseBridges': '1',
         #setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
         #this has no effect on circuit length or construction
-        'Bridge': 'dummy ' + guardDir_Port + ' ' + guardFP,
+        'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
         'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
         # '__DisablePredictedCircuits': '1',
         '__LeaveStreamsUnattached': '1',
         #'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
     }
     tor_process = launch_tbb_tor_with_stem(tbb_path=tbb_dir, torrc=torrc, tor_binary=tor_binary)
-    return tor_process
+    return tor_process, exitDescriptor
 
 
 #connect to tor control port using optional password authentication
@@ -175,19 +172,41 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
     controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
 
 
+def CircRTT(ExitDescriptor):
+    exitFP = selectedPathList[2]
+    DirPort = [stem.DirPort(ExitDescriptor.address, ExitDescriptor.or_port)]
+    while True:
+        starttime = time.time()
+        rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + exitFP, fall_back_to_authority=False,
+                                          endpoints=DirPort).run(True)[0]
+        hackyRTT = time.time() - starttime
+        print("RTT of custom circuit is probably: " + hackyRTT)
+        print("there's a log somewhere that has an rtt time, idk where it's at, but stem records the rtt of this command\n"
+              "It has a time measurement right now, but i cannot verify it's accuracy")
+        #totally arbitrary, collects every 30s
+        time.sleep(30)
+
 def VisitUrl(tbb_dir):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
         driver.get('https://www.whatismyip.com/')
-        time.sleep(99999)
+        while True:
+            time.sleep(30)
+            driver.refresh()
+        #time.sleep(99999)
 
 
 #tor_process = startTor(log_level, logfilepath)
 if CheckTorrc() == False:
     sys.exit()
-tor_process = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
+
+#returns guard descriptor, not needed nor used, but might be useful
+tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
 controller = ConnectControlPort()
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
+periodicRTT = threading.Thread(target=CircRTT, args=[exitDescriptor])
+periodicRTT.start()
 VisitUrl(tbb_dir)
+#only for sure works with exit node
 
 
 #watches the POPEN subprocess stdout indefinately
