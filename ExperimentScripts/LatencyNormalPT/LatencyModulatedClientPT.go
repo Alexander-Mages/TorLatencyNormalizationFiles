@@ -11,8 +11,11 @@
 package main
 
 import (
+	"encoding/csv"
+	"fmt"
 	"io"
 	"net"
+	"net/http"
 	"os"
 	"os/signal"
 	"sync"
@@ -27,6 +30,19 @@ var ptInfo pt.ClientInfo
 // When a connection handler starts, +1 is written to this channel; when it
 // ends, -1 is written.
 var handlerChan = make(chan int)
+
+var LatencyAddition int
+
+type Record struct {
+	Date string
+	Source string
+	Server string
+	Low string
+	Q1 string
+	MD string
+	Q3 string
+	High string
+}
 
 type customConn struct {
 	net.Conn
@@ -43,7 +59,7 @@ func newClientConn(conn net.Conn) (c *customConn) {
 //
 //}
 func (conn *customConn) Write(b []byte) (n int, err error) {
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(time.Duration(LatencyAddition) * time.Millisecond)
 	n, err = conn.Conn.Write(b)
 	return n, err
 }
@@ -101,8 +117,102 @@ func acceptLoop(ln *pt.SocksListener) error {
 	}
 }
 
+
+
+
+func fetchLatencyMetrics(url string) ([][]string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	reader := csv.NewReader(resp.Body)
+	reader.Comment = '#'
+	//note^ '' specifies a rune (seems like a char?), but "" specifies a string
+	reader.FieldsPerRecord = -1
+	rawdata, err := reader.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+	return rawdata, nil
+}
+
+func parseLatencyMetrics(rawdata [][]string) ([]Record, error) {
+	var data []Record
+	for _, line := range rawdata {
+		row := Record{
+			Date: line[0],
+			Source: line[1],
+			Server: line[2],
+			Low: line[3],
+			Q1: line[4],
+			MD: line[5],
+			Q3: line[6],
+			High: line[7],
+		}
+		data = append(data, row)
+	}
+	return data, nil
+}
+
+
 func main() {
 	var err error
+
+
+	//using the US data for now
+	now := time.Now()
+	SubtractedTime := now.Add(-time.Hour * 48)
+
+	//this confused me, Jan 2 2006 is the formatting date for Go. This date is formatted in the desired way in the layout param
+	FinalDate := SubtractedTime.Format("2006-01-02")
+	url := fmt.Sprintf("https://metrics.torproject.org/onionperf-latencies.csv?start=%s&end=%s&server=public", FinalDate, now.Format("2006-01-02"))
+
+	rawdata, err := fetchLatencyMetrics(url)
+	if err != nil {
+		fmt.Println(err)
+	}
+	data, _ := parseLatencyMetrics(rawdata)
+
+	for _, row := range data {
+		fmt.Println(row.Date + "\t\t " + row.Source + " \t\t " + row.Server + " \t\t " + row.Low + " \t\t " + row.Q1+ " \t\t " + row.MD + " \t\t " + row.Q3 + " \t\t " + row.High)
+	}
+	fmt.Printf("using latency data from region: %s", data[5].Source)
+
+	//measure latency here, will need to be done by stem (probably), so communication will need to happen between programs
+	//check PT spec for communication, it's just an integer so I can't imagine it's impossible
+	fmt.Printf("Average user latencies are as follows:\n25th percentile:%s\nmedian:%s\n75th percentile:%s\n", data[5].Q1, data[5].MD, data[5].Q3)
+	fmt.Printf("latency range including outliers: %s - %s", data[5].Low, data[5].High)
+
+
+	MeasuredLatency := 500
+	LatencyAddition = 0
+	//brackets are hard coded right now for simplicity
+	if MeasuredLatency > 1500{
+		fmt.Println("nothing we can do, latency higher than highest outlier bracket")
+	} else if MeasuredLatency > Atoi(data[5].High) {
+		fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
+		LatencyAddition = 1500 - MeasuredLatency
+	} else if MeasuredLatency > Atoi(data[5].Q3) {
+		fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
+		LatencyAddition = Atoi(data[5].High) - MeasuredLatency
+	} else if MeasuredLatency > Atoi(data[5].MD) {
+		fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
+		LatencyAddition = Atoi(data[5].Q3) - MeasuredLatency
+	} else if MeasuredLatency > Atoi(data[5].Q1) {
+		fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
+		LatencyAddition = Atoi(data[5].MD) - MeasuredLatency
+	} else if MeasuredLatency > Atoi(data[5].Low) {
+		fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
+		LatencyAddition = Atoi(data[5].Q1) - MeasuredLatency
+	} else if Measured Latency < Atoi(data[5].Low) {
+		fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
+		LatencyAddition = Atoi(data[5].Low) - MeasuredLatency
+	}
+	//in case this hellish piece of code doesn't print it
+	fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", LatencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
+//etc....
+
 	time.Sleep(7 * time.Second)
 	ptInfo, err = pt.ClientSetup([]string{"dummy"})
 	if err != nil {

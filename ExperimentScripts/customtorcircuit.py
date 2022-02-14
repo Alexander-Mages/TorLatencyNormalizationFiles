@@ -190,7 +190,7 @@ def VisitUrl(tbb_dir):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
         driver.get('https://www.whatismyip.com/')
         while True:
-            time.sleep(30)
+            time.sleep(3000)
             driver.refresh()
         #time.sleep(99999)
 
@@ -203,6 +203,16 @@ if CheckTorrc() == False:
 tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
 controller = ConnectControlPort()
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
+VisitUrl(tbb_dir)
+exitFP = selectedPathList[2]  
+DirPort = [stem.DirPort(exitDescriptor.address, exitDescriptor.or_port)]
+starttime = time.time()
+rtttest = descriptor.remote.Query(resource='/tor/server/fp/' + exitFP, fall_back_to_authority=False, endpoints=DirPort).run(True)[0]
+hackyRTT = time.time() - starttime
+print("RTT of custom circuit is probably: " + hackyRTT)
+print("there's a log somewhere that has an rtt time, idk where it's at, but stem records the rtt of this command\n"
+"It has a time measurement right now, but i cannot verify it's accuracy")
+print("\n\n\n\n\n\n\n\n\n\n\n")
 periodicRTT = threading.Thread(target=CircRTT, args=[exitDescriptor])
 periodicRTT.start()
 VisitUrl(tbb_dir)
