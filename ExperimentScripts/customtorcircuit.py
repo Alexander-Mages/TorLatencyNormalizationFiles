@@ -195,10 +195,16 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
 
 def ViolateExitPolicy(tbb_dir):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
-        driver.get('http:127.0.0.1:80')
+        driver.get('https://speed.cloudflare.com/')
+        #for testing
+        #driver.get('http:127.0.0.1:80')
         while True:
             time.sleep(30)
-            driver.refresh()
+            start_time = time.time()
+            driver.get('http://127.0.0.1:80/')
+            latency = time.time() - start_time
+            #somehow communicate latency to PT
+            print("RTT to exit node is " + latency)
 
 #queries exit node descriptor via IP. All system traffic must run through Tor for this to work.
 def CircRTT(ExitDescriptor):

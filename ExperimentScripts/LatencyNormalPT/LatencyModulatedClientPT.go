@@ -21,6 +21,7 @@ import (
 	"sync"
 	"syscall"
 	"time"
+	"strconv"
 )
 
 import "git.torproject.org/pluggable-transports/goptlib.git"
@@ -184,30 +185,39 @@ func main() {
 	fmt.Printf("Average user latencies are as follows:\n25th percentile:%s\nmedian:%s\n75th percentile:%s\n", data[5].Q1, data[5].MD, data[5].Q3)
 	fmt.Printf("latency range including outliers: %s - %s", data[5].Low, data[5].High)
 
+	//convert strings to integers, has to be done seperately due to two return values
+	High, _ := strconv.Atoi(data[5].High)
+	Q3, _ := strconv.Atoi(data[5].Q3)
+	MD, _ := strconv.Atoi(data[5].MD)
+	Q1, _ := strconv.Atoi(data[5].Q1)
+	Low, _ := strconv.Atoi(data[5].Low)
 
-	MeasuredLatency := 500
+
+	//IMPORTANT NOTE
+	//make sure the thing doesnt break if an invalid measurement is passed (negative number, 0, float, etc..)
+	MeasuredLatency := 1000
 	LatencyAddition = 0
 	//brackets are hard coded right now for simplicity
 	if MeasuredLatency > 1500{
 		fmt.Println("nothing we can do, latency higher than highest outlier bracket")
-	} else if MeasuredLatency > Atoi(data[5].High) {
+	} else if MeasuredLatency > High {
 		fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
 		LatencyAddition = 1500 - MeasuredLatency
-	} else if MeasuredLatency > Atoi(data[5].Q3) {
+	} else if MeasuredLatency > Q3 {
 		fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
-		LatencyAddition = Atoi(data[5].High) - MeasuredLatency
-	} else if MeasuredLatency > Atoi(data[5].MD) {
+		LatencyAddition = High - MeasuredLatency
+	} else if MeasuredLatency > MD {
 		fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
-		LatencyAddition = Atoi(data[5].Q3) - MeasuredLatency
-	} else if MeasuredLatency > Atoi(data[5].Q1) {
+		LatencyAddition = Q3 - MeasuredLatency
+	} else if MeasuredLatency > Q1 {
 		fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
-		LatencyAddition = Atoi(data[5].MD) - MeasuredLatency
-	} else if MeasuredLatency > Atoi(data[5].Low) {
+		LatencyAddition = MD - MeasuredLatency
+	} else if MeasuredLatency > Low {
 		fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
-		LatencyAddition = Atoi(data[5].Q1) - MeasuredLatency
-	} else if Measured Latency < Atoi(data[5].Low) {
+		LatencyAddition = Q1 - MeasuredLatency
+	} else if MeasuredLatency < Low {
 		fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
-		LatencyAddition = Atoi(data[5].Low) - MeasuredLatency
+		LatencyAddition = Low - MeasuredLatency
 	}
 	//in case this hellish piece of code doesn't print it
 	fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", LatencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
