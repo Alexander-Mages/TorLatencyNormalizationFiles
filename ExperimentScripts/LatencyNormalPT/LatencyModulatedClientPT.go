@@ -14,6 +14,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -44,6 +45,9 @@ type Record struct {
 	Q3 string
 	High string
 }
+
+//control port
+const SockAddr = "/tmp/control.sock"
 
 type customConn struct {
 	net.Conn
@@ -119,6 +123,31 @@ func acceptLoop(ln *pt.SocksListener) error {
 }
 
 
+func controlPortServer(c net.Conn) {
+	log.Printf("Client Connected [%s]", c.RemoteAddr().Network())
+	io.Copy(c, c)
+	c.Close()
+}
+
+func startControlPort() {
+	if err := os.RemoveAll(Sockaddr); err != nil {
+		log.Fatal(err)
+	}
+
+	l, err := net.Listen("unix", SockAddr)
+	if err != nil {
+		log.Fatal("listen error", err)
+	}
+	defer l.close()
+
+	for {
+		conn, err := l.Accept()
+		if err != nil {
+			log.Fatal("accept error", err)
+		}
+		go controlPortServer(conn)
+	}
+}
 
 
 func fetchLatencyMetrics(url string) ([][]string, error) {
