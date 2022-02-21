@@ -16,6 +16,9 @@ import os
 
 # location of tor browser bundle. It's torrc must be modified, not the system binary torrc @ /etc/tor/torrc
 tbb_dir = '/home/alex/tor-browser_en-US/'
+# location of control socket file
+SockAddr = '/tmp/control.sock'
+
 
 #
 #
@@ -228,6 +231,21 @@ def VisitUrl(tbb_dir):
         while True:
             time.sleep(30)
             driver.refresh()
+
+
+
+
+#
+#
+#PLUGGABLE TRANSPORT CONTROL INTERFACE
+#
+#
+
+def connectCtrlPortPT(SockAddr):
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect(SockAddr)
+    s.send("LATENCYMODULATION STOP")
+    #I already miss go, can't defer and I'm scared to add threading
 
 
 #make sure torrc is correctly configured
