@@ -11,6 +11,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"fmt"
 	"io"
@@ -23,6 +24,9 @@ import (
 	"syscall"
 	"time"
 	"strconv"
+	"net/textproto"
+	"strings"
+	"regexp"
 )
 
 import "git.torproject.org/pluggable-transports/goptlib.git"
@@ -125,8 +129,24 @@ func acceptLoop(ln *pt.SocksListener) error {
 
 func controlPortServer(c net.Conn) {
 	log.Printf("Client Connected [%s]", c.RemoteAddr().Network())
-	io.Copy(c, c)
-	c.Close()
+	rdr := bufio.NewReader(c)
+	reader := textproto.NewReader(rdr)
+	for {
+		command, err := reader.ReadLine()
+		if err != nil {
+			fmt.Println("read machine broke (ง ͠° ͟ل͜ ͡°)ง : ", err)
+		}
+		if strings.EqualFold(command, "stop") {
+			//Stop Transport
+		} else if strings.EqualFold(command, "start") {
+			//Start Transport
+		} else if matchbool, _ := regexp.Match("^latency\\s\\d{2,5}", []byte(command)); matchbool {
+			re := regexp.MustCompile("[0-9]+")
+			latency := re.FindAllString(command, -1)
+			LatencyAddition, _ = strconv.Atoi(fmt.Sprint(latency))
+		}
+	}
+	defer c.Close()
 }
 
 func startControlPort() {
