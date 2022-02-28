@@ -243,10 +243,12 @@ def VisitUrl(tbb_dir):
 
 def connectCtrlPortPT(SockAddr):
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.connect(SockAddr)
-    s.send("LATENCYMODULATION STOP")
-    #I already miss go, can't defer and I'm scared to add threading
-
+    s.create_connection(SockAddr)
+    return s
+    s.send("START")
+ 
+def sendCommandPT(socket, command):
+    socket.send(command)
 
 #make sure torrc is correctly configured
 if CheckTorrc() == False:
@@ -259,6 +261,8 @@ tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfile
 controller = ConnectControlPort()
 #create custom circuit and allow stream attachment only to custom circ
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
+
+connectCtrlPortPT(SockAddr)
 #Launches the browser, every 30 seconds, it will violate the exit nodes' exit policy, getting an RTT
 ViolateExitPolicy(tbb_dir)
 

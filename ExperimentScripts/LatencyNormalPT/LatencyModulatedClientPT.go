@@ -127,10 +127,16 @@ func acceptLoop(ln *pt.SocksListener) error {
 }
 
 
-func controlPortServer(c net.Conn) {
+
+//COMMANDS: (case insensitive)
+//start
+//stop
+//latency {int}
+func controlPortServer(data []Record, c net.Conn) {
 	log.Printf("Client Connected [%s]", c.RemoteAddr().Network())
 	rdr := bufio.NewReader(c)
 	reader := textproto.NewReader(rdr)
+	defer c.Close()
 	for {
 		command, err := reader.ReadLine()
 		if err != nil {
@@ -143,14 +149,16 @@ func controlPortServer(c net.Conn) {
 		} else if matchbool, _ := regexp.Match("^latency\\s\\d{2,5}", []byte(command)); matchbool {
 			re := regexp.MustCompile("[0-9]+")
 			latency := re.FindAllString(command, -1)
-			LatencyAddition, _ = strconv.Atoi(fmt.Sprint(latency))
+			FinalMeasuredLatency, _ := strconv.Atoi(fmt.Sprint(latency))
+			LatencyAddition = calculateLatencyAddition(data, FinalMeasuredLatency)
+		} else {
+			fmt.Println("invalid command")
 		}
 	}
-	defer c.Close()
 }
 
-func startControlPort() {
-	if err := os.RemoveAll(Sockaddr); err != nil {
+func startControlPort(data []Record) {
+	if err := os.RemoveAll(SockAddr); err != nil {
 		log.Fatal(err)
 	}
 
@@ -158,14 +166,14 @@ func startControlPort() {
 	if err != nil {
 		log.Fatal("listen error", err)
 	}
-	defer l.close()
+	defer l.Close()
 
 	for {
 		conn, err := l.Accept()
 		if err != nil {
 			log.Fatal("accept error", err)
 		}
-		go controlPortServer(conn)
+		go controlPortServer(data, conn)
 	}
 }
 
@@ -205,10 +213,48 @@ func parseLatencyMetrics(rawdata [][]string) ([]Record, error) {
 	return data, nil
 }
 
+func calculateLatencyAddition(data []Record, MeasuredLatency int) (latencyAddition int) {
+	//convert strings to integers, has to be done seperately due to two return values
+	High, _ := strconv.Atoi(data[5].High)
+	Q3, _ := strconv.Atoi(data[5].Q3)
+	MD, _ := strconv.Atoi(data[5].MD)
+	Q1, _ := strconv.Atoi(data[5].Q1)
+	Low, _ := strconv.Atoi(data[5].Low)
+
+
+	//IMPORTANT NOTE
+	//make sure the thing doesnt break if an invalid measurement is passed (negative number, 0, float, etc..)
+	//brackets are hard coded right now for simplicity
+	if MeasuredLatency > 1500{
+		fmt.Println("nothing we can do, latency higher than highest outlier bracket")
+	} else if MeasuredLatency > High {
+		fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
+		latencyAddition = 1500 - MeasuredLatency
+	} else if MeasuredLatency > Q3 {
+		fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
+		latencyAddition = High - MeasuredLatency
+	} else if MeasuredLatency > MD {
+		fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
+		latencyAddition = Q3 - MeasuredLatency
+	} else if MeasuredLatency > Q1 {
+		fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
+		latencyAddition = MD - MeasuredLatency
+	} else if MeasuredLatency > Low {
+		fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
+		latencyAddition = Q1 - MeasuredLatency
+	} else if MeasuredLatency < Low {
+		fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
+		latencyAddition = Low - MeasuredLatency
+	}
+	//in case this hellish piece of code doesn't print it
+	fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", latencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
+	//etc....
+	return latencyAddition
+}
 
 func main() {
 	var err error
-
+	LatencyAddition = 0
 
 	//using the US data for now
 	now := time.Now()
@@ -228,49 +274,10 @@ func main() {
 		fmt.Println(row.Date + "\t\t " + row.Source + " \t\t " + row.Server + " \t\t " + row.Low + " \t\t " + row.Q1+ " \t\t " + row.MD + " \t\t " + row.Q3 + " \t\t " + row.High)
 	}
 	fmt.Printf("using latency data from region: %s", data[5].Source)
-
-	//measure latency here, will need to be done by stem (probably), so communication will need to happen between programs
-	//check PT spec for communication, it's just an integer so I can't imagine it's impossible
 	fmt.Printf("Average user latencies are as follows:\n25th percentile:%s\nmedian:%s\n75th percentile:%s\n", data[5].Q1, data[5].MD, data[5].Q3)
 	fmt.Printf("latency range including outliers: %s - %s", data[5].Low, data[5].High)
 
-	//convert strings to integers, has to be done seperately due to two return values
-	High, _ := strconv.Atoi(data[5].High)
-	Q3, _ := strconv.Atoi(data[5].Q3)
-	MD, _ := strconv.Atoi(data[5].MD)
-	Q1, _ := strconv.Atoi(data[5].Q1)
-	Low, _ := strconv.Atoi(data[5].Low)
-
-
-	//IMPORTANT NOTE
-	//make sure the thing doesnt break if an invalid measurement is passed (negative number, 0, float, etc..)
-	MeasuredLatency := 1000
-	LatencyAddition = 0
-	//brackets are hard coded right now for simplicity
-	if MeasuredLatency > 1500{
-		fmt.Println("nothing we can do, latency higher than highest outlier bracket")
-	} else if MeasuredLatency > High {
-		fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
-		LatencyAddition = 1500 - MeasuredLatency
-	} else if MeasuredLatency > Q3 {
-		fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
-		LatencyAddition = High - MeasuredLatency
-	} else if MeasuredLatency > MD {
-		fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
-		LatencyAddition = Q3 - MeasuredLatency
-	} else if MeasuredLatency > Q1 {
-		fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
-		LatencyAddition = MD - MeasuredLatency
-	} else if MeasuredLatency > Low {
-		fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
-		LatencyAddition = Q1 - MeasuredLatency
-	} else if MeasuredLatency < Low {
-		fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
-		LatencyAddition = Low - MeasuredLatency
-	}
-	//in case this hellish piece of code doesn't print it
-	fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", LatencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
-//etc....
+	go startControlPort(data)
 
 	time.Sleep(7 * time.Second)
 	ptInfo, err = pt.ClientSetup([]string{"dummy"})
