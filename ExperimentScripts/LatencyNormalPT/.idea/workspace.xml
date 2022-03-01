@@ -56,7 +56,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../LatencyMetricsParser.go" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
-  <component name="RunManager" selected="Go Build.go build LatencyMetricsParser.go (1)">
+  <component name="RunManager" selected="Go Build.go build LatencyMetricsParser.go">
     <configuration name="go build LatencyMetricsParser.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="LatencyNormalPT" />
       <working_directory value="$PROJECT_DIR$" />
@@ -103,6 +103,11 @@
           <url>file://$PROJECT_DIR$/goptlibDummyTransport/dummy-client.go</url>
           <line>106</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/LatencyModulatedClientPT.go</url>
+          <line>260</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

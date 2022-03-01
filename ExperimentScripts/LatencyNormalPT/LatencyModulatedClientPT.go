@@ -226,28 +226,28 @@ func calculateLatencyAddition(data []Record, MeasuredLatency int) (latencyAdditi
 	//make sure the thing doesnt break if an invalid measurement is passed (negative number, 0, float, etc..)
 	//brackets are hard coded right now for simplicity
 	if MeasuredLatency > 1500{
-		fmt.Println("nothing we can do, latency higher than highest outlier bracket")
+		//fmt.Println("nothing we can do, latency higher than highest outlier bracket")
 	} else if MeasuredLatency > High {
-		fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
+		//fmt.Printf("latency higher than collected outlier, normalizing to artificial highest bracket of 1500ms")
 		latencyAddition = 1500 - MeasuredLatency
 	} else if MeasuredLatency > Q3 {
-		fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
+		//fmt.Printf("latency above 75th percentile and below highest outlier, normalizing to high outlier of %s", data[5].High)
 		latencyAddition = High - MeasuredLatency
 	} else if MeasuredLatency > MD {
-		fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
+		//fmt.Printf("latency is above median and below 75th percentile, normalizing to 75th percentile of %s", data[5].Q3)
 		latencyAddition = Q3 - MeasuredLatency
 	} else if MeasuredLatency > Q1 {
-		fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
+		//fmt.Printf("Latency is above 25th percentile and below median, normalizing latency to median of %s", data[5].MD)
 		latencyAddition = MD - MeasuredLatency
 	} else if MeasuredLatency > Low {
-		fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
+		//fmt.Printf("Latency is above lowest outlier but below 25th percentile, normalizing to 25th percentile of %s", data[5].Q1)
 		latencyAddition = Q1 - MeasuredLatency
 	} else if MeasuredLatency < Low {
-		fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
+		//fmt.Printf("latency lower than lowest outlier, normalizing to low outlier of %s", data[5].Low)
 		latencyAddition = Low - MeasuredLatency
 	}
 	//in case this hellish piece of code doesn't print it
-	fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", latencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
+	//fmt.Printf("adding %i of latency to measured latency of %i to normalize it to target latency of %i", latencyAddition, MeasuredLatency, LatencyAddition + MeasuredLatency)
 	//etc....
 	return latencyAddition
 }
@@ -255,6 +255,7 @@ func calculateLatencyAddition(data []Record, MeasuredLatency int) (latencyAdditi
 func main() {
 	var err error
 	LatencyAddition = 0
+	time.Sleep(7 * time.Second)
 
 	//using the US data for now
 	now := time.Now()
@@ -269,17 +270,16 @@ func main() {
 		fmt.Println(err)
 	}
 	data, _ := parseLatencyMetrics(rawdata)
-
+	/*
 	for _, row := range data {
 		fmt.Println(row.Date + "\t\t " + row.Source + " \t\t " + row.Server + " \t\t " + row.Low + " \t\t " + row.Q1+ " \t\t " + row.MD + " \t\t " + row.Q3 + " \t\t " + row.High)
 	}
 	fmt.Printf("using latency data from region: %s", data[5].Source)
 	fmt.Printf("Average user latencies are as follows:\n25th percentile:%s\nmedian:%s\n75th percentile:%s\n", data[5].Q1, data[5].MD, data[5].Q3)
 	fmt.Printf("latency range including outliers: %s - %s", data[5].Low, data[5].High)
-
+	*/
 	go startControlPort(data)
 
-	time.Sleep(7 * time.Second)
 	ptInfo, err = pt.ClientSetup([]string{"dummy"})
 	if err != nil {
 		os.Exit(1)

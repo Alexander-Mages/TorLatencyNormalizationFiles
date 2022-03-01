@@ -13,8 +13,7 @@ import tbselenium.common as cm
 from tbselenium.tbdriver import TorBrowserDriver
 from tbselenium.utils import launch_tbb_tor_with_stem
 import os
-import multiprocessing
-
+import socket
 # location of tor browser bundle. It's torrc must be modified, not the system binary torrc @ /etc/tor/torrc
 tbb_dir = '/home/alex/tor-browser_en-US/'
 # location of control socket file
@@ -205,7 +204,7 @@ def MeasurementLoop(tbb_dir, SockAddr):
         while True:
             time.sleep(30)
             start_time = time.time()
-            driver.get('http://127.0.0.1:80/')
+            driver.load_url('http://127.0.0.1:80/')
             latency = time.time() - start_time
             #somehow communicate latency to PT
             print("RTT to exit node is " + latency)
@@ -246,7 +245,7 @@ def VisitUrl(tbb_dir):
 
 def connectCtrlPortPT(SockAddr):
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.create_connection(SockAddr)
+    s.connect(SockAddr)
     s.send("START")
     return s
 
