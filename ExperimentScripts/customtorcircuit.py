@@ -13,6 +13,7 @@ import tbselenium.common as cm
 from tbselenium.tbdriver import TorBrowserDriver
 from tbselenium.utils import launch_tbb_tor_with_stem
 import os
+import multiprocessing
 
 # location of tor browser bundle. It's torrc must be modified, not the system binary torrc @ /etc/tor/torrc
 tbb_dir = '/home/alex/tor-browser_en-US/'
@@ -196,9 +197,9 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
 #
 #
 
-def ViolateExitPolicy(tbb_dir):
+def MeasurementLoop(tbb_dir, SockAddr):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
-        driver.get('https://speed.cloudflare.com/')
+        socket = connectCtrlPortPT(SockAddr)
         #for testing
         #driver.get('http:127.0.0.1:80')
         while True:
@@ -208,6 +209,8 @@ def ViolateExitPolicy(tbb_dir):
             latency = time.time() - start_time
             #somehow communicate latency to PT
             print("RTT to exit node is " + latency)
+            sendCommandPT(socket, "LATENCY " + latency)
+
 
 #queries exit node descriptor via IP. All system traffic must run through Tor for this to work.
 def CircRTT(ExitDescriptor):
@@ -244,9 +247,9 @@ def VisitUrl(tbb_dir):
 def connectCtrlPortPT(SockAddr):
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     s.create_connection(SockAddr)
-    return s
     s.send("START")
- 
+    return s
+
 def sendCommandPT(socket, command):
     socket.send(command)
 
@@ -261,10 +264,8 @@ tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfile
 controller = ConnectControlPort()
 #create custom circuit and allow stream attachment only to custom circ
 BuildCustomCircAndOpenStreamListener(controller, selectedPath)
-
-connectCtrlPortPT(SockAddr)
 #Launches the browser, every 30 seconds, it will violate the exit nodes' exit policy, getting an RTT
-ViolateExitPolicy(tbb_dir)
+MeasurementLoop(tbb_dir, SockAddr)
 
 
 #watches the POPEN subprocess's stdout indefinately

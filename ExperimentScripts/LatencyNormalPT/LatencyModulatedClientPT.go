@@ -173,7 +173,7 @@ func startControlPort(data []Record) {
 		if err != nil {
 			log.Fatal("accept error", err)
 		}
-		go controlPortServer(data, conn)
+		controlPortServer(data, conn)
 	}
 }
 

@@ -7,6 +7,7 @@
     <list default="true" id="a044456e-cce7-4081-ba71-fba4784bf810" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LatencyModulatedClientPT.go" beforeDir="false" afterPath="$PROJECT_DIR$/LatencyModulatedClientPT.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customtorcircuit.py" beforeDir="false" afterPath="$PROJECT_DIR$/../customtorcircuit.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
