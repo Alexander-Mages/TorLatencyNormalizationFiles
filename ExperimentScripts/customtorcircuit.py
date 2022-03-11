@@ -215,7 +215,7 @@ def MeasurementLoop(tbb_dir, SockAddr):
                 #page errors are viewed by selenium as errors, thus this is neccecary
                 rtt = time.time() - start_time
             #put time in milliseconds
-            rttms = round(rtt) * 1000
+            latency = round(rtt * 1000)
             print("RTT to exit node is " + str(latency))
             sendCommandPT(socket, "LATENCY " + str(latency))
 

@@ -28,7 +28,7 @@ import (
 	"strings"
 	"regexp"
 )
-
+import "github.com/eugene-eeo/vivaldi-go"
 import "git.torproject.org/pluggable-transports/goptlib.git"
 
 var ptInfo pt.ClientInfo
@@ -146,20 +146,24 @@ func controlPortServer(data []Record, c net.Conn) {
 	defer c.Close()
 	for {
 		command, err := reader.ReadLine()
+		fmt.Println(command)
 		if err != nil {
 			fmt.Println("read machine broke (ง ͠° ͟ل͜ ͡°)ง : ", err)
 		}
 		if strings.EqualFold(command, "stop") {
 			//Stop Transport
+			fmt.Println("stop command")
 		} else if strings.EqualFold(command, "start") {
 			//Start Transport
+			fmt.Println("start command")
 		} else if matchbool, _ := regexp.Match("^latency\\s\\d{2,5}", []byte(command)); matchbool {
+			fmt.Println("new latency")
 			re := regexp.MustCompile("[0-9]+")
 			latency := re.FindAllString(command, -1)
 			FinalMeasuredLatency, _ := strconv.Atoi(fmt.Sprint(latency))
 			LatencyAddition = calculateLatencyAddition(data, FinalMeasuredLatency)
 			//I honestly don't know what this does, or how it works, but I'm seeing if the README example works here
-			local.update(FinalMeasuredLatency, vivaldi.NewContextFromValues(remote, 5.0))
+			local.Update(float64(FinalMeasuredLatency), vivaldi.NewContextFromValues(remote, 5.0))
 		} else {
 			fmt.Println("invalid command")
 		}
@@ -266,6 +270,7 @@ func main() {
 	//set latency modification to 0 to start
 	LatencyAddition = 0
 
+	time.Sleep(7 * time.Second)
 
 	//using the US data for now
 	now := time.Now()

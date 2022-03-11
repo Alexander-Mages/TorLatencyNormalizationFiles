@@ -53,24 +53,12 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/LatencyModulatedClientPT.go" />
+    <property name="last_opened_file_path" value="$USER_HOME$/goptlib/examples/dummy-client/dummy-client.go" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
-  <component name="RunManager" selected="Go Test.go test dummy-client">
-    <configuration name="go build LatencyMetricsParser.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="LatencyNormalPT" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/LatencyMetricsParser.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build LatencyMetricsParser.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="LatencyNormalPT" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/goptlibDummyTransport/LatencyMetricsParser.go" />
+  <component name="RunManager">
+    <configuration name="Unnamed" type="GoRemoteDebugConfigurationType" factoryName="Go Remote" nameIsGenerated="true">
+      <option name="disconnectOption" value="ASK" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -83,27 +71,6 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="go test dummy-client" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
-      <module name="LatencyNormalPT" />
-      <working_directory value="$USER_HOME$/goptlib/examples/dummy-client" />
-      <go_parameters value="-trimpath" />
-      <kind value="DIRECTORY" />
-      <directory value="$USER_HOME$/goptlib/examples/dummy-client" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Go Build.go build LatencyMetricsParser.go" />
-      <item itemvalue="Go Build.go build LatencyMetricsParser.go (1)" />
-      <item itemvalue="Go Test.go test dummy-client" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Build.go build LatencyMetricsParser.go (1)" />
-        <item itemvalue="Go Build.go build LatencyMetricsParser.go" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,23 +88,7 @@
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$USER_HOME$/goptlib/examples/dummy-client/dummy-client.go</url>
-          <line>152</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="dummy-client">
-        <watch expression="LatencyAddition" />
-      </configuration>
-      <inline-watch fileUrl="file://$USER_HOME$/goptlib/examples/dummy-client/dummy-client.go" line="152">
-        <watch expression="LatencyAddition" />
-      </inline-watch>
-    </watches-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LatencyNormalPT$go_test_dummy_client.out" NAME="go test dummy-client Coverage Results" MODIFIED="1647021016600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
