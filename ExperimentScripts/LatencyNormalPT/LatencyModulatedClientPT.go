@@ -134,6 +134,13 @@ func acceptLoop(ln *pt.SocksListener) error {
 //latency {int}
 func controlPortServer(data []Record, c net.Conn) {
 	log.Printf("Client Connected [%s]", c.RemoteAddr().Network())
+	//initialize vivaldi coordinate system
+	local := vivaldi.NewContext()
+	remote := vivaldi.NewHVector(
+		5000.0, //x
+		5000.0, //y
+		5000.0, //z
+	)
 	rdr := bufio.NewReader(c)
 	reader := textproto.NewReader(rdr)
 	defer c.Close()
@@ -151,6 +158,8 @@ func controlPortServer(data []Record, c net.Conn) {
 			latency := re.FindAllString(command, -1)
 			FinalMeasuredLatency, _ := strconv.Atoi(fmt.Sprint(latency))
 			LatencyAddition = calculateLatencyAddition(data, FinalMeasuredLatency)
+			//I honestly don't know what this does, or how it works, but I'm seeing if the README example works here
+			local.update(FinalMeasuredLatency, vivaldi.NewContextFromValues(remote, 5.0))
 		} else {
 			fmt.Println("invalid command")
 		}
@@ -254,8 +263,9 @@ func calculateLatencyAddition(data []Record, MeasuredLatency int) (latencyAdditi
 
 func main() {
 	var err error
+	//set latency modification to 0 to start
 	LatencyAddition = 0
-	time.Sleep(7 * time.Second)
+
 
 	//using the US data for now
 	now := time.Now()

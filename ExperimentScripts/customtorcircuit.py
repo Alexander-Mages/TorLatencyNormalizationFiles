@@ -12,6 +12,7 @@ import functools
 import tbselenium.common as cm
 from tbselenium.tbdriver import TorBrowserDriver
 from tbselenium.utils import launch_tbb_tor_with_stem
+from selenium.common.exceptions import WebDriverException
 import os
 import socket
 # location of tor browser bundle. It's torrc must be modified, not the system binary torrc @ /etc/tor/torrc
@@ -200,15 +201,23 @@ def MeasurementLoop(tbb_dir, SockAddr):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
         socket = connectCtrlPortPT(SockAddr)
         #for testing
-        #driver.get('http:127.0.0.1:80')
+        try:
+            #opens the browser
+            driver.get('http://127.0.0.1:80')
+        except WebDriverException:
+            pass
         while True:
             time.sleep(30)
             start_time = time.time()
-            driver.load_url('http://127.0.0.1:80/')
-            latency = time.time() - start_time
-            #somehow communicate latency to PT
-            print("RTT to exit node is " + latency)
-            sendCommandPT(socket, "LATENCY " + latency)
+            try:
+                driver.refresh()
+            except WebDriverException:
+                #page errors are viewed by selenium as errors, thus this is neccecary
+                rtt = time.time() - start_time
+            #put time in milliseconds
+            rttms = round(rtt) * 1000
+            print("RTT to exit node is " + str(latency))
+            sendCommandPT(socket, "LATENCY " + str(latency))
 
 
 #queries exit node descriptor via IP. All system traffic must run through Tor for this to work.
@@ -246,11 +255,11 @@ def VisitUrl(tbb_dir):
 def connectCtrlPortPT(SockAddr):
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     s.connect(SockAddr)
-    s.send("START")
+    s.send(str.encode("START"))
     return s
 
 def sendCommandPT(socket, command):
-    socket.send(command)
+    socket.send(str.encode(command))
 
 #make sure torrc is correctly configured
 if CheckTorrc() == False:
