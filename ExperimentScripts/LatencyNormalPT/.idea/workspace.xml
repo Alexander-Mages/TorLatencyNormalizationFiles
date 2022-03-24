@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a044456e-cce7-4081-ba71-fba4784bf810" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LatencyModulatedClientPT.go" beforeDir="false" afterPath="$PROJECT_DIR$/LatencyModulatedClientPT.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customtorcircuit.py" beforeDir="false" afterPath="$PROJECT_DIR$/../customtorcircuit.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/goptlib/examples/dummy-client/dummy-client.go" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vivaldiPlayground" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RunManager">
