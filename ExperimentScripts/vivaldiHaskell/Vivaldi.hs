@@ -10,6 +10,22 @@ main = do
     putStrLn("Remote error estimate")
     RemoteError <- getLine
 
+
+
+
+    --constructor for coordinatePlane object
+    data coordinatePlane = coordinatePlane
+        { x :: int
+        , y :: int
+        , z :: int }
+
+
+
+    vivaldi rtt localPosition remotePosition
+        --
+
+        
+
     --"sample weight balances local and remote error"
     -- a = LocalError, b = RemoteError
     BalanceLocalRemoteError LocalError RemoteError
@@ -17,7 +33,7 @@ main = do
 
     --"compute relative error of this sample"
     
-    computeRelativeError Local Remote RTT
+    computeRelativeError Local Remote RTT 
         abs ((Local - Remote) - RTT) / RTT
         --this is supposed to be absolute value (not sure if my syntax is right yet)
 
