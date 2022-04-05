@@ -1,13 +1,6 @@
-
-newtype CoordinateMap = CoordinateMap { 
-                                      x :: Int 
-                                    , y :: Int 
-                                    , z :: Int 
-                                    }
-
-
 --type Vivaldi definition, returns type Vivaldi
 --constructors: Coordinates creates custom point (origin), Update takes parameters RTT, and LocalCoordinates + RemoteCoordinates of type Vivaldi
+--comment ^ irrelavent as of commit 7b3e2435b382c9a38624b58ee8dd0716f1658de7, Apr 5
 
 data Vivaldi = Coordinates Int Int Int
             
@@ -26,11 +19,3 @@ let origin = Coordinates 0 0 0
 let newPoint = Coordinates 1 1 1
 --100 is RTT
 firstPoint <- Update 100 origin newPoint
-
-
-
-
-main = do
-
-    Vivaldi :: Coordinates 0 0 0
-    Vivaldi :: Update 100 1 0 0
