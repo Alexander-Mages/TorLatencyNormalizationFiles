@@ -18,5 +18,5 @@ origin :: Vivaldi
 let origin = Coordinates 0 0 0
 let newPoint = Coordinates 1 1 1
 --100 is RTT
-MapV2 <- Update 100 origin newPoint
+map <- Update 100 origin newPoint
 
