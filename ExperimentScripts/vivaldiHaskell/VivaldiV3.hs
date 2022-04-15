@@ -16,7 +16,7 @@ data Coordinates = Coordinates {
 vectorLength :: Vector -> Double
 vectorLength v =
     sqrt(
-    (x v)^2 + (y v)^2 + (z v)^2 + (w v)^2
+    x v ^ 2  +  y v ^ 2  +  z v ^ 2  +  w v ^ 2
     )
 
 --vector distance
