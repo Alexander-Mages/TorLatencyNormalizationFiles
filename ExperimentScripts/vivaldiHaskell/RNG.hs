@@ -1,5 +1,5 @@
 import System.Random
-import Control.Monad
+--import Control.Monad
 
 num :: IO [Double]
 num = do
