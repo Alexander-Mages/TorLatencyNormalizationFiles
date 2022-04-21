@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use <$>" #-}
 import Data.Map (Map)
 import qualified Data.Map as Map
 import qualified Data.Vector.Dense as Vector
@@ -23,18 +21,21 @@ vectorDist x y =
 --random number generator (between 1 and 400)
 randomNum :: IO [Double]
 randomNum = do
-    gen <- newStdGen
-    return $ randomRs (1,400) gen
+    return $ randomRs (1,400) <$> newStdGen
     
 initializeCoordinates :: List -> Vector -> Map
 initializeCoordinates =
     --equivilent to vector.list, but with the vector.dense type
     --let a = Vector.listVector [Coordinates 0 0 0 0, Coordinates 1 1 1 1]
-    Data.Map.fromList [("initialPoint",
+    return Data.Map.fromList [("initialPoint", Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])]
     --not sure whether it allows IO numbers to be used
-    Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])]
 
+addRandomCoordinate :: Map -> Vector -> Map
+addRandomCoordinate vivaldi =
+    Data.Map.insert "PointOne" (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
+
+main :: IO ()
 main = do
-    initializeCoordinates
+    vivaldi <- initializeCoordinates
 
 
