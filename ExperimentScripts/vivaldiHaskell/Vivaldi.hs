@@ -41,12 +41,22 @@ addCoordinateAndMinimizeEnergy vivaldi name =
     minimizeEnergy (addRandomCoordinateToMap vivaldi name)
 
 minimizeEnergy :: --idk yet
-minimizeEnergy vivaldi =
+minimizeEnergy vivaldi name rtt =
     --this is far from functional, but I'm half implementing it to help my conceptualization
-    --need to add error calculation
-    Operations.add((vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! "PointOne")))
-    --the keys should NOT remain hardcoded
-    --no idea what pattern arguments are expected in by operations
+    --need to add error calculation and it's relavent recursion condition
+    Operations.plus (
+        (Vector.listVector [(0, x), (0, y), (0, z), (0, w)]), --origin
+        Operations.scale(
+            (rtt - vectorLength(
+        Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name)))
+    )/vectorLength(
+        Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name))))
+        )
+    )
+    rtt - vectorLength(
+        Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name)))
+    )
+    --no idea what pattern arguments are expected in by Vector.Dense.Operations
 
 main :: IO ()
 main = do
