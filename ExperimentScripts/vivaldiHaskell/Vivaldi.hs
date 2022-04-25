@@ -39,7 +39,7 @@ addRandomCoordinateToMap vivaldi name =
 addCoordinateAndMinimizeEnergy :: Map -> Vector -> Map
 addCoordinateAndMinimizeEnergy vivaldi name =
     minimizeEnergy (addRandomCoordinateToMap vivaldi name)
-
+{-
 minimizeEnergy :: --idk yet
 minimizeEnergy vivaldi name rtt =
     --this is far from functional, but I'm half implementing it to help my conceptualization
@@ -57,7 +57,7 @@ minimizeEnergy vivaldi name rtt =
         Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name)))
     )
     --no idea what pattern arguments are expected in by Vector.Dense.Operations
-
+-}
 main :: IO ()
 main = do
     vivaldi <- initializeCoordinates
