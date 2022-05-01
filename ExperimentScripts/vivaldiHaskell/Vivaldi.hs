@@ -41,28 +41,23 @@ initializeLatencies ::
 initializeLatencies =
     Data.Map.fromList (
         zip (
-            --this sacrilege avoids using external libraries to iterate
-            ["latency1-1","latency1-2","latency1-3","latency1-4","latency1-5","latency1-6","latency1-7","latency1-8","latency1-9",
-            "latency2-1","latency2-2","latency2-3","latency2-4","latency2-5","latency2-6","latency2-7","latency2-8","latency2-9",
-            "latency3-1","latency3-2","latency3-3","latency3-4","latency3-5","latency3-6","latency3-7","latency3-8","latency3-9",
-            "latency4-1","latency4-2","latency4-3","latency4-4","latency4-5","latency4-6","latency4-7","latency4-8","latency4-9",
-            "latency5-1","latency5-2","latency5-3","latency5-4","latency5-5","latency5-6","latency5-7","latency5-8","latency5-9",
-            "latency6-1","latency6-2","latency6-3","latency6-4","latency6-5","latency6-6","latency6-7","latency6-8","latency6-9",
-            "latency7-1","latency7-2","latency7-3","latency7-4","latency7-5","latency7-6","latency7-7","latency7-8","latency7-9",
-            "latency8-1","latency8-2","latency8-3","latency8-4","latency8-5","latency8-6","latency8-7","latency8-8","latency8-9",
-            "latency9-1","latency9-2","latency9-3","latency9-4","latency9-5","latency9-6","latency9-7","latency9-8","latency9-9"]
-            (replicate 81 randomNum)
+            --zipWith: elementwise string concatenation of lists
+            (zipWith (++) (replicate 72 "latency") (map show $ -- \/excludes multiples of 11
+            [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])) -- ["latency12","latency13",]...
+            (replicate 72 randomNum) -- [283,13,398]...
         )
     )
 
-zipWith (++) [1..81]
-zipWith (++) (replicate 81 "latency") [1..81]
-
-error ::
-error latencies hosts=
-
-    2 * ((latencies ! "latency1-2") - (vectorDist (hosts ! "host1", hosts ! "host2")))
-
+error :: Map -> Map -> Double
+error latencies hosts =
+    ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
+    dist :: Double
+    dist latencyid = 
+        abs((latencies ! $ "latency" ++ show latencyid) - 
+        (vectorDist (hosts ! $ "host" ++ show head latencyid) (hosts ! $ "host" ++ show last latencyid)) ^2)
+    --applies the preceding function to all items in list ids, replacing each item with the result
+    sum $ map dist ids
+    -- ^final error value
 
 normalizeCoordinates ::
 normalizeCoordinates hosts latencies =
