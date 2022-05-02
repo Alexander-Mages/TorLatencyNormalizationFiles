@@ -36,7 +36,7 @@ initializeCoordinates =
             )-- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
     )
 
-initializeLatencies :: 
+initializeLatencies :: List -> Map
 --returns map of ["latency{host#}{dest#}", {randomly generated latency}]
 initializeLatencies =
     Data.Map.fromList (
@@ -50,23 +50,82 @@ initializeLatencies =
 
 error :: Map -> Map -> Double
 error latencies hosts =
-    ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
+    let ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
     dist :: Double
     dist latencyid = 
-        abs((latencies ! $ "latency" ++ show latencyid) - 
-        (vectorDist (hosts ! $ "host" ++ show head latencyid) (hosts ! $ "host" ++ show last latencyid)) ^2)
+        abs(
+            (latencies ! $ "latency" ++ show latencyid) - 
+            (vectorDist (hosts ! $ "host" ++ show head latencyid) (hosts ! $ "host" ++ show last latencyid)) ^2
+        )
     --applies the preceding function to all items in list ids, replacing each item with the result
     sum $ map dist ids
     -- ^final error value
 
-normalizeCoordinates ::
-normalizeCoordinates hosts latencies =
+normalizeMap :: Map -> Map -> Int -> Map
+normalizeMap hosts latencies errTarget =
+    --this is going to look rough until I get it solved conceptually :/
+    --pseudocode is a generous categorization
+    let ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
+    until ((((error (latencies hosts)) - 1000) < errTarget)
+        (map repositionSingleCoordinate ids)
+    --THIS SYNTAX IS INCORRECT^
+    --mapping cannot be used in an until block
 
---pretending this is not here for now
+--latencies and hosts Maps are not global variables, depending on how haskell handles functions,
+--I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
+
+repositionSingleCoordinate :: Int -> Map
+repositionSingleCoordinate latencyid =
+    --I ask forgiveness from all those who need read this
+    Data.Map.insert ("host" ++ show head latencyid) (Vector.plus ((hosts ! $ "host" ++ show head latencyid) (Vector.scale .002 (
+        Vector.plus(
+            (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
+            (Vector.scale ((                 
+            (latencies ! $ "latency" ++ show latencyid) - 
+                vectorLength (
+                        Vector.plus(
+                    (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                        )
+                    )
+                ) / (
+                    vectorLength (
+                        Vector.plus(
+                            (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                        )
+                    )
+                    )
+                    Vector.plus(
+                            (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                        )
+                    )
+                )
+            )
+        )
+    ))) hosts
+
+
+findClosestNode ::
+findClosestNode hosts latencies hostKey =
+    --relatively easy implementation, just need a list of host keys to map/fold through
+
+
+main :: IO ()
+main = do
+    hosts <- initializeCoordinates
+    latencies <- initializeLatencies
+    vivaldi <- normalizeMap hosts latencies errTarget
+   -- ^ the finished system (i think)       -- ^ arbitrary error cutoff
+                            
+
+
+
+
 {-
+--pretending this is not here for now
 addRandomCoordinateToMap :: Map -> Vector -> Map
 addRandomCoordinateToMap vivaldi name =
-    Data.Map.insert ("Point" ++ show name) (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)]) vivaldi
+    Data.Map.insert ("Point" ++ show name) (Vector.listVector [
+        (randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)]) vivaldi
     --in the absence of the naming parameter, the insert function doesn't need "vivaldi" argument at end as haskell infers it's placement
 
 addCoordinateAndMinimizeEnergy :: Map -> Vector -> Map
@@ -91,10 +150,3 @@ minimizeEnergy vivaldi name rtt =
     )
     --no idea what pattern arguments are expected in by Vector.Dense.Operations
 -}
-main :: IO ()
-main = do
-    hosts <- initializeCoordinates
-    latencies <- initializeLatencies
-    vivaldi' <- addCoordinateAndMinimizeEnergy vivaldi "one"
-    --this is too imperative like, I should be able to do this in one function call via recursion, where i would be able to specify a number of random coordinates to be added
-    
