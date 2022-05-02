@@ -3,7 +3,6 @@ import qualified Data.Map as Map
 import qualified Data.Vector.Dense as Vector
 import qualified Data.Vector.Dense.Operations as Operations
 import System.Random
-import Control.Monad
 
 --vector length
 --does this just find the linear distance?
