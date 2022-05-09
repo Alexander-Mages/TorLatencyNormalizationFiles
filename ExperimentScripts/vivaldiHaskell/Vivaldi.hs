@@ -32,7 +32,7 @@ initializeCoordinates =
     Data.Map.fromList (
         --"zip" combiles elements of two lists into one list of tuples | zip :: [a] -> [b] -> [(a,b)]
         zip (
-            ["host0","host1","host2","host3","host4","host5","host6","host7","host8","host9"] 
+            [0..9] --integers as keys
             (replicate 9 Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
             )-- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
     )
@@ -42,30 +42,29 @@ initializeLatencies :: List -> Map
 initializeLatencies =
     Data.Map.fromList (
         zip (
-            --zipWith: elementwise string concatenation of lists
-            (zipWith (++) (replicate 72 "latency") (map show $ -- \/excludes multiples of 11
-            [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])) -- ["latency12","latency13",]...
-            (replicate 72 randomNum) -- [283,13,398]...
+            --fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
+            concat $ zipWith (zip . repeat) [1..25] $ tails [1..25] --currently creates some tuples with two identical values
+            (replicate 325 randomNum) -- [283,13,398]...
         )
     )
 
 errdist :: Double
     dist latencyid = 
         abs(
-            (latencies ! ("latency" ++ show latencyid)) - 
-            (vectorDist (hosts ! ("host" ++ show head latencyid)) (hosts ! ("host" ++ show last latencyid))) ^2
+            (latencies ! latencyid) - 
+            (vectorDist (hosts ! (latencyid ! 0)) (hosts ! (latencyid ! 1))) ^2
         )
 error :: Map -> Map -> Double
 error latencies hosts =
-    sum (map (errdist (map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])))
- -- ^final error value    ^applies the preceding function to all items in list ids, replacing each item with the result
+    sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ tails [1..25])))
+ -- ^final error value    ^applies the preceding function to all latencies, replacing each item with the result
 
 normalizeMap :: Map -> Map -> Int -> Map
 normalizeMap hosts latencies errTarget =
     --this is going to look rough until I get it solved conceptually :/
     --pseudocode is a generous categorization
     until ((((error (latencies hosts)) - 1000) < errTarget)
-        (map repositionSingleCoordinate (map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])))
+        (map repositionSingleCoordinate (concat $ zipWith (zip . repeat) [1..25] $ tails [1..25])))
     --THIS SYNTAX IS INCORRECT^
     --mapping cannot be used in an until block
 
