@@ -49,11 +49,11 @@ initializeLatencies =
     )
 
 errdist :: Double
-    dist latencyid = 
-        abs(
-            (latencies ! latencyid) - 
-            (vectorDist (hosts ! (latencyid ! 0)) (hosts ! (latencyid ! 1))) ^2
-        )
+errdist latencyid latencies hosts = 
+    abs(
+        (latencies ! latencyid) - 
+        (vectorDist (hosts ! (latencyid ! 0)) (hosts ! (latencyid ! 1))) ^2
+    )
 error :: Map -> Map -> Double
 error latencies hosts =
     sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ tails [1..25])))
