@@ -1,3 +1,5 @@
+module Vivaldi where
+
 import Data.Map (Map)
 import qualified Data.Map as Map
 import qualified Data.Vector.Dense as Vector
@@ -47,26 +49,23 @@ initializeLatencies =
         )
     )
 
-error :: Map -> Map -> Double
-error latencies hosts =
-    let ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
-    dist :: Double
+errdist :: Double
     dist latencyid = 
         abs(
-            (latencies ! $ "latency" ++ show latencyid) - 
-            (vectorDist (hosts ! $ "host" ++ show head latencyid) (hosts ! $ "host" ++ show last latencyid)) ^2
+            (latencies ! ("latency" ++ show latencyid)) - 
+            (vectorDist (hosts ! ("host" ++ show head latencyid)) (hosts ! ("host" ++ show last latencyid))) ^2
         )
-    --applies the preceding function to all items in list ids, replacing each item with the result
-    sum $ map dist ids
-    -- ^final error value
+error :: Map -> Map -> Double
+error latencies hosts =
+    sum (map (errdist (map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])))
+ -- ^final error value    ^applies the preceding function to all items in list ids, replacing each item with the result
 
 normalizeMap :: Map -> Map -> Int -> Map
 normalizeMap hosts latencies errTarget =
     --this is going to look rough until I get it solved conceptually :/
     --pseudocode is a generous categorization
-    let ids = map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98]
     until ((((error (latencies hosts)) - 1000) < errTarget)
-        (map repositionSingleCoordinate ids)
+        (map repositionSingleCoordinate (map show $ [12..21]++[23..32]++[34..43]++[45..54]++[56..65]++[67..76]++[78..87]++[89..98])))
     --THIS SYNTAX IS INCORRECT^
     --mapping cannot be used in an until block
 
@@ -76,37 +75,36 @@ normalizeMap hosts latencies errTarget =
 repositionSingleCoordinate :: Int -> Map
 repositionSingleCoordinate latencyid =
     --I ask forgiveness from all those who need read this
-    Data.Map.insert ("host" ++ show head latencyid) (Vector.plus ((hosts ! $ "host" ++ show head latencyid) (Vector.scale .002 (
+    Data.Map.insert ("host" ++ show head latencyid) (Vector.plus ((hosts ! ("host" ++ show head latencyid)) (Vector.scale .002 (
         Vector.plus(
             (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
             (Vector.scale ((                 
-            (latencies ! $ "latency" ++ show latencyid) - 
+            (latencies ! ("latency" ++ show latencyid)) - 
                 vectorLength (
                         Vector.plus(
-                    (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                    (hosts ! ("host" ++ show head latencyid)) Vector.scale(-1 $ hosts ! ("host" ++ show last latencyid))
                         )
                     )
                 ) / (
                     vectorLength (
                         Vector.plus(
-                            (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                            (hosts ! ("host" ++ show head latencyid)) Vector.scale(-1 $ hosts ! ("host" ++ show last latencyid))
                         )
                     )
                     )
                     Vector.plus(
-                            (hosts ! $ "host" ++ show head latencyid) Vector.scale(-1 $ hosts ! $ "host" ++ show last latencyid)
+                            (hosts ! ("host" ++ show head latencyid)) Vector.scale(-1 $ hosts ! ("host" ++ show last latencyid))
                         )
                     )
                 )
             )
         )
     ))) hosts
-
-
+{-
 findClosestNode ::
 findClosestNode hosts latencies hostKey =
     --relatively easy implementation, just need a list of host keys to map/fold through
-
+-}
 
 main :: IO ()
 main = do
