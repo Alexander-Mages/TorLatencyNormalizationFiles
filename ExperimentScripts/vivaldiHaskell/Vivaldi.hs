@@ -32,8 +32,9 @@ initializeCoordinates =
     Data.Map.fromList (
         --"zip" combiles elements of two lists into one list of tuples | zip :: [a] -> [b] -> [(a,b)]
         zip (
-            [0..9] --integers as keys
-            (replicate 9 Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
+            [0..25] --integers as keys
+            -- ^ \/ both must be scaled along with the # of latencies created
+            (replicate 25 Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
             )-- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
     )
 
@@ -44,7 +45,7 @@ initializeLatencies =
         zip (
             --fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
             concat $ zipWith (zip . repeat) [1..25] $ tails [1..25] --currently creates some tuples with two identical values
-            (replicate 325 randomNum) -- [283,13,398]...
+            (replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
     )
 
