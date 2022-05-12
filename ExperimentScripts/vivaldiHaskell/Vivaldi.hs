@@ -9,9 +9,17 @@ import System.Random
 --elementwise vector addition
 addvec :: Vector -> Vector -> Vector
 addvec a b =          
+    -- ^ ^ Vector 1, Vector 2
     Vector.listVector [((x a)+(x b), x), ((y a)+(y b), y), ((z a)+(z b), z), ((w a)+(w b), w)]
                       -- ^ ^         ^
                       --key, vector, key of new coordinate
+--vector scaling
+scalevec :: Vector -> Double -> Vector
+scalevec a b =
+    --   ^ ^ Vector, scale factor
+    Vector.listVector [(b(x a), x), (b(y a), y), (b(z a), z), (b(w a), w)]
+                    --  ^ ^ ^   ^
+                    --scale factor, key, vector, key of new coordinate
 
 
 --vector length
