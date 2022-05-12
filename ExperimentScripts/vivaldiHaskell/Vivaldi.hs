@@ -2,9 +2,17 @@ module Vivaldi where
 
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
-import qualified Data.Vector.Dense as Vector
-import qualified Data.Vector.Dense.Operations as Operations
+import qualified Data.Vector as Vector
 import System.Random
+
+--Vector operations
+--elementwise vector addition
+addvec :: Vector -> Vector -> Vector
+addvec a b =          
+    Vector.listVector [((x a)+(x b), x), ((y a)+(y b), y), ((z a)+(z b), z), ((w a)+(w b), w)]
+                      -- ^ ^         ^
+                      --key, vector, key of new coordinate
+
 
 --vector length
 --does this just find the linear distance?
