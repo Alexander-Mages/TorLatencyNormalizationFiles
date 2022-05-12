@@ -1,5 +1,4 @@
 module Vivaldi where
-
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import qualified Data.Vector as Vector
@@ -94,8 +93,8 @@ repositionSingleCoordinate latencyid =
     Data.Map.insert (latencyid ! 1) (addvec ((hosts ! (latencyid ! 1))) (scalevec .002 (
         addvec(
             (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
-            (scalevec ((                 
-            (latencies ! latencyid)) - 
+            (scalevec (                
+            (latencies ! latencyid) - 
                 vectorLength (
                         addvec(
                     (hosts ! (latencyid ! 1))) scalevec(-1 $ hosts ! (latencyid ! 2)))
@@ -112,10 +111,46 @@ repositionSingleCoordinate latencyid =
                             (hosts ! (latencyid ! 1))) scalevec(-1 $ hosts ! (latencyid ! 2))
                         )
                     )
-                )
-            )
-        )
+                --)
+            --)
+        --)
     ))) hosts
+
+Data.Map.insert (latencyid ! 0) (
+    addvec(
+        (hosts (latencyid ! 0)), --source
+        scalevec(
+            addvec(
+                Vector.listVector[(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)],
+                scalevec(
+                    (((latencies ! latencyid) - vectorLength(addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1)))) /
+                            (vectorLength(addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1))))),
+                    (addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1)))
+
+                )
+            ),
+            0.002 --scaling factor
+        )
+    )
+) hosts --map to insert into
+
+--psedocode
+Data.Map.insert (latencyid ! 0) (
+    addvec(
+        (latencyid ! 0), --source
+        scalevec(
+            vadd(
+                randomvec, 
+                scalevec(
+                    ((latency - vlen(vadd(positions[source], scale(-1, positions[dest]))))/(vlen(vadd(positions[source], scale(-1, positions[dest]))))),
+                    (vadd(positions[source], scale(-1, positions[dest])))
+                )
+            ),
+            0.002 
+        )
+    )
+)
+
 {-
 findClosestNode ::
 findClosestNode hosts latencies hostKey =
