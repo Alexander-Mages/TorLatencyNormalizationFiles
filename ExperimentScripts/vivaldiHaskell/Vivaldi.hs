@@ -91,25 +91,25 @@ normalizeMap hosts latencies errTarget =
 repositionSingleCoordinate :: Int -> Map
 repositionSingleCoordinate latencyid =
     --I ask forgiveness from all those who need read this
-    Data.Map.insert (latencyid ! 1) (Vector.plus ((hosts ! (latencyid ! 1))) (Vector.scale .002 (
-        Vector.plus(
+    Data.Map.insert (latencyid ! 1) (addvec ((hosts ! (latencyid ! 1))) (scalevec .002 (
+        addvec(
             (Vector.listVector [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
-            (Vector.scale ((                 
+            (scalevec ((                 
             (latencies ! latencyid)) - 
                 vectorLength (
-                        Vector.plus(
-                    (hosts ! (latencyid ! 1))) Vector.scale(-1 $ hosts ! (latencyid ! 2)))
+                        addvec(
+                    (hosts ! (latencyid ! 1))) scalevec(-1 $ hosts ! (latencyid ! 2)))
                         )
                     )
                 ) / (
                     vectorLength (
-                        Vector.plus(
-                            (hosts ! (latencyid ! 1))) Vector.scale(-1 $ hosts ! (latencyid ! 2))
+                        addvec(
+                            (hosts ! (latencyid ! 1))) scalevec(-1 $ hosts ! (latencyid ! 2))
                         )
                     )
                     )
-                    Vector.plus(
-                            (hosts ! (latencyid ! 1))) Vector.scale(-1 $ hosts ! (latencyid ! 2))
+                    addvec(
+                            (hosts ! (latencyid ! 1))) scalevec(-1 $ hosts ! (latencyid ! 2))
                         )
                     )
                 )
