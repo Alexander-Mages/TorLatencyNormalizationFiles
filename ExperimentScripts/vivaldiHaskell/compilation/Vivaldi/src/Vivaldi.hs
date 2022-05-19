@@ -11,14 +11,14 @@ import qualified Data.List
 addvec :: Vector Double -> Vector Double -> Vector Double
 addvec a b =
 	-- ^ ^ Vector 1, Vector 2
-	Vector.fromList [((a ! 0)+(a ! 0)), ((a ! 1)+(b ! 1)), ((a ! 2)+(b ! 2)), ((a ! 3)+(b ! 3))]
+	Vector.fromList [((a !! 0)+(a !! 0)), ((a !! 1)+(b !! 1)), ((a !! 2)+(b !! 2)), ((a !! 3)+(b !! 3))]   ---this syntax need be applied to rest of code 05/16/22
 						-- ^ ^		 ^
 						--key, vector, key of new coordinate
 --vector scaling
 scalevec :: Vector Double -> Double -> Vector Double
 scalevec a b =
 	-- ^ ^ Vector, scale factor
-	Vector.fromList [(b(x a), x), (b(y a), y), (b(z a), z), (b(w a), w)]
+	Vector.fromList [(b(a !! 0)), (b(a !! 1)), (b(a !! 2)), (b(a !! 3))]
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 
@@ -28,7 +28,7 @@ scalevec a b =
 vectorLength :: Vector Double -> Double
 vectorLength v =
 	sqrt (
-	x v ^ 2 + y v ^ 2 + z v ^ 2 + w v ^ 2
+	 (v !! 0) ^ 2 + (v !! 1) ^ 2 + (v !! 2) ^ 2 + (v !! 3) ^ 2
 	)
 
 --vector distance
@@ -51,7 +51,7 @@ initializeCoordinates =
 		zip (
 			[0..25] --integers as keys
 			-- ^ \/ both must be scaled along with the # of latencies created
-			(replicate 25 Vector.fromList [(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)])
+			(replicate 25 Vector.fromList [(randomNum), (randomNum), (randomNum), (randomNum)])
 			)-- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
 	)
 
@@ -60,7 +60,7 @@ initializeLatencies =
 	Map.fromList (
 		zip (
 			--fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
-			concat $ zipWith (zip . repeat) [1..25] $ tails [1..25] --currently creates some tuples with two identical values
+			concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25] --currently creates some tuples with two identical values
 			(replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
 		)
 	)
@@ -68,12 +68,12 @@ initializeLatencies =
 errdist :: [Int] -> Map Integer Double -> Map Integer (Vector Double) -> Double
 errdist latencyid latencies hosts =
 	abs (
-		(latencies ! latencyid) -
-		(vectorDist (hosts ! (latencyid ! 0)) (hosts ! (latencyid ! 1))) ^ 2
+		(latencies !! latencyid) -
+		(vectorDist (hosts !! (latencyid !! 0)) (hosts !! (latencyid !! 1))) ^ 2
 	)
 error :: Map Integer Double -> Map Integer (Vector Double) -> Double
 error latencies hosts =
-	sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ tails [1..25])))
+	sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
 normalizeMap :: Map Integer Double -> Map Integer (Vector Double) -> Int -> Map Integer (Vector Double)
@@ -81,7 +81,7 @@ normalizeMap latencies hosts errTarget =
 	until (
 		(((Vivaldi.error (latencies hosts)) - 1000) < errTarget)				--first arg
 		(map repositionSingleCoordinate)										--second arg
-		(concat $ zipWith (zip . repeat) [1..25] $ tails [1..25])	--third arg
+		(concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])	--third arg
 	)
 	--THIS SYNTAX IS INCORRECT^		--Eugene: hopefully corrected now
 	--mapping cannot be used in an until block
@@ -92,16 +92,16 @@ normalizeMap latencies hosts errTarget =
 
 repositionSingleCoordinate :: [Int] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
 repositionSingleCoordinate latencyid latencies hosts =
-	Map.insert (latencyid ! 0) (
+	Map.insert (latencyid !! 0) (
 		addvec (
-			(hosts (latencyid ! 0)), --source
+			(hosts (latencyid !! 0)), --source
 			scalevec (
 				addvec (
-					Vector.fromList[(randomNum, x), (randomNum, y), (randomNum, z), (randomNum, w)],
+					Vector.fromList[(randomNum), (randomNum), (randomNum), (randomNum)],
 					scalevec (
-						(((latencies ! latencyid) - vectorLength(addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1)))) /
-								(vectorLength(addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1))))),
-						(addvec((hosts ! (latencyid ! 0)), scalevec((hosts ! (latencyid ! 1)), -1)))
+						(((latencies !! latencyid) - vectorLength(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1)))) /
+								(vectorLength(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1))))),
+						(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1)))
 					)
 				),
 				0.002 --scaling factor
@@ -118,10 +118,8 @@ findClosestNode hosts latencies hostKey =
 
 main :: IO ()
 main = do
-	hosts <- initializeCoordinates
-	latencies <- initializeLatencies
-	normalizeMap hosts latencies errTarget
-	-- ^ the finished system (i think)		-- ^ arbitrary error cutoff
+	normalizeMap initializeCoordinates initializeLatencies 100
+	-- ^ the finished system (i think)					-- ^ arbitrary error cutoff
 
 
 
@@ -147,13 +145,13 @@ minimizeEnergy vivaldi name rtt =
 		(Vector.fromList [(0, x), (0, y), (0, z), (0, w)]), --origin
 		Operations.scale(
 			(rtt - vectorLength(
-		Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name)))
+		Operations.plus (vivaldi !! "initialPoint") Operations.scale(-1 (vivaldi !! ("Point" ++ show name)))
 	)/vectorLength(
-		Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name))))
+		Operations.plus (vivaldi !! "initialPoint") Operations.scale(-1 (vivaldi !! ("Point" ++ show name))))
 		)
 	)
 	rtt - vectorLength(
-		Operations.plus (vivaldi ! "initialPoint") Operations.scale(-1 (vivaldi ! ("Point" ++ show name)))
+		Operations.plus (vivaldi !! "initialPoint") Operations.scale(-1 (vivaldi !! ("Point" ++ show name)))
 	)
 	--no idea what pattern arguments are expected in by Vector.Dense.Operations
 -}
