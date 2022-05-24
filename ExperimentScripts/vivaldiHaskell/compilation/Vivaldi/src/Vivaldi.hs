@@ -8,22 +8,22 @@ import qualified Data.List
 
 --Vector operations
 --elementwise vector addition
-addvec :: [Double] -> [Double] -> Vector Double
+addvec :: [Double] -> [Double] ->[Double]
 addvec a b =
 	-- ^ ^ Vector 1, Vector 2
-	Vector.fromList [((a !! 0)+(a !! 0)), ((a !! 1)+(b !! 1)), ((a !! 2)+(b !! 2)), ((a !! 3)+(b !! 3))]   ---this syntax need be applied to rest of code 05/16/22
+	[((a !! 0)+(a !! 0)), ((a !! 1)+(b !! 1)), ((a !! 2)+(b !! 2)), ((a !! 3)+(b !! 3))]   ---this syntax need be applied to rest of code 05/16/22
 						-- ^ ^		 ^
 						--key, vector, key of new coordinate
 {--
 --vector scaling
-scalevec :: [Double] -> Double -> Vector Double
+scalevec :: [Double] -> Double ->[Double]
 scalevec a b =
 	-- ^ ^ Vector, scale factor
 	Vector.fromList [(b * (a !! 0)), (b * (a !! 1)), (b * (a !! 2)), (b * (a !! 3))]
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 --}
-scalevec :: Vector Double -> Double -> Vector Double
+scalevec :: [Double] -> Double ->[Double]
 scalevec a b = map (b*) a
 
 
@@ -42,11 +42,11 @@ vectorDist x y =
 	vectorLength(addvec(x, (scalevec(y, -1))))
 
 --random number generator (between 1 and 400)
-randomNum :: IO [Double]
+randomNum :: IO [a9]
 randomNum = do
 	return $ randomRs (1,400) <$> newStdGen
 
-initializeCoordinates :: Map Integer (Vector Double)
+initializeCoordinates :: Map Integer [Double]
 --returns map of ["host{host#}", (randomly generated 4 way vector)]
 initializeCoordinates =
 	--two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -55,7 +55,7 @@ initializeCoordinates =
 		zip (
 			[0..25] --integers as keys
 			-- ^ \/ both must be scaled along with the # of latencies created
-			(replicate 25 Vector.fromList [(randomNum), (randomNum), (randomNum), (randomNum)])
+			(replicate 25 [(randomNum), (randomNum), (randomNum), (randomNum)])
 			)-- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
 	)
 
@@ -69,21 +69,21 @@ initializeLatencies =
 		)
 	)
 
-errdist :: [Int] -> Map Integer Double -> Map Integer (Vector Double) -> Double
+errdist :: [Int] -> Map Integer Double -> Map Integer [Double] -> Double
 errdist latencyid latencies hosts =
 	abs (
 		(latencies !! latencyid) -
 		(vectorDist (hosts !! (latencyid !! 0)) (hosts !! (latencyid !! 1))) ^ 2
 	)
-error :: Map Integer Double -> Map Integer (Vector Double) -> Double
-error latencies hosts =
+err :: Map Integer Double -> Map Integer [Double] -> Double
+err latencies hosts =
 	sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
-normalizeMap :: Map Integer Double -> Map Integer (Vector Double) -> Int -> Map Integer (Vector Double)
+normalizeMap :: Map Integer Double -> Map Integer [Double] -> Int -> Map Integer [Double]
 normalizeMap latencies hosts errTarget =
 	until (
-		(((Vivaldi.error (latencies hosts)) - 1000) < errTarget)				--first arg
+		(((err (latencies hosts)) - 1000) < errTarget)				--first arg
 		(map repositionSingleCoordinate)										--second arg
 		(concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])	--third arg
 	)
@@ -94,14 +94,14 @@ normalizeMap latencies hosts errTarget =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 
-repositionSingleCoordinate :: [Int] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
+repositionSingleCoordinate :: [Int] -> Map Integer Double -> Map Integer [Double] -> Map Integer [Double]
 repositionSingleCoordinate latencyid latencies hosts =
 	Map.insert (latencyid !! 0) (
 		addvec (
 			(hosts (latencyid !! 0)), --source
 			scalevec (
 				addvec (
-					Vector.fromList[(randomNum), (randomNum), (randomNum), (randomNum)],
+					[(randomNum), (randomNum), (randomNum), (randomNum)],
 					scalevec (
 						(((latencies !! latencyid) - vectorLength(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1)))) /
 								(vectorLength(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1))))),
