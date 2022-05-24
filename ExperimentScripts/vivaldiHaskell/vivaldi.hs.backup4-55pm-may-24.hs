@@ -23,7 +23,7 @@ scalevec a b =
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 --}
-scalevec :: Vector Double -> Double -> Vector Double
+scalevec :: [Double] -> Double -> Vector Double
 scalevec a b = map (b*) a
 
 
