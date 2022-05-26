@@ -23,13 +23,13 @@ scalevec a b =
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 --}
-scalevec :: [Double] -> Double -> Vector Double
+scalevec :: Vector Double -> Double -> Vector Double
 scalevec a b = map (b*) a
 
 
 --vector length
 --does this just find the linear distance?
-vectorLength :: [Double] -> Double
+vectorLength :: Vector Double -> Double
 vectorLength = map (**)
 
 --vector distance
@@ -93,7 +93,7 @@ normalizeMap latencies hosts errTarget =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 
-repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer ([Double] -> Vector Double)
+repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
 repositionSingleCoordinate latencyid latencies hosts =
         Map.insert (head latencyid) (
                 addvec(
