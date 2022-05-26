@@ -36,12 +36,15 @@ vectorLength v = map (**) v
 vectorDist :: [Double] -> [Double] -> Double
 vectorDist x y =
 	--functions not implemented
-	vectorLength(addvec(x, (scalevec(y, -1))))
+	vectorLength(addvec x (scalevec y -1))
+
 
 --random number generator (between 1 and 400)
-randomNum :: IO [Double]
+randomNum :: IO Double
 randomNum = do
 	return $ randomRs (1,400) <$> newStdGen
+--randomNum :: Double
+--randomNum = 244
 
 initializeCoordinates :: Map Integer (Vector Double)
 --returns map of ["host{host#}", (randomly generated 4 way vector)]
@@ -61,7 +64,7 @@ initializeLatencies =
 	Map.fromList (
 		zip (
 			--fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
-			concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25] --currently creates some tuples with two identical values
+			concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50] --currently creates some tuples with two identical values
 			(replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
 		)
 	)
@@ -72,17 +75,17 @@ errdist latencyid latencies hosts =
 		(latencies !! latencyid) -
 		(vectorDist (hosts !! (latencyid !! 0)) (hosts !! (latencyid !! 1))) ^ 2
 	)
-error :: Map Integer Double -> Map Integer (Vector Double) -> Double
-error latencies hosts =
-	sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
+err :: Map Integer Double -> Map Integer (Vector Double) -> Double
+err latencies hosts =
+	sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
 normalizeMap :: Map Integer (Vector Double) -> Map Integer (Double) -> Integer -> Map Integer (Vector Double)
 normalizeMap latencies hosts errTarget =
 	until (
-		(((Vivaldi.error (latencies hosts)) - 1000) < errTarget)				--first arg
+		(((err (latencies hosts)) - 1000) < errTarget)				--first arg
 		(map repositionSingleCoordinate)										--second arg
-		(concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])	--third arg
+		(concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])	--third arg
 	)
 	--mapping cannot be used in an until block
 
@@ -90,13 +93,13 @@ normalizeMap latencies hosts errTarget =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 
-repositionSingleCoordinate :: [Int] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
+repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer ([Double] -> Vector Double)
 repositionSingleCoordinate latencyid latencies hosts =
 	Map.insert (latencyid !! 0) (
-		addvec (
-			(hosts (latencyid !! 0)), --source
-			scalevec (
-				addvec (
+		addvec(
+			(hosts !! (latencyid !! 0)), --source
+			scalevec(
+				addvec(
 					Vector.fromList[(randomNum), (randomNum), (randomNum), (randomNum)],
 					scalevec (
 						(((latencies !! latencyid) - vectorLength(addvec((hosts !! (latencyid !! 0)), scalevec((hosts !! (latencyid !! 1)), -1)))) /
@@ -117,6 +120,6 @@ findClosestNode hosts latencies hostKey =
 -}
 
 main :: Map Integer (Vector Double)
-main = do
+main =
 	normalizeMap initializeCoordinates initializeLatencies 100
 	-- ^ the finished system (i think)					-- ^ arbitrary error cutoff
