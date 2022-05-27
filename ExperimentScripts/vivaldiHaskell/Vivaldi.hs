@@ -8,16 +8,20 @@ import qualified Data.List
 import Control.Monad.Io.Class.MonadIO
 
 --Vector operations
+{--
 --elementwise vector addition
 --addvec :: [Double] -> [Double] -> Vector Double
 --addvec :: Num a => [a] -> [a] -> Vector a
 -- ^ this is result of :t after ghci> addvec a b = [(a !! 0)+(a !! 0), (a !! 1)+(b !! 1), (a !! 2)+(b !! 2), (a !! 3)+(b !! 3)]
-addvec :: Num a => [a] -> [a] -> [a]
-addvec a b =
+addvec2 :: Num a => [a] -> [a] -> [a]
+addvec2 a b =
         -- ^ ^ Vector 1, Vector 2
-        Vector.fromList [(a !! 0)+(a !! 0), (a !! 1)+(b !! 1), (a !! 2)+(b !! 2), (a !! 3)+(b !! 3)]   ---this syntax need be applied to rest of code 05/16/22
+        Vector.fromList [(a !! 0)+(b !! 0), (a !! 1)+(b !! 1), (a !! 2)+(b !! 2), (a !! 3)+(b !! 3)]   ---this syntax need be applied to rest of code 05/16/22
                                                 -- ^ ^		 ^
                                                 --key, vector, key of new coordinate
+--}
+addvec :: Num a => [a] -> [a] -> [a]
+addvec a b = zipWith (+) a b
 {--
 --vector scaling
 scalevec :: [Double] -> Double -> Vector Double
