@@ -5,7 +5,7 @@ import Data.Vector (Vector)
 import qualified Data.Vector as Vector
 import System.Random
 import qualified Data.List
-import Control.Monad.Io.Class.MonadIO
+import Control.Monad.IO.Class (MonadIO)
 
 --Vector operations
 {--
@@ -89,18 +89,18 @@ initializeLatencies =
                         (replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
 
-errdist :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Double
+errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
 errdist latencyid latencies hosts =
         abs (
-                (latencies !! latencyid) -
-                vectorDist (hosts !! head latencyid) (hosts !! tail latencyid) ^ 2
+                ((latencies !! latencyid) -
+                (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2
         )
-err :: Map Integer Double -> Map Integer (Vector Double) -> Double
+--err :: Map Integer Double -> Map Integer (Vector Double) -> Double
 err latencies hosts =
-        sum (map (errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])))
+        sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
-normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
+--normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
 normalizeMap latencies hosts errTarget =
         until (
                 ((err (latencies hosts) - 1000) < errTarget)                            --first arg
@@ -113,7 +113,7 @@ normalizeMap latencies hosts errTarget =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 
-repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
+--repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
 repositionSingleCoordinate latencyid latencies hosts =
         Map.insert (head latencyid) (
                 addvec(
@@ -139,7 +139,7 @@ findClosestNode hosts latencies hostKey =
 	--relatively easy implementation, just need a list of host keys to map/fold through
 -}
 
-main :: Map Integer (Vector Double)
+--main :: Map Integer (Vector Double)
 main =
         normalizeMap initializeCoordinates initializeLatencies 100
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
