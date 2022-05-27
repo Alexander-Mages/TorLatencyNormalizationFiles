@@ -52,7 +52,7 @@ vectorDist :: Num a => [a] -> [a] -> [a -> a]
 vectorDist a b =
         --functions not implemented
         vectorLength(addvec a (map negate b))
-                        --scale instead of ^
+
 
 --random number generator (between 1 and 400)
 --randomNum :: IO Double
@@ -64,7 +64,7 @@ randomNum =
 
 
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, Control.Monad.IO.Class.MonadIO f) => Map k (Vector (f [a]))
+initializeCoordinates :: (Ord k, Enum k, Random a, Num k, Num a, Control.Monad.IO.Class.MonadIO f) => Map k (Vector (f [a]))
 --god help me. Again, reminder to look into this type constraint
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -77,10 +77,9 @@ initializeCoordinates =
                         (replicate 25 (Vector.fromList [randomNum, randomNum, randomNum, randomNum]))
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
-        
+
 --initializeLatencies :: Map Integer Double
-initializeLatencies :: (Ord a1, Enum a1, Random a2, Num a1, Num a2, Ord b, Enum b, Num b, Control.Monad.IO.Class.MonadIO f) => Map (a1, b) (f [a2])
---try using a b c instead of a1 a2 and b
+initializeLatencies :: (Ord a1, Ord b, Enum a1, Enum b, Random a2, Num a1, Num b, Num a2, Control.Monad.IO.Class.MonadIO f) => Map (a1, b) (f [a2])
 --I thought it couldn't get any worse
 initializeLatencies =
         Map.fromList (
@@ -89,6 +88,7 @@ initializeLatencies =
                         (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]) --currently creates some tuples with two identical values
                         (replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
+
 errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
 errdist latencyid latencies hosts =
         abs (
@@ -104,7 +104,7 @@ err latencies hosts =
 normalizeMap latencies hosts errTarget =
         until (
                 ((err (latencies hosts) - 1000) < errTarget)                            --first arg
-                (map repositionSingleCoordinate)                                   --second arg
+                (map repositionSingleCoordinate)                                                                                --second arg
                 (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])    --third arg
         )
         --mapping cannot be used in an until block
