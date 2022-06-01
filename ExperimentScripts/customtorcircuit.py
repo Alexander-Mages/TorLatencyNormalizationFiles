@@ -208,12 +208,13 @@ def MeasurementLoop(tbb_dir, SockAddr):
             pass
         while True:
             time.sleep(30)
-            start_time = time.time()
+            start_time = time.perf_counter()
+            #             ^ more accurate timing than time.time(), intended for measuring performance
             try:
                 driver.refresh()
             except WebDriverException:
                 #page errors are viewed by selenium as errors, thus this is neccecary
-                rtt = time.time() - start_time
+                rtt = time.perf_counter() - start_time
             #put time in milliseconds
             latency = round(rtt * 1000)
             print("RTT to exit node is " + str(latency))
