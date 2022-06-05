@@ -144,7 +144,7 @@ normalizeMap maps =
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
 repositionSingleCoordinate :: (Map k a9, Map (k, k) a9) -> (Int, Int) -> (Map k a9, Map (k, k) a9)
 repositionSingleCoordinate maps latencyid =
-        ((snd maps),
+        (
         (Map.insert (fst latencyid) (
                 addvec(
                         (fst maps) !! fst latencyid, --source
@@ -161,7 +161,7 @@ repositionSingleCoordinate maps latencyid =
                         )
                 )
         ) (fst maps)) --map to insert into
-        )
+        , (snd maps))
 
 {-
 findClosestNode ::
@@ -170,6 +170,7 @@ findClosestNode hosts latencies hostKey =
 -}
 
 --main :: Map Integer (Vector Double)
+main :: (Map k (Vector (f [a])), Map (k, k) [a])
 main =
         normalizeMap (initializeCoordinates, initializeLatencies)
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
