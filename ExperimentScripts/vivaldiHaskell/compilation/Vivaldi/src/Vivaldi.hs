@@ -106,19 +106,20 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: (k, k) -> Map (k, k) a -> Map k a -> a -> a
-errdist latencyid latencies hosts =
+errdist :: ((Map k a),(Map (k, k) a)) -> (k, k) -> a -> a
+errdist maps latencyid =
         abs (
-                ((fallibleLookup latencyid latencies) -
-                (vectorDist (fallibleLookup (fst latencyid) hosts) (fallibleLookup (snd latencyid) hosts))) ^ 2
+                ((fallibleLookup latencyid (snd maps)) -
+                (vectorDist (fallibleLookup (fst latencyid) (fst maps)) (fallibleLookup (snd latencyid) (fst maps)))) ^ 2
         )
 
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
-err :: (Num k, Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
-err latencies hosts =
-        sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
+--err :: (Num k, Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
+err :: (Num k, Enum k) => (Map k a, Map (k, k) a) -> a -> a
+err maps =
+        sum (map (errdist maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
-
+{--
 --normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
 normalizeMap latencies hosts errTarget =
         until (
@@ -127,30 +128,40 @@ normalizeMap latencies hosts errTarget =
                 (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])    --third arg
         )
         --mapping cannot be used in an until block
+--}
+
+-- maps = (hosts, latencies)
+normalizeMap :: (Map k a9, Map (k, k) a9) -> (Map k a9, Map (k, k) a9)
+normalizeMap maps =
+        if (((err maps) - 1000) < 100) then
+                maps
+        else
+                normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 
 --latencies and hosts Maps are not global variables, depending on how haskell handles functions,
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
-
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
-repositionSingleCoordinate latencyid latencies hosts =
-        Map.insert (head latencyid) (
+repositionSingleCoordinate :: (Map k a9, Map (k, k) a9) -> (Int, Int) -> (Map k a9, Map (k, k) a9)
+repositionSingleCoordinate maps latencyid =
+        ((snd maps),
+        (Map.insert (fst latencyid) (
                 addvec(
-                        hosts !! head latencyid, --source
+                        (fst maps) !! fst latencyid, --source
                         scalevec(
                                 addvec(
                                         Vector.fromList[randomNum, randomNum, randomNum, randomNum],
                                         scalevec (
-                                                ((latencies !! latencyid) - vectorLength(addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1)))) /
-                                                                vectorLength(addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1))),
-                                                addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1))
+                                                (((snd maps) !! latencyid) - vectorLength(addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1)))) /
+                                                                vectorLength(addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1))),
+                                                addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1))
                                         )
                                 ),
                                 0.002 --scaling factor
                         )
                 )
-        ) hosts --map to insert into
-
+        ) (fst maps)) --map to insert into
+        )
 
 {-
 findClosestNode ::
@@ -160,5 +171,5 @@ findClosestNode hosts latencies hostKey =
 
 --main :: Map Integer (Vector Double)
 main =
-        normalizeMap initializeCoordinates initializeLatencies 100
+        normalizeMap (initializeCoordinates, initializeLatencies)
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
