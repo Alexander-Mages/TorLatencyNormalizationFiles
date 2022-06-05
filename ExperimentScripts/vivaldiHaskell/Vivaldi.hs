@@ -38,33 +38,30 @@ scalevec a b = map (b*) a
 
 --vector length
 --vectorLength :: [Double] -> Double
-vectorLength :: Num a => [a] -> [a -> a]
---vectorLength :: Floating a => [a] -> [a -> a]
+vectorLength :: (Double a, Double (a -> a)) => [a] -> a -> a
+--vectorLength :: (Floating a, Floating (a -> a)) => [a] -> a -> a
 -- ^ this is what GHCI gives me, seems wrong, I don't want to use floating points
-vectorLength = map (**)
+vectorLength = sqrt (sum (map (**)))
 --side note, this is beautiful syntax, only 8 characters in the function body
 
 --vector distance
 --vectorDist :: [Double] -> [Double] -> Double
--- vectorDist :: Floating a => [a] -> [a] -> [a -> a]
+-- vectorDist :: (Floating a, Floating (a -> a)) => [a] -> [a] -> a -> a
 -- GHCI RESULT ^
-vectorDist :: Num a => [a] -> [a] -> [a -> a]
-vectorDist a b =
-        --functions not implemented
-        vectorLength(addvec a (map negate b))
+vectorDist :: (Double a, Double (a -> a)) => [a] -> [a] -> a -> a
+vectorDist a b = vectorLength(addvec a (map negate b))
                         --scale instead of ^
 
 --random number generator (between 1 and 400)
 --randomNum :: IO Double
-randomNum :: (Random a, Num a, Control.Monad.IO.Class.MonadIO f) => f [a] --note to self: find out what this type constraint means/contains
-randomNum = 
-        randomRs (1,400) <$> newStdGen
+randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this type constraint means/contains
+randomNum = randomRs (1,400) <$> newStdGen
 --randomNum :: Double
 --randomNum = 244
 
 
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, Control.Monad.IO.Class.MonadIO f) => Map k (Vector (f [a]))
+initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, MonadIO f) => Map k (Vector (f [a]))
 --god help me. Again, reminder to look into this type constraint
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -79,7 +76,7 @@ initializeCoordinates =
         )
         
 --initializeLatencies :: Map Integer Double
-initializeLatencies :: (Ord a1, Enum a1, Random a2, Num a1, Num a2, Ord b, Enum b, Num b, Control.Monad.IO.Class.MonadIO f) => Map (a1, b) (f [a2])
+initializeLatencies :: (Ord a1, Enum a1, Num a1, Random a2, Num a2, Ord b, Enum b, Num b, MonadIO f) => Map (a1, b) (f [a2])
 --try using a b c instead of a1 a2 and b
 --I thought it couldn't get any worse
 initializeLatencies =
@@ -90,11 +87,19 @@ initializeLatencies =
                         (replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
 errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
+errdist :: (Ord a, Enum a, Num a, Random a2, Num a2, MonadIO f) => (a, a) -> Map (a, a) (f [a2]) -> Map a (Vector (f [a2])) -> a
+--signatures I wrote^
+errdist :: ()
+errdist latencyid latencies hosts = abs ( ((latencies !! latencyid) - (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2)
+
+
 errdist latencyid latencies hosts =
         abs (
                 ((latencies !! latencyid) -
                 (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2
         )
+
+
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
 err latencies hosts =
         sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
