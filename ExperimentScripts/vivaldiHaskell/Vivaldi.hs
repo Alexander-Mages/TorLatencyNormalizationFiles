@@ -114,42 +114,49 @@ errdist latencyid latencies hosts =
         )
 
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
-err :: (Num k, Num (Map (k, k) a -> Map k a -> a -> a), Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
+err :: (Num k, Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
 err latencies hosts =
         sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
-
+{--
 --normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
 normalizeMap latencies hosts errTarget =
         until (
-                ((err (latencies hosts) - 1000) < errTarget)                            --first arg
+                (((err latencies hosts) - 1000) < errTarget)                            --first arg
                 (map repositionSingleCoordinate)                                   --second arg
                 (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])    --third arg
         )
         --mapping cannot be used in an until block
+--}
+
+normalizeMap maps =
+        if (((err maps) - 1000) < 100) then
+                maps
+        else
+                normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 
 --latencies and hosts Maps are not global variables, depending on how haskell handles functions,
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
-
+maps = (hosts, latencies)
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
-repositionSingleCoordinate latencyid latencies hosts =
+repositionSingleCoordinate maps latencyid =
         Map.insert (head latencyid) (
                 addvec(
-                        hosts !! head latencyid, --source
+                        (fst maps) !! head latencyid, --source
                         scalevec(
                                 addvec(
                                         Vector.fromList[randomNum, randomNum, randomNum, randomNum],
                                         scalevec (
-                                                ((latencies !! latencyid) - vectorLength(addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1)))) /
-                                                                vectorLength(addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1))),
-                                                addvec(hosts !! head latencyid, scalevec(hosts !! tail latencyid, -1))
+                                                (((snd maps) !! latencyid) - vectorLength(addvec((fst maps) !! head latencyid, scalevec((fst maps) !! tail latencyid, -1)))) /
+                                                                vectorLength(addvec((fst maps) !! head latencyid, scalevec((fst maps) !! tail latencyid, -1))),
+                                                addvec((fst maps) !! head latencyid, scalevec((fst maps) !! tail latencyid, -1))
                                         )
                                 ),
                                 0.002 --scaling factor
                         )
                 )
-        ) hosts --map to insert into
+        ) (fst maps) --map to insert into
 
 
 {-
@@ -160,5 +167,5 @@ findClosestNode hosts latencies hostKey =
 
 --main :: Map Integer (Vector Double)
 main =
-        normalizeMap initializeCoordinates initializeLatencies 100
+        normalizeMap (initializeCoordinates, initializeLatencies)
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
