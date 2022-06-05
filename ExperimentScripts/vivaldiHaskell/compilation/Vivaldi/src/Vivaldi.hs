@@ -112,6 +112,7 @@ errdist latencyid latencies hosts =
         )
 
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
+err :: (Num k, Num (Map (k, k) a -> Map k a -> a -> a), Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
 err latencies hosts =
         sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
