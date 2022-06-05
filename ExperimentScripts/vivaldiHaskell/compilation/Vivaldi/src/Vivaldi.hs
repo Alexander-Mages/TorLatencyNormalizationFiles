@@ -38,33 +38,30 @@ scalevec a b = map (b*) a
 
 --vector length
 --vectorLength :: [Double] -> Double
-vectorLength :: Num a => [a] -> [a -> a]
---vectorLength :: Floating a => [a] -> [a -> a]
+vectorLength :: (Num a) => [a] -> a -> a
+--vectorLength :: (Floating a, Floating (a -> a)) => [a] -> a -> a
 -- ^ this is what GHCI gives me, seems wrong, I don't want to use floating points
-vectorLength = map (**)
+vectorLength v = sqrt (sum (map (**) v))
 --side note, this is beautiful syntax, only 8 characters in the function body
 
 --vector distance
 --vectorDist :: [Double] -> [Double] -> Double
--- vectorDist :: Floating a => [a] -> [a] -> [a -> a]
+-- vectorDist :: (Floating a, Floating (a -> a)) => [a] -> [a] -> a -> a
 -- GHCI RESULT ^
-vectorDist :: Num a => [a] -> [a] -> [a -> a]
-vectorDist a b =
-        --functions not implemented
-        vectorLength(addvec a (map negate b))
+vectorDist :: (Num a) => [a] -> [a] -> a -> a
+vectorDist a b = vectorLength(addvec a (map negate b))
                         --scale instead of ^
 
 --random number generator (between 1 and 400)
 --randomNum :: IO Double
-randomNum :: (Random a, Num a, Control.Monad.IO.Class.MonadIO f) => f [a] --note to self: find out what this type constraint means/contains
-randomNum = 
-        randomRs (1,400) <$> newStdGen
+randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this type constraint means/contains
+randomNum = randomRs (1,400) <$> newStdGen
 --randomNum :: Double
 --randomNum = 244
 
 
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, Control.Monad.IO.Class.MonadIO f) => Map k (Vector (f [a]))
+initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, MonadIO f) => Map k (Vector (f [a]))
 --god help me. Again, reminder to look into this type constraint
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -79,7 +76,8 @@ initializeCoordinates =
         )
         
 --initializeLatencies :: Map Integer Double
-initializeLatencies :: (Ord a1, Enum a1, Random a2, Num a1, Num a2, Ord b, Enum b, Num b, Control.Monad.IO.Class.MonadIO f) => Map (a1, b) (f [a2])
+--initializeLatencies :: (Ord a1, Enum a1, Num a1, Random a2, Num a2, Ord b, Enum b, Num b, MonadIO f) => Map (a1, b) (f [a2])
+initializeLatencies :: (Ord a1, Enum a1, Num a1, Random a2, Num a2, Ord b, Enum b, Num b) => Map (a1, b) ([a2])
 --try using a b c instead of a1 a2 and b
 --I thought it couldn't get any worse
 initializeLatencies =
@@ -87,14 +85,32 @@ initializeLatencies =
                 zip
                         --fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
                         (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]) --currently creates some tuples with two identical values
-                        (replicate 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
+                        (take 325 randomNum) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
-errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
+        --should be identical to the above: ghci> let maapp = Data.Map.Strict.fromList $ zip ((concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])) (Prelude.take 325 (iterate (+1) 1))
+        --ghci> Data.Map.Strict.lookup (23,48) maapp
+                --Just 320
+
+--errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
+--errdist :: (Num a, Num b, Random a2, Num a2, MonadIO f) => (a, a) -> Map (a, b) (f [a2]) -> Map a (Vector (f [a2])) -> a
+--signatures I wrote^
+--errdist :: ()
+--errdist latencyid latencies hosts = abs ( ((latencies !! latencyid) - (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2)
+
+--errdist :: (k, k) -> Map (k, k) a -> Map k b -> Maybe a
+
+fallibleLookup :: (Ord k, Monad m) => k -> Map.Map k a -> m a
+fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.lookup k
+--I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
+--I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
+
+errdist :: (k, k) -> Map (k, k) a -> Map k a -> a -> a
 errdist latencyid latencies hosts =
         abs (
-                ((latencies !! latencyid) -
-                (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2
+                ((fallibleLookup latencyid latencies) -
+                (vectorDist (fallibleLookup (fst latencyid) hosts) (fallibleLookup (snd latencyid) hosts))) ^ 2
         )
+
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
 err latencies hosts =
         sum (map errdist (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
