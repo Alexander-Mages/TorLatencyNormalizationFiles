@@ -37,6 +37,8 @@ scalevec a b =
 scalevec :: Num b => [b] -> b -> [b]
 scalevec a b = map (b*) a
 
+inversevec :: Num b => [b] -> [b]
+inversevec a = map negate a
 
 --vector length
 --vectorLength :: [Double] -> Double
@@ -51,7 +53,7 @@ vectorLength v = sqrt (sum (map (**) v))
 -- vectorDist :: (Floating a, Floating (a -> a)) => [a] -> [a] -> a -> a
 -- GHCI RESULT ^
 vectorDist :: (Num a) => [a] -> [a] -> a -> a
-vectorDist a b = vectorLength(addvec a (map negate b))
+vectorDist a b = vectorLength(addvec a (inversevec b))
                         --scale instead of ^
 
 --random number generator (between 1 and 400)
@@ -136,32 +138,33 @@ normalizeMap maps =
         if (((err maps) - 1000) < 100) then
                 maps
         else
-                normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
+                --normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
+                (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), (snd maps))
+                --normalizeMap ((map (repositionSingleCoordinate latencies v)), latencies)
+                --take 325 (iterate repositionSingleCoordinate)
 
 --latencies and hosts Maps are not global variables, depending on how haskell handles functions,
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
-repositionSingleCoordinate :: (Map k a9, Map (k, k) a9) -> (Int, Int) -> (Map k a9, Map (k, k) a9)
+repositionSingleCoordinate :: (Map k a9, Map (k, k) a9) -> (Int, Int) -> (Map k a9)
 repositionSingleCoordinate maps latencyid =
-        (
-        (Map.insert (fst latencyid) (
+        Map.insert (fst latencyid) (
                 addvec(
-                        (fst maps) !! fst latencyid, --source
+                        fallibleLookup (fst latencyid) (fst maps), --source
                         scalevec(
                                 addvec(
                                         Vector.fromList[randomNum, randomNum, randomNum, randomNum],
                                         scalevec (
-                                                (((snd maps) !! latencyid) - vectorLength(addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1)))) /
-                                                                vectorLength(addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1))),
-                                                addvec((fst maps) !! fst latencyid, scalevec((fst maps) !! snd latencyid, -1))
+                                                ((fallibleLookup latencyid (snd maps)) - vectorLength(addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps))))) /
+                                                                vectorLength(addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps)))),
+                                                addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps)))
                                         )
                                 ),
                                 0.002 --scaling factor
                         )
                 )
-        ) (fst maps)) --map to insert into
-        , (snd maps))
+        ) (fst maps) --map to insert into
 
 {-
 findClosestNode ::
