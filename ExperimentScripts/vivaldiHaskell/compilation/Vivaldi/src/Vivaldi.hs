@@ -6,6 +6,7 @@ import qualified Data.Vector as Vector
 import System.Random
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
+import Data.Maybe
 
 {-# LANGUAGE FlexibleContexts #-}
 
@@ -42,17 +43,17 @@ inversevec a = map negate a
 
 --vector length
 --vectorLength :: [Double] -> Double
-vectorLength :: (Num a) => [a] -> a -> a
+vectorLength :: (Num a) => [a] -> a
 --vectorLength :: (Floating a, Floating (a -> a)) => [a] -> a -> a
 -- ^ this is what GHCI gives me, seems wrong, I don't want to use floating points
-vectorLength v = sqrt (sum (map (**) v))
+vectorLength v = sqrt (sum (map (^2) v))
 --side note, this is beautiful syntax, only 8 characters in the function body
 
 --vector distance
 --vectorDist :: [Double] -> [Double] -> Double
 -- vectorDist :: (Floating a, Floating (a -> a)) => [a] -> [a] -> a -> a
 -- GHCI RESULT ^
-vectorDist :: (Num a) => [a] -> [a] -> a -> a
+vectorDist :: (Num a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
                         --scale instead of ^
 
@@ -108,16 +109,17 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: ((Map k a),(Map (k, k) a)) -> (k, k) -> a -> a
+errdist :: ((Map k a),(Map (k, k) a)) -> (k, k) -> a
 errdist maps latencyid =
         abs (
-                ((fallibleLookup latencyid (snd maps)) -
-                (vectorDist (fallibleLookup (fst latencyid) (fst maps)) (fallibleLookup (snd latencyid) (fst maps)))) ^ 2
+                --vectorDist removes the maybe monad from the values, thus the line above need be a "Just" value to enable arithmetic
+                (((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps))) -
+                (vectorDist (fallibleLookup (fst latencyid) (fst maps)) (fallibleLookup (snd latencyid) (fst maps)))) ^2)
         )
 
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
 --err :: (Num k, Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
-err :: (Num k, Enum k) => (Map k a, Map (k, k) a) -> a -> a
+err :: (Num k, Enum k) => (Map k a, Map (k, k) a) -> a
 err maps =
         sum (map (errdist maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
@@ -133,7 +135,7 @@ normalizeMap latencies hosts errTarget =
 --}
 
 -- maps = (hosts, latencies)
-normalizeMap :: (Map k a9, Map (k, k) a9) -> (Map k a9, Map (k, k) a9)
+normalizeMap :: (Map Int a, Map (Int, Int) a) -> (Map Int a, Map (Int, Int) a)
 normalizeMap maps =
         if (((err maps) - 1000) < 100) then
                 maps
@@ -147,24 +149,22 @@ normalizeMap maps =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
-repositionSingleCoordinate :: (Map k a9, Map (k, k) a9) -> (Int, Int) -> (Map k a9)
+repositionSingleCoordinate :: (Map Int a, Map (Int, Int) a) -> (Int, Int) -> (Map Int a)
 repositionSingleCoordinate maps latencyid =
         Map.insert (fst latencyid) (
-                addvec(
-                        fallibleLookup (fst latencyid) (fst maps), --source
-                        scalevec(
-                                addvec(
-                                        Vector.fromList[randomNum, randomNum, randomNum, randomNum],
-                                        scalevec (
-                                                ((fallibleLookup latencyid (snd maps)) - vectorLength(addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps))))) /
-                                                                vectorLength(addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps)))),
-                                                addvec(fallibleLookup (fst latencyid) (fst maps), inversevec(fallibleLookup (snd latencyid) (fst maps)))
-                                        )
-                                ),
-                                0.002 --scaling factor
-                        )
-                )
+                addvec
+                        (fallibleLookup (fst latencyid) (fst maps)) --source
+                        (scalevec
+                                (addvec 
+                                        ([randomNum, randomNum, randomNum, randomNum])
+                                        (scalevec
+                                                (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))
+                                                (((fallibleLookup (latencyid) (snd maps)) - vectorLength(addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))) /
+                                                        (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))))
+                                                ))
+                                0.002) --scaling factor
         ) (fst maps) --map to insert into
+
 
 {-
 findClosestNode ::
@@ -173,7 +173,7 @@ findClosestNode hosts latencies hostKey =
 -}
 
 --main :: Map Integer (Vector Double)
-main :: (Map k (Vector (f [a])), Map (k, k) [a])
+main :: (Num k) => (Map k a, Map (k, k) a)
 main =
         normalizeMap (initializeCoordinates, initializeLatencies)
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
