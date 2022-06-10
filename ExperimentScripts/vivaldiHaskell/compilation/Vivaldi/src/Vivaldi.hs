@@ -141,7 +141,7 @@ normalizeMap maps =
                 maps
         else
                 --normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
-                (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), (snd maps))
+                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), (snd maps))
                 --normalizeMap ((map (repositionSingleCoordinate latencies v)), latencies)
                 --take 325 (iterate repositionSingleCoordinate)
 
