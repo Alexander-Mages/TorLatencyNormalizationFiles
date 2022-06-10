@@ -159,7 +159,7 @@ repositionSingleCoordinate maps latencyid =
                                         ([randomNum, randomNum, randomNum, randomNum])
                                         (scalevec
                                                 (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))
-                                                (((fallibleLookup (latencyid) (snd maps)) - vectorLength(addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))) /
+                                                (((fallibleLookup (latencyid) (snd maps)) - (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps)))))) /
                                                         (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))))
                                                 ))
                                 0.002) --scaling factor
