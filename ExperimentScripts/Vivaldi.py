@@ -1,7 +1,6 @@
 from numpy import array
 from numpy import sum as vecSum
 from numpy import add as vecAdd
-import pandas as pd
 import numpy as np
 import random
 import sys
@@ -14,19 +13,19 @@ def randomVec():
     return array([random.uniform(0,400),random.uniform(0,400),random.uniform(0,400),random.uniform(0,400)])
 
 def vectorLength(a):
-    return np.sqrt(vecSum(np.power(a,2)))
+    np.\
+        sqrt(vecSum(np.power(a,2)))
 
 def vectorDist(a,b):
-    return vectorLength(vecAdd(a, b*-1))
+    vectorLength(vecAdd(a, b*-1))
 
 def error():
-    global latencies
     if not latencies: #< ensures not null
         parseData()
     err = sum = count = 0
     for (source, dest) in latencies:
-        dist = pd.to_numeric(latencies[(source, dest)]) - vectorDist(positions[source], positions[dest])
-        err += dist ** 2
+        dist = latencies[(source, dest)] - vectorDist(positions[source], positions[dest])
+        err += dist ^ 2
         count += 1
         sum += abs(dist)
     return err/count
@@ -64,9 +63,6 @@ def parseData(files):
                     latencies[(sourceHost, destHost)] = rtt
 
 def findCoordinates():
-    global positions
-    global hosts
-    global latencies
     err = error()
     newErr = err - 1000
 
@@ -78,19 +74,19 @@ def findCoordinates():
         for source in hosts:
             f = randomVec()
             for dest in hosts:
-                if (source == dest) or ((source, dest) not in latencies and (dest, source) not in latencies):
+                if source == dest:
                     continue
-                elif (source, dest) in latencies:
-                    l = latencies[(source, dest)]
-                elif (dest, source) in latencies:
+                l = latencies[(source, dest)]
+                if not l:
                     l = latencies[(dest, source)]
-                else:
-                    raise Exception("baby's first hashtable")
-            delta = vecAdd(positions[source], (-1 * positions[dest]))
+                if not l:
+                    continue
+            delta = addvec(positions[source], scale(-1, positions[dest]))
             dist = vectorLength(delta)
-            e = pd.to_numeric(l) - dist
-            f = vecAdd(f, (e/dist * delta))
-        positions[source] = vecAdd(positions[source], (0.002 * f))
+            e = l - dist
+            f = addvec(f, scale(e/dist, delta))
+        positions[source] = addvec(positions[source], scale(0.002, f))
+
         newErr = error()
 
 def findClosest(node):
@@ -104,13 +100,10 @@ def findClosest(node):
 
 
 def main():
-    global positions
-    global latencies
-    global hosts
     initCoords([sys.argv[1]]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
+    print(latencies)
     print(positions)
     findCoordinates()
     print(positions)
-    print(latencies)
 if __name__ == "__main__":
     main()
