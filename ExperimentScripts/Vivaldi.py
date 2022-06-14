@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 import random
 import sys
-
 positions = {} #dictionary
 latencies = {} #dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
 hosts = set() # set object: same interface as HashSet
@@ -52,7 +51,7 @@ def parseData(files):
             sourceHost = f.readline()
             hosts.add(sourceHost) #adds source host to hosts hashset
             #read timing measurements, assuming same format as Parse/ProcessVC.java
-            for line in f.readlines():
+            for line in f.read().splitlines():
                 (destHost, rtt) = line.split(":")
                 hosts.add(destHost) #adds destination to hosts hashset
                 if (sourceHost, destHost) in latencies:
@@ -86,11 +85,11 @@ def findCoordinates():
                     l = latencies[(dest, source)]
                 else:
                     raise Exception("baby's first hashtable")
-            delta = vecAdd(positions[source], (-1 * positions[dest]))
+            delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
             dist = vectorLength(delta)
             e = pd.to_numeric(l) - dist
-            f = vecAdd(f, (e/dist * delta))
-        positions[source] = vecAdd(positions[source], (0.002 * f))
+            f = vecAdd(f, np.multiply(delta, e/dist))
+        positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
         newErr = error()
 
 def findClosest(node):

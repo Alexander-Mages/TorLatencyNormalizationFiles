@@ -59,14 +59,14 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
 
 --random number generator (between 1 and 400)
 --randomNum :: IO Double
-randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this type constraint means/contains
+randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this monadic type constraint means/contains
 randomNum = randomRs (1,400) <$> newStdGen
 --randomNum :: Double
 --randomNum = 244
 
 
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, MonadIO f) => Map k (Vector (f [a]))
+initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a, MonadIO f) => Map k (f [a])
 --god help me. Again, reminder to look into this type constraint
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -76,7 +76,7 @@ initializeCoordinates =
                 zip 
                         [0..25] --integers as keys
                         -- ^ \/ both must be scaled along with the # of latencies created
-                        (replicate 25 (Vector.fromList [randomNum, randomNum, randomNum, randomNum]))
+                        (replicate 25 ([randomNum, randomNum, randomNum, randomNum]))
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
         
@@ -159,8 +159,8 @@ repositionSingleCoordinate maps latencyid =
                                         ([randomNum, randomNum, randomNum, randomNum])
                                         (scalevec
                                                 (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))
-                                                (((fallibleLookup (latencyid) (snd maps)) - (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps)))))) /
-                                                        (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))))
+                                               (fallibleLookup (latencyid) (snd maps) - vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps))))) /
+                                                        (vectorLength (addvec (fallibleLookup (fst latencyid) (fst maps)) (inversevec (fallibleLookup (snd latencyid) (fst maps)))))
                                                 ))
                                 0.002) --scaling factor
         ) (fst maps) --map to insert into
@@ -173,7 +173,7 @@ findClosestNode hosts latencies hostKey =
 -}
 
 --main :: Map Integer (Vector Double)
-main :: (Num k) => (Map k a, Map (k, k) a)
+main :: (Map Int (Vector (f [a])), Map (Int, Int) a)
 main =
         normalizeMap (initializeCoordinates, initializeLatencies)
         -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
