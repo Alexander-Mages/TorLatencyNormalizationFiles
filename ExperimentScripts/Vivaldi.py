@@ -10,7 +10,7 @@ latencies = {} #dictionary keyed as follows latencies[(sourceHost, destHost)] = 
 hosts = set() # set object: same interface as HashSet
 
 def randomVec():
-    return array([random.uniform(0,400),random.uniform(0,400),random.uniform(0,400),random.uniform(0,400)])
+    return array([random.uniform(1,400),random.uniform(1,400),random.uniform(1,400),random.uniform(1,400)])
 
 def vectorLength(a):
     return np.sqrt(vecSum(np.power(a,2)))
@@ -54,13 +54,15 @@ def parseData(files):
             for line in f.read().splitlines():
                 (destHost, rtt) = line.split(":")
                 hosts.add(destHost) #adds destination to hosts hashset
-                if (sourceHost, destHost) in latencies:
+                #if (sourceHost, destHost) in latencies:
                 #if a value exists for the host pair tuple it's turned into a list and the new value is appended
-                    latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
-                    latencies.append(rtt)
+                latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
+                latencies.append(rtt)
                     #does this: latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]], rtt]
-                else:
-                    latencies[(sourceHost, destHost)] = rtt
+                #else:
+                    #latencies[(sourceHost, destHost)] = rtt
+
+                #take a look at this^
 
 def findCoordinates():
     global positions
@@ -77,7 +79,7 @@ def findCoordinates():
         for source in hosts:
             f = randomVec()
             for dest in hosts:
-                if (source == dest) or ((source, dest) not in latencies and (dest, source) not in latencies):
+                if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                     continue
                 elif (source, dest) in latencies:
                     l = latencies[(source, dest)]
@@ -87,9 +89,9 @@ def findCoordinates():
                     raise Exception("baby's first hashtable")
             delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
             dist = vectorLength(delta)
-            e = pd.to_numeric(l) - dist
+            e = pd.to_numeric(l) - dist #iterate through l's, it can be a list. Make sure l is always treated as list
             f = vecAdd(f, np.multiply(delta, e/dist))
-        positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
+            positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
         newErr = error()
 
 def findClosest(node):
