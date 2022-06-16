@@ -10,7 +10,7 @@ import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
-import Graphics.Win32 (bLACKONWHITE)
+--import Graphics.Win32 (bLACKONWHITE)
 {--
 import qualified GHC.Exts.Heap as PB
 import qualified Distribution.Compat.CharParsing as PB
@@ -47,7 +47,6 @@ scalevec a b =
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 --}
---scalevec :: [Double] -> Double -> Vector Double
 scalevec :: Num b => [b] -> b -> [b]
 scalevec a b = map (b*) a
 
@@ -55,32 +54,21 @@ inversevec :: Num b => [b] -> [b]
 inversevec = map negate
 
 --vector length
---vectorLength :: [Double] -> Double
 vectorLength :: (Num a, Floating a) => [a] -> a
---vectorLength :: (Floating a, Floating (a -> a)) => [a] -> a -> a
--- ^ this is what GHCI gives me, seems wrong, I don't want to use floating points
 vectorLength v = sqrt (sum (map (^2) v))
---side note, this is beautiful syntax, only 8 characters in the function body
 
 --vector distance
---vectorDist :: [Double] -> [Double] -> Double
--- vectorDist :: (Floating a, Floating (a -> a)) => [a] -> [a] -> a -> a
--- GHCI RESULT ^
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
                         --scale instead of ^
 
 --random number generator (between 1 and 400)
---randomNum :: IO Double
-randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this monadic type constraint means/contains
+randomNum :: (Random a, Num a, MonadIO f) => f [a]
 randomNum = randomRs (1,400) <$> newStdGen
---randomNum :: Double
---randomNum = 244
 
 
 --initializeCoordinates :: Map Integer (Vector Double)
 initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
---god help me. Again, reminder to look into this type constraint
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
         --returns map of ["host{host#}", (randomly generated 4 way vector)]
@@ -93,11 +81,7 @@ initializeCoordinates =
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
 
---initializeLatencies :: Map Integer Double
---initializeLatencies :: (Ord a1, Enum a1, Num a1, Random a2, Num a2, Ord b, Enum b, Num b, MonadIO f) => Map (a1, b) (f [a2])
 initializeLatencies :: (Ord a, Enum a, Num a, Random b, Num b) => Map (a, a) b
---try using a b c instead of a1 a2 and b
---I thought it couldn't get any worse
 initializeLatencies =
         Map.fromList (
                 zip
@@ -109,14 +93,6 @@ initializeLatencies =
         --ghci> Data.Map.Strict.lookup (23,48) maapp
                 --Just 320
 
---errdist :: (Int, Int) -> Map (a, b) (f [a]) -> Map k (Vector (f [a])) -> [a -> a]
---errdist :: (Num a, Num b, Random a2, Num a2, MonadIO f) => (a, a) -> Map (a, b) (f [a2]) -> Map a (Vector (f [a2])) -> a
---signatures I wrote^
---errdist :: ()
---errdist latencyid latencies hosts = abs ( ((latencies !! latencyid) - (vectorDist (hosts !! fst latencyid) (hosts !! snd latencyid))) ^ 2)
-
---errdist :: (k, k) -> Map (k, k) a -> Map k b -> Maybe a
-
 fallibleLookup :: (Ord k, MonadFail m) => k -> Map.Map k a -> m a
 fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.lookup k
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
@@ -125,17 +101,16 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 errdist :: (Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
 errdist maps latencyid =
         abs (
-                --vectorDist removes the maybe monad from the values, thus the line above need be a "Just" value to enable arithmetic
+                --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
                 (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
                 vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
         )
 
---err :: Map Integer Double -> Map Integer (Vector Double) -> Double
---err :: (Num k, Enum k) => p1 -> p2 -> Map (k, k) a -> Map k a -> a -> a
 err :: (Num a, Floating a, Num k, Enum k, Ord k) => (Map k [a], Map (k, k) a) -> a
 err maps =
         sum (map (errdist maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
+
 {--
 --normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
 normalizeMap latencies hosts errTarget =
@@ -151,17 +126,12 @@ normalizeMap latencies hosts errTarget =
 normalizeMap :: (Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
 normalizeMap maps =
         if (err maps - 1000) < 100 then
-                maps
+        --arbitrary cutoff^
+                maps --concretizes the finished map and returns the tuple
         else
-                --normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
                 normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), snd maps)
-                --normalizeMap ((map (repositionSingleCoordinate latencies v)), latencies)
-                --take 325 (iterate repositionSingleCoordinate)
+                --maps repositionSingleCoordinate to host-pairs, reverses the resulting list of maps, left-bias union consolidates the changes, map is recursively normalized until err condition is met
 
---latencies and hosts Maps are not global variables, depending on how haskell handles functions,
---I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
-
---repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
 repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
 repositionSingleCoordinate maps latencyid =
         Map.insert (fst latencyid) (
@@ -177,6 +147,7 @@ repositionSingleCoordinate maps latencyid =
                                                 ))
                                 0.002) --scaling factor
         ) (fst maps) --map to insert into
+
 
 
 class Pretty a where
@@ -221,7 +192,6 @@ formatLatencies maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
                         (Map.keys (snd maps), Map.elems (snd maps))]
 
 
---main :: Map Integer (Vector Double)
 main :: IO () --(Random a, Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a)
 main =
         let
@@ -230,4 +200,3 @@ main =
                 c = formatCoordinates a
         in
                 putStrLn (b ++ c)
-        -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
