@@ -24,6 +24,7 @@ dependencies:
 - containers
 - vector
 - random
+- boxes
 
 library:
   source-dirs: src

@@ -32,6 +32,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , boxes
     , containers
     , random
     , vector
@@ -47,6 +48,7 @@ executable Vivaldi-exe
   build-depends:
       Vivaldi
     , base >=4.7 && <5
+    , boxes
     , containers
     , random
     , vector
@@ -63,6 +65,7 @@ test-suite Vivaldi-test
   build-depends:
       Vivaldi
     , base >=4.7 && <5
+    , boxes
     , containers
     , random
     , vector

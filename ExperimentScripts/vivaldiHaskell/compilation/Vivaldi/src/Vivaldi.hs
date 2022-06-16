@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Redundant bracket" #-}
+{-# LANGUAGE FlexibleInstances #-}
 module Vivaldi where
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
@@ -9,6 +9,17 @@ import System.Random
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Maybe
+import qualified Text.PrettyPrint.Boxes as PB
+import Graphics.Win32 (bLACKONWHITE)
+{--
+import qualified GHC.Exts.Heap as PB
+import qualified Distribution.Compat.CharParsing as PB
+import Numeric (showGFloatAlt)
+import qualified GHC.Exts.Heap as PB
+import Data.Map.Internal.Debug (validsize)
+import Data.String (String)
+import Text.XHtml (cols)
+--}
 
 {-# LANGUAGE FlexibleContexts #-}
 
@@ -62,7 +73,7 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
 --random number generator (between 1 and 400)
 --randomNum :: IO Double
 randomNum :: (Random a, Num a, MonadIO f) => f [a] --note to self: find out what this monadic type constraint means/contains
-randomNum = (randomRs (1,400) <$> newStdGen)
+randomNum = randomRs (1,400) <$> newStdGen
 --randomNum :: Double
 --randomNum = 244
 
@@ -78,7 +89,7 @@ initializeCoordinates =
                 zip
                         [0..25] --integers as keys
                         -- ^ \/ both must be scaled along with the # of latencies created
-                        (replicate 25 ([100, 100, 100, 100]))
+                        (replicate 25 [100, 100, 100, 100])
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
 
@@ -92,7 +103,7 @@ initializeLatencies =
                 zip
                         --fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
                         (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]) --currently creates some tuples with two identical values
-                        (replicate 325 (200)) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
+                        (replicate 325 200) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
         --should be identical to the above: ghci> let maapp = Data.Map.Strict.fromList $ zip ((concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])) (Prelude.take 325 (iterate (+1) 1))
         --ghci> Data.Map.Strict.lookup (23,48) maapp
@@ -111,12 +122,12 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: (Num a, Floating a, Ord k) => ((Map k [a]),(Map (k, k) a)) -> (k, k) -> a
+errdist :: (Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
 errdist maps latencyid =
         abs (
                 --vectorDist removes the maybe monad from the values, thus the line above need be a "Just" value to enable arithmetic
-                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps))) -
-                (vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))) **2
+                (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
+                vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
         )
 
 --err :: Map Integer Double -> Map Integer (Vector Double) -> Double
@@ -139,11 +150,11 @@ normalizeMap latencies hosts errTarget =
 -- maps = (hosts, latencies)
 normalizeMap :: (Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
 normalizeMap maps =
-        if (((err maps) - 1000) < 100) then
+        if (err maps - 1000) < 100 then
                 maps
         else
                 --normalizeMap (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
-                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), (snd maps))
+                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), snd maps)
                 --normalizeMap ((map (repositionSingleCoordinate latencies v)), latencies)
                 --take 325 (iterate repositionSingleCoordinate)
 
@@ -151,7 +162,7 @@ normalizeMap maps =
 --I may need to pass them as parameters to the "map" function uses (https://stackoverflow.com/questions/51073535/using-map-with-function-that-has-multiple-arguments)
 
 --repositionSingleCoordinate :: [Integer] -> Map Integer Double -> Map Integer (Vector Double) -> Map Integer (Vector Double)
-repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> (Map Int [a])
+repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
 repositionSingleCoordinate maps latencyid =
         Map.insert (fst latencyid) (
                 addvec
@@ -161,21 +172,62 @@ repositionSingleCoordinate maps latencyid =
                                         [100, 100, 100, 100]
                                         (scalevec
                                                 (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
-                                               (((Data.Maybe.fromJust (fallibleLookup (latencyid) (snd maps))) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
-                                                        (vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))))
+                                               ((Data.Maybe.fromJust (fallibleLookup (latencyid) (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
+                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
                                                 ))
                                 0.002) --scaling factor
         ) (fst maps) --map to insert into
 
 
-{-
-findClosestNode ::
-findClosestNode hosts latencies hostKey =
-	--relatively easy implementation, just need a list of host keys to map/fold through
--}
+class Pretty a where
+        ppr :: a -> PB.Box
+
+instance Pretty String where
+        ppr = PB.text
+
+instance Pretty Int where
+        ppr = PB.text . show
+
+instance Pretty Float where
+        ppr = PB.text . show
+
+instance Pretty [Float] where
+        ppr = PB.text . show
+
+instance Pretty [(Int, Int)] where
+        ppr = PB.text . show
+
+instance Pretty [Int] where
+        ppr = PB.text . show
+
+col :: (Pretty a, Pretty t) => (t, [a]) -> PB.Box
+col (a, xs) = PB.vcat PB.left $ lab ++ vals
+        where
+                lab = [ppr a]
+                vals = fmap ppr xs
+
+formatCoordinates :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatCoordinates maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
+        where
+                cols :: [([Int], [[Float]])]
+                cols = [
+                        (Map.keys (fst maps), Map.elems (fst maps))]
+
+formatLatencies :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatLatencies maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
+        where
+                cols :: [([(Int, Int)], [Float])]
+                cols = [
+                        (Map.keys (snd maps), Map.elems (snd maps))]
+
 
 --main :: Map Integer (Vector Double)
-main :: (Random a, Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a)
+main :: IO () --(Random a, Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a)
 main =
-        normalizeMap (initializeCoordinates, initializeLatencies)
-        -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        let
+                a = normalizeMap (initializeCoordinates, initializeLatencies)
+                b = formatLatencies a
+                c = formatCoordinates a
+        in
+                putStrLn (b ++ c)
+        -- ^ the finished system (i think)					-- ^ arbitrary error cutoff                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
