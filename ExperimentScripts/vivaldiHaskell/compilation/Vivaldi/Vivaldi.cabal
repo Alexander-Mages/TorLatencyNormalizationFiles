@@ -35,6 +35,7 @@ library
     , boxes
     , containers
     , random
+    , split
     , vector
   default-language: Haskell2010
 
@@ -51,6 +52,7 @@ executable Vivaldi-exe
     , boxes
     , containers
     , random
+    , split
     , vector
   default-language: Haskell2010
 
@@ -68,5 +70,6 @@ test-suite Vivaldi-test
     , boxes
     , containers
     , random
+    , split
     , vector
   default-language: Haskell2010

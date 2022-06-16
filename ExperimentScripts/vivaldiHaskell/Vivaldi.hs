@@ -10,6 +10,7 @@ import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
+import GHC.Base (Double)
 --import Graphics.Win32 (bLACKONWHITE)
 {--
 import qualified GHC.Exts.Heap as PB
@@ -63,12 +64,18 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
                         --scale instead of ^
 
 --random number generator (between 1 and 400)
-randomNum :: (Random a, Num a, MonadIO f) => f [a]
-randomNum = randomRs (1,400) <$> newStdGen
+--randomNum :: (Random a, Num a{--, MonadIO f--}, Num b) => b -> a
+--randomNum = randomRs (1.00, 400.00) <$> newStdGen
+--anothaNum :: Int -> [Float]--(Num a, Random a, MonadIO f) => [b]
+--anothaNum quantity = do
+        --g <- newStdGen
+        --take quantity $ randomRs (1.00, 400.00) g
 
+numm :: IO Double
+numm = getStdRandom (randomR (1.00,400.00))
 
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Random a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
+initializeCoordinates :: Map Int [IO Double]
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
         --returns map of ["host{host#}", (randomly generated 4 way vector)]
@@ -77,7 +84,7 @@ initializeCoordinates =
                 zip
                         [0..25] --integers as keys
                         -- ^ \/ both must be scaled along with the # of latencies created
-                        (replicate 25 [100, 100, 100, 100])
+                        (replicate 25 [numm, numm, numm, numm])
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
 
@@ -91,13 +98,13 @@ filterDuplicateTuples :: Eq a => [(a, a)] -> [(a, a)]
 filterDuplicateTuples x = filter (uncurry (/=)) (Data.List.nubBy tupleSymmetry x)
                 --removes elements according to the tupleSymmetry condition
 
-initializeLatencies :: (Ord a, Enum a, Num a, Random b, Num b) => Map (a, a) b
+initializeLatencies :: Map (Int, Int) (IO Double)
 initializeLatencies =
         Map.fromList (
                 zip
                         --fills every combination of items in 2 [1..25] int lists. Scaling requires simply changing the 25 below to desired host quantity
                         (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))
-                        (replicate 300 200) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
+                        (replicate 300 numm) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
         --should be identical to the above: ghci> let maapp = Data.Map.Strict.fromList $ zip ((concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])) (Prelude.take 325 (iterate (+1) 1))
         --ghci> Data.Map.Strict.lookup (23,48) maapp
@@ -108,7 +115,7 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: (Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
+errdist :: (Map Int [IO Double], Map (Int, Int) (IO Double)) -> (Int, Int) -> IO Double
 errdist maps latencyid =
         abs (
                 --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
@@ -116,7 +123,7 @@ errdist maps latencyid =
                 vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
         )
 
-err :: (Num a, Floating a, Num k, Enum k, Ord k) => (Map k [a], Map (k, k) a) -> a
+err :: (Map Int [IO Double], Map (Int, Int) (IO Double)) -> IO Double
 err maps =
         sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
@@ -133,7 +140,7 @@ normalizeMap latencies hosts errTarget =
 --}
 
 -- maps = (hosts, latencies)
-normalizeMap :: (Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
+normalizeMap :: {--(Num a, Ord a, Floating a, Random a) => --}(Map Int [IO Double], Map (Int, Int) (IO Double)) -> (Map Int [IO Double], Map (Int, Int) (IO Double))
 normalizeMap maps =
         if (err maps - 1000) < 100 then
         --arbitrary cutoff^
@@ -142,14 +149,14 @@ normalizeMap maps =
                 normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps)
                 --maps repositionSingleCoordinate to host-pairs, reverses the resulting list of maps, left-bias union consolidates the changes, map is recursively normalized until err condition is met
 
-repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
+repositionSingleCoordinate :: (Map Int [IO Double], Map (Int, Int) (IO Double)) -> (Int, Int) -> Map Int [IO Double]
 repositionSingleCoordinate maps latencyid =
         Map.insert (fst latencyid) (
                 addvec
                         (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
                         (scalevec
                                 (addvec
-                                        [100, 100, 100, 100]
+                                        [200.00, 200.00, 200.00, 200.00]
                                         (scalevec
                                                 (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
                                                ((Data.Maybe.fromJust (fallibleLookup (latencyid) (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
@@ -166,13 +173,13 @@ class Pretty a where
 instance Pretty String where
         ppr = PB.text
 
-instance Pretty Int where
+--instance Pretty Int where
+    --    ppr = PB.text . show
+
+instance Pretty (IO Double) where
         ppr = PB.text . show
 
-instance Pretty Float where
-        ppr = PB.text . show
-
-instance Pretty [Float] where
+instance Pretty [IO Double] where
         ppr = PB.text . show
 
 instance Pretty [(Int, Int)] where
@@ -187,26 +194,24 @@ col (a, xs) = PB.vcat PB.left $ lab ++ vals
                 lab = [ppr a]
                 vals = fmap ppr xs
 
-formatCoordinates :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatCoordinates :: (Map Int [IO Double], Map (Int, Int) (IO Double)) -> String
 formatCoordinates maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
         where
-                cols :: [([Int], [[Float]])]
+                cols :: [([Int], [[IO Double]])]
                 cols = [
                         (Map.keys (fst maps), Map.elems (fst maps))]
 
-formatLatencies :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatLatencies :: (Map Int [IO Double], Map (Int, Int) (IO Double)) -> String
 formatLatencies maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
         where
-                cols :: [([(Int, Int)], [Float])]
+                cols :: [([(Int, Int)], [IO Double])]
                 cols = [
                         (Map.keys (snd maps), Map.elems (snd maps))]
 
 
 main :: IO () --(Random a, Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a)
-main =
-        let
-                a = normalizeMap (initializeCoordinates, initializeLatencies)
-                b = formatLatencies a
-                c = formatCoordinates a
-        in
-                putStrLn (b ++ c)
+main = do
+        coords <- initializeCoordinates
+        latencies <- initializeLatencies
+        yield <- normalizeMap (coords, latencies)
+        print (formatLatencies yield ++ formatCoordinates yield)
