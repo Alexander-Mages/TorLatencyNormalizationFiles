@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# LANGUAGE FlexibleInstances #-}
-module Vivaldi where
+module Main where
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Vector (Vector)
@@ -81,12 +81,22 @@ initializeCoordinates =
                         -- ^ replicate :: Int -> a -> [a], creates list of length of first argument and value of second
         )
 
+tupleSymmetry :: Eq a => (a, a) -> (a, a) -> Bool
+tupleSymmetry (x,y) (a,b) =
+        (x == a && y == b) || (x == b && y == a) || (x == y)
+
+--https://www.seas.upenn.edu/~cis194/fall16/lectures/04-typeclasses.html - "The Eq type class - CIS194"
+filterDuplicateTuples :: Eq a => [(a, a)] -> [(a, a)]
+                        --(uncurry (/=)) is the same as (\(x,y) -> x /= y) which is the same as (\(x,y) -> not (x == y))
+filterDuplicateTuples = filter (uncurry (/=)) (Data.List.nubBy tupleSymmetry)
+                --removes elements according to the tupleSymmetry condition
+
 initializeLatencies :: (Ord a, Enum a, Num a, Random b, Num b) => Map (a, a) b
 initializeLatencies =
         Map.fromList (
                 zip
-                        --fills every combination of items in 2 [1..9] int lists. Scaling requires simply changing the 9 below to desired host quantity
-                        (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]) --currently creates some tuples with two identical values
+                        --fills every combination of items in 2 [1..25] int lists. Scaling requires simply changing the 25 below to desired host quantity
+                        (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))
                         (replicate 325 200) -- [283,13,398]... note: must be scaled according to the keys, "length concat $ zipWith (zip . repeat) [1..25] $ tails [1..25]"
         )
         --should be identical to the above: ghci> let maapp = Data.Map.Strict.fromList $ zip ((concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])) (Prelude.take 325 (iterate (+1) 1))
@@ -108,7 +118,7 @@ errdist maps latencyid =
 
 err :: (Num a, Floating a, Num k, Enum k, Ord k) => (Map k [a], Map (k, k) a) -> a
 err maps =
-        sum (map (errdist maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))
+        sum (map (errdist maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
 {--
@@ -129,7 +139,7 @@ normalizeMap maps =
         --arbitrary cutoff^
                 maps --concretizes the finished map and returns the tuple
         else
-                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50]))), snd maps)
+                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))), snd maps)
                 --maps repositionSingleCoordinate to host-pairs, reverses the resulting list of maps, left-bias union consolidates the changes, map is recursively normalized until err condition is met
 
 repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
