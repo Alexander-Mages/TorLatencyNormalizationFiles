@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# HLINT ignore "Avoid lambda" #-}
 module Main where
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
@@ -11,6 +12,7 @@ import Control.Monad.IO.Class (MonadIO)
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
 import Data.List.Split
+import Debug.Trace
 --import Graphics.Win32 (bLACKONWHITE)
 {--
 import qualified GHC.Exts.Heap as PB
@@ -140,17 +142,27 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: (Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
+errdist :: ({--Show a is for debug--}Show a, Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
 errdist maps latencyid =
-        abs (
+        Debug.Trace.traceShow (abs (
                 --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
                 (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
                 vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
-        )
+        )) (abs (
+                --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
+                (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
+                vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
+        ))
 
-err :: (Num a, Floating a, Num k, Enum k, Ord k) => (Map k [a], Map (k, k) a) -> a
+
+err :: (Num a, Floating a, Num k, Enum k, Ord k,{--show is for debug.Trace.traceShow--} Show a, Show k) => (Map k [a], Map (k, k) a) -> a
 err maps =
-        sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
+        --sum (map (`errdist` maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
+        --backticks turn function errdist into an operator, allowing it to be passed the maps. requires switching order of args
+
+        Debug.Trace.traceShow ((Data.Maybe.fromJust (fallibleLookup (1,22) (snd maps))), vectorDist (Data.Maybe.fromJust (fallibleLookup (fst (1,22)) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd (1,22)) (fst maps)))) (sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))))
+        --sum (map (\x -> errdist maps x) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
+        --lambda that allows maps to be passed into errdist
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
 {--
@@ -165,18 +177,20 @@ normalizeMap latencies hosts errTarget =
 --}
 
 -- maps = (hosts, latencies)
-normalizeMap :: (Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
+normalizeMap :: (Num a, {--show is for debug.Trace.traceShow--}Show a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
 normalizeMap maps =
-        if err maps - 1000 < 100 then
+        if err maps - 1000 < -1000 then
         --arbitrary cutoff^
                 maps --concretizes the finished map and returns the tuple
         else
-                normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps)
+                --Debug.Trace.trace "normalizationLoop" (normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps))
                 --maps repositionSingleCoordinate to host-pairs, reverses the resulting list of maps, left-bias union consolidates the changes, map is recursively normalized until err condition is met
+                Debug.Trace.trace "normalizationLoop" (normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps))
 
-repositionSingleCoordinate :: (Num a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
+
+repositionSingleCoordinate :: (Num a, Floating a, Show a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
 repositionSingleCoordinate maps latencyid =
-        Map.insert (fst latencyid) (
+        Debug.Trace.trace "doin stuff" ( Map.insert (fst latencyid) (
                 addvec
                         (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
                         (scalevec
@@ -189,7 +203,7 @@ repositionSingleCoordinate maps latencyid =
                                                 ))
                                 0.002) --scaling factor
         ) (fst maps) --map to insert into
-
+        )
 
 
 class Pretty a where
