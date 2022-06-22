@@ -6,29 +6,19 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Vector (Vector)
 import qualified Data.Vector as Vector
-import System.Random
+import System.Random.PCG
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
 import Data.List.Split
 import Debug.Trace
---import Graphics.Win32 (bLACKONWHITE)
-{--
-import qualified GHC.Exts.Heap as PB
-import qualified Distribution.Compat.CharParsing as PB
-import Numeric (showGFloatAlt)
-import qualified GHC.Exts.Heap as PB
-import Data.Map.Internal.Debug (validsize)
-import Data.String (String)
-import Text.XHtml (cols)
---}
 
-{-# LANGUAGE FlexibleContexts #-}
+
+--NOTE: vec and vector refer to coordinate vectors. These are of datatype list.
 
 --Vector operations
 {--
---elementwise vector addition
 --addvec :: [Double] -> [Double] -> Vector Double
 --addvec :: Num a => [a] -> [a] -> Vector a
 -- ^ this is result of :t after ghci> addvec a b = [(a !! 0)+(a !! 0), (a !! 1)+(b !! 1), (a !! 2)+(b !! 2), (a !! 3)+(b !! 3)]
@@ -39,8 +29,15 @@ addvec2 a b =
                                                 -- ^ ^		 ^
                                                 --key, vector, key of new coordinate
 --}
+
+--elementwise vector addition
 addvec :: Num a => [a] -> [a] -> [a]
 addvec = zipWith (+)
+{--
+ghci> addvec [1.00, 2.00, 3.00, 4.00] [1.5, 2.25, 2.2, 3.1]
+[2.5,4.25,5.2,7.1]
+--}
+
 {--
 --vector scaling
 scalevec :: [Double] -> Double -> Vector Double
@@ -50,21 +47,48 @@ scalevec a b =
 					-- ^ ^ ^ ^
 					--scale factor, key, vector, key of new coordinate
 --}
+--vector multiplication by scalar
 scalevec :: Num b => [b] -> b -> [b]
 scalevec a b = map (b*) a
+{--
+ghci> scalevec [1,2,3,4] 2
+[2,4,6,8]
+ghci> scalevec [1.5,3,4.5,6] 0.33
+[0.495,0.99,1.485,1.98]
+--}
 
+--inverse of vector
 inversevec :: Num b => [b] -> [b]
 inversevec = map negate
+{--
+ghci> inversevec [1,2,3,4]
+[-1,-2,-3,-4]
+--}
 
 --vector length
 vectorLength :: (Num a, Floating a) => [a] -> a
 vectorLength v = sqrt (sum (map (^2) v))
+{-- Python implementation - input of [1,2,3,4] yields 5.477225575051661 in both implementations:
+import math
+
+def vectorLength(x):
+    sum = 0
+    for i in x:
+        sum += i ** 2
+    return math.sqrt(sum)
+
+print(vectorLength([1,2,3,4]))
+--}
 
 --vector distance
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
-                        --scale instead of ^
 
+randFromSeed :: [Double]
+randFromSeed = runST $ do
+        --      (0,400] for floating datatypes
+        uniformR (0.00,400.00) create
+--using System.Random.PCG, from PCG-random. This supposedly provides statisticlly good prediction-resistant numbers
 
 --initializeCoordinates :: Map Integer (Vector Double)
 initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Random a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
@@ -97,8 +121,8 @@ tupleSymmetry (x,y) (a,b) =
 --https://www.seas.upenn.edu/~cis194/fall16/lectures/04-typeclasses.html - "The Eq type class - CIS194"
 filterDuplicateTuples :: Eq a => [(a, a)] -> [(a, a)]
                         --(uncurry (/=)) is the same as (\(x,y) -> x /= y) which is the same as (\(x,y) -> not (x == y))
-filterDuplicateTuples x = filter (uncurry (/=)) (Data.List.nubBy tupleSymmetry x)
-                --removes elements according to the tupleSymmetry condition
+filterDuplicateTuples = filter (uncurry (/=))--(Data.List.nubBy tupleSymmetry x)
+                                                -- ^removes elements according to the tupleSymmetry condition
 
 initializeLatencies :: (Ord a, Enum a, Num a, Random b, Num b, Fractional b) => Map (a, a) b
 initializeLatencies =
@@ -144,15 +168,9 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 
 errdist :: ({--Show a is for debug--}Show a, Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
 errdist maps latencyid =
-        Debug.Trace.traceShow (abs (
                 --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
                 (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
                 vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
-        )) (abs (
-                --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
-                (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
-                vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
-        ))
 
 
 err :: (Num a, Floating a, Num k, Enum k, Ord k,{--show is for debug.Trace.traceShow--} Show a, Show k) => (Map k [a], Map (k, k) a) -> a
@@ -160,7 +178,8 @@ err maps =
         --sum (map (`errdist` maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
         --backticks turn function errdist into an operator, allowing it to be passed the maps. requires switching order of args
 
-        Debug.Trace.trace "error" (sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))))
+        Debug.Trace.traceShow (sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))) / 300 ) (sum (map (errdist maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))) / 300 )
+                                                                                                                                                 --    ^ #of iterations. is static
         --sum (map (\x -> errdist maps x) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
         --lambda that allows maps to be passed into errdist
 -- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
@@ -179,18 +198,18 @@ normalizeMap latencies hosts errTarget =
 -- maps = (hosts, latencies)
 normalizeMap :: (Num a, {--show is for debug.Trace.traceShow--}Show a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
 normalizeMap maps =
-        if err maps - 1000 < -1000 then
+        if err maps - 1000 > 50000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
         --arbitrary cutoff^
                 maps --concretizes the finished map and returns the tuple
         else
                 --Debug.Trace.trace "normalizationLoop" (normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps))
                 --maps repositionSingleCoordinate to host-pairs, reverses the resulting list of maps, left-bias union consolidates the changes, map is recursively normalized until err condition is met
-                Debug.Trace.trace "normalizationLoop" (normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps))
+                Debug.Trace.trace "normalizing" (normalizeMap (Map.unions (reverse (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))), snd maps))
 
 
 repositionSingleCoordinate :: (Num a, Floating a, Show a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> Map Int [a]
 repositionSingleCoordinate maps latencyid =
-        Debug.Trace.trace "doin stuff" ( Map.insert (fst latencyid) (
+        Map.insert (fst latencyid) (
                 addvec
                         (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
                         (scalevec
@@ -198,12 +217,11 @@ repositionSingleCoordinate maps latencyid =
                                         [100, 100, 100, 100] --arbitrary, shouldn't matter
                                         (scalevec
                                                 (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
-                                               ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
+                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
                                                         vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
                                                 ))
                                 0.002) --scaling factor
         ) (fst maps) --map to insert into
-        )
 
 
 class Pretty a where

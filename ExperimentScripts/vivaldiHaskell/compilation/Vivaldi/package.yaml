@@ -26,6 +26,7 @@ dependencies:
 - random
 - boxes
 - split
+- pcg-random
 
 library:
   source-dirs: src
