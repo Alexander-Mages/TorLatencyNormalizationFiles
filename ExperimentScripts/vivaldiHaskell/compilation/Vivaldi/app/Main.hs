@@ -6,9 +6,10 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Vector (Vector)
 import qualified Data.Vector as Vector
-import System.Random
+import System.Random.PCG
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
+import Control.Monad.ST
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
 import Data.List.Split
@@ -83,10 +84,15 @@ print(vectorLength([1,2,3,4]))
 --vector distance
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
-
-
+{--
+randFromSeed :: [Double]
+randFromSeed = Control.Monad.ST.runST $ do
+        --      (0,400] for floating datatypes
+        uniformR (0.00,400.00) create
+--using System.Random.PCG, from PCG-random. This supposedly provides statisticlly good prediction-resistant numbers
+--}
 --initializeCoordinates :: Map Integer (Vector Double)
-initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Random a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
+initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
         --returns map of ["host{host#}", (randomly generated 4 way vector)]
@@ -119,7 +125,7 @@ filterDuplicateTuples :: Eq a => [(a, a)] -> [(a, a)]
 filterDuplicateTuples = filter (uncurry (/=))--(Data.List.nubBy tupleSymmetry x)
                                                 -- ^removes elements according to the tupleSymmetry condition
 
-initializeLatencies :: (Ord a, Enum a, Num a, Random b, Num b, Fractional b) => Map (a, a) b
+initializeLatencies :: (Ord a, Enum a, Num a, Num b, Fractional b) => Map (a, a) b
 initializeLatencies =
         Map.fromList (
                 zip
@@ -193,7 +199,7 @@ normalizeMap latencies hosts errTarget =
 -- maps = (hosts, latencies)
 normalizeMap :: (Num a, {--show is for debug.Trace.traceShow--}Show a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
 normalizeMap maps =
-        if err maps - 1000 > 50000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
+        if err maps - 1000 > 30000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
         --arbitrary cutoff^
                 maps --concretizes the finished map and returns the tuple
         else
