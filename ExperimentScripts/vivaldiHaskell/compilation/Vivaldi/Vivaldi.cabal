@@ -24,8 +24,6 @@ source-repository head
   location: https://github.com/githubuser/Vivaldi
 
 library
-  exposed-modules:
-      Vivaldi
   other-modules:
       Paths_Vivaldi
   hs-source-dirs:
@@ -34,6 +32,7 @@ library
       base >=4.7 && <5
     , boxes
     , containers
+    , ordered-containers
     , pcg-random
     , random
     , split
@@ -52,6 +51,7 @@ executable Vivaldi-exe
     , base >=4.7 && <5
     , boxes
     , containers
+    , ordered-containers
     , pcg-random
     , random
     , split
@@ -71,6 +71,7 @@ test-suite Vivaldi-test
     , base >=4.7 && <5
     , boxes
     , containers
+    , ordered-containers
     , pcg-random
     , random
     , split

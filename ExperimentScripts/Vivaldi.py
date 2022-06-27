@@ -54,13 +54,13 @@ def parseData(files):
             for line in f.read().splitlines():
                 (destHost, rtt) = line.split(":")
                 hosts.add(destHost) #adds destination to hosts hashset
-                #if (sourceHost, destHost) in latencies:
+                if (sourceHost, destHost) in latencies:
                 #if a value exists for the host pair tuple it's turned into a list and the new value is appended
-                latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
-                latencies.append(rtt)
+                    latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
+                    latencies.append(rtt)
                     #does this: latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]], rtt]
-                #else:
-                    #latencies[(sourceHost, destHost)] = rtt
+                else:
+                    latencies[(sourceHost, destHost)] = rtt
 
                 #take a look at this^
 
