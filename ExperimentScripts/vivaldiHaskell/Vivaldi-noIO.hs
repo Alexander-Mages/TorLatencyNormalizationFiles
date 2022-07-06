@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# HLINT ignore "Avoid lambda" #-}
 {-# HLINT ignore "Use first" #-}
 module Main where
@@ -169,14 +170,14 @@ fallibleLookup k = maybe (fail "fallibleLookup: Key not found") pure . Map.looku
 --I know this is bad practice, but it works. https://stackoverflow.com/questions/31898658/the-maybe-result-from-map-lookup-is-not-type-checking-with-my-monad-transformer
 --I don't know why or how, but it allows a failure case without a Maybe monad (random numbers didn't play nice for some reason)
 
-errdist :: ({--Show a is for debug--}Show a, Num a, Floating a, Ord k) => (Map k [a],Map (k, k) a) -> (k, k) -> a
+errdist :: () => (Map Int [Double],Map (Int, Int) Double) -> (Int, Int) -> Double
 errdist maps latencyid =
                 --fallibleLookup returns type (m a). fromJust converts this to a "Just" value to enable arithmetic
                 (Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) -
                 vectorDist (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))) **2
 
 
-err :: (Num a, Floating a, Num k, Enum k, Ord k,{--show is for debug.Trace.traceShow--} Show a, Show k) => (Map k [a], Map (k, k) a) -> a
+err :: (Show Double) => (Map Int [Double], Map (Int, Int) Double) -> Double
 err maps =
         --sum (map (`errdist` maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
         --backticks turn function errdist into an operator, allowing it to be passed the maps. requires switching order of args
@@ -198,20 +199,55 @@ normalizeMap latencies hosts errTarget =
         --mapping cannot be used in an until block
 --}
 {--
-[[(1,[1.0,2.0]),(1,[5.0,6.0]),(1,[4.0,5.0]),(1,[7.0,6.0])],[(2,[2.0,4.0]),(2,[5.0,7.0]),(2,[7.0,8.0]),(2,[9.0,10.0])],[(3,[1.0,2.0]),(3,[8.0,9.0]),(3,[10.0,11.0]),(3,[3.0,4.0])],[(4,[1.0,2.0]),(4,[4.0,5.0]),(4,[6.0,7.0]),(4,[10.0,11.0])]]aver xs = map (\[(a, b)] -> (a ,average b)) (groupDuplicates xs)
+[[(1,[1.0,2.0,3.0,4.0]),(1,[5.0,6.0,7.0,8.0]),(1,[4.0,5.0,6.0,7.0]),(1,[7.0,6.0,5.0,4.0])],[(2,[2.0,4.0,3.0,1.0]),(2,[5.0,7.0,6.0,8.0]),(2,[7.0,8.0,9.0,10.0]),(2,[9.0,10.0,11.0,12.0])],[(3,[1.0,2.0,3.0,4.0]),(3,[8.0,9.0,10.0,11.0]),(3,[10.0,11.0,12.0,13.0]),(3,[3.0,4.0,5.0,6.0])],[(4,[1.0,2.0,3.0,4.0]),(4,[4.0,5.0,6.0,7.0]),(4,[6.0,7.0,8.0,9.0]),(4,[10.0,11.0,12.0,13.0])]]
 
-aver xs = map (\[(x, [a,b])] -> (x ,[average a, average b])) (groupDuplicates xs)
+--aver xs = map (\[(a, b)] -> (a ,average b)) (groupDuplicates xs)
+
+--aver xs = map (\[(x, [a,b])] -> (x ,[average a, average b])) (groupDuplicates xs)
 
 average :: [Double] -> Double
 average xs = realToFrac (sum xs) / Data.List.genericLength xs
 
-aver xs = map (\[(x, [a,b,c,d])] -> (x ,[average a, average b, average c, average d])) (groupDuplicates xs)
+aver xs = map (\[(x, xs)] -> (x ,sumvec xs)) (groupDuplicates xs)
 groupDuplicates = groupBy (\(a,b) (x,y) -> a == x)
- [(1,[1.00,2.00]),(2,[5.00,6.00]),(1,[4.00,5.00]),(1,[7.00,6.00]),(2,[2.00,4.00]),(2,[5.00,7.00]),(2,[7.00,8.00]),(2,[9.00,10.00]),(3,[1.00,2.00]),(3,[8.00,9.00]),(3,[10.00,11.00]),(3,[3.00,4.00]),(4,[1.00,2.00]),(4,[4.00,5.00]),(4,[6.00,7.00]),(4,[10.00,11.00])]
-(\[(a, b)] -> (a ,average b))
+
+average' :: [[(x, [a,b,c,d])]]
+average' xs = map averageOfCoords (groupDuplicates xs)
+
+averageOfCoords :: [(x,[a,b,c,d])] -> (x,[a,b,c,d])
+averageOfCoords xs = sumvec (map snd xs)
+
+meanvec :: [[Double, Double, Double, Double]] -> [Double, Double, Double, Double]
+meanvec xs = (foldr1 (zipWith (+)) xs) / Data.List.genericLength xs
+
+lal xs = map lastone (map (map snd) (groupDuplicates xs))
+
+lastone xs = sumvec (map (map snd) (groupDuplicates xs))
+
+map head (map (map fst) changes) = [1,2,3,4] -- (keys)
+
+averageChanges :: [[(Int, [Double])]] -> [(Int, [Double])]
+averageChanges = zip
+                        (map head (map (map fst) (groupDuplicates xs))) -- ordered list of keys
+                        (map meanvec (map (map snd) (groupDuplicates xs))) --ordered list of averaged coordinates
+
 --}
+groupDuplicates :: [(Int, [Double])] -> [[(Int, [Double])]]
+groupDuplicates = Data.List.groupBy (\(a,b) (x,y) -> a == x)
+
+averageChanges :: [(Int, [Double])] -> [(Int, [Double])]
+averageChanges xs = zip
+                        (map (head . map fst) (groupDuplicates xs)) -- ordered list of keys
+                        (map (meanvec . map snd) (groupDuplicates xs)) --ordered list of averaged coordinates
+
+meanvec :: [[Double]] -> [Double]
+meanvec xs = map (/ Data.List.genericLength xs) (foldr1 (zipWith (+)) xs)
+--maps the function "divide by length" to the "sum of an arbitrary # of vectors of arbitrary but equal length"
+-- [(1,[1.00,2.00]),(2,[5.00,6.00]),(1,[4.00,5.00]),(1,[7.00,6.00]),(2,[2.00,4.00]),(2,[5.00,7.00]),(2,[7.00,8.00]),(2,[9.00,10.00]),(3,[1.00,2.00]),(3,[8.00,9.00]),(3,[10.00,11.00]),(3,[3.00,4.00]),(4,[1.00,2.00]),(4,[4.00,5.00]),(4,[6.00,7.00]),(4,[10.00,11.00])]
+--(\[(a, b)] -> (a ,average b))
+
 -- maps = (hosts, latencies)
-normalizeMap :: (Num a, {--show is for debug.Trace.traceShow--}Show a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a) -> (Map Int [a], Map (Int, Int) a)
+normalizeMap :: (Map Int [Double], Map (Int, Int) Double) -> (Map Int [Double], Map (Int, Int) Double)
 normalizeMap maps =
         if err maps - 4000 < 20000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
         --arbitrary cutoff^
@@ -219,9 +255,9 @@ normalizeMap maps =
         else
                 --maps repositionSingleCoordinate to host-pairs yielding a list of "changes" in key/value tuples, list is converted to an Ordered Map, left-biased union applies the changes to the map
                 --map is then recursively normalized until err condition is met
-                normalizeMap (Map.union (Map.fromList (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))) (fst maps), snd maps)
+                normalizeMap (Map.union (Map.fromList (averageChanges (map (repositionSingleCoordinate maps) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))))) (fst maps), snd maps)
 
-repositionSingleCoordinate :: (Num a, Floating a, Show a) => (Map Int [a], Map (Int, Int) a) -> (Int, Int) -> (Int, [a])
+repositionSingleCoordinate :: (Map Int [Double], Map (Int, Int) Double) -> (Int, Int) -> (Int, [Double])
 repositionSingleCoordinate maps latencyid =
         {--Map.insert (fst latencyid) (
                 addvec
@@ -285,10 +321,10 @@ instance Pretty String where
 instance Pretty Int where
         ppr = PB.text . show
 
-instance Pretty Float where
+instance Pretty Double where
         ppr = PB.text . show
 
-instance Pretty [Float] where
+instance Pretty [Double] where
         ppr = PB.text . show
 
 instance Pretty [(Int, Int)] where
@@ -303,17 +339,17 @@ col (a, xs) = PB.vcat PB.left $ lab ++ vals
                 lab = [ppr a]
                 vals = fmap ppr xs
 
-formatCoordinates :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatCoordinates :: (Map Int [Double], Map (Int, Int) Double) -> String
 formatCoordinates maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
         where
-                cols :: [([Int], [[Float]])]
+                cols :: [([Int], [[Double]])]
                 cols = [
                         (Map.keys (fst maps), Map.elems (fst maps))]
 
-formatLatencies :: (Map Int [Float], Map (Int, Int) Float) -> String
+formatLatencies :: (Map Int [Double], Map (Int, Int) Double) -> String
 formatLatencies maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
         where
-                cols :: [([(Int, Int)], [Float])]
+                cols :: [([(Int, Int)], [Double])]
                 cols = [
                         (Map.keys (snd maps), Map.elems (snd maps))]
 
