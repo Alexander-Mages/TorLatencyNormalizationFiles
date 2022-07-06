@@ -8,7 +8,7 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Vector (Vector)
 import qualified Data.Vector as Vector
-import System.Random.PCG
+import System.Random.Mersenne
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Bifunctor
@@ -87,13 +87,10 @@ print(vectorLength([1,2,3,4]))
 --vector distance
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
-{--
+
 randFromSeed :: [Double]
-randFromSeed = Control.Monad.ST.runST $ do
-        --      (0,400] for floating datatypes
-        uniformR (0.00,400.00) create
---using System.Random.PCG, from PCG-random. This supposedly provides statisticlly good prediction-resistant numbers
---}
+randFromSeed = 
+        random (newMTGen "justASeed")
 --initializeCoordinates :: Map Integer (Vector Double)
 initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
 initializeCoordinates =

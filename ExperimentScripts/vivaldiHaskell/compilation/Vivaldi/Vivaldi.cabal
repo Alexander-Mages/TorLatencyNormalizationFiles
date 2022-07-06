@@ -32,8 +32,8 @@ library
       base >=4.7 && <5
     , boxes
     , containers
+    , mersenne-random
     , ordered-containers
-    , pcg-random
     , random
     , split
     , vector
@@ -51,8 +51,8 @@ executable Vivaldi-exe
     , base >=4.7 && <5
     , boxes
     , containers
+    , mersenne-random
     , ordered-containers
-    , pcg-random
     , random
     , split
     , vector
@@ -71,8 +71,8 @@ test-suite Vivaldi-test
     , base >=4.7 && <5
     , boxes
     , containers
+    , mersenne-random
     , ordered-containers
-    , pcg-random
     , random
     , split
     , vector
