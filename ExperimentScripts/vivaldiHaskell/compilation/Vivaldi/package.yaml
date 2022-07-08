@@ -27,7 +27,8 @@ dependencies:
 - random
 - boxes
 - split
-- mersenne-random
+- pcg-random
+- primitive
 
 library:
   source-dirs: src

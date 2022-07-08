@@ -8,11 +8,14 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Vector (Vector)
 import qualified Data.Vector as Vector
-import System.Random.Mersenne
+import System.Random.PCG
+import System.Random.PCG.Class
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Bifunctor
 import Control.Monad.ST
+import Control.Monad
+import Control.Monad.Primitive
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
 import Data.List.Split
@@ -87,11 +90,28 @@ print(vectorLength([1,2,3,4]))
 --vector distance
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
-
+{--
 randFromSeed :: [Double]
 randFromSeed = 
         random (newMTGen "justASeed")
---initializeCoordinates :: Map Integer (Vector Double)
+--}
+
+--ALL RANDOM # GENERATION IS DETERMINISTIC AND REFERENTIALLY TRANSPARENT
+--uses System.Random.PCG from pcg-random
+randCoordsFromSeed :: (Variate a, Fractional a, PrimMonad m) => [[m a]]
+randCoordsFromSeed = do
+        --"initialize 1 2" two word seed, "word" defined as "64-bit unsigned integer type" in https://hackage.haskell.org/package/base-4.14.1.0/docs/Data-Word.html#t:Word64
+        (replicate 25 (replicate 4 (uniformR (0.00,400.00) (initialize 1 2))))
+        --creates a list containing 25 lists each containing 4 doubles. i.e. a list of 25 4d coordinates
+        --replicateM is used to replicate monadic actions, advancing the monadic object (seed in this case) upon each "use"
+
+--randLatenciesFromSeed :: (Variate a, Fractional a, s ~ Control.Monad.Primitive.PrimMonad m) => [m a]
+randLatenciesFromSeed :: (Variate a, Fractional a, PrimMonad m) => [m a]
+randLatenciesFromSeed = do                -- \/ arbitrary
+        (replicate 300 (uniformR (0.00,400.00) (initialize 3 4)))
+                                                   -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
+
+
 initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
 initializeCoordinates =
         --two maps: one holds hosts, denoted host1 host2 etc... the other holds latencies, denoted latency1-2 latency2-4 etc...
@@ -246,7 +266,7 @@ meanvec xs = map (/ Data.List.genericLength xs) (foldr1 (zipWith (+)) xs)
 -- maps = (hosts, latencies)
 normalizeMap :: (Map Int [Double], Map (Int, Int) Double) -> (Map Int [Double], Map (Int, Int) Double)
 normalizeMap maps =
-        if err maps - 4000 < 20000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
+        if err maps - 1500 < 16000 then --This is wrong, > needs to be <, but I want it to run to completion. Error value is increasing
         --arbitrary cutoff^
                 maps --concretizes the finished map and returns the tuple
         else
@@ -256,6 +276,18 @@ normalizeMap maps =
 
 repositionSingleCoordinate :: (Map Int [Double], Map (Int, Int) Double) -> (Int, Int) -> (Int, [Double])
 repositionSingleCoordinate maps latencyid =
+        (fst latencyid,
+                addvec
+                        (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
+                        (scalevec
+                                (addvec
+                                        [100, 100, 100, 100] --arbitrary, shouldn't matter
+                                        (scalevec
+                                                (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
+                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
+                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
+                                                ))
+                                0.002))
         {--Map.insert (fst latencyid) (
                 addvec
                         (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
@@ -282,31 +314,7 @@ repositionSingleCoordinate maps latencyid =
                                                 ))
                                 0.002) --scaling factor
         ) --}
-        Debug.Trace.traceShow
-        ("\nOLD: " ++ show (fst latencyid, Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) ++ "\nNEW: " ++ show (fst latencyid,
-                addvec
-                        (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
-                        (scalevec
-                                (addvec
-                                        [100, 100, 100, 100] --arbitrary, shouldn't matter
-                                        (scalevec
-                                                (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
-                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
-                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
-                                                ))
-                                0.002)))
-        (fst latencyid,
-                addvec
-                        (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
-                        (scalevec
-                                (addvec
-                                        [100, 100, 100, 100] --arbitrary, shouldn't matter
-                                        (scalevec
-                                                (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
-                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
-                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
-                                                ))
-                                0.002))
+
 
 
 class Pretty a where
