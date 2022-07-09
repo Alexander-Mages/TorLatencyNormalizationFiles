@@ -370,7 +370,10 @@ formatLatencies maps = PB.render $ PB.hsep 1 PB.left $ fmap col cols
 main :: IO () --(Random a, Num a, Ord a, Floating a) => (Map Int [a], Map (Int, Int) a)
 main =
         let
-                a = normalizeMap (initializeCoordinates, initializeLatencies)
+                --based upon hard-coded numbers
+                --a = normalizeMap (initializeCoordinates, initializeLatencies)
+                --based upon pure, seeded, random number generation
+                a = normalizeMap (initializeRandomCoordinates, initializeRandomLatencies)
                 b = formatCoordinates a
                 c = formatLatencies a
         in
