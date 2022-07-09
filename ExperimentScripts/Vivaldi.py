@@ -5,9 +5,15 @@ import pandas as pd
 import numpy as np
 import random
 import sys
+from numpy.random import Generator, PCG64, SeedSequence
+import re #regex
+
 positions = {} #dictionary
 latencies = {} #dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
 hosts = set() # set object: same interface as HashSet
+
+def PCGRandomVec():
+    sg = SeedSequence
 
 def randomVec():
     return array([random.uniform(1,400),random.uniform(1,400),random.uniform(1,400),random.uniform(1,400)])
@@ -33,10 +39,41 @@ def error():
 def initCoords(files):
     global hosts
     global positions
-    parseData(files)
+    parsePingData(files)
     for host in hosts:
         positions[host] = randomVec()
 
+
+def parsePingData(files):
+    global hosts
+    global latencies
+    for file in files:
+        with open(file) as f:
+            sourceHost = f.readline().rstrip()
+            hosts.add(sourceHost)
+            for line in f.read().splitlines():
+                line = line.rstrip() #removes \n newline
+                rttMatch = re.search(r'time=(\d+.\d+)', line)
+                destHostMatch = re.search(r'from\s(\d+.\d+.\d+.\d+)', line)
+                # extracts the "group" from the match object stored in rttMatch and destHostMatch
+                try:
+                    rtt = rttMatch.group(1)
+                except AttributeError:
+                    print("RTT PARSING FAILED, CONTINUING ANYWAY")
+                    pass
+                try:
+                    destHost = destHostMatch.group(1)
+                except AttributeError:
+                    print("IP PARSING FAILED, CONTINUING ANYWAY")
+                    pass
+
+                hosts.add(destHost)
+                if (sourceHost, destHost) in latencies:
+                #if the host-pair already has a measurement associated with it, another is appended
+                    latencies[(sourceHost, destHost)].append(rtt)
+                else:
+                    #if no values have been inserted yet, the item is made into a list, with an item appended to it
+                    latencies[(sourceHost, destHost)] = [rtt]
 
 def parseData(files):
     #Dictionaries are python's hashtables. This is the creation of one:
@@ -55,14 +92,13 @@ def parseData(files):
                 (destHost, rtt) = line.split(":")
                 hosts.add(destHost) #adds destination to hosts hashset
                 if (sourceHost, destHost) in latencies:
-                #if a value exists for the host pair tuple it's turned into a list and the new value is appended
+                #if the host-pair already has a measurement associated with it, another is appended
+                    latencies.append(rtt)
+                else:
+                    #if no values have been inserted yet, the item is made into a list, with an item appended to it
                     latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
                     latencies.append(rtt)
-                    #does this: latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]], rtt]
-                else:
-                    latencies[(sourceHost, destHost)] = rtt
 
-                #take a look at this^
 
 def findCoordinates():
     global positions
@@ -108,6 +144,8 @@ def main():
     global positions
     global latencies
     global hosts
+    parsePingData(sys.argv[1:])
+    print("done")
     initCoords([sys.argv[1]]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     print(positions)
     findCoordinates()
