@@ -114,36 +114,22 @@ def findCoordinates():
         err = newErr
         for source in hosts:
             f = randomVec()
-            if pd.isna(f.any()):
-                print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
             for dest in hosts:
                 if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                     continue
                 elif (source, dest) in latencies:
                     l = latencies[(source, dest)]
-                    if pd.isna(l):
-                        print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 elif (dest, source) in latencies:
                     l = latencies[(dest, source)]
-                    if pd.isna(l):
-                        print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 else:
                     raise Exception("baby's first hashtable")
-                if pd.isna(positions[source].any()) or pd.isna(positions[dest].any()):
-                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
-                if pd.isna(delta.any()):
-                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 dist = vectorLength(delta)
-                if pd.isna(dist):
-                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 e = pd.to_numeric(l) - dist #iterate through l's, it can be a list. Make sure l is always treated as list
                 firstDebug = e/dist
                 debugVariable = np.multiply(delta, firstDebug)
                 f = vecAdd(f, debugVariable)
                 positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
-                if pd.isna(positions[source].any()):
-                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
         newErr = error()
         print(newErr)
 
