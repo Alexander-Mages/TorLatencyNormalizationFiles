@@ -9,13 +9,11 @@ import qualified Data.Map as Map
 import Data.Vector (Vector)
 import qualified Data.Vector as Vector
 import System.Random.PCG
-import System.Random.PCG.Class
 import qualified Data.List
 import Control.Monad.IO.Class (MonadIO)
 import Data.Bifunctor
 import Control.Monad.ST
 import Control.Monad
-import Control.Monad.Primitive
 import Data.Maybe
 import qualified Text.PrettyPrint.Boxes as PB
 import Data.List.Split
@@ -90,27 +88,37 @@ print(vectorLength([1,2,3,4]))
 --vector distance
 vectorDist :: (Floating a) => [a] -> [a] -> a
 vectorDist a b = vectorLength(addvec a (inversevec b))
-{--
-randFromSeed :: [Double]
-randFromSeed = 
-        random (newMTGen "justASeed")
---}
 
 --ALL RANDOM # GENERATION IS DETERMINISTIC AND REFERENTIALLY TRANSPARENT
 --uses System.Random.PCG from pcg-random
-randCoordsFromSeed :: (Variate a, Fractional a, PrimMonad m) => [[m a]]
-randCoordsFromSeed = do
-        --"initialize 1 2" two word seed, "word" defined as "64-bit unsigned integer type" in https://hackage.haskell.org/package/base-4.14.1.0/docs/Data-Word.html#t:Word64
-        (replicate 25 (replicate 4 (uniformR (0.00,400.00) (initialize 1 2))))
+randVectorsFromSeed :: [[Double]]
+randVectorsFromSeed = runST $ do
+        g <- initialize 1 2 -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
+        replicateM 25 (replicateM 4 (uniformR (0.00, 400.00) g))
         --creates a list containing 25 lists each containing 4 doubles. i.e. a list of 25 4d coordinates
         --replicateM is used to replicate monadic actions, advancing the monadic object (seed in this case) upon each "use"
 
---randLatenciesFromSeed :: (Variate a, Fractional a, s ~ Control.Monad.Primitive.PrimMonad m) => [m a]
-randLatenciesFromSeed :: (Variate a, Fractional a, PrimMonad m) => [m a]
-randLatenciesFromSeed = do                -- \/ arbitrary
-        (replicate 300 (uniformR (0.00,400.00) (initialize 3 4)))
-                                                   -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
+randLatenciesFromSeed :: [Double]
+randLatenciesFromSeed = runST $ do
+        g <- initialize 3 4         -- \/ arbitrary
+        replicateM 300 (uniformR (0.00, 400.00) g)
 
+
+initializeRandomCoordinates :: Map Int [Double]--(f a)
+initializeRandomCoordinates =
+        Map.fromList (
+                zip
+                        [1..25]
+                        randVectorsFromSeed
+        )
+
+initializeRandomLatencies :: Map (Int, Int) Double
+initializeRandomLatencies =
+        Map.fromList (
+                zip
+                        (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))
+                        randLatenciesFromSeed
+        )
 
 initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
 initializeCoordinates =
