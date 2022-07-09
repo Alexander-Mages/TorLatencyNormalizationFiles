@@ -114,21 +114,38 @@ def findCoordinates():
         err = newErr
         for source in hosts:
             f = randomVec()
+            if pd.isna(f.any()):
+                print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
             for dest in hosts:
                 if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                     continue
                 elif (source, dest) in latencies:
                     l = latencies[(source, dest)]
+                    if pd.isna(l):
+                        print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 elif (dest, source) in latencies:
                     l = latencies[(dest, source)]
+                    if pd.isna(l):
+                        print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 else:
                     raise Exception("baby's first hashtable")
-            delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
-            dist = vectorLength(delta)
-            e = pd.to_numeric(l) - dist #iterate through l's, it can be a list. Make sure l is always treated as list
-            f = vecAdd(f, np.multiply(delta, e/dist))
-            positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
+                if pd.isna(positions[source].any()) or pd.isna(positions[dest].any()):
+                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
+                if pd.isna(delta.any()):
+                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                dist = vectorLength(delta)
+                if pd.isna(dist):
+                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                e = pd.to_numeric(l) - dist #iterate through l's, it can be a list. Make sure l is always treated as list
+                firstDebug = e/dist
+                debugVariable = np.multiply(delta, firstDebug)
+                f = vecAdd(f, debugVariable)
+                positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
+                if pd.isna(positions[source].any()):
+                    print("NAAAAAAAAAAAAAAAAAAAAAAAAAA")
         newErr = error()
+        print(newErr)
 
 def findClosest(node):
     minDist = 1000000
@@ -144,10 +161,8 @@ def main():
     global positions
     global latencies
     global hosts
-    parsePingData(sys.argv[1:])
-    print("done")
     initCoords([sys.argv[1]]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
-    print(positions)
+    #print(positions)
     findCoordinates()
     print(positions)
     print(latencies)
