@@ -133,7 +133,7 @@ def findCoordinates():
         newErr = error()
         print(newErr)
 
-def findClosest(node):
+def findClosest(x):
     minDist = 1000000
     for host in positions:
         dist = vectorDist(positions[host], positions[x])
@@ -150,7 +150,7 @@ def main():
     initCoords([sys.argv[1]]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     #print(positions)
     findCoordinates()
+    findClosest('204.56.0.138')
     print(positions)
-    print(latencies)
 if __name__ == "__main__":
     main()
