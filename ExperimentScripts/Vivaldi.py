@@ -108,7 +108,7 @@ def findCoordinates():
     newErr = err - 1000
 
     if not hosts:
-        getHosts()
+        initCoords(sys.argv[1])
 
     for a in range(0,200):
         err = newErr
