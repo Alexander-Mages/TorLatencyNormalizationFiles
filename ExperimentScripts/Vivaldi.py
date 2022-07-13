@@ -8,9 +8,10 @@ import sys
 from numpy.random import Generator, PCG64, SeedSequence
 import re #regex
 
-positions = {} #dictionary
-latencies = {} #dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
-hosts = set() # set object: same interface as HashSet
+positions = {}  # dictionaryhow
+latencies = {}  # dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
+hosts = set()  # set object: same interface as HashSet
+
 
 def PCGRandomVec():
     sg = SeedSequence
@@ -27,10 +28,14 @@ def vectorDist(a,b):
 def error():
     global latencies
     if not latencies: #< ensures not null
-        parseData()
+        print("test")
+        raise Exception('somethings wrong')
     err = sum = count = 0
     for (source, dest) in latencies:
-        dist = pd.to_numeric(latencies[(source, dest)]) - vectorDist(positions[source], positions[dest])
+        #print((latencies[source,dest][0]))
+        #print((pd.to_numeric(latencies[(source, dest)][0])))
+        dist = latencies[(source, dest)] - vectorDist(positions[source], positions[dest])
+        #print(dist)
         err += dist ** 2
         count += 1
         sum += abs(dist)
@@ -38,19 +43,23 @@ def error():
 
 def initCoords(files):
     global hosts
+    global latencies
     global positions
-    parsePingData(files)
+    hosts, latencies = parsePingData(files)
     for host in hosts:
         positions[host] = randomVec()
+    #print(positions,"\n\n\n\n\n\n\n")
+    #print(latencies,"\n\n\n\n\n\n\n")
+    #print(hosts)
 
 
 def parsePingData(files):
-    global hosts
-    global latencies
+    h = set()
+    l = {}
     for file in files:
         with open(file) as f:
             sourceHost = f.readline().rstrip()
-            hosts.add(sourceHost)
+            h.add(sourceHost)
             for line in f.read().splitlines():
                 line = line.rstrip() #removes \n newline
                 rttMatch = re.search(r'time=(\d+.\d+)', line)
@@ -67,51 +76,53 @@ def parsePingData(files):
                     print("IP PARSING FAILED, CONTINUING ANYWAY")
                     pass
 
-                hosts.add(destHost)
-                if (sourceHost, destHost) in latencies:
+                h.add(destHost)
+                if (sourceHost, destHost) in l:
                 #if the host-pair already has a measurement associated with it, another is appended
-                    latencies[(sourceHost, destHost)].append(rtt)
+                    #l[(sourceHost, destHost)].append(float(rtt))
+                    l[(sourceHost, destHost)].append(random.uniform(0.1,300.0))
                 else:
                     #if no values have been inserted yet, the item is made into a list, with an item appended to it
-                    latencies[(sourceHost, destHost)] = [rtt]
+                    #l[(sourceHost, destHost)] = [float(rtt)]
+                    l[(sourceHost, destHost)] =  [random.uniform(0.1, 300.0)]
+    return (h, l)
 
-def parseData(files):
-    #Dictionaries are python's hashtables. This is the creation of one:
-    #latencies = {
-    #    (sourceHost, destHost): [latency, latency', latency'']
-    #}
-    global hosts
-    global latencies
-    for file in files:
-        with open(file) as f:
-            #opens file and adds host
-            sourceHost = f.readline()
-            hosts.add(sourceHost) #adds source host to hosts hashset
-            #read timing measurements, assuming same format as Parse/ProcessVC.java
-            for line in f.read().splitlines():
-                (destHost, rtt) = line.split(":")
-                hosts.add(destHost) #adds destination to hosts hashset
-                if (sourceHost, destHost) in latencies:
-                #if the host-pair already has a measurement associated with it, another is appended
-                    latencies.append(rtt)
-                else:
-                    #if no values have been inserted yet, the item is made into a list, with an item appended to it
-                    latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
-                    latencies.append(rtt)
 
+# def parseData(files):
+#     #Dictionaries are python's hashtables. This is the creation of one:
+#     #latencies = {
+#     #    (sourceHost, destHost): [latency, latency', latency'']
+#     #}
+#     global hosts
+#     global latencies
+#     for file in files:
+#         with open(file) as f:
+#             #opens file and adds host
+#             sourceHost = f.readline()
+#             hosts.add(sourceHost) #adds source host to hosts hashset
+#             #read timing measurements, assuming same format as Parse/ProcessVC.java
+#             for line in f.read().splitlines():
+#                 (destHost, rtt) = line.split(":")
+#                 hosts.add(destHost) #adds destination to hosts hashset
+#                 if (sourceHost, destHost) in latencies:
+#                 #if the host-pair already has a measurement associated with it, another is appended
+#                     latencies.append(rtt)
+#                 else:
+#                     #if no values have been inserted yet, the item is made into a list, with an item appended to it
+#                     latencies[(sourceHost, destHost)] = [latencies[(sourceHost, destHost)]]
+#                     latencies.append(rtt)
+#
 
 def findCoordinates():
     global positions
     global hosts
     global latencies
-    err = error()
-    newErr = err - 1000
-
+    #err = error()
+    #newErr = err - 1000
     if not hosts:
-        initCoords(sys.argv[1])
-
+        raise Exception("somethings up")
+        #initCoords(sys.argv[1:])
     for a in range(0,200):
-        err = newErr
         for source in hosts:
             f = randomVec()
             for dest in hosts:
@@ -122,6 +133,7 @@ def findCoordinates():
                 elif (dest, source) in latencies:
                     l = latencies[(dest, source)]
                 else:
+                    print((source,dest))
                     raise Exception("baby's first hashtable")
                 delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                 dist = vectorLength(delta)
@@ -144,13 +156,10 @@ def findClosest(x):
 
 
 def main():
-    global positions
-    global latencies
-    global hosts
-    initCoords([sys.argv[1]]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
+    initCoords(sys.argv[1:]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     #print(positions)
     findCoordinates()
-    findClosest('204.56.0.138')
+    findClosest('204.56.0.138') #source host in archive/FILENEW1
     print(positions)
 if __name__ == "__main__":
     main()
