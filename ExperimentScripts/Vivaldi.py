@@ -5,19 +5,31 @@ import pandas as pd
 import numpy as np
 import random
 import sys
-from numpy.random import Generator, PCG64, SeedSequence
+from numpy.random import Generator, PCG64, SeedSequence, default_rng
 import re #regex
 
-positions = {}  # dictionaryhow
+positions = {}  # dictionary
 latencies = {}  # dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
 hosts = set()  # set object: same interface as HashSet
+pcgGeneratedBool = False
 
+def initializePCGGen():
+    global pcgGeneratedBool
+    if not pcgGeneratedBool:
+        seed = SeedSequence([1,2])
+        gen = default_rng(seed)
+        pcgGeneratedBool = True
+        return gen
+    else:
+        raise Exception('cannot initialize PRNG more than once')
 
-def PCGRandomVec():
-    sg = SeedSequence
+def pcgRandVec():
+    global pcgGen
+    return array([pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00)])
+    #0.00 is okay, default_rng().uniform(a,b) is constrained by (a,b]
 
-def randomVec():
-    return array([random.uniform(1,400),random.uniform(1,400),random.uniform(1,400),random.uniform(1,400)])
+#def randomVec():
+#    return array([random.uniform(1,400),random.uniform(1,400),random.uniform(1,400),random.uniform(1,400)])
 
 def vectorLength(a):
     return np.sqrt(vecSum(np.power(a,2)))
@@ -47,7 +59,7 @@ def initCoords(files):
     global positions
     hosts, latencies = parsePingData(files)
     for host in hosts:
-        positions[host] = randomVec()
+        positions[host] = pcgRandVec()
     #print(positions,"\n\n\n\n\n\n\n")
     #print(latencies,"\n\n\n\n\n\n\n")
     #print(hosts)
@@ -80,12 +92,12 @@ def parsePingData(files):
                 if (sourceHost, destHost) in l:
                 #if the host-pair already has a measurement associated with it, another is appended
                     #l[(sourceHost, destHost)].append(float(rtt))
-                    l[(sourceHost, destHost)].append(random.uniform(0.1,300.0))
+                    l[(sourceHost, destHost)].append(pcgRandVec())
                 else:
                     #if no values have been inserted yet, the item is made into a list, with an item appended to it
                     #l[(sourceHost, destHost)] = [float(rtt)]
-                    l[(sourceHost, destHost)] =  [random.uniform(0.1, 300.0)]
-    return (h, l)
+                    l[(sourceHost, destHost)] = [pcgRandVec()]
+    return (h,l)
 
 
 # def parseData(files):
@@ -124,7 +136,7 @@ def findCoordinates():
         #initCoords(sys.argv[1:])
     for a in range(0,200):
         for source in hosts:
-            f = randomVec()
+            f = pcgRandVec()
             for dest in hosts:
                 if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                     continue
@@ -156,6 +168,8 @@ def findClosest(x):
 
 
 def main():
+    global pcgGen
+    pcgGen = initializePCGGen()
     initCoords(sys.argv[1:]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     #print(positions)
     findCoordinates()
