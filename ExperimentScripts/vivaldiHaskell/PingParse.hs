@@ -2,6 +2,7 @@ import System.Environment
 import Data.Word
 import Data.ByteString
 import Control.Applicative
+import Text.Parser
 
 data PingLine =
     PingLine {
