@@ -152,11 +152,8 @@ def findCoordinates():
                     dist = vectorLength(delta)
                     e = pd.to_numeric(latency) - dist  # iterate through l's, it can be a list. Make sure l is always treated as list
                     x = np.multiply(delta, e/dist)
-                    if not f:
-                        f = vecAdd(f, x)
-                    else:
-                        f += vecAdd(f, x)
-                positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
+                    f = vecAdd(f, x)
+                    positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
         newErr = error()
         print(newErr)
 
