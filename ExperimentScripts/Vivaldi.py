@@ -147,12 +147,15 @@ def findCoordinates():
                 else:
                     print((source,dest))
                     raise Exception("baby's first hashtable")
-                delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
-                dist = vectorLength(delta)
-                e = pd.to_numeric(l) - dist #iterate through l's, it can be a list. Make sure l is always treated as list
-                firstDebug = e/dist
-                debugVariable = np.multiply(delta, firstDebug)
-                f = vecAdd(f, debugVariable)
+                for latency in l:
+                    delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
+                    dist = vectorLength(delta)
+                    e = pd.to_numeric(latency) - dist  # iterate through l's, it can be a list. Make sure l is always treated as list
+                    x = np.multiply(delta, e/dist)
+                    if not f:
+                        f = vecAdd(f, x)
+                    else:
+                        f += vecAdd(f, x)
                 positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
         newErr = error()
         print(newErr)
