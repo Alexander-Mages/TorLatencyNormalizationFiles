@@ -5,21 +5,20 @@ import pandas as pd
 import numpy as np
 import random
 import sys
-from numpy.random import Generator, PCG64, SeedSequence, default_rng
+from numpy.random import Generator, SeedSequence, default_rng
 import re #regex
 
 positions = {}  # dictionary
 latencies = {}  # dictionary keyed as follows latencies[(sourceHost, destHost)] = [rtt]
 hosts = set()  # set object: same interface as HashSet
-pcgGeneratedBool = False
 
 def initializePCGGen():
-    global pcgGeneratedBool
-    if not pcgGeneratedBool:
-        seed = SeedSequence([1,2])
-        gen = default_rng(seed)
-        pcgGeneratedBool = True
-        return gen
+    global pcgGen
+    if not pcgGen:
+        #seed = SeedSequence([1,2])
+        #pcgGen = default_rng(seed)
+        pcgGen = Generator(PCG64(seed=[1, 2]))
+        return pcgGen
     else:
         raise Exception('cannot initialize PRNG more than once')
 
@@ -138,7 +137,8 @@ def findCoordinates():
         for source in hosts:
             f = pcgRandVec()
             for dest in hosts:
-                if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
+                #if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
+                if source == dest:
                     continue
                 elif (source, dest) in latencies:
                     l = latencies[(source, dest)]
@@ -147,6 +147,14 @@ def findCoordinates():
                 else:
                     print((source,dest))
                     raise Exception("baby's first hashtable")
+                #if l is a list,
+                # looking at my original Java code, it doesn't seem like there should be situations with multiple values. Detect them:
+                if (((source, dest) in latencies) and ((dest, source) in latencies) and (latencies[(dest, source)] != latencies[(source, dest)])):
+                    print(source, dest, " have more than one latency")
+                    raise Exception("this I did not expect")
+                if (l.length > 1):
+                    print(source, dest, " have more than one latency ", l)
+                    raise Exception("or this")
                 for latency in l:
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                     dist = vectorLength(delta)

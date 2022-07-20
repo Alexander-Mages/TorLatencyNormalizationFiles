@@ -2,7 +2,6 @@ import System.Environment
 import Data.Word
 import Data.ByteString
 import Control.Applicative
-import Text.Parser
 
 data PingLine =
     PingLine {
@@ -38,4 +37,4 @@ logParser = many $ logEntryParser <* endOfLine
 main :: IO ()
 main = do
     Data.ByteString.readFile "C:/Users/amages/Downloads/Archive/FILENEW1" >>= print . parseOnly logParser
-
+--line-by-line is preferred
