@@ -1,11 +1,14 @@
-import System.Environment
+{-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use newtype instead of data" #-}
+import System.Environment ()
 import Data.Word
-import Data.ByteString
-import Control.Applicative
-
+import Data.Attoparsec.Text
+import Control.Applicative ( Alternative(many) )
+import qualified Data.ByteString as B
 data PingLine =
     PingLine {
-        destAddr :: String,
+        destAddr :: IP,
         rtt :: Double
     } deriving Show
 
@@ -20,15 +23,21 @@ logEntryParser = do
     string " ms"
     return $ PingLine destAddr rtt
 
-parseIP :: Parser String
-parseIP = do
-    x <- string
-    return String x
+data IP = IP Word8 Word8 Word8 Word8 deriving Show
 
+parseIP :: Parser IP
+parseIP = do
+    x <- decimal
+    char '.'
+    y <- decimal
+    char '.'
+    z <- decimal
+    char '.'
+    IP x y z <$> decimal
+--return $ IP x y z w
 parseRTT :: Parser Double
 parseRTT = do
-    x <- double
-    return Double x
+    double
 
 logParser :: Parser PingFile
 logParser = many $ logEntryParser <* endOfLine
@@ -36,5 +45,7 @@ logParser = many $ logEntryParser <* endOfLine
 
 main :: IO ()
 main = do
-    Data.ByteString.readFile "C:/Users/amages/Downloads/Archive/FILENEW1" >>= print . parseOnly logParser
---line-by-line is preferred
+    a <- readFile "C:/Users/amages/Downloads/Archive/FILENEW1"
+    x <- parseOnly logParser
+    print x
+
