@@ -24,11 +24,11 @@ def initializePCGGen():
 
 def pcgRandVec():
     global pcgGen
-    return array([pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00),pcgGen.uniform(0.00,400.00)])
+    return array([pcgGen.uniform(0.01,400),pcgGen.uniform(0.01,400),pcgGen.uniform(0.01,400),pcgGen.uniform(0.01,400)])
     #0.00 is okay, default_rng().uniform(a,b) is constrained by (a,b]
 
 #def randomVec():
-#    return array([random.uniform(1,400),random.uniform(1,400),random.uniform(1,400),random.uniform(1,400)])
+#    return array([random.uniform(0.01,400),random.uniform(0.01,400),random.uniform(0.01,400),random.uniform(0.01,400)])
 
 def vectorLength(a):
     return np.sqrt(vecSum(np.power(a,2)))
