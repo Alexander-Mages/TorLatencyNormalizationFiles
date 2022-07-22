@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import random
 import sys
-from numpy.random import Generator, SeedSequence, default_rng
+from numpy.random import Generator, SeedSequence, default_rng, PCG64
 import re #regex
 
 positions = {}  # dictionary
@@ -14,7 +14,7 @@ hosts = set()  # set object: same interface as HashSet
 
 def initializePCGGen():
     global pcgGen
-    if not pcgGen:
+    if not 'pcgGen' in globals():
         #seed = SeedSequence([1,2])
         #pcgGen = default_rng(seed)
         pcgGen = Generator(PCG64(seed=[1, 2]))
@@ -90,12 +90,12 @@ def parsePingData(files):
                 h.add(destHost)
                 if (sourceHost, destHost) in l:
                 #if the host-pair already has a measurement associated with it, another is appended
-                    #l[(sourceHost, destHost)].append(float(rtt))
-                    l[(sourceHost, destHost)].append(pcgRandVec())
+                    l[(sourceHost, destHost)].append(float(rtt))
+                    #l[(sourceHost, destHost)].append(pcgRandVec())
                 else:
                     #if no values have been inserted yet, the item is made into a list, with an item appended to it
-                    #l[(sourceHost, destHost)] = [float(rtt)]
-                    l[(sourceHost, destHost)] = [pcgRandVec()]
+                    l[(sourceHost, destHost)] = [float(rtt)]
+                    #l[(sourceHost, destHost)] = [pcgRandVec()]
     return (h,l)
 
 
@@ -146,13 +146,16 @@ def findCoordinates():
                     l = latencies[(dest, source)]
                 else:
                     print((source,dest))
-                    raise Exception("baby's first hashtable")
+                    #When the latency values are parsed instead of generated, this error is generally hit. I believe
+                    #this isn't an issue, unless latency values are supposed to exist for every possible (host,dest) pair
+                    #raise Exception("baby's first hashtable")
+                    continue
                 #if l is a list,
                 # looking at my original Java code, it doesn't seem like there should be situations with multiple values. Detect them:
                 if (((source, dest) in latencies) and ((dest, source) in latencies) and (latencies[(dest, source)] != latencies[(source, dest)])):
                     print(source, dest, " have more than one latency")
-                    raise Exception("this I did not expect")
-                if (l.length > 1):
+                    #raise Exception("this I did not expect")
+                if (len(l) > 1):
                     print(source, dest, " have more than one latency ", l)
                     raise Exception("or this")
                 for latency in l:
