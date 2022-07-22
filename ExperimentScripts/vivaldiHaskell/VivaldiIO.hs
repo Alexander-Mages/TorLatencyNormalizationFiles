@@ -96,14 +96,14 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
 randVectorsFromSeed :: [[Double]]
 randVectorsFromSeed = runST $ do
         g <- initialize 1 2 -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
-        replicateM 25 (replicateM 4 (uniformR (0.00, 400.00) g))
+        replicateM 25 (replicateM 4 (uniformR (1.00, 400.00) g))
         --creates a list containing 25 lists each containing 4 doubles. i.e. a list of 25 4d coordinates
         --replicateM is used to replicate monadic actions, advancing the monadic object (seed in this case) upon each "use"
 
 randLatenciesFromSeed :: [Double]
 randLatenciesFromSeed = runST $ do
         g <- initialize 3 4         -- \/ arbitrary
-        replicateM 300 (uniformR (0.00, 400.00) g)
+        replicateM 300 (uniformR (1.00, 400.00) g)
 
 
 initializeRandomCoordinates :: Map Int [Double]--(f a)
@@ -227,8 +227,6 @@ err maps =
         --sum (map (\x -> errdist maps x) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
         --lambda that allows maps to be passed into errdist
 
-
-[[(1,[1.0,2.0,3.0,4.0]),(1,[5.0,6.0,7.0,8.0]),(1,[4.0,5.0,6.0,7.0]),(1,[7.0,6.0,5.0,4.0])],[(2,[2.0,4.0,3.0,1.0]),(2,[5.0,7.0,6.0,8.0]),(2,[7.0,8.0,9.0,10.0]),(2,[9.0,10.0,11.0,12.0])],[(3,[1.0,2.0,3.0,4.0]),(3,[8.0,9.0,10.0,11.0]),(3,[10.0,11.0,12.0,13.0]),(3,[3.0,4.0,5.0,6.0])],[(4,[1.0,2.0,3.0,4.0]),(4,[4.0,5.0,6.0,7.0]),(4,[6.0,7.0,8.0,9.0]),(4,[10.0,11.0,12.0,13.0])]]
 
 groupDuplicates :: [(Int, [Double])] -> [[(Int, [Double])]]
 groupDuplicates = Data.List.groupBy (\(a,b) (x,y) -> a == x)

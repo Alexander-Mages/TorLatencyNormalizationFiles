@@ -145,19 +145,21 @@ def findCoordinates():
                 elif (dest, source) in latencies:
                     l = latencies[(dest, source)]
                 else:
-                    print((source,dest))
+                    #print((source,dest))
                     #When the latency values are parsed instead of generated, this error is generally hit. I believe
                     #this isn't an issue, unless latency values are supposed to exist for every possible (host,dest) pair
                     #raise Exception("baby's first hashtable")
                     continue
                 #if l is a list,
                 # looking at my original Java code, it doesn't seem like there should be situations with multiple values. Detect them:
-                if (((source, dest) in latencies) and ((dest, source) in latencies) and (latencies[(dest, source)] != latencies[(source, dest)])):
-                    print(source, dest, " have more than one latency")
+                #if (((source, dest) in latencies) and ((dest, source) in latencies) and (latencies[(dest, source)] != latencies[(source, dest)])):
+                #    print(source, dest, " have more than one latency")
                     #raise Exception("this I did not expect")
                 if (len(l) > 1):
                     print(source, dest, " have more than one latency ", l)
                     raise Exception("or this")
+                #else:
+                #    l = l[0]
                 for latency in l:
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                     dist = vectorLength(delta)
