@@ -96,14 +96,14 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
 randVectorsFromSeed :: [[Double]]
 randVectorsFromSeed = runST $ do
         g <- initialize 1 2 -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
-        replicateM 25 (replicateM 4 (uniformR (1.00, 400.00) g))
+        replicateM 25 (replicateM 4 (uniformR (1.00, 399.00) g))
         --creates a list containing 25 lists each containing 4 doubles. i.e. a list of 25 4d coordinates
         --replicateM is used to replicate monadic actions, advancing the monadic object (seed in this case) upon each "use"
 
 randLatenciesFromSeed :: [Double]
 randLatenciesFromSeed = runST $ do
         g <- initialize 3 4         -- \/ arbitrary
-        replicateM 300 (uniformR (1.00, 400.00) g)
+        replicateM 300 (uniformR (1.00, 399.00) g)
 
 
 initializeRandomCoordinates :: Map Int [Double]--(f a)
