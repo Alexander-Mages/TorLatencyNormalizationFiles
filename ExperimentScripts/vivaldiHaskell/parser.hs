@@ -26,7 +26,7 @@ main = do
         --this maps the function "words" to each line, seperating the string into a list of strings, delimited by whitespace
         --next, parseLine is mapped to each list (line), using pattern matching to extract the time=***ms and dest IP addr
     --map fromJust . filter isJust .
-        --filter isJust filters out any Maybe values from the list, returning only the filled, Just values
+        --filter isJust filters  out any Maybe values from the list, returning only the filled, Just values
         --map fromJust, then evaluates the Just value into it's non-monadic value, removing the maybe monad.
         --this can also accomplished with "catMaybes" - which "creates a list of Just values from a Maybe list"
             --http://zvon.org/other/haskell/Outputmaybe/catMaybes_f.html
