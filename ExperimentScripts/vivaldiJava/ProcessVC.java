@@ -235,6 +235,7 @@ public class ProcessVC {
 		find_coordinates();
 		System.err.println("After find_coordinates");
 
+		/*
 		BufferedReader victims = new BufferedReader(new FileReader(args[1]));
 		String nextLineV;
 		
@@ -250,6 +251,7 @@ public class ProcessVC {
 					double distance = latency.get(nextLineV + "|" + nextLineP);
 					System.out.println("Ping distance from " + nextLineV + " to node " + p.getEntryNode() + " is " + distance);
 				}
+			*/
 				
 			/*	VecVC pinger = pos.get(nextLineV);
 				VecVC pingee = pos.get(nextLineP);
@@ -307,7 +309,8 @@ public class ProcessVC {
 				//System.out.println("Guess is: " + victimLatency);
 					System.out.println("Coordinate distance from " + victim + " to node " + p.getEntryNode() + " is " + distances.get(victim));
 				}*/
-			}
-		}
+			//}
+		//}
+	
 	}
 }
