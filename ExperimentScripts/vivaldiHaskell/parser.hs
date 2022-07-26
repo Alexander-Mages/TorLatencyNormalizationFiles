@@ -17,7 +17,11 @@ parseLine _ = Nothing
 prettyPrint :: PingEntry -> IO ()
 prettyPrint (PingEntry destHost rtt) = putStrLn $ rtt ++ "ms to " ++ destHost
 
-main = do
+formatData :: PingEntry -> String
+--still in format of time=
+formatData (PingEntry destHost rtt) sourceHost = ((sourceHost, destHost), rtt)
+
+parsePingFile = do
     --lines <$> readFile "/home/alex/ExperimentData/FILENEW1"
         --Reads the file into a single string, then seperates into a list of strings delimited by newlines
     --tail .
@@ -35,7 +39,8 @@ main = do
     --sugary version
     justPings <- catMaybes . map (parseLine . words) . tail . lines <$> readFile "/home/alex/ExperimentData/FILENEW1"
 
+    --note, tail raises exception if input is empty, drop 1 is a suitable alternative
+        
     sourceHost <- head . lines <$> readFile "/home/alex/ExperimentData/FILENEW1"
-    mapM_ prettyPrint justPings
-    print sourceHost
+    return $ ((mapM prettyPrint justPings), sourceHost)
     --putStrLn sourceHost

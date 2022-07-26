@@ -96,14 +96,14 @@ vectorDist a b = vectorLength(addvec a (inversevec b))
 randVectorsFromSeed :: [[Double]]
 randVectorsFromSeed = runST $ do
         g <- initialize 1 2 -- ^ <- is the monadic bind operator. This immediately runs the action, gets its result and binds to g
-        replicateM 25 (replicateM 4 (uniformR (1.00, 399.00) g))
+        replicateM 25 (replicateM 4 (uniformR (0.00, 400.00) g))
         --creates a list containing 25 lists each containing 4 doubles. i.e. a list of 25 4d coordinates
         --replicateM is used to replicate monadic actions, advancing the monadic object (seed in this case) upon each "use"
 
 randLatenciesFromSeed :: [Double]
 randLatenciesFromSeed = runST $ do
         g <- initialize 3 4         -- \/ arbitrary
-        replicateM 300 (uniformR (1.00, 399.00) g)
+        replicateM 300 (uniformR (0.00, 400.00) g)
 
 
 initializeRandomCoordinates :: Map Int [Double]--(f a)
@@ -121,19 +121,6 @@ initializeRandomLatencies =
                         (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25]))
                         randLatenciesFromSeed
         )
-
---this only does 1 for now
-parsePingFile = do
-    content <- readFile "pingLogFile" --not real filename, use cmd arg input if possible
-    let
-        lines = lines content
-        sourceHost = read (head lines)
-        lines' = map tail lines
-    print (show sourceHost)
-    print (show lines')
-
-
-
 
 initializeCoordinates :: (Ord k, Enum k, Num k, Fractional a, Num a{--, MonadIO f--}) => Map k [a]--(f a)
 initializeCoordinates =
@@ -226,7 +213,54 @@ err maps =
                                                                                                                                                  --    ^ #of iterations. is static
         --sum (map (\x -> errdist maps x) (filterDuplicateTuples (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [1..25])))
         --lambda that allows maps to be passed into errdist
+-- ^final error value	^applies the preceding function to all latencies, replacing each item with the result
 
+{--
+--normalizeMap :: Map Integer (Vector Double) -> Map Integer Double -> Integer -> Map Integer (Vector Double)
+normalizeMap latencies hosts errTarget =
+        until (
+                (((err latencies hosts) - 1000) < errTarget)                            --first arg
+                (map repositionSingleCoordinate)                                   --second arg
+                (concat $ zipWith (zip . repeat) [1..25] $ Data.List.tails [26..50])    --third arg
+        )
+        --mapping cannot be used in an until block
+--}
+{--
+[[(1,[1.0,2.0,3.0,4.0]),(1,[5.0,6.0,7.0,8.0]),(1,[4.0,5.0,6.0,7.0]),(1,[7.0,6.0,5.0,4.0])],[(2,[2.0,4.0,3.0,1.0]),(2,[5.0,7.0,6.0,8.0]),(2,[7.0,8.0,9.0,10.0]),(2,[9.0,10.0,11.0,12.0])],[(3,[1.0,2.0,3.0,4.0]),(3,[8.0,9.0,10.0,11.0]),(3,[10.0,11.0,12.0,13.0]),(3,[3.0,4.0,5.0,6.0])],[(4,[1.0,2.0,3.0,4.0]),(4,[4.0,5.0,6.0,7.0]),(4,[6.0,7.0,8.0,9.0]),(4,[10.0,11.0,12.0,13.0])]]
+
+--aver xs = map (\[(a, b)] -> (a ,average b)) (groupDuplicates xs)
+
+--aver xs = map (\[(x, [a,b])] -> (x ,[average a, average b])) (groupDuplicates xs)
+
+average :: [Double] -> Double
+average xs = realToFrac (sum xs) / Data.List.genericLength xs
+
+aver xs = map (\[(x, xs)] -> (x ,sumvec xs)) (groupDuplicates xs)
+groupDuplicates = groupBy (\(a,b) (x,y) -> a == x)
+
+average' :: [[(x, [a,b,c,d])]]
+average' xs = map averageOfCoords (groupDuplicates xs)
+
+averageOfCoords :: [(x,[a,b,c,d])] -> (x,[a,b,c,d])
+averageOfCoords xs = sumvec (map snd xs)
+
+meanvec :: [[Double, Double, Double, Double]] -> [Double, Double, Double, Double]
+meanvec xs = (foldr1 (zipWith (+)) xs) / Data.List.genericLength xs
+
+lal xs = map lastone (map (map snd) (groupDuplicates xs))
+
+lastone xs = sumvec (map (map snd) (groupDuplicates xs))
+
+map head (map (map fst) changes) = [1,2,3,4] -- (keys)
+
+averageChanges :: [[(Int, [Double])]] -> [(Int, [Double])]
+averageChanges = zip
+                        (map head (map (map fst) (groupDuplicates xs))) -- ordered list of keys
+                        (map meanvec (map (map snd) (groupDuplicates xs))) --ordered list of averaged coordinates
+
+--}
+
+[[(1,[1.0,2.0,3.0,4.0]),(1,[5.0,6.0,7.0,8.0]),(1,[4.0,5.0,6.0,7.0]),(1,[7.0,6.0,5.0,4.0])],[(2,[2.0,4.0,3.0,1.0]),(2,[5.0,7.0,6.0,8.0]),(2,[7.0,8.0,9.0,10.0]),(2,[9.0,10.0,11.0,12.0])],[(3,[1.0,2.0,3.0,4.0]),(3,[8.0,9.0,10.0,11.0]),(3,[10.0,11.0,12.0,13.0]),(3,[3.0,4.0,5.0,6.0])],[(4,[1.0,2.0,3.0,4.0]),(4,[4.0,5.0,6.0,7.0]),(4,[6.0,7.0,8.0,9.0]),(4,[10.0,11.0,12.0,13.0])]]
 
 groupDuplicates :: [(Int, [Double])] -> [[(Int, [Double])]]
 groupDuplicates = Data.List.groupBy (\(a,b) (x,y) -> a == x)
@@ -267,6 +301,33 @@ repositionSingleCoordinate maps latencyid =
                                                         vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
                                                 ))
                                 0.002))
+        {--Map.insert (fst latencyid) (
+                addvec
+                        (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
+                        (scalevec
+                                (addvec
+                                        [100, 100, 100, 100] --arbitrary, shouldn't matter
+                                        (scalevec
+                                                (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
+                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
+                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
+                                                ))
+                                0.002) --scaling factor
+        ) (fst maps) --map to insert into --}
+        {--(fst maps) Map.>| (fst latencyid) (
+                addvec
+                        (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) --source
+                        (scalevec
+                                (addvec
+                                        [100, 100, 100, 100] --arbitrary, shouldn't matter
+                                        (scalevec
+                                                (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))
+                                                ((Data.Maybe.fromJust (fallibleLookup latencyid (snd maps)) - vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps)))))) /
+                                                        vectorLength (addvec (Data.Maybe.fromJust (fallibleLookup (fst latencyid) (fst maps))) (inversevec (Data.Maybe.fromJust (fallibleLookup (snd latencyid) (fst maps))))))
+                                                ))
+                                0.002) --scaling factor
+        ) --}
+
 
 
 class Pretty a where
@@ -317,10 +378,10 @@ main =
                 --based upon hard-coded numbers
                 --a = normalizeMap (initializeCoordinates, initializeLatencies)
                 --based upon pure, seeded, random number generation
-                a = normalizeMap (initializeRandomCoordinates, initializeRandomLatencies)
+                --a = normalizeMap (initializeRandomCoordinates, initializeRandomLatencies)
+                --based upon parsed data
+                a = normalizeMap (initializeParsedCoordinates, initializeParsedLatencies)
                 b = formatCoordinates a
                 c = formatLatencies a
         in
                 putStrLn b
-                --putStrLn (show (Map.elems (fst a)) ++ "BREAK\n\n\n" ++ (show (Map.keys (fst a))))
-                --putStrLn (show (Map.elems (fst a)) ++ "BREAK" ++ show (Map.elems (snd a)))
