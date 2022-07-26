@@ -1,5 +1,5 @@
 import System.IO (readFile)
-import Control.Applicative ((<$>))
+import Control.Applicative (<$>)
 import Data.Maybe (isJust, fromJust)
 import Data.List (sortBy)
 import Data.Function (on)
@@ -17,11 +17,12 @@ parseLine _ = Nothing
 prettyPrint :: PingEntry -> IO ()
 prettyPrint (PingEntry destHost rtt) = putStrLn $ rtt ++ "ms to " ++ destHost
 
-formatData :: PingEntry -> String
---still in format of time=
-formatData (PingEntry destHost rtt) sourceHost = ((sourceHost, destHost), rtt)
 
-parsePingFile = do
+--formatData :: PingEntry -> String
+--still in format of time=
+--formatData (PingEntry destHost rtt) sourceHost = ((sourceHost, destHost), rtt)
+
+main = do
     --lines <$> readFile "/home/alex/ExperimentData/FILENEW1"
         --Reads the file into a single string, then seperates into a list of strings delimited by newlines
     --tail .
@@ -42,5 +43,8 @@ parsePingFile = do
     --note, tail raises exception if input is empty, drop 1 is a suitable alternative
         
     sourceHost <- head . lines <$> readFile "/home/alex/ExperimentData/FILENEW1"
-    return $ ((mapM prettyPrint justPings), sourceHost)
+    mapM_ prettyPrint justPings
+    --return $ ((mapM prettyPrint justPings), sourceHost)
     --putStrLn sourceHost
+
+--System.Directory

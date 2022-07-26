@@ -135,7 +135,8 @@ def findCoordinates():
         #initCoords(sys.argv[1:])
     for a in range(0,200):
         for source in hosts:
-            f = pcgRandVec()
+            #f = pcgRandVec()
+            f = np.array([0.00,0.00,0.00,0.00])
             for dest in hosts:
                 #if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                 if source == dest:
