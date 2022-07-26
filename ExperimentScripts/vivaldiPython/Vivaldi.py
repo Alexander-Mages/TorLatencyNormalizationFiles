@@ -38,18 +38,27 @@ def vectorDist(a,b):
 
 def error():
     global latencies
+    global positions
     if not latencies: #< ensures not null
         print("test")
         raise Exception('somethings wrong')
     err = sum = count = 0
-    for (source, dest) in latencies:
+    for key in positions:
+        if (positions[key] < 0).any():
+            print("err", positions[key])
+    for (source, dest), latency in latencies.items():
         #print((latencies[source,dest][0]))
         #print((pd.to_numeric(latencies[(source, dest)][0])))
-        dist = latencies[(source, dest)] - vectorDist(positions[source], positions[dest])
+        dist = latency - vectorDist(positions[source], positions[dest])
+        #if dist < 0:
+            #print(dist)
         #print(dist)
         err += dist ** 2
         count += 1
         sum += abs(dist)
+
+    if err < 0:
+        print("end of err debug 2 vals:", err, err/count)
     return err/count
 
 def initCoords(files):
@@ -59,10 +68,12 @@ def initCoords(files):
     hosts, latencies = parsePingData(files)
     for host in hosts:
         positions[host] = pcgRandVec()
+    for key in positions:
+        if (positions[key] < 0).any():
+            print("initcoords", positions[key])
     #print(positions,"\n\n\n\n\n\n\n")
     #print(latencies,"\n\n\n\n\n\n\n")
     #print(hosts)
-
 
 def parsePingData(files):
     h = set()
@@ -133,10 +144,17 @@ def findCoordinates():
     if not hosts:
         raise Exception("somethings up")
         #initCoords(sys.argv[1:])
+    debugCount = 0
     for a in range(0,200):
+        print(".5% interval reached. Error: ", error())
         for source in hosts:
+            for key in positions:
+                if (positions[key] < 0).any():
+                    print(positions[key])
+            newErr = error()
+            print("find coordinates error", newErr)
+            debugCount += 1
             #f = pcgRandVec()
-            f = np.array([0.00,0.00,0.00,0.00])
             for dest in hosts:
                 #if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                 if source == dest:
@@ -162,14 +180,15 @@ def findCoordinates():
                 #else:
                 #    l = l[0]
                 for latency in l:
+                    f = np.array([0.00, 0.00, 0.00, 0.00])
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                     dist = vectorLength(delta)
                     e = pd.to_numeric(latency) - dist  # iterate through l's, it can be a list. Make sure l is always treated as list
                     x = np.multiply(delta, e/dist)
                     f = vecAdd(f, x)
                     positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
-        newErr = error()
-        print(newErr)
+                    if (positions[source] < 0).any():
+                        print("the culprit.", positions[source])
 
 def findClosest(x):
     minDist = 1000000
@@ -182,10 +201,13 @@ def findClosest(x):
 
 
 def main():
+    #print(vectorLength(np.array([192.1,32.2,4.2839,8.2])))
+    print(vecAdd(np.array([192.1,32.2,4.2839,8.2]), np.array([174.2,82.1,110.4,9.5])))
     global pcgGen
     pcgGen = initializePCGGen()
     initCoords(sys.argv[1:]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     #print(positions)
+    print("ERR", error())
     findCoordinates()
     findClosest('204.56.0.138') #source host in archive/FILENEW1
     print(positions)
