@@ -145,14 +145,16 @@ def findCoordinates():
         raise Exception("somethings up")
         #initCoords(sys.argv[1:])
     debugCount = 0
+    percentFinished = 0
     for a in range(0,200):
-        print(".5% interval reached. Error: ", error())
+        print(percentFinished/200, "% Finished. Error: ", error())
+        percentFinished =+ 1
         for source in hosts:
             for key in positions:
                 if (positions[key] < 0).any():
                     print(positions[key])
-            newErr = error()
-            print("find coordinates error", newErr)
+            #newErr = error()
+            #print("find coordinates error (printed upon EVERY change): ", newErr)
             debugCount += 1
             #f = pcgRandVec()
             for dest in hosts:
@@ -180,6 +182,8 @@ def findCoordinates():
                 #else:
                 #    l = l[0]
                 for latency in l:
+                    if (positions[source] < 0).any():
+                        print("the culprit.", positions[source])
                     f = np.array([0.00, 0.00, 0.00, 0.00])
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                     dist = vectorLength(delta)
@@ -202,12 +206,12 @@ def findClosest(x):
 
 def main():
     #print(vectorLength(np.array([192.1,32.2,4.2839,8.2])))
-    print(vecAdd(np.array([192.1,32.2,4.2839,8.2]), np.array([174.2,82.1,110.4,9.5])))
+    #print(vecAdd(np.array([192.1,32.2,4.2839,8.2]), np.array([174.2,82.1,110.4,9.5])))
     global pcgGen
     pcgGen = initializePCGGen()
     initCoords(sys.argv[1:]) #file input format: Vivaldi.py file1 file2 file3 (I tried putting [0], but it reads the script name as an argument
     #print(positions)
-    print("ERR", error())
+    print("ERR BEFORE FINDCOORDINATES: ", error())
     findCoordinates()
     findClosest('204.56.0.138') #source host in archive/FILENEW1
     print(positions)
