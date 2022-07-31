@@ -205,12 +205,20 @@ public class ProcessVC {
 			else d = dd;
 		    } 
 		    VecVC delta = pos.get(host).add(pos.get(dest).scale(-1));
+			/*if (delta.get(0) < 0 || delta.get(1) < 0 || delta.get(2) < 0 || delta.get(3) < 0 )
+			{
+				System.err.println("delta is negative " + delta);
+			}*/
 		    double dist = delta.len();
 		    double e = d.doubleValue() - dist;
 		    f = f.add(delta.scale(e/dist));
 		}
 		//pos.put(host, pos.get(host).add(f.scale(0.004)));
 		pos.put(host, pos.get(host).add(f.scale(0.002)));
+		if ( (pos.get(host)).get(0) < 0 || (pos.get(host)).get(1) < 0 || (pos.get(host)).get(2) < 0 || (pos.get(host)).get(3) < 0)
+		{
+			System.err.println("pos is negative " + pos.get(host));
+		}
 	    }
 	    new_err = error();
 	    System.err.println("New error is " + new_err);

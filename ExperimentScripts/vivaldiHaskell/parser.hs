@@ -1,7 +1,7 @@
 import System.IO (readFile)
-import Control.Applicative (<$>)
+import Control.Applicative
 import Data.Maybe (isJust, fromJust)
-import Data.List (sortBy)
+import Data.List (sortBy, stripPrefix)
 import Data.Function (on)
 import Data.Maybe (catMaybes)
 --import Control.Monad.IO.Class (liftIO)
@@ -15,7 +15,7 @@ parseLine _ = Nothing
 
 
 prettyPrint :: PingEntry -> IO ()
-prettyPrint (PingEntry destHost rtt) = putStrLn $ rtt ++ "ms to " ++ destHost
+prettyPrint (PingEntry destHost rtt) = putStrLn $ (fromJust (stripPrefix "time=" rtt)) ++ "ms to " ++ destHost
 
 
 --formatData :: PingEntry -> String

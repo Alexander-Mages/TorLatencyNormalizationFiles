@@ -43,9 +43,9 @@ def error():
         print("test")
         raise Exception('somethings wrong')
     err = sum = count = 0
-    for key in positions:
-        if (positions[key] < 0).any():
-            print("err", positions[key])
+    #for key in positions:
+        #if (positions[key] < 0).any():
+            #print("err", positions[key])
     for (source, dest), latency in latencies.items():
         #print((latencies[source,dest][0]))
         #print((pd.to_numeric(latencies[(source, dest)][0])))
@@ -146,15 +146,15 @@ def findCoordinates():
         #initCoords(sys.argv[1:])
     debugCount = 0
     percentFinished = 0
+    err = error()
+    newErr = err - 1000
     for a in range(0,200):
-        print(percentFinished/200, "% Finished. Error: ", error())
-        percentFinished =+ 1
+        print(percentFinished/2, "% Finished. Error: ", error())
+        percentFinished += 1
+        err = newErr
         for source in hosts:
-            for key in positions:
-                if (positions[key] < 0).any():
-                    print(positions[key])
-            #newErr = error()
-            #print("find coordinates error (printed upon EVERY change): ", newErr)
+            f = np.array([0.00, 0.00, 0.00, 0.00])
+            #print("find coordinates error (printed upon EVERY change): ", err)
             debugCount += 1
             #f = pcgRandVec()
             for dest in hosts:
@@ -182,17 +182,20 @@ def findCoordinates():
                 #else:
                 #    l = l[0]
                 for latency in l:
-                    if (positions[source] < 0).any():
-                        print("the culprit.", positions[source])
-                    f = np.array([0.00, 0.00, 0.00, 0.00])
+                    #if (positions[source] < 0).any():
+                        #print("the culprit.", positions[source])
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
                     dist = vectorLength(delta)
                     e = pd.to_numeric(latency) - dist  # iterate through l's, it can be a list. Make sure l is always treated as list
                     x = np.multiply(delta, e/dist)
                     f = vecAdd(f, x)
-                    positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
-                    if (positions[source] < 0).any():
-                        print("the culprit.", positions[source])
+                    #check error for increases
+            positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
+            if newErr < error():
+                print("ERR HAS INCREASED.")
+            #if (positions[source] < 0).any():
+                #print("the culprit.", positions[source])
+        newErr = error()
 
 def findClosest(x):
     minDist = 1000000
