@@ -66,9 +66,9 @@ def initCoords(files):
     global latencies
     global positions
     hosts, latencies = parsePingData(files)
-    for host in hosts:
+    for host in sorted(hosts):
         positions[host] = pcgRandVec()
-    for key in positions:
+    for key in sorted(positions):
         if (positions[key] < 0).any():
             print("initcoords", positions[key])
     #print(positions,"\n\n\n\n\n\n\n")
@@ -153,19 +153,19 @@ def findCoordinates():
     #
     #
     for a in range(0,200):
-        print(percentFinished/2, "% Finished. Error: ", newErr)
-        percentFinished += 1
+        print(percentFinished, "% Finished. Error: ", newErr)
+        percentFinished += 0.5
         err = newErr
         verbose = False
-        if percentFinished >= 5:
+        if percentFinished >= 2.5:
             verbose = True
-        for source in hosts:
+        for source in sorted(hosts):
             f = np.array([0.00, 0.00, 0.00, 0.00])
             #print("find coordinates error (printed upon EVERY change): ", err)
             debugCount += 1
             #f = pcgRandVec()
 
-            for dest in hosts:
+            for dest in sorted(hosts):
                 #if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                 if source == dest:
                     continue
@@ -190,7 +190,7 @@ def findCoordinates():
                 #else:
                 #    l = l[0]
                 #shouldnt ever be more than one item
-                for latency in l:
+                for latency in sorted(l):
                     #if (positions[source] < 0).any():
                         #print("the culprit.", positions[source])
                     delta = vecAdd(positions[source], np.multiply(positions[dest], -1))
@@ -199,12 +199,12 @@ def findCoordinates():
                     x = np.multiply(delta, e/dist)
                     f = vecAdd(f, x)
                     #check error for increases
-            if verbose == True:
-                beforeErr = error()
+            #if verbose == True:
+            #    beforeErr = error()
             positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
-            if verbose == True:
-                if beforeErr < error():
-                     print("ERR HAS INCREASED. beforeErr=",beforeErr,"currentErr=",error(),"f=",f,"debugCount=",debugCount,"positions[source]=",positions[source],"source=",source)
+            #if verbose == True:
+            #    if beforeErr < error():
+            #         print("ERR HAS INCREASED. beforeErr=",beforeErr,"currentErr=",error(),"f=",f,"debugCount=",debugCount,"positions[source]=",positions[source],"source=",source)
             #debugErr = error()
             #if newErr < debugErr:
             #    print("ERR HAS INCREASED. coordinate just assigned: ",positions[source], "f value: ", f, "oldErr: ", newErr, "thenew Err: ", debugErr)
