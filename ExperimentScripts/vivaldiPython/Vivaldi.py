@@ -147,16 +147,24 @@ def findCoordinates():
     debugCount = 0
     percentFinished = 0
     err = error()
-    newErr = err - 1000
+    newErr = err# - 1000 PUT THIS BACK DONT FORGET
+    #
+    #
+    #
+    #
     for a in range(0,200):
-        print(percentFinished/2, "% Finished. Error: ", error())
+        print(percentFinished/2, "% Finished. Error: ", newErr)
         percentFinished += 1
         err = newErr
+        verbose = False
+        if percentFinished >= 5:
+            verbose = True
         for source in hosts:
             f = np.array([0.00, 0.00, 0.00, 0.00])
             #print("find coordinates error (printed upon EVERY change): ", err)
             debugCount += 1
             #f = pcgRandVec()
+
             for dest in hosts:
                 #if (source == dest) or (((source, dest) not in latencies) and ((dest, source) not in latencies)):
                 if source == dest:
@@ -181,6 +189,7 @@ def findCoordinates():
                     raise Exception("or this")
                 #else:
                 #    l = l[0]
+                #shouldnt ever be more than one item
                 for latency in l:
                     #if (positions[source] < 0).any():
                         #print("the culprit.", positions[source])
@@ -190,9 +199,15 @@ def findCoordinates():
                     x = np.multiply(delta, e/dist)
                     f = vecAdd(f, x)
                     #check error for increases
+            if verbose == True:
+                beforeErr = error()
             positions[source] = vecAdd(positions[source], np.multiply(f, 0.002))
-            if newErr < error():
-                print("ERR HAS INCREASED.")
+            if verbose == True:
+                if beforeErr < error():
+                     print("ERR HAS INCREASED. beforeErr=",beforeErr,"currentErr=",error(),"f=",f,"debugCount=",debugCount,"positions[source]=",positions[source],"source=",source)
+            #debugErr = error()
+            #if newErr < debugErr:
+            #    print("ERR HAS INCREASED. coordinate just assigned: ",positions[source], "f value: ", f, "oldErr: ", newErr, "thenew Err: ", debugErr)
             #if (positions[source] < 0).any():
                 #print("the culprit.", positions[source])
         newErr = error()
