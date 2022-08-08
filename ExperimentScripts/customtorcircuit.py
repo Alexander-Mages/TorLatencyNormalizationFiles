@@ -21,29 +21,45 @@ tbb_dir = '/home/alex/tor-browser_en-US/'
 SockAddr = '/tmp/control.sock'
 
 
+global timeForFilenames
+timeForFilenames = str(int(time.time()))
 #
 #
 # ARGUMENT PARSING
 #
 #
 def ParseArgs():
-    if len(sys.argv[0]) < 1:
+    if len(sys.argv[0]) < 2:
         print(
-            "ERR: No Argument\nusage: script.py -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
+            "ERR: No Argument\nusage: script.py mitigate/measure/manual -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
         sys.exit(1)
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('mode', type=str)
     parser.add_argument('-v', type=int)
     parser.add_argument('path', type=str)
     parser.add_argument('-logfile', type=str)
     args = parser.parse_args()
-
     selectedPath = args.path
     selectedPathList = selectedPath.split(",")
+
+    global mode
+    #select mode - an if statement for each condition to help debugging
+    if args.mode == "measure":
+        mode = args.mode
+    elif args.mode == "mitigate":
+        mode = args.mode
+    elif args.mode == "manual":
+        mode = args.mode
+    else:
+        raise Exception("Missing positional argument 1: 'mode'. Please choose mitigate or measure mode.\n"
+                        "usage: script.py mitigate/measure -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
+
     if args.logfile:
         logfilepath = args.logfile
     else:
-        logfilepath = '/tmp/' + str(time.time()) + 'tor_error'
+        global timeForFilenames
+        logfilepath = '/home/alex/rttLogs/' + timeForFilenames + mode + 'torLog.txt'
 
     # select verbosity
     if args.v == 2:
@@ -73,41 +89,13 @@ def CheckTorrc():
 
 #
 #
-###Launching And Setting Up Tor
+###Launching And Configuring Tor
 #
 #
 #startTor() does so using stem, just the tor binary.
 #startTorBrowser() does so using the tor browser bundle through a subprocess
 #startCustomTorBrowser() does so using tbselenium using a custom torrc. It returns a subprocess and allows selenium to be used
 #^the latter is the only updated one, the former don't work with current experimental apparatus
-
-#Idk what the hell this is, but startTor() doesn't work without it
-def ISuckAtProgramming(line):
-    print(line)
-
-#starts tor directly through stem, no browser
-def startTor(log_level, logfilepath):
-    tor_process = process.launch_tor_with_config(
-        config = {
-            'ControlPort': '9051',
-            'Log': [
-                log_level+' stdout',
-                log_level+' file '+logfilepath,
-            ],
-            #'__DisablePredictedCircuits': '1',
-            #'UseBridges': '1',
-            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
-            '__LeaveStreamsUnattached': '1',
-            'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
-            'SocksPort': '9050 IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth',
-        }, completion_percent=0, take_ownership=True, close_output=False, init_msg_handler=ISuckAtProgramming
-    )
-    #returns POPEN subprocess so I can communicate with it
-    return tor_process
-
-#Launches Tor Browser using POPEN, does not use selenium
-def startTorBrowser():
-     subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
 
 #Launches through TBSelenium
 def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
@@ -117,22 +105,54 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
     #in order to integrate with the pluggable transport, we need the IP of the guard node
     guardDescriptor = descriptor.remote.Query(resource='/tor/server/fp/' + selectedPathList[0]).run()[0]
     guardDir_Port = "{}:{}".format(guardDescriptor.address, guardDescriptor.or_port)
-    torrc = {
-        'ControlPort': '9051',
-        'SOCKSPort': '9050',
-        'Log': [
-            loglevel + ' stdout',
-            loglevel + ' file ' + logfilepath,
-        ],
-        'UseBridges': '1',
-        #setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
-        #this has no effect on circuit length or construction
-        'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
-        'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
-        # '__DisablePredictedCircuits': '1',
-        '__LeaveStreamsUnattached': '1',
-        #'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
-    }
+    global mode
+
+    if mode == "mitigate":
+        #mitigate mode - normalizes latency based upon this script's measurements and brackets from tor metrics
+        torrc = {
+            'ControlPort': '9051',
+            'SOCKSPort': '9050',
+            'Log': [
+                loglevel + ' stdout',
+                loglevel + ' file ' + logfilepath,
+            ],
+            'UseBridges': '1',
+            # setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
+            # this has no effect on circuit length or construction
+            'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
+            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/LatencyModulatedClientPT',
+            # '__DisablePredictedCircuits': '1',
+            '__LeaveStreamsUnattached': '1',
+            # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+        }
+    elif mode == "measure":
+        #measures latency without adding any additional delay
+        torrc = {
+            'ControlPort': '9051',
+            'SOCKSPort': '9050',
+            'Log': [
+                loglevel + ' stdout',
+                loglevel + ' file ' + logfilepath,
+            ],
+            # '__DisablePredictedCircuits': '1',
+            '__LeaveStreamsUnattached': '1',
+            # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+        }
+    elif mode == "manual":
+        torrc = {
+            'ControlPort': '9051',
+            'SOCKSPort': '9050',
+            'Log': [
+                loglevel + ' stdout',
+                loglevel + ' file ' + logfilepath,
+            ],
+            # '__DisablePredictedCircuits': '1',
+            '__LeaveStreamsUnattached': '1',
+            # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+        }
+    else:
+        raise Exception("mode not set")
+    print("in case of OSError: Process terminated: Failed to bind one of the listener ports., try killall tor")
     tor_process = launch_tbb_tor_with_stem(tbb_path=tbb_dir, torrc=torrc, tor_binary=tor_binary)
     return tor_process, exitDescriptor
 
@@ -189,25 +209,27 @@ def BuildCustomCircAndOpenStreamListener(controller, selectedPath):
     controller.add_event_listener(circuitAnomaly, control.EventType.CIRC)
 
 
-
-
 #
 #
-#LATENCY MEASUREMENT
+#Browser scripting
 #
 #
 
-def MeasurementLoop(tbb_dir, SockAddr):
+def MeasurementLoop(tbb_dir, SockAddr, pubIP):
     with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
-        socket = connectCtrlPortPT(SockAddr)
+        global mode
+        if mode == "mitigate":
+            socket = connectCtrlPortPT(SockAddr)
+        global timeForFilenames
+        logFile = open("/home/alex/rttLogs/" + timeForFilenames + mode + "rttLog.txt", "w")
         #for testing
         try:
             #opens the browser
-            driver.get('http://127.0.0.1:80')
+            driver.get('https://127.0.0.1')
         except WebDriverException:
             pass
         while True:
-            time.sleep(30)
+            time.sleep(5)
             start_time = time.perf_counter()
             #             ^ more accurate timing than time.time(), intended for measuring performance
             try:
@@ -217,8 +239,115 @@ def MeasurementLoop(tbb_dir, SockAddr):
                 rtt = time.perf_counter() - start_time
             #put time in milliseconds
             latency = round(rtt * 1000)
-            print("RTT to exit node is " + str(latency))
-            sendCommandPT(socket, "LATENCY " + str(latency))
+            if mode == "mitigate":
+                sendCommandPT(socket, "LATENCY " + str(latency))
+
+            log = "RTT from client " + pubIP + " to exit node within circuit " + selectedPath + " is " + str(latency) + " ms\n"
+            print(log)
+            logFile.write(log)
+            if latency > 180000:
+                #connection timeout
+                raise Exception("Connection timeout. ")
+
+
+#just visits a url, thats about it.
+def OpenBrowser(tbb_dir, url):
+    with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
+        driver.get(url)
+        while True:
+            time.sleep(60)
+            #just opens the browser to the desired url, and leaves it for manual intervention
+
+#
+#
+#PLUGGABLE TRANSPORT CONTROL INTERFACE
+#
+#
+
+def connectCtrlPortPT(SockAddr):
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect(SockAddr)
+    s.send(str.encode("START"))
+    return s
+
+def sendCommandPT(socket, command):
+    socket.send(str.encode(command))
+
+
+if __name__ == "__main__":
+    # make sure torrc is correctly configured
+    if CheckTorrc() == False:
+        sys.exit()
+    # parse arguments
+    selectedPath, selectedPathList, logfilepath, log_level = ParseArgs()
+    # Launches tor browser using tbselenium
+    tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
+    # connect stem controller to tor process
+    controller = ConnectControlPort()
+    # create custom circuit and allow stream attachment only to custom circ
+    BuildCustomCircAndOpenStreamListener(controller, selectedPath)
+    # get public IP the script is being run from for logging purposes
+    pubIP = requests.get('https://api.ipify.org').content.decode('utf8')
+    # Launches the browser, every 30 seconds, it will violate the exit nodes' exit policy, getting an RTT
+    if mode == "manual":
+        OpenBrowser(tbb_dir, 'http://example.com')
+    elif mode == "measure" or mode == "mitigate":
+        MeasurementLoop(tbb_dir, SockAddr, pubIP)
+    else:
+        raise Exception("something broke")
+
+    # watches the POPEN subprocess's stdout indefinately
+    for line in tor_process.stdout:
+        print("systime:", time.time(), line)
+    # I dont see any reason why the program would hit this line, but for redundancy this will block the program
+    # since the tor process is terminated upon exit
+    tor_process.wait()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#CURRENTLY UNUSED CODE. may be relevent in the future
+
+
+#Idk what the hell this is, but startTor() doesn't work without it
+def ISuckAtProgramming(line):
+    print(line)
+
+#starts tor directly through stem, no browser
+def startTor(log_level, logfilepath):
+    tor_process = process.launch_tor_with_config(
+        config = {
+            'ControlPort': '9051',
+            'Log': [
+                log_level+' stdout',
+                log_level+' file '+logfilepath,
+            ],
+            #'__DisablePredictedCircuits': '1',
+            #'UseBridges': '1',
+            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
+            '__LeaveStreamsUnattached': '1',
+            'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+            'SocksPort': '9050 IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth',
+        }, completion_percent=0, take_ownership=True, close_output=False, init_msg_handler=ISuckAtProgramming
+    )
+    #returns POPEN subprocess so I can communicate with it
+    return tor_process
+
+#Launches Tor Browser using POPEN, does not use selenium
+def startTorBrowser():
+     subprocess.Popen(["/home/alex/tor-browser_en-US/Browser/start-tor-browser", '--default-torrc', '/home/alex/tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults'])
+
 
 
 #queries exit node descriptor via IP. All system traffic must run through Tor for this to work.
@@ -236,50 +365,4 @@ def CircRTT(ExitDescriptor):
         #totally arbitrary, collects every 30s
         time.sleep(30)
 
-#just visits a url, thats about it.
-def VisitUrl(tbb_dir):
-    with TorBrowserDriver(tbb_dir, socks_port=9050, control_port=9051, tor_cfg=cm.USE_STEM) as driver:
-        driver.get('https://www.whatismyip.com/')
-        while True:
-            time.sleep(30)
-            driver.refresh()
 
-
-
-
-#
-#
-#PLUGGABLE TRANSPORT CONTROL INTERFACE
-#
-#
-
-def connectCtrlPortPT(SockAddr):
-    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.connect(SockAddr)
-    s.send(str.encode("START"))
-    return s
-
-def sendCommandPT(socket, command):
-    socket.send(str.encode(command))
-
-#make sure torrc is correctly configured
-if CheckTorrc() == False:
-    sys.exit()
-#parse arguments
-selectedPath, selectedPathList, logfilepath, log_level = ParseArgs()
-#Launches tor browser using tbselenium
-tor_process, exitDescriptor = LaunchCustomTorBrowser(tbb_dir, log_level, logfilepath)
-#connect stem controller to tor process
-controller = ConnectControlPort()
-#create custom circuit and allow stream attachment only to custom circ
-BuildCustomCircAndOpenStreamListener(controller, selectedPath)
-#Launches the browser, every 30 seconds, it will violate the exit nodes' exit policy, getting an RTT
-MeasurementLoop(tbb_dir, SockAddr)
-
-
-#watches the POPEN subprocess's stdout indefinately
-for line in tor_process.stdout:
-    print("systime:", time.time(), line)
-#I dont see any reason why the program would hit this line, but for redundancy this will block the program
-#since the tor process is terminated upon exit
-tor_process.wait()
