@@ -272,7 +272,7 @@ def connectCtrlPortPT(SockAddr):
 
 def sendCommandPT(socket, command):
     socket.send(str.encode(command))
-
+ 
 
 if __name__ == "__main__":
     # make sure torrc is correctly configured
