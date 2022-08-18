@@ -31,7 +31,7 @@ timeForFilenames = str(int(time.time()))
 def ParseArgs():
     if len(sys.argv[0]) < 2:
         print(
-            "ERR: No Argument\nusage: script.py mitigate/measure/manual -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
+            "ERR: No Argument\nusage: script.py mitigate/measure/manual/dummy/NoLatencyModulation -v 2-3 (one is default) 'guard','middleman','exit' -logfile /errorfile")
         sys.exit(1)
 
     parser = argparse.ArgumentParser()
@@ -50,6 +50,10 @@ def ParseArgs():
     elif args.mode == "mitigate":
         mode = args.mode
     elif args.mode == "manual":
+        mode = args.mode
+    elif args.mode == "dummy":
+        mode = args.mode
+    elif args.mode == "NoLatencyModulation":
         mode = args.mode
     else:
         raise Exception("Missing positional argument 1: 'mode'. Please choose mitigate or measure mode.\n"
@@ -121,6 +125,42 @@ def LaunchCustomTorBrowser(tbb_dir, loglevel, logfilepath):
             # this has no effect on circuit length or construction
             'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
             'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/LatencyModulatedClientPT',
+            # '__DisablePredictedCircuits': '1',
+            '__LeaveStreamsUnattached': '1',
+            # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+        }
+    elif mode == "noLatencyModulation":
+        #uses dummy transport
+        torrc = {
+            'ControlPort': '9051',
+            'SOCKSPort': '9050',
+            'Log': [
+                loglevel + ' stdout',
+                loglevel + ' file ' + logfilepath,
+            ],
+            'UseBridges': '1',
+            # setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
+            # this has no effect on circuit length or construction
+            'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
+            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/NOLATENCYADDITIONLatencyModulatedClientPT',
+            # '__DisablePredictedCircuits': '1',
+            '__LeaveStreamsUnattached': '1',
+            # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
+        }
+    elif mode == "dummy":
+        #uses dummy transport
+        torrc = {
+            'ControlPort': '9051',
+            'SOCKSPort': '9050',
+            'Log': [
+                loglevel + ' stdout',
+                loglevel + ' file ' + logfilepath,
+            ],
+            'UseBridges': '1',
+            # setting the entry node as the bridge allows a pluggable transport to be used as a proxy, without a server
+            # this has no effect on circuit length or construction
+            'Bridge': 'dummy ' + guardDir_Port + ' ' + selectedPathList[0],
+            'ClientTransportPlugin': 'dummy exec /home/alex/goptlib/examples/dummy-client/dummy-client',
             # '__DisablePredictedCircuits': '1',
             '__LeaveStreamsUnattached': '1',
             # 'HashedControlPassword': '16:1651BF63EE73164460ED67E7E4046DDB1FE7E408563A9CA566A0D3D538',
@@ -272,7 +312,7 @@ def connectCtrlPortPT(SockAddr):
 
 def sendCommandPT(socket, command):
     socket.send(str.encode(command))
- 
+
 
 if __name__ == "__main__":
     # make sure torrc is correctly configured
