@@ -2,8 +2,8 @@ import sys
 import os
 import re
 #https://pypi.org/project/shove/
-from shove import Shove
-#import shelve
+#from shove import Shove
+import shelve
 #import gc
 
 #parses the dataset at https://zenodo.org/record/4911583
@@ -40,7 +40,7 @@ with open(relayInfo) as relayInfo:
         fingerprint = searchResult.group(1)
         IPaddr = searchResult.group(2)
         relayInfoDict[fingerprint] = IPaddr
-    relayInfo.close()
+#    relayInfo.close() #I don't think this is needed when using "with"
 
 
 #associate relayid in paths file with fingerprint.
@@ -53,48 +53,54 @@ with open(probedRelays) as probedRelays:
         fingerprint = searchResult.group(2)
 
         probedRelaysDict[relayId] = relayInfoDict[fingerprint]
-    probedRelays.close()
+    #probedRelays.close() #I don't think this is needed when using "with"
 
 del relayInfoDict
 #gc.collect()
 
 
 #noTheoreticDict = {}
-#alternative to shelve or shove: UserDict (see https://sebsauvage.net/python/snyppets/index.html#dbdict)
-noTheoreticDict = Shove(os.path.join(outputDirectory, "../", "noTheoreticDictFile", ".shove"))
-searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
-with open(paths) as paths:
-    for entry in paths.readlines():
-#for entry in noTheoreticPathsFile:
-        searchResult = re.search(searchstr4, entry)
-        sourceRelayId = searchResult.group(1)
-        destRelayId = searchResult.group(2)
-        latencies = searchResult.group(3)
+with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingStore", ".shelved"))) as noTheoreticDict:
+    searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
+    with open(paths) as paths:
+        for entry in paths.readlines():
+    #for entry in noTheoreticPathsFile:
+            searchResult = re.search(searchstr4, entry)
+            sourceRelayId = searchResult.group(1)
+            destRelayId = searchResult.group(2)
+            latencies = searchResult.group(3)
 
-        #replace relayID with fingerprint
-        sourceRelayIP = probedRelaysDict[sourceRelayId]
-        destRelayIP = probedRelaysDict[destRelayId]
+            #replace relayID with fingerprint
+            sourceRelayIP = probedRelaysDict[sourceRelayId]
+            destRelayIP = probedRelaysDict[destRelayId]
 
-        noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
-paths.close()
-del probedRelaysDict
-#del noTheoreticPathsFile
+            noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
+            #noTheoreticDict.sync() if using "Writeback=True" as a shelve option
+    #paths.close() #I don't think this is needed when using "with"
+    del probedRelaysDict
+    #del noTheoreticPathsFile
 
-#gc.collect()
+    #gc.collect()
 
-#outputDirectory
-for key in noTheoreticDict:
-    source, dest = key
-    filePath = os.path.join(outputDirectory, sourceRelayIP + ".txt")
-    if not os.path.exists(filePath):
-        f = open(filePath, "x") #will error if file exists
-        f.write(source + "\n") #writes source IP to top of file
-        for latency in noTheoreticDict[key]:
-            latencyInMilliseconds = latency/1000
-            f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
-    else:    #append to it
-        f = open(filePath, "a") #will not error if the file exists, will append
-        for latency in noTheoreticDict[key]:
-            latencyInMilliseconds = latency/1000
-            f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
-    f.close()
+    #outputDirectory
+    for key in noTheoreticDict:
+        source, dest = key
+        filePath = os.path.join(outputDirectory, sourceRelayIP + ".txt")
+        #if not os.path.exists(filePath):
+        try:
+            with open(filePath, "x") as f:
+                #f = open(filePath, "x") #will error if file exists
+                f.write(source + "\n") #writes source IP to top of file
+                for latency in noTheoreticDict[key]:
+                    latencyInMilliseconds = latency/1000
+                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
+        #else:    #append to it
+        except FileExistsError:
+            with open(filePath, "a") as f: #will not error if the file exists, will append
+                #f = open(filePath, "a") #will not error if the file exists, will append
+                for latency in noTheoreticDict[key]:
+                    latencyInMilliseconds = latency/1000
+                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
+        #f.close() #I don't think this is needed when using "with"
+
+#noTheoreticDict.close() #I don't think this is needed when using "with"
