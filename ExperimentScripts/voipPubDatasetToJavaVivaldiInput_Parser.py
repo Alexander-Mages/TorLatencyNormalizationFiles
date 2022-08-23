@@ -1,6 +1,9 @@
 import sys
 import os
 import re
+#https://pypi.org/project/shove/
+from shove import Shove
+#import shelve
 #import gc
 
 #parses the dataset at https://zenodo.org/record/4911583
@@ -56,7 +59,9 @@ del relayInfoDict
 #gc.collect()
 
 
-noTheoreticDict = {}
+#noTheoreticDict = {}
+#alternative to shelve or shove: UserDict (see https://sebsauvage.net/python/snyppets/index.html#dbdict)
+noTheoreticDict = Shove(os.path.join(outputDirectory, "../", "noTheoreticDictFile", ".shove"))
 searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
 with open(paths) as paths:
     for entry in paths.readlines():
@@ -73,15 +78,14 @@ with open(paths) as paths:
         noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
 paths.close()
 del probedRelaysDict
-del noTheoreticPathsFile
+#del noTheoreticPathsFile
 
 #gc.collect()
 
 #outputDirectory
-filePath = os.path.join(outputDirectory, source + ".txt")
 for key in noTheoreticDict:
     source, dest = key
-    filePath = os.path.join(outputDirectory, source + ".txt")
+    filePath = os.path.join(outputDirectory, sourceRelayIP + ".txt")
     if not os.path.exists(filePath):
         f = open(filePath, "x") #will error if file exists
         f.write(source + "\n") #writes source IP to top of file
