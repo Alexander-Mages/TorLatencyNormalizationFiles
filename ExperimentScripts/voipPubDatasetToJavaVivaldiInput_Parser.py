@@ -1,7 +1,7 @@
 import sys
 import os
 import re
-import gc
+#import gc
 
 #parses the dataset at https://zenodo.org/record/4911583
 
@@ -59,7 +59,7 @@ del relayInfoDict
 noTheoreticDict = {}
 searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
 with open(paths) as paths:
-    for entry in paths.readlines()
+    for entry in paths.readlines():
 #for entry in noTheoreticPathsFile:
         searchResult = re.search(searchstr4, entry)
         sourceRelayId = searchResult.group(1)
