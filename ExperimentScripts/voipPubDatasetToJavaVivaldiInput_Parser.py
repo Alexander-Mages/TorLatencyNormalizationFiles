@@ -25,9 +25,9 @@ outputDirectory = sys.argv[4]
 #             noTheoreticPathsFile.append(line)
 #
 #     paths.close()
-with open(paths) as paths:
-    noTheoreticPathsFile = paths.readlines()
-paths.close()
+#with open(paths) as paths:
+#    noTheoreticPathsFile = paths.readlines()
+#paths.close()
 
 relayInfoDict = {}
 with open(relayInfo) as relayInfo:
@@ -53,26 +53,30 @@ with open(probedRelays) as probedRelays:
     probedRelays.close()
 
 del relayInfoDict
-gc.collect()
+#gc.collect()
 
 
 noTheoreticDict = {}
 searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
-for entry in noTheoreticPathsFile:
-    searchResult = re.search(searchstr4, entry)
-    sourceRelayId = searchResult.group(1)
-    destRelayId = searchResult.group(2)
-    latencies = searchResult.group(3)
+with open(paths) as paths:
+    for entry in paths.readlines()
+#for entry in noTheoreticPathsFile:
+        searchResult = re.search(searchstr4, entry)
+        sourceRelayId = searchResult.group(1)
+        destRelayId = searchResult.group(2)
+        latencies = searchResult.group(3)
 
-    #replace relayID with fingerprint
-    sourceRelayIP = probedRelaysDict[sourceRelayId]
-    destRelayIP = probedRelaysDict[destRelayId]
+        #replace relayID with fingerprint
+        sourceRelayIP = probedRelaysDict[sourceRelayId]
+        destRelayIP = probedRelaysDict[destRelayId]
 
-    noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
-
+        noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
+paths.close()
 del probedRelaysDict
 del noTheoreticPathsFile
-gc.collect()
+
+#gc.collect()
+
 #outputDirectory
 filePath = os.path.join(outputDirectory, source + ".txt")
 for key in noTheoreticDict:
