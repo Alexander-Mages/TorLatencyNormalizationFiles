@@ -60,7 +60,7 @@ del relayInfoDict
 
 
 #noTheoreticDict = {}
-with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingStore", ".shelved"))) as noTheoreticDict:
+with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingStore.shelved"))) as noTheoreticDict:
     searchstr4 = re.compile(r"^(\d{1,4})\s(\d{1,4})\s\d\s(.+)")
     with open(paths) as paths:
         for entry in paths.readlines():
@@ -74,7 +74,8 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
             sourceRelayIP = probedRelaysDict[sourceRelayId]
             destRelayIP = probedRelaysDict[destRelayId]
 
-            noTheoreticDict[(sourceRelayIP, destRelayIP)] = latencies.split(",")
+            key = sourceRelayIP + "," + destRelayIP
+            noTheoreticDict[key] = latencies.split(",")
             #noTheoreticDict.sync() if using "Writeback=True" as a shelve option
     #paths.close() #I don't think this is needed when using "with"
     del probedRelaysDict
@@ -84,22 +85,23 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
 
     #outputDirectory
     for key in noTheoreticDict:
-        source, dest = key
-        filePath = os.path.join(outputDirectory, sourceRelayIP + ".txt")
+        source = key.split(",")[0]
+        dest = key.split(",")[1]
+        filePath = os.path.join(outputDirectory, source + ".txt")
         #if not os.path.exists(filePath):
         try:
             with open(filePath, "x") as f:
                 #f = open(filePath, "x") #will error if file exists
                 f.write(source + "\n") #writes source IP to top of file
                 for latency in noTheoreticDict[key]:
-                    latencyInMilliseconds = latency/1000
+                    latencyInMilliseconds = int(latency)/1000
                     f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
         #else:    #append to it
         except FileExistsError:
             with open(filePath, "a") as f: #will not error if the file exists, will append
                 #f = open(filePath, "a") #will not error if the file exists, will append
                 for latency in noTheoreticDict[key]:
-                    latencyInMilliseconds = latency/1000
+                    latencyInMilliseconds = int(latency)/1000
                     f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
         #f.close() #I don't think this is needed when using "with"
 
