@@ -1,0 +1,32 @@
+#Topology:
+#two machines, a client and a server. client connects to echo server
+
+#no OS specified for the nodes, as default is:
+#'Ubuntu1604-STD'
+
+
+#declaring a simulator
+set ns [new Simulator]  
+
+#loads library allowing tb- commands
+#i don't know what that means yet^
+source tb_compat.tcl
+
+set Client [$ns node]
+#           ^references the simulator
+set Server [$ns node]
+
+
+#set a duplex connection between the client and server
+set link0 [$ns duplex-link $Client $Server 100mb 0ms DropTail]
+
+#manually set IP addresses to make automation easier
+tb-set-ip $Client 142.1.1.2
+tb-set-ip $Server 142.1.1.3
+
+
+#static routing
+$ns rtproto Static
+
+# Go!
+$ns run

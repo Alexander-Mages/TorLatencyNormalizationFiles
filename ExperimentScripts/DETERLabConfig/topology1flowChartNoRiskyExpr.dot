@@ -1,0 +1,7 @@
+digraph D {
+    Client
+    Server
+
+    Client -> Server
+    Server -> Client [label="link0"]
+}
