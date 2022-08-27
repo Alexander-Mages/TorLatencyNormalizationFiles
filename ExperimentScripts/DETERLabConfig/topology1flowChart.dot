@@ -1,0 +1,13 @@
+digraph D {
+    Client
+    Server
+    Tun
+    lan0 [shape=polygon]
+    internet [label="Internet (Tor network)"]
+
+    Client -> lan0
+    Server -> lan0
+    lan0 -> Tun 
+    Tun -> internet [label="this link will be\nconfigured automatically."]
+
+}
