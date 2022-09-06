@@ -118,11 +118,15 @@ public class ParserVC {
 				totalTime += time;
 				squareTotalTime += time*time;
 			}
-			double mean = totalTime / count;
-		        double stddev = Math.sqrt(squareTotalTime/count - mean*mean );
-			if (debug) {
-				System.out.println("Standard Deviation for file " + dataFiles[i].getName() + " for host " + fromHost + " is " + stddev);
-				System.out.println("Mean for file " + dataFiles[i].getName() + " for host " + fromHost + " is " + mean);
+			if (count < 1) {
+				System.err.println(dataFiles[i].getName() + " for host " + fromHost + " is empty");}
+			else {
+				double mean = totalTime / count;
+				double stddev = Math.sqrt(squareTotalTime/count - mean*mean );
+				if (debug) {
+					System.out.println("Standard Deviation for file " + dataFiles[i].getName() + " for host " + fromHost + " is " + stddev);
+					System.out.println("Mean for file " + dataFiles[i].getName() + " for host " + fromHost + " is " + mean);
+				}
 			}
 		}
 		latencies = result;
