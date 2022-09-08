@@ -23,7 +23,7 @@ set Tun [$ns node]
 
 #latency and bandwidth parameters are required, but latency will be set to 0
 #"Unless you absolutely need different settings, please specify 10 Mbps, 100 Mbps, 100 Mbps or 1000 Mbps bandwidth and 0 ms delay"
-set lan0 [$ns make-lan "$Tun $Client $Server" 100Mb 0ms]
+set lan0 [$ns make-lan "$Tun $Client $Server" 10Mb 0ms]
 
 
 #static routing

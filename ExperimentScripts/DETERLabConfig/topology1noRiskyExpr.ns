@@ -18,7 +18,7 @@ set Server [$ns node]
 
 
 #set a duplex connection between the client and server
-set link0 [$ns duplex-link $Client $Server 100mb 0ms DropTail]
+set link0 [$ns duplex-link $Client $Server 100Mb 0ms DropTail]
 
 #manually set IP addresses to make automation easier
 tb-set-ip $Client 142.1.1.2

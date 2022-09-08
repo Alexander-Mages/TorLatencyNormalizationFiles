@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+####################
+### DEPENDENCIES ###
+####################
+
+#sudo apt-get install -y python-pip
+#sudo pip install stem 
+#sudo apt-get install -y libevent-dev openssl libssl-dev
+
+# Get our public ip address
+MY_PUBLIC_IP = $(wget http://ipinfo.io/ip -qO -)
+
+
+
+############
+### TING ###
+############
+
+# Generate default tingrc file
+cat <<EOF > $(pwd)/tingrc
+SocksPort 9050
+ControllerPort 9051
+SourceAddr $MY_PUBLIC_IP
+DestinationAddr $MY_PUBLIC_IP
+DestinationPort 16667
+NumSamples 200
+NumRepeats 1
+RelayList internet
+RelayCacheTime 24
+W 51.158.230.172,0D962170FBB3837E85E2314EEAAC49966A153F34
+Z 171.25.193.20,0D967EACE42448A08E244366DF753BBFF611EB37
+SocksTimeout 60
+MaxCircuitBuildAttempts 5
+EOF

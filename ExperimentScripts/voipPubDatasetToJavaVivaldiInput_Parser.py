@@ -95,14 +95,14 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
                 f.write(source + "\n") #writes source IP to top of file
                 for latency in noTheoreticDict[key]:
                     latencyInMilliseconds = int(latency)/1000
-                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
+                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
         #else:    #append to it
         except FileExistsError:
             with open(filePath, "a") as f: #will not error if the file exists, will append
                 #f = open(filePath, "a") #will not error if the file exists, will append
                 for latency in noTheoreticDict[key]:
                     latencyInMilliseconds = int(latency)/1000
-                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + latencyInMilliseconds +  " ms\n")
+                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
         #f.close() #I don't think this is needed when using "with"
 
 #noTheoreticDict.close() #I don't think this is needed when using "with"
