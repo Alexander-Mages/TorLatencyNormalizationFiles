@@ -1,0 +1,43 @@
+#Topology:
+#two machines, a client and a server. client connects out to 
+#tor and back to the echo server
+
+#no OS specified for the nodes, as default is:
+#'Ubuntu1604-STD'
+
+
+#declaring a simulator
+set ns [new Simulator]  
+
+#loads library allowing tb- commands
+#i don't know what that means yet^
+source tb_compat.tcl
+
+set Client [$ns node]
+#           ^references the simulator
+
+#we don't want the tunnel node to be one of the two above
+#It selects this automatically, but this node will be the most "well-connected", and thus should be selected
+#set Tun [$ns node]
+
+#latency and bandwidth parameters are required, but latency will be set to 0
+#"Unless you absolutely need different settings, please specify 10 Mbps, 100 Mbps, 100 Mbps or 1000 Mbps bandwidth and 0 ms delay"
+#set lan0 [$ns make-lan "$Tun $Client $Server" 10Mb 0ms]
+
+
+#static routing
+$ns rtproto Static
+
+# Go!
+$ns run
+
+
+
+#useful codelines
+#tb-set-node-startcmd $Client "initClient.sh -a >& /tmp/node0.log"
+#tb-set-node-startcmd $Server "initServer.sh -a >& /tmp/node0.log"
+#initClient being the launch of Stem and initServer likely being the echo server
+
+#tb-set-node-tarfiles node install-dir1 tarfile1 tarfile2 ...
+#installs tarfiles on the local disk. Can be used to install large(r) files like the Tor binary
+#only installs upon boot
