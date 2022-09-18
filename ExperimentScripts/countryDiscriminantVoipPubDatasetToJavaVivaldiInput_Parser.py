@@ -4,6 +4,7 @@ import re
 #https://pypi.org/project/shove/
 #from shove import Shove
 import shelve
+from geoip import geolite2
 #import gc
 
 #parses the dataset at https://zenodo.org/record/4911583
@@ -14,6 +15,7 @@ probedRelays = sys.argv[3]
 outputDirectory = sys.argv[4]
 
 
+UNKNOWNIPADDRESSCOUNTRY = 0
 #remove lines with data marked 3 (theoretic estimation)
 #noTheoreticPathsFile = []
 # with open(paths) as paths:
@@ -89,6 +91,18 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
         source = key.split(",")[0]
         dest = key.split(",")[1]
 
+        #check dest country
+        destCountry = geolite2.lookup(dest).country
+        sourceCountry = geolite2.lookup(source).country
+        if (destCountry != 'US'):
+            if destCountry is None:
+                UNKNOWNIPADDRESSCOUNTRY += 1
+            continue
+        if (sourceCountry != 'US'):
+            if sourceCountry is None:
+                UNKNOWNIPADDRESSCOUNTRY += 1
+            continue
+
         filePath = os.path.join(outputDirectory, source + ".txt")
         #if not os.path.exists(filePath):
         try:
@@ -108,3 +122,8 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
         #f.close() #I don't think this is needed when using "with"
 
 #noTheoreticDict.close() #I don't think this is needed when using "with"
+
+with open(os.path.join(outputDirectory, "numOfUnknownIPAddresses.txt")) as z:
+    z.write(str(UNKNOWNIPADDRESSCOUNTRY))
+    z.close
+
