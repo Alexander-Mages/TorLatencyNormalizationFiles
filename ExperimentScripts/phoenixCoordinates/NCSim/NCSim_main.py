@@ -39,8 +39,11 @@ def NCSim_main(*args,**kwargs):
     
     # raw distance matrix #
     
-    clear
-    load('data_matrix.mat')
+    #clear
+    DATA = load('data_matrix.mat')
+    print(sorted(DATA.keys()))
+    print(DATA["king_matrix"])
+    print("test")
     # PL: 169 * 169 PlanetLa data set
 # Toread: 355 * 355 PlanetLab data set (collected in Mar.-Apr. 2010, 
 #   used in our ACM ReArch'10 paper 'Taming the Triangle Inequality Violations with Network Coordinate System on Real Internet',
@@ -49,7 +52,7 @@ def NCSim_main(*args,**kwargs):
 #   used in many Network Coordinate papers
     
     # DATA = PL; # PlanetLab data set (small)
-    DATA=copy(Toread)
+    #DATA=copy(Toread)
 # NCSim_main.m:45
     
     # DATA = king_matrix; # King data set
@@ -269,3 +272,4 @@ def NCSim_main(*args,**kwargs):
         fprintf('\n50th Percentile RE: %.3f %.3f %.3f %.3f\n',vivaldi_fpre,ides_fpre,dmf_fpre,phoenix_fpre)
         fprintf('90th Percentile RE: %.3f %.3f %.3f %.3f\n',vivaldi_npre,ides_npre,dmf_npre,phoenix_npre)
     
+NCSim_main()

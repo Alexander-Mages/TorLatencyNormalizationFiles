@@ -360,3 +360,4 @@ def phoenix(D=None,dim=None,N=None,K=None,C=None,converge_on=None,new_hosts=None
 # fprintf('Lambda = #.3f, Relative Error: #.3f\n', lambda, NPRE(rerr));
     fpre_flashcrowd=[]
 # NCS_phoenix.m:365
+phoenix()
