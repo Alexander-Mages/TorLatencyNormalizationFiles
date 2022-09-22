@@ -92,16 +92,19 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
         dest = key.split(",")[1]
 
         #check dest country
-        destCountry = geolite2.lookup(dest).country
-        sourceCountry = geolite2.lookup(source).country
-        if (destCountry != 'US'):
-            if destCountry is None:
-                UNKNOWNIPADDRESSCOUNTRY += 1
-            continue
-        if (sourceCountry != 'US'):
-            if sourceCountry is None:
-                UNKNOWNIPADDRESSCOUNTRY += 1
-            continue
+        destCountry = geolite2.lookup(dest)
+        sourceCountry = geolite2.lookup(source)
+        if destCountry is None:
+            UNKNOWNIPADDRESSCOUNTRY += 1
+        else:
+            if (destCountry.country != 'US'):
+                continue
+
+        if sourceCountry is None:
+            UNKNOWNIPADDRESSCOUNTRY += 1
+        else:
+            if (sourceCountry.country != 'US'):
+                continue
 
         filePath = os.path.join(outputDirectory, source + ".txt")
         #if not os.path.exists(filePath):
@@ -123,7 +126,7 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
 
 #noTheoreticDict.close() #I don't think this is needed when using "with"
 
-with open(os.path.join(outputDirectory, "numOfUnknownIPAddresses.txt")) as z:
+with open(os.path.join(outputDirectory, "numOfUnknownIPAddresses.txt"), "x") as z:
     z.write(str(UNKNOWNIPADDRESSCOUNTRY))
     z.close
 
