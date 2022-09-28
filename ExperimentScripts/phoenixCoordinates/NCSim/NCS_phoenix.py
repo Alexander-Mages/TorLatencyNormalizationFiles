@@ -5,7 +5,7 @@ from smop.libsmop import *
     # a simplified Phoenix NC system without considering node churn, distance variation, etc
     
 @function
-def phoenix(D=None,dim=None,N=None,K=None,C=None,converge_on=None,new_hosts=None,*args,**kwargs):
+def phoenix(D,dim,N,K,C,converge_on,new_hosts,*args,**kwargs):
     varargin = phoenix.varargin
     nargin = phoenix.nargin
 
@@ -360,4 +360,3 @@ def phoenix(D=None,dim=None,N=None,K=None,C=None,converge_on=None,new_hosts=None
 # fprintf('Lambda = #.3f, Relative Error: #.3f\n', lambda, NPRE(rerr));
     fpre_flashcrowd=[]
 # NCS_phoenix.m:365
-phoenix()

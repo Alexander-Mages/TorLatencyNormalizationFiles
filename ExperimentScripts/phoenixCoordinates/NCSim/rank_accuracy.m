@@ -29,7 +29,7 @@ function [final_rank_accuracy_result] = rank_accuracy(estimate, real)
     [m n] = size(estimate);
     for i=1:m
         for j=1:n
-            if (real(i, j) <=0 | i == j)
+            if (real(i, j) <=0 || i == j)
                 continue;
             end
             tmp = ceil(real(i, j));

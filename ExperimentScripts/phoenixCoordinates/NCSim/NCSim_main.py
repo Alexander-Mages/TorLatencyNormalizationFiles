@@ -1,10 +1,14 @@
 # Generated with SMOP  0.41-beta
 from smop.libsmop import *
 # NCSim_main.m
+from NCS_phoenix import phoenix as NCS_phoenix
+from relative_error import relative_error
+import time
 
-    
+
 @function
 def NCSim_main(*args,**kwargs):
+    time.sleep(10)
     varargin = NCSim_main.varargin
     nargin = NCSim_main.nargin
 
@@ -108,13 +112,18 @@ def NCSim_main(*args,**kwargs):
 # NCSim_main.m:80
         for round in arange(1,max_round).reshape(-1):
             # NC: Phoenix
-            out_all,in_all,fpre_newhost,fpre_flashcrowd=NCS_phoenix(DATA,default_dimension,length(DATA),32,5,0,[],nargout=4)
+            out_all,in_all,fpre_newhost,fpre_flashcrowd = NCS_phoenix(DATA,default_dimension,length(DATA),32,5,0,[],nargout=4)
 # NCSim_main.m:84
             predicted_matrix=dot(out_all,in_all)
 # NCSim_main.m:85
             real_matrix=copy(DATA)
 # NCSim_main.m:85
-            rerr=relative_error(predicted_matrix,DATA)
+
+
+
+            #DEBUG CHANGE
+            #changing DATA to DATA[king_matrix]. Assuming that real_matrix is the king_matrix
+            rerr=relative_error(predicted_matrix,DATA['king_matrix'])
 # NCSim_main.m:85
             output_re=store_re(rerr.T,1,1000)
 # NCSim_main.m:86
