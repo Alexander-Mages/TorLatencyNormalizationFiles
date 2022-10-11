@@ -2,4 +2,5 @@
 %given that data_matrix.mat is @ TorLatencyNormalizationFiles/ExperimentScripts/phoenixCoordinates/NCSim/data_matrix.mat
 load('NCSim/data_matrix.mat');
 DATA = Toread;
-csvwrite('data_matrix.csv', Toread);
+disp(DATA);
+%csvwrite('data_matrix.csv', Toread);
