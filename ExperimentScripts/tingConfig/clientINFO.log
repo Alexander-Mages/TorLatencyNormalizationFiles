@@ -1,0 +1,360 @@
+Oct 11 16:24:41.000 [notice] Tor 0.2.3.25 (git-17c24b3118224d65) opening new log file.
+Oct 11 16:24:41.000 [info] tor_lockfile_lock(): Locking "/users/magesap/tingAttempt2/tor/data/client//lock"
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 1/2 path bias for node deltersvrAnonServ01
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 2/2 path bias for node Joker
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 1/1 path bias for node bauruine
+Oct 11 16:24:41.000 [info] or_state_load(): Loaded state from "/users/magesap/tingAttempt2/tor/data/client//state"
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 1/2 path bias for node deltersvrAnonServ01
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 2/2 path bias for node Joker
+Oct 11 16:24:41.000 [info] entry_guards_parse_state(): Read 1/1 path bias for node bauruine
+Oct 11 16:24:41.000 [info] read_file_to_str(): Could not open "/users/magesap/tingAttempt2/tor/data/client//router-stability": No such file or directory
+Oct 11 16:24:41.000 [info] cell_ewma_set_scale_factor(): Disabled cell_ewma algorithm because of value in Default value
+Oct 11 16:24:41.000 [info] geoip_load_file(): Failed to open GEOIP file /usr/local/share/tor/geoip.  
+Oct 11 16:24:41.000 [info] crypto_global_init(): NOT using OpenSSL engine support.
+Oct 11 16:24:41.000 [notice] This version of OpenSSL has a known-good EVP counter-mode implementation. Using it.
+Oct 11 16:24:41.000 [info] crypto_seed_rng(): Seeding RNG from "/dev/urandom"
+Oct 11 16:24:42.000 [notice] OpenSSL OpenSSL 1.0.2g  1 Mar 2016 looks like version 0.9.8m or later; I will try SSL_OP to enable renegotiation
+Oct 11 16:24:42.000 [info] Bootstrapped 0%: Starting.
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key B0794B84C7868261D06C3A9FE683D3C9FE804065
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 0B5340CE4134B252118CFBECC491F98F107798C4
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 6C29F33BA94B5F9D8EC0EE9EB7144BDFF876AA52
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 02958C9BE542EEA43130E54FE6634B6E874B196D
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 4A69B937C66923151A7B98F091135E5E7529F375
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 6BBBFADD5D17017136EEA85AE030E4B2730E6FA7
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key DB47FB5A2A042523A663A9FD328AF67EA955F2EB
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 8762993F29E1DF05ABCE3AB0CC15D3ABAE6448BE
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 21FB228258F9A729F88E86D83AB77F88C272C75D
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key FB278C1EA2D7B055A82DB62346D29F26EDCFE682
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 8EF5B21B3F94DA1E6F2EB09A7ED05AA68ACC0E19
+Oct 11 16:24:42.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for unrecognized directory authority with signing key 62EA5595951196DACDCE605C53DF6FE025641864
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'dannenberg' at dannenberg.torauth.de:80 (contact Andreas Lehner; identity 0232AF901C31A04EE9848595AF9BB7620D4C5B2E)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'tor26' at 86.59.21.38:80 (contact Peter Palfrader; identity 14C131DFC5C6F93646BE72FA1401C02A8DF2E8B4)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'longclaw' at 199.58.81.140:80 (contact Riseup Networks <collective at riseup dot net> - 1nNzekuHGGzBYRzyjfjFEfeisNvxkn4RT; identity 23D15D965BC35114467363C165C4F724B64B4F66)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'bastet' at 204.13.164.118:80 (contact stefani <nocat at readthefinemanual dot net> 4096/F4B863AD6642E7EE; identity 27102BC123E7AF1D4741AE047E160C91ADC76B21)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'maatuska' at 171.25.193.9:443 (contact 4096R/1E8BF34923291265 Linus Nordberg <linus@nordberg.se>; identity 49015F787433103580E3B66A1707A00E60F2D15B)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'moria1' at 128.31.0.34:9131 (contact 1024D/EB5A896A28988BF5 arma mit edu; identity D586D18309DED4CD6D57C18FDB97EFA96D330566)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'dizum' at 45.66.33.45:80 (contact FD790065EBBD5E7AE6D039620D7F81CD19147711 Alex de Joode <usura@sabotage.org>; identity E8A9C45EDE6D711294FADF8E7951F4DE6CA56B58)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'gabelmoo' at 131.188.40.189:80 (contact 4096R/261C5FBE77285F88FB0C343266C8C2D7C5AA446D Sebastian Hahn <tor@sebastianhahn.net> - 12NbRAjAG5U3LLWETSF7fSTcdaz32Mu5CN; identity ED03BB616EB2F60BEC80151114BB25CEF515B226)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'Faravahar' at 154.35.175.225:80 (contact 0x0B47D56D Sina Rabbani (inf0) <sina redteam net>; identity EFCBE720AB3A82B99F9E953CD5BF50F7EEFC7B97)
+Oct 11 16:24:42.000 [warn] A consensus needs 1 good signatures from recognized authorities for us to accept it. This one has 0 (). It has 9 signatures from authorities we don't recognize.
+Oct 11 16:24:42.000 [info] update_consensus_networkstatus_fetch_time_impl(): Live ns consensus was the most recent until 2022-10-11 16:00:00 and will expire at 2022-10-11 18:00:00; fetching the next one at 2022-10-11 16:46:50.
+Oct 11 16:24:42.000 [info] update_consensus_networkstatus_fetch_time_impl(): No live microdesc consensus; we should fetch one immediately.
+Oct 11 16:24:42.000 [info] cell_ewma_set_scale_factor(): Enabled cell_ewma algorithm because of value in CircuitPriorityHalflifeMsec in consensus; scale factor is 0.793701 per 10 seconds
+Oct 11 16:24:42.000 [info] read_file_to_str(): Could not open "/users/magesap/tingAttempt2/tor/data/client//unverified-consensus": No such file or directory
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'dannenberg' at dannenberg.torauth.de:80 (contact Andreas Lehner; identity 0232AF901C31A04EE9848595AF9BB7620D4C5B2E)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'tor26' at 86.59.21.38:80 (contact Peter Palfrader; identity 14C131DFC5C6F93646BE72FA1401C02A8DF2E8B4)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'longclaw' at 199.58.81.140:80 (contact Riseup Networks <collective at riseup dot net> - 1nNzekuHGGzBYRzyjfjFEfeisNvxkn4RT; identity 23D15D965BC35114467363C165C4F724B64B4F66)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'bastet' at 204.13.164.118:80 (contact stefani <nocat at readthefinemanual dot net> 4096/F4B863AD6642E7EE; identity 27102BC123E7AF1D4741AE047E160C91ADC76B21)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'maatuska' at 171.25.193.9:443 (contact 4096R/1E8BF34923291265 Linus Nordberg <linus@nordberg.se>; identity 49015F787433103580E3B66A1707A00E60F2D15B)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'moria1' at 128.31.0.34:9131 (contact 1024D/EB5A896A28988BF5 arma mit edu; identity D586D18309DED4CD6D57C18FDB97EFA96D330566)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'dizum' at 45.66.33.45:80 (contact FD790065EBBD5E7AE6D039620D7F81CD19147711 Alex de Joode <usura@sabotage.org>; identity E8A9C45EDE6D711294FADF8E7951F4DE6CA56B58)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'gabelmoo' at 131.188.40.189:80 (contact 4096R/261C5FBE77285F88FB0C343266C8C2D7C5AA446D Sebastian Hahn <tor@sebastianhahn.net> - 12NbRAjAG5U3LLWETSF7fSTcdaz32Mu5CN; identity ED03BB616EB2F60BEC80151114BB25CEF515B226)
+Oct 11 16:24:42.000 [warn] Consensus includes unrecognized authority 'Faravahar' at 154.35.175.225:80 (contact 0x0B47D56D Sina Rabbani (inf0) <sina redteam net>; identity EFCBE720AB3A82B99F9E953CD5BF50F7EEFC7B97)
+Oct 11 16:24:42.000 [warn] A consensus needs 1 good signatures from recognized authorities for us to accept it. This one has 0 (). It has 9 signatures from authorities we don't recognize.
+Oct 11 16:24:42.000 [info] read_file_to_str(): Could not open "/users/magesap/tingAttempt2/tor/data/client//unverified-microdesc-consensus": No such file or directory
+Oct 11 16:24:42.000 [warn] Please upgrade! This version of Tor (0.2.3.25) is obsolete, according to the directory authorities. Recommended versions are: 0.4.5.1-alpha,0.4.5.2-alpha,0.4.5.3-rc,0.4.5.4-rc,0.4.5.5-rc,0.4.5.6,0.4.5.7,0.4.5.8,0.4.5.9,0.4.5.10,0.4.5.11,0.4.5.12,0.4.5.14,0.4.7.1-alpha,0.4.7.2-alpha,0.4.7.3-alpha,0.4.7.4-alpha,0.4.7.5-alpha,0.4.7.6-rc,0.4.7.7,0.4.7.8,0.4.7.10
+Oct 11 16:24:42.000 [notice] Reloaded microdescriptor cache.  Found 6044 descriptors.
+Oct 11 16:24:44.000 [info] router_load_routers_from_string(): 6093 elements to add
+Oct 11 16:24:44.000 [info] router_load_routers_from_string(): 0 elements to add
+Oct 11 16:24:44.000 [info] routerlist_remove_old_routers(): We have 6093 live routers and 0 old router descriptors.
+Oct 11 16:24:44.000 [info] tor_mmap_file(): Could not open "/users/magesap/tingAttempt2/tor/data/client//cached-extrainfo" for mmap(): No such file or directory
+Oct 11 16:24:44.000 [notice] We now have enough directory information to build circuits.
+Oct 11 16:24:44.000 [notice] Bootstrapped 80%: Connecting to the Tor network.
+Oct 11 16:24:44.000 [notice] New control connection opened.
+Oct 11 16:24:45.000 [info] handle_control_authenticate(): Authenticated control connection (11)
+Oct 11 16:24:45.000 [notice] Tor 0.2.3.25 (git-17c24b3118224d65) opening log file.
+Oct 11 16:24:45.000 [info] cell_ewma_set_scale_factor(): Enabled cell_ewma algorithm because of value in CircuitPriorityHalflifeMsec in consensus; scale factor is 0.793701 per 10 seconds
+Oct 11 16:24:45.000 [info] geoip_load_file(): Failed to open GEOIP file /usr/local/share/tor/geoip.  
+Oct 11 16:24:45.000 [notice] Tor 0.2.3.25 (git-17c24b3118224d65) opening log file.
+Oct 11 16:24:45.000 [info] cell_ewma_set_scale_factor(): Enabled cell_ewma algorithm because of value in CircuitPriorityHalflifeMsec in consensus; scale factor is 0.793701 per 10 seconds
+Oct 11 16:24:45.000 [info] geoip_load_file(): Failed to open GEOIP file /usr/local/share/tor/geoip.  
+Oct 11 16:24:45.000 [info] update_consensus_router_descriptor_downloads(): 61 router descriptors downloadable. 0 delayed; 6093 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Oct 11 16:24:45.000 [info] launch_descriptor_downloads(): Launching 3 requests for 61 routers, 21 at a time
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$FD798C5483C3ED83FCA39050C569FFE9B7A64980~drymm at 84.150.225.12'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Router not connected (nothing is).  Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$7B86CA7E0ACB013A63FBD5A04CF7AF9F8C73AA8B~GrmmlTemp at 45.62.229.86'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$CEAED69B37F0751CE521BD8CCE9478C42A089764~simonjester at 212.83.167.220'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] launch_descriptor_downloads(): Launching 3 requests for 110 routers, 37 at a time
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$A13281DBD8F8E484E95DD273B3EE7FC14C1B0A7A~Desperado at 78.47.134.196'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$C9278B602025FAE439BB554BC4E1184CFF1A2ABF~BantuRelay at 54.251.87.143'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:32145 ...
+Oct 11 16:24:45.000 [info] onion_pick_cpath_exit(): Using requested exit node '$0F2D7468A8404E5CB194D003F38EF2CD38930499~Anaconda1 at 185.189.125.22'
+Oct 11 16:24:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:24:45.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:24:45.000 [info] routerlist_remove_old_routers(): We have 6093 live routers and 0 old router descriptors.
+Oct 11 16:24:45.000 [info] or_state_save(): Saved state to "/users/magesap/tingAttempt2/tor/data/client//state"
+Oct 11 16:24:45.000 [notice] Heartbeat: Tor's uptime is 0:00 hours, with 6 circuits open. I've sent 0 kB and received 0 kB.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:45.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop Anaconda1): $0F2D7468A8404E5CB194D003F38EF2CD38930499(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$0F2D7468A8404E5CB194D003F38EF2CD38930499/185.189.125.22' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop BantuRelay): $C9278B602025FAE439BB554BC4E1184CFF1A2ABF(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$C9278B602025FAE439BB554BC4E1184CFF1A2ABF/54.251.87.143' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop Desperado): $A13281DBD8F8E484E95DD273B3EE7FC14C1B0A7A(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$A13281DBD8F8E484E95DD273B3EE7FC14C1B0A7A/78.47.134.196' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop simonjester): $CEAED69B37F0751CE521BD8CCE9478C42A089764(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$CEAED69B37F0751CE521BD8CCE9478C42A089764/212.83.167.220' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop GrmmlTemp): $7B86CA7E0ACB013A63FBD5A04CF7AF9F8C73AA8B(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$7B86CA7E0ACB013A63FBD5A04CF7AF9F8C73AA8B/45.62.229.86' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:24:56.000 [info] internal circ (length 1, last hop drymm): $FD798C5483C3ED83FCA39050C569FFE9B7A64980(closed)
+Oct 11 16:24:56.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:24:56.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$FD798C5483C3ED83FCA39050C569FFE9B7A64980/84.150.225.12' because the OR conn just failed.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1643 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 919 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 918 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 837 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1685 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1685 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '185.189.125.22'; will retry
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '84.150.225.12'; retrying
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '45.62.229.86'; retrying
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '212.83.167.220'; retrying
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '78.47.134.196'; will retry
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:24:56.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:24:56.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '54.251.87.143'; will retry
+Oct 11 16:24:56.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:46.000 [info] update_consensus_router_descriptor_downloads(): 61 router descriptors downloadable. 0 delayed; 6093 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Oct 11 16:25:46.000 [info] launch_descriptor_downloads(): Launching 3 requests for 61 routers, 21 at a time
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9101 ...
+Oct 11 16:25:46.000 [info] onion_pick_cpath_exit(): Using requested exit node '$5AC61DC0B51C83AC2E655E06B7396ECD7D34DC47~toritoinfinito2 at 187.207.131.33'
+Oct 11 16:25:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Oct 11 16:25:46.000 [info] onion_pick_cpath_exit(): Using requested exit node '$E23BE2F391C51BB143CC2C0251BDBE2DE908B843~FreeAssange2021 at 142.132.186.85'
+Oct 11 16:25:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:25:46.000 [info] onion_pick_cpath_exit(): Using requested exit node '$8358BDDA9C9A680B4E3A2809E5C24F5B3624D5C2~Unnamed at 51.91.73.194'
+Oct 11 16:25:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] launch_descriptor_downloads(): Launching 3 requests for 110 routers, 37 at a time
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Oct 11 16:25:46.000 [info] onion_pick_cpath_exit(): Using requested exit node '$7EA6EAD6FD83083C538F44038BBFA077587DD755~dizum at 45.66.33.45'
+Oct 11 16:25:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:25:46.000 [info] onion_pick_cpath_exit(): Using requested exit node '$62B4EF4F81E2DF1F018D0FB1758E5496D533657B~mylocXdus01 at 146.0.40.193'
+Oct 11 16:25:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:25:46.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:25:46.000 [info] routerlist_remove_old_routers(): We have 6093 live routers and 0 old router descriptors.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:46.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:25:57.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:25:57.000 [info] internal circ (length 1, last hop mylocXdus01): $62B4EF4F81E2DF1F018D0FB1758E5496D533657B(closed)
+Oct 11 16:25:57.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$62B4EF4F81E2DF1F018D0FB1758E5496D533657B/146.0.40.193' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:25:57.000 [info] internal circ (length 1, last hop dizum): $7EA6EAD6FD83083C538F44038BBFA077587DD755(closed)
+Oct 11 16:25:57.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$7EA6EAD6FD83083C538F44038BBFA077587DD755/45.66.33.45' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:25:57.000 [info] internal circ (length 1, last hop Unnamed): $8358BDDA9C9A680B4E3A2809E5C24F5B3624D5C2(closed)
+Oct 11 16:25:57.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$8358BDDA9C9A680B4E3A2809E5C24F5B3624D5C2/51.91.73.194' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$8358BDDA9C9A680B4E3A2809E5C24F5B3624D5C2/51.91.73.194' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:25:57.000 [info] internal circ (length 1, last hop FreeAssange2021): $E23BE2F391C51BB143CC2C0251BDBE2DE908B843(closed)
+Oct 11 16:25:57.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$E23BE2F391C51BB143CC2C0251BDBE2DE908B843/142.132.186.85' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:25:57.000 [info] internal circ (length 1, last hop toritoinfinito2): $5AC61DC0B51C83AC2E655E06B7396ECD7D34DC47(closed)
+Oct 11 16:25:57.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:25:57.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$5AC61DC0B51C83AC2E655E06B7396ECD7D34DC47/187.207.131.33' because the OR conn just failed.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1640 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 920 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 919 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1684 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 836 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1682 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '146.0.40.193'; will retry
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '187.207.131.33'; retrying
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '142.132.186.85'; retrying
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '51.91.73.194'; will retry
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '51.91.73.194'; retrying
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:25:57.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:25:57.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '45.66.33.45'; will retry
+Oct 11 16:25:57.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:47.000 [info] update_consensus_router_descriptor_downloads(): 61 router descriptors downloadable. 0 delayed; 6093 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Oct 11 16:26:47.000 [info] launch_descriptor_downloads(): Launching 3 requests for 61 routers, 21 at a time
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$B0B5DF324016DCDDE220A01FA309545CA6164D7A~tor70IPConnectinfo at 194.5.96.70'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$F836446663F1EB816F13708955F105D0B2F5C8E0~cyberbits at 212.129.32.142'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:80 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$9554FC0CF9A5200542E3375C8AE4E939C4594228~FiveBoxingWizards at 83.44.171.172'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] launch_descriptor_downloads(): Launching 3 requests for 110 routers, 37 at a time
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$9C900A7F6F5DD034CFFD192DAEC9CCAA813DB022~firstor2 at 86.105.212.130'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$5F6C39A94F5537B9195ADD1BDE45D18FD4C7F23C~Poseidon at 100.34.142.61'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Oct 11 16:26:47.000 [info] onion_pick_cpath_exit(): Using requested exit node '$6BFAE622B55C83BD36802D18CC4EF1E61E813430~FreeProgramThink at 209.141.61.36'
+Oct 11 16:26:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Oct 11 16:26:47.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Oct 11 16:26:47.000 [info] routerlist_remove_old_routers(): We have 6093 live routers and 0 old router descriptors.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:47.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 1; recommendation ignore)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 2; recommendation ignore)
+Oct 11 16:26:55.000 [info] 1 connections have failed:
+Oct 11 16:26:55.000 [info]  1 connections died in state connect()ing with SSL state (No SSL object)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 3; recommendation ignore)
+Oct 11 16:26:55.000 [info] 2 connections have failed:
+Oct 11 16:26:55.000 [info]  2 connections died in state connect()ing with SSL state (No SSL object)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 4; recommendation ignore)
+Oct 11 16:26:55.000 [info] 3 connections have failed:
+Oct 11 16:26:55.000 [info]  3 connections died in state connect()ing with SSL state (No SSL object)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 5; recommendation ignore)
+Oct 11 16:26:55.000 [info] 4 connections have failed:
+Oct 11 16:26:55.000 [info]  4 connections died in state connect()ing with SSL state (No SSL object)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:55.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 80%: Connecting to the Tor network. (Connection timed out; TIMEOUT; count 6; recommendation ignore)
+Oct 11 16:26:55.000 [info] 5 connections have failed:
+Oct 11 16:26:55.000 [info]  5 connections died in state connect()ing with SSL state (No SSL object)
+Oct 11 16:26:55.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop FreeProgramThink): $6BFAE622B55C83BD36802D18CC4EF1E61E813430(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$6BFAE622B55C83BD36802D18CC4EF1E61E813430/209.141.61.36' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop Poseidon): $5F6C39A94F5537B9195ADD1BDE45D18FD4C7F23C(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$5F6C39A94F5537B9195ADD1BDE45D18FD4C7F23C/100.34.142.61' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop firstor2): $9C900A7F6F5DD034CFFD192DAEC9CCAA813DB022(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$9C900A7F6F5DD034CFFD192DAEC9CCAA813DB022/86.105.212.130' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop FiveBoxingWizards): $9554FC0CF9A5200542E3375C8AE4E939C4594228(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$9554FC0CF9A5200542E3375C8AE4E939C4594228/83.44.171.172' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop cyberbits): $F836446663F1EB816F13708955F105D0B2F5C8E0(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$F836446663F1EB816F13708955F105D0B2F5C8E0/212.129.32.142' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] circuit_expire_building(): Abandoning circ 0 (state 2:connecting to server, purpose 5)
+Oct 11 16:26:58.000 [info] internal circ (length 1, last hop tor70IPConnectinfo): $B0B5DF324016DCDDE220A01FA309545CA6164D7A(closed)
+Oct 11 16:26:58.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Oct 11 16:26:58.000 [info] connection_ap_fail_onehop(): Closing one-hop stream to '$B0B5DF324016DCDDE220A01FA309545CA6164D7A/194.5.96.70' because the OR conn just failed.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1641 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 916 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 920 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 832 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1685 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Socks connection [waiting for circuit] with 1685 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '209.141.61.36'; will retry
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '194.5.96.70'; retrying
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '212.129.32.142'; retrying
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '83.44.171.172'; retrying
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '86.105.212.130'; will retry
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:26:58.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Oct 11 16:26:58.000 [info] connection_dir_request_failed(): Giving up on downloading microdescriptors from  directory server at '100.34.142.61'; will retry
+Oct 11 16:26:58.000 [info] _connection_free(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Oct 11 16:27:37.000 [notice] Interrupt: exiting cleanly.
+Oct 11 16:27:37.000 [info] or_state_save(): Saved state to "/users/magesap/tingAttempt2/tor/data/client//state"
+Oct 11 16:27:37.000 [info] buf_shrink_freelists(): Cleaned freelist for 4096-byte chunks: original length 7, kept 0, dropped 7.
+Oct 11 16:27:37.000 [info] buf_shrink_freelists(): Cleaned freelist for 8192-byte chunks: original length 0, kept 0, dropped 0.
+Oct 11 16:27:37.000 [info] buf_shrink_freelists(): Cleaned freelist for 16384-byte chunks: original length 0, kept 0, dropped 0.
+Oct 11 16:27:37.000 [info] buf_shrink_freelists(): Cleaned freelist for 32768-byte chunks: original length 1, kept 0, dropped 1.
+Oct 11 16:27:37.000 [info] tor_lockfile_unlock(): Unlocking "/users/magesap/tingAttempt2/tor/data/client//lock"
