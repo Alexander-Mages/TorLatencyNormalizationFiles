@@ -266,6 +266,12 @@ func calculateLatencyAddition(data []Record, MeasuredLatency int) (latencyAdditi
 }
 
 func main() {
+	file, err := os.OpenFile("PTlog.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+        if err != nil {
+              log.Fatal(err)
+        }
+        log.SetOutput(file)
+
 	var err error
 	//set latency modification to 0 to start
 	LatencyAddition = 0
