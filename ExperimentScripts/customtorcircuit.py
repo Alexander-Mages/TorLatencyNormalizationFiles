@@ -282,8 +282,9 @@ def MeasurementLoop(tbb_dir, SockAddr, pubIP):
             if mode == "mitigate":
                 sendCommandPT(socket, "LATENCY " + str(latency))
 
-            log = "RTT from client " + pubIP + " to exit node within circuit " + selectedPath + " is " + str(latency) + " ms\n"
-            print(log)
+            log = "\nRTT from client " + pubIP + " to exit node within circuit " + selectedPath + " is " + str(latency) + " ms\n"
+	    #print(log)
+            print(colored(log, "green", "on_red"))
             logFile.write(log)
             if latency > 180000:
                 #connection timeout
