@@ -1,11 +1,14 @@
 import os
+import numpy as np
+import re
+import pandas as pd
 
 l = {}
-
-for file in os.listdir("/home/alex/ExperimentData"):
-    with open(file) as f:
+root = "/home/alex/ExperimentData/"
+for files in os.listdir("/home/alex/ExperimentData"):
+    files = os.path.join(root, files)
+    with open(files) as f:
         sourceHost = f.readline().rstrip()
-        h.add(sourceHost)
         for line in f.read().splitlines():
             line = line.rstrip()  # removes \n newline
             rttMatch = re.search(r'time=(\d+.\d+)', line)
@@ -13,7 +16,7 @@ for file in os.listdir("/home/alex/ExperimentData"):
             # extracts the "group" from the match object stored in rttMatch and destHostMatch
             try:
                 rtt = rttMatch.group(1)
-                except AttributeError:
+            except AttributeError:
                 print("RTT PARSING FAILED, CONTINUING ANYWAY")
                 pass
             try:
@@ -30,3 +33,14 @@ for file in os.listdir("/home/alex/ExperimentData"):
                 # if no values have been inserted yet, the item is made into a list, with an item appended to it
                 l[(sourceHost, destHost)] = [float(rtt)]
                 # l[(sourceHost, destHost)] = [pcgRandVec()]
+
+
+i,j = zip(*l.keys())
+a = np.zeros((len(i)+1,len(j)+1), dtype=np.double)
+np.add.at(a, tuple((i,j)), tuple(l.values()))
+
+print(a)
+
+DF = pd.DataFrame(a)
+DF.to_csv("output.csv")
+
