@@ -44,10 +44,9 @@ a = np.memmap('/mnt/memmap/memmapedArray.dat', dtype=np.float64, mode='w+', shap
 #mode w+ acts as np.zeros. here's a comment from numpy's memmap.py code:
 #When a memmap causes a file to be created or extended beyond its current size in the filesystem, the contents of the new part are
 #unspecified. On systems with POSIX filesystem semantics, the extended part will be filled with zero bytes.
-x = list(range(len(i)))
-y = list(range(len(j)))
-i = np.arange(0, 111403, 1)
-np.add.at(a, i, tuple(l.values()))
+print(len(j))
+print("the above should be 111403, if so, then it should be used as a variable in the np.arange call.")
+np.add.at(a, np.arange(0, 111403, 1), tuple(l.values()))
 
 with open('output.csv', newline='', dialect='excel') as csvfile:
     w = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
