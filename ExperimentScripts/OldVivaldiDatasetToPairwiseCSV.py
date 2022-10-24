@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import re
+#import zarr
 import pandas as pd
 
 l = {}
@@ -36,11 +37,18 @@ for files in os.listdir("/home/alex/ExperimentData"):
 
 
 i,j = zip(*l.keys())
-a = np.zeros((len(i)+1,len(j)+1), dtype=np.double)
-np.add.at(a, tuple((i,j)), tuple(l.values()))
+assert len(i) == len(j), "asymmetric matrix"
+#a = np.zeros((len(i)+1,len(j)+1), dtype=np.float64)
+#a = zarr.zeros((len(i)+1,len(j)+1), dtype=np.float64) #couldn't figure out how to initialize the matrix w/ zeros in zarr
+a = np.memmap('/mnt/memmap/memmapedArray.dat', dtype=np.float64, mode='w+', shape=(len(i)+1,len(j)+1))
+#mode w+ acts as np.zeros. here's a comment from numpy's memmap.py code:
+#When a memmap causes a file to be created or extended beyond its current size in the filesystem, the contents of the new part are
+#unspecified. On systems with POSIX filesystem semantics, the extended part will be filled with zero bytes.
+x = list(range(len(i)))
+y = list(range(len(j)))
+i = np.arange(0, 111403, 1)
+np.add.at(a, i, tuple(l.values()))
 
-print(a)
-
-DF = pd.DataFrame(a)
-DF.to_csv("output.csv")
-
+with open('output.csv', newline='', dialect='excel') as csvfile:
+    w = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    w.writerows(a)
