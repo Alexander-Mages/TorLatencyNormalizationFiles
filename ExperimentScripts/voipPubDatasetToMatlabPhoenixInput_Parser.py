@@ -85,26 +85,38 @@ with shelve.open((os.path.join(outputDirectory, "../", "noTheoreticDictBackingSt
     #gc.collect()
 
     #outputDirectory
-    for key in noTheoreticDict:
-        source = key.split(",")[0]
-        dest = key.split(",")[1]
+    i, j = zip(*noTheoreticDict.keys())
+    assert len(i) == len(j), "asymmetric matrix"
+    a = np.zeros((len(i)+1,len(j)+1), dtype=np.float64)
+    # a = zarr.zeros((len(i)+1,len(j)+1), dtype=np.float64) #couldn't figure out how to initialize the matrix w/ zeros in zarr
+    a = np.memmap('/mnt/memmap/memmapedArrayVOIP.dat', dtype=np.float64, mode='w+', shape=(len(i) + 1, len(j) + 1))
+    # mode w+ acts as np.zeros. here's a comment from numpy's memmap.py code:
+    # When a memmap causes a file to be created or extended beyond its current size in the filesystem, the contents of the new part are
+    # unspecified. On systems with POSIX filesystem semantics, the extended part will be filled with zero bytes.
+    print(len(j))
+    print("the above should be 111403 (for old vivaldi data), if so, then it should be used as a variable in the np.arange call.")
+    np.add.at(a, np.arange(0, 111403, 1), tuple(l.values()))
 
-        filePath = os.path.join(outputDirectory, source + ".txt")
-        #if not os.path.exists(filePath):
-        try:
-            with open(filePath, "x") as f:
-                #f = open(filePath, "x") #will error if file exists
-                f.write(source + "\n") #writes source IP to top of file
-                for latency in noTheoreticDict[key]:
-                    latencyInMilliseconds = int(latency)/1000
-                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
-        #else:    #append to it
-        except FileExistsError:
-            with open(filePath, "a") as f: #will not error if the file exists, will append
-                #f = open(filePath, "a") #will not error if the file exists, will append
-                for latency in noTheoreticDict[key]:
-                    latencyInMilliseconds = int(latency)/1000
-                    f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
+    #for key in noTheoreticDict:
+        #source = key.split(",")[0]
+        #dest = key.split(",")[1]
+
+        #filePath = os.path.join(outputDirectory, source + ".txt")
+        # #if not os.path.exists(filePath):
+        # try:
+        #     with open(filePath, "x") as f:
+        #         #f = open(filePath, "x") #will error if file exists
+        #         f.write(source + "\n") #writes source IP to top of file
+        #         for latency in noTheoreticDict[key]:
+        #             latencyInMilliseconds = int(latency)/1000
+        #             f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
+        # #else:    #append to it
+        # except FileExistsError:
+        #     with open(filePath, "a") as f: #will not error if the file exists, will append
+        #         #f = open(filePath, "a") #will not error if the file exists, will append
+        #         for latency in noTheoreticDict[key]:
+        #             latencyInMilliseconds = int(latency)/1000
+        #             f.write("64 bytes from " + dest + ": icmp_seq=0 ttl=50 time=" + str(latencyInMilliseconds) +  " ms\n")
         #f.close() #I don't think this is needed when using "with"
 
 #noTheoreticDict.close() #I don't think this is needed when using "with"
