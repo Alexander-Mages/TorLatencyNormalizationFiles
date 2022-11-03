@@ -4,6 +4,7 @@ import re
 #import zarr
 import csv
 import pandas as pd
+import sys
 
 l = {}
 root = "/home/alex/ExperimentData/"
@@ -78,11 +79,17 @@ def readMemmappedArray():
 def main():
     parseData()
     #writeMemmappedArray()
+    filename = "/mnt/memmap/OldVivaldiDataOutput.csv"
+    #filename = sys.argv[1]
 
-    a, j = readMemmappedArray()
-    with open('/mnt/memmap/OldVivaldiDataOutput.csv', newline='', mode='w') as csvfile:
-        w = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        memEfficientToCSV(a, w, len(j)+1)
+    #a, j = readMemmappedArray()
+    writeMemmappedArray()
+    print("writing to csv.. I guess")
+    np.savetxt(filename, a, delimiter=',')
+    #with open('/mnt/memmap/OldVivaldiDataOutput.csv', newline='', mode='w') as csvfile:
+        #w = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        #memEfficientToCSV(a, w, len(j)+1)
 
 
 if __name__ == "__main__":
