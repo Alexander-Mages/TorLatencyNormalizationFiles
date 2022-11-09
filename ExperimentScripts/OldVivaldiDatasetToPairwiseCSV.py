@@ -68,6 +68,7 @@ def writeMemmappedArray():
     print(len(j))
     print("the above should be 111403, if so, then it should be used as a variable in the np.arange call.")
     np.add.at(a, np.arange(0, 111403, 1), tuple(l.values()))
+    return a
 
 def readMemmappedArray():
     i, j = zip(*l.keys())
@@ -83,7 +84,7 @@ def main():
     #filename = sys.argv[1]
 
     #a, j = readMemmappedArray()
-    writeMemmappedArray()
+    a = writeMemmappedArray()
     print("writing to csv.. I guess")
     np.savetxt(filename, a, delimiter=',')
     #with open('/mnt/memmap/OldVivaldiDataOutput.csv', newline='', mode='w') as csvfile:

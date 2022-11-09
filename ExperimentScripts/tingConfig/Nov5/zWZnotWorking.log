@@ -1,0 +1,236 @@
+Nov 05 14:01:29.000 [notice] Tor 0.2.4.22 (git-2ee56e4c2c841a45) opening new log file.
+Nov 05 14:01:29.000 [notice] Your Tor server's identity key fingerprint is 'tingBPz AF56FE113620E480E4BC71F0C459E1D9BC9FB459'
+Nov 05 14:01:30.000 [warn] Please upgrade! This version of Tor (0.2.4.22) is obsolete, according to the directory authorities. Recommended versions are: 0.4.5.5-rc,0.4.5.6,0.4.5.7,0.4.5.8,0.4.5.9,0.4.5.10,0.4.5.11,0.4.5.12,0.4.5.14,0.4.7.1-alpha,0.4.7.2-alpha,0.4.7.3-alpha,0.4.7.4-alpha,0.4.7.5-alpha,0.4.7.6-rc,0.4.7.7,0.4.7.8,0.4.7.10
+Nov 05 14:01:30.000 [notice] Bootstrapped 45%: Asking for relay descriptors.
+Nov 05 14:01:30.000 [notice] Guessed our IP address as 206.117.25.79 (source: 193.23.244.244).
+Nov 05 14:01:31.000 [notice] Bootstrapped 51%: Loading relay descriptors.
+Nov 05 14:01:31.000 [notice] I learned some more directory information, but not enough to build a circuit: We need more descriptors: we have 96/6133, and can only build 0% of likely paths. (We have 1% of guards bw, 1% of midpoint bw, and 1% of exit bw.)
+Nov 05 14:01:31.000 [notice] We'd like to launch a circuit to handle a connection, but we already have 32 general-purpose client circuits pending. Waiting until some finish.
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 10; recommendation warn)
+Nov 05 14:03:41.000 [warn] 9 connections have failed:
+Nov 05 14:03:41.000 [warn]  9 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 11; recommendation warn)
+Nov 05 14:03:41.000 [warn] 10 connections have failed:
+Nov 05 14:03:41.000 [warn]  10 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 12; recommendation warn)
+Nov 05 14:03:41.000 [warn] 11 connections have failed:
+Nov 05 14:03:41.000 [warn]  11 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 13; recommendation warn)
+Nov 05 14:03:41.000 [warn] 12 connections have failed:
+Nov 05 14:03:41.000 [warn]  12 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 14; recommendation warn)
+Nov 05 14:03:41.000 [warn] 13 connections have failed:
+Nov 05 14:03:41.000 [warn]  13 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 15; recommendation warn)
+Nov 05 14:03:41.000 [warn] 14 connections have failed:
+Nov 05 14:03:41.000 [warn]  14 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 16; recommendation warn)
+Nov 05 14:03:41.000 [warn] 15 connections have failed:
+Nov 05 14:03:41.000 [warn]  15 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 17; recommendation warn)
+Nov 05 14:03:41.000 [warn] 16 connections have failed:
+Nov 05 14:03:41.000 [warn]  16 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 18; recommendation warn)
+Nov 05 14:03:41.000 [warn] 17 connections have failed:
+Nov 05 14:03:41.000 [warn]  17 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 19; recommendation warn)
+Nov 05 14:03:41.000 [warn] 18 connections have failed:
+Nov 05 14:03:41.000 [warn]  18 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 20; recommendation warn)
+Nov 05 14:03:41.000 [warn] 19 connections have failed:
+Nov 05 14:03:41.000 [warn]  19 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 21; recommendation warn)
+Nov 05 14:03:41.000 [warn] 20 connections have failed:
+Nov 05 14:03:41.000 [warn]  20 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 22; recommendation warn)
+Nov 05 14:03:41.000 [warn] 21 connections have failed:
+Nov 05 14:03:41.000 [warn]  21 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 23; recommendation warn)
+Nov 05 14:03:41.000 [warn] 22 connections have failed:
+Nov 05 14:03:41.000 [warn]  22 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 24; recommendation warn)
+Nov 05 14:03:41.000 [warn] 23 connections have failed:
+Nov 05 14:03:41.000 [warn]  23 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 25; recommendation warn)
+Nov 05 14:03:41.000 [warn] 24 connections have failed:
+Nov 05 14:03:41.000 [warn]  24 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 26; recommendation warn)
+Nov 05 14:03:41.000 [warn] 25 connections have failed:
+Nov 05 14:03:41.000 [warn]  25 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 27; recommendation warn)
+Nov 05 14:03:41.000 [warn] 26 connections have failed:
+Nov 05 14:03:41.000 [warn]  26 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 28; recommendation warn)
+Nov 05 14:03:41.000 [warn] 27 connections have failed:
+Nov 05 14:03:41.000 [warn]  27 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 29; recommendation warn)
+Nov 05 14:03:41.000 [warn] 28 connections have failed:
+Nov 05 14:03:41.000 [warn]  28 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 30; recommendation warn)
+Nov 05 14:03:41.000 [warn] 29 connections have failed:
+Nov 05 14:03:41.000 [warn]  29 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 31; recommendation warn)
+Nov 05 14:03:41.000 [warn] 30 connections have failed:
+Nov 05 14:03:41.000 [warn]  30 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:03:41.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 32; recommendation warn)
+Nov 05 14:03:41.000 [warn] 31 connections have failed:
+Nov 05 14:03:41.000 [warn]  31 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 33; recommendation warn)
+Nov 05 14:05:52.000 [warn] 32 connections have failed:
+Nov 05 14:05:52.000 [warn]  32 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 34; recommendation warn)
+Nov 05 14:05:52.000 [warn] 33 connections have failed:
+Nov 05 14:05:52.000 [warn]  33 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 35; recommendation warn)
+Nov 05 14:05:52.000 [warn] 34 connections have failed:
+Nov 05 14:05:52.000 [warn]  34 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 36; recommendation warn)
+Nov 05 14:05:52.000 [warn] 35 connections have failed:
+Nov 05 14:05:52.000 [warn]  35 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 37; recommendation warn)
+Nov 05 14:05:52.000 [warn] 36 connections have failed:
+Nov 05 14:05:52.000 [warn]  36 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 38; recommendation warn)
+Nov 05 14:05:52.000 [warn] 37 connections have failed:
+Nov 05 14:05:52.000 [warn]  37 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 39; recommendation warn)
+Nov 05 14:05:52.000 [warn] 38 connections have failed:
+Nov 05 14:05:52.000 [warn]  38 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:05:52.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 40; recommendation warn)
+Nov 05 14:05:52.000 [warn] 39 connections have failed:
+Nov 05 14:05:52.000 [warn]  39 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 41; recommendation warn)
+Nov 05 14:07:43.000 [warn] 40 connections have failed:
+Nov 05 14:07:43.000 [warn]  40 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 42; recommendation warn)
+Nov 05 14:07:43.000 [warn] 41 connections have failed:
+Nov 05 14:07:43.000 [warn]  41 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 43; recommendation warn)
+Nov 05 14:07:43.000 [warn] 42 connections have failed:
+Nov 05 14:07:43.000 [warn]  42 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 44; recommendation warn)
+Nov 05 14:07:43.000 [warn] 43 connections have failed:
+Nov 05 14:07:43.000 [warn]  43 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 45; recommendation warn)
+Nov 05 14:07:43.000 [warn] 44 connections have failed:
+Nov 05 14:07:43.000 [warn]  44 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 46; recommendation warn)
+Nov 05 14:07:43.000 [warn] 45 connections have failed:
+Nov 05 14:07:43.000 [warn]  45 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 47; recommendation warn)
+Nov 05 14:07:43.000 [warn] 46 connections have failed:
+Nov 05 14:07:43.000 [warn]  46 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 48; recommendation warn)
+Nov 05 14:07:43.000 [warn] 47 connections have failed:
+Nov 05 14:07:43.000 [warn]  47 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 49; recommendation warn)
+Nov 05 14:07:43.000 [warn] 48 connections have failed:
+Nov 05 14:07:43.000 [warn]  48 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 50; recommendation warn)
+Nov 05 14:07:43.000 [warn] 49 connections have failed:
+Nov 05 14:07:43.000 [warn]  49 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 51; recommendation warn)
+Nov 05 14:07:43.000 [warn] 50 connections have failed:
+Nov 05 14:07:43.000 [warn]  50 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 52; recommendation warn)
+Nov 05 14:07:43.000 [warn] 51 connections have failed:
+Nov 05 14:07:43.000 [warn]  51 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 53; recommendation warn)
+Nov 05 14:07:43.000 [warn] 52 connections have failed:
+Nov 05 14:07:43.000 [warn]  52 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 54; recommendation warn)
+Nov 05 14:07:43.000 [warn] 53 connections have failed:
+Nov 05 14:07:43.000 [warn]  53 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 55; recommendation warn)
+Nov 05 14:07:43.000 [warn] 54 connections have failed:
+Nov 05 14:07:43.000 [warn]  54 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 56; recommendation warn)
+Nov 05 14:07:43.000 [warn] 55 connections have failed:
+Nov 05 14:07:43.000 [warn]  55 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 57; recommendation warn)
+Nov 05 14:07:43.000 [warn] 56 connections have failed:
+Nov 05 14:07:43.000 [warn]  56 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 58; recommendation warn)
+Nov 05 14:07:43.000 [warn] 57 connections have failed:
+Nov 05 14:07:43.000 [warn]  57 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 59; recommendation warn)
+Nov 05 14:07:43.000 [warn] 58 connections have failed:
+Nov 05 14:07:43.000 [warn]  58 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 60; recommendation warn)
+Nov 05 14:07:43.000 [warn] 59 connections have failed:
+Nov 05 14:07:43.000 [warn]  59 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 61; recommendation warn)
+Nov 05 14:07:43.000 [warn] 60 connections have failed:
+Nov 05 14:07:43.000 [warn]  60 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 62; recommendation warn)
+Nov 05 14:07:43.000 [warn] 61 connections have failed:
+Nov 05 14:07:43.000 [warn]  61 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 63; recommendation warn)
+Nov 05 14:07:43.000 [warn] 62 connections have failed:
+Nov 05 14:07:43.000 [warn]  62 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:07:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 64; recommendation warn)
+Nov 05 14:07:43.000 [warn] 63 connections have failed:
+Nov 05 14:07:43.000 [warn]  63 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:08:05.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 65; recommendation warn)
+Nov 05 14:08:05.000 [warn] 64 connections have failed:
+Nov 05 14:08:05.000 [warn]  64 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:08:05.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 66; recommendation warn)
+Nov 05 14:08:05.000 [warn] 65 connections have failed:
+Nov 05 14:08:05.000 [warn]  65 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:08:05.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 67; recommendation warn)
+Nov 05 14:08:05.000 [warn] 66 connections have failed:
+Nov 05 14:08:05.000 [warn]  66 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 68; recommendation warn)
+Nov 05 14:09:43.000 [warn] 67 connections have failed:
+Nov 05 14:09:43.000 [warn]  67 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 69; recommendation warn)
+Nov 05 14:09:43.000 [warn] 68 connections have failed:
+Nov 05 14:09:43.000 [warn]  68 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 70; recommendation warn)
+Nov 05 14:09:43.000 [warn] 69 connections have failed:
+Nov 05 14:09:43.000 [warn]  69 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 71; recommendation warn)
+Nov 05 14:09:43.000 [warn] 70 connections have failed:
+Nov 05 14:09:43.000 [warn]  70 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:43.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 72; recommendation warn)
+Nov 05 14:09:43.000 [warn] 71 connections have failed:
+Nov 05 14:09:43.000 [warn]  71 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 73; recommendation warn)
+Nov 05 14:09:56.000 [warn] 72 connections have failed:
+Nov 05 14:09:56.000 [warn]  72 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 74; recommendation warn)
+Nov 05 14:09:56.000 [warn] 73 connections have failed:
+Nov 05 14:09:56.000 [warn]  73 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 75; recommendation warn)
+Nov 05 14:09:56.000 [warn] 74 connections have failed:
+Nov 05 14:09:56.000 [warn]  74 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 76; recommendation warn)
+Nov 05 14:09:56.000 [warn] 75 connections have failed:
+Nov 05 14:09:56.000 [warn]  75 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 77; recommendation warn)
+Nov 05 14:09:56.000 [warn] 76 connections have failed:
+Nov 05 14:09:56.000 [warn]  76 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 78; recommendation warn)
+Nov 05 14:09:56.000 [warn] 77 connections have failed:
+Nov 05 14:09:56.000 [warn]  77 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 79; recommendation warn)
+Nov 05 14:09:56.000 [warn] 78 connections have failed:
+Nov 05 14:09:56.000 [warn]  78 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 80; recommendation warn)
+Nov 05 14:09:56.000 [warn] 79 connections have failed:
+Nov 05 14:09:56.000 [warn]  79 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:09:56.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 81; recommendation warn)
+Nov 05 14:09:56.000 [warn] 80 connections have failed:
+Nov 05 14:09:56.000 [warn]  80 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:10:06.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 82; recommendation warn)
+Nov 05 14:10:06.000 [warn] 81 connections have failed:
+Nov 05 14:10:06.000 [warn]  81 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:10:06.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 83; recommendation warn)
+Nov 05 14:10:06.000 [warn] 82 connections have failed:
+Nov 05 14:10:06.000 [warn]  82 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:10:06.000 [warn] Problem bootstrapping. Stuck at 51%: Loading relay descriptors. (Connection timed out; TIMEOUT; count 84; recommendation warn)
+Nov 05 14:10:06.000 [warn] 83 connections have failed:
+Nov 05 14:10:06.000 [warn]  83 connections died in state connect()ing with SSL state (No SSL object)
+Nov 05 14:11:36.000 [notice] We'd like to launch a circuit to handle a connection, but we already have 32 general-purpose client circuits pending. Waiting until some finish. [162 similar message(s) suppressed in last 600 seconds]
+Nov 05 14:11:43.000 [notice] Interrupt: we have stopped accepting new connections, and will shut down in 30 seconds. Interrupt again to exit now.
+Nov 05 14:11:45.000 [notice] SIGINT received a second time; exiting now.

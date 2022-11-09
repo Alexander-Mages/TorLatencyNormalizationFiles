@@ -1,0 +1,25 @@
+#clone repository and enter "tor" directory
+extract, ./configure, and make both tor versions
+
+#configure
+add ReachableAddresses to client-torrc
+fill the rest in from ting's configure script
+(if not running w & z nodes locally, torrc-w & torrc-z are not needed)
+
+
+configure tingrc (file in this repository)
+
+#run daemons
+
+python echo_server 4444
+./tor -f ~/tor/configs/torrc-client
+
+
+#run ting
+python ting [fp] [fp] --config ./tingrc
+
+
+
+notes:
+connectivity to both W & Z relays are required, as well as connectivity to a couple of directory authorities (not tor26 though, due to an unknown ssl error)
+this connectivity must be specified both in the ReachableAddresses parameter and the DETER allowed connecvitity.

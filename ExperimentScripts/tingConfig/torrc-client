@@ -1,0 +1,24 @@
+AvoidDiskWrites 1
+ControlPort 9051
+CookieAuthentication 1
+CircuitBuildTimeout 10
+LearnCircuitBuildTimeout 0
+DataDirectory /users/magesap/tingAttempt2/tor/data/client/
+DirPort 9030
+DirReqStatistics 0
+UseMicrodescriptors 0
+Log debug file /users/magesap/tingAttempt2/tor/logs/client.log
+SocksListenAddress 127.0.0.1
+SocksPort 9050
+WarnUnsafeSocks 0
+ExitPolicy reject *:*
+PublishServerDescriptor 0
+EnforceDistinctSubnets 0
+RunAsDaemon 0
+#tor26 86.59.21.38
+ReachableAddresses 162.247.74.201, 51.15.75.120, 193.23.244.244, 66.111.2.131, 204.13.164.118
+#AlternateDirAuthority tor26 86.59.21.38:443 847B1F850344D7876491A54892F904934E4EB85D
+#ReachableAddresses 162.247.74.201,41.216.189.100,65.109.28.248
+#AlternateDirAuthority JohnWick 65.109.28.248:443 28244F663A09BA4DEC62C1FCE3EB6FA221B847B2
+#AlternateDirAuthority PaellaTeam 178.156.41.232:443 F8167F4E684CEA838CC829992373296D3B1DC474
+#AlternateDirAuthority tor26 86.59.21.38:80 14C131DFC5C6F93646BE72FA1401C02A8DF2E8B4
