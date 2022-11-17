@@ -1,0 +1,20 @@
+Nickname tingBPw
+AvoidDiskWrites 1
+ControlPort 9151
+CookieAuthentication 1
+LearnCircuitBuildTimeout 0
+DataDirectory ~/tingWithWZ/tor/data/w
+Log info file ~/tingWithWZ/tor/logs/w.log
+ORPort 9001
+DirReqStatistics 0
+UseMicrodescriptors 0
+DownloadExtraInfo 1
+FetchUselessDescriptors 1
+SocksListenAddress 127.0.0.1
+SocksPort 9150
+WarnUnsafeSocks 0
+RunAsDaemon 0
+ExitPolicy accept 206.117.25.79:*
+ExitPolicy reject *:*
+PublishServerDescriptor 1
+#ReachableAddresses 162.247.74.201, 51.15.75.120, 193.23.244.244, 66.111.2.131, 204.13.164.118, 185.220.100.252, 49.12.57.137, 65.109.28.248
