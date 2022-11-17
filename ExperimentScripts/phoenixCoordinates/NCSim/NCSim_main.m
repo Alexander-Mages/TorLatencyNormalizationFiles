@@ -33,7 +33,8 @@ function NCSim_main()
 % raw distance matrix %
 
 clear
-load('data_matrix.mat');
+% load('data_matrix.mat');
+readtable('OldVivaldiDataset.csv');
 % PL: 169 * 169 PlanetLa data set
 % Toread: 355 * 355 PlanetLab data set (collected in Mar.-Apr. 2010, 
 %   used in our ACM ReArch'10 paper 'Taming the Triangle Inequality Violations with Network Coordinate System on Real Internet',
