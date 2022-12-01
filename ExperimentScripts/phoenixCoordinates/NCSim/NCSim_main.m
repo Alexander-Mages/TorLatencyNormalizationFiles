@@ -33,7 +33,26 @@ function NCSim_main()
 % raw distance matrix %
 
 clear
-load('data_matrix.mat');
+
+%map the csv file to memory
+%DATA = memmapfile('/mnt/memmap/OldVivaldiDataOutput.csv', 'Format', 'double');
+
+%m = tabularTextDatastore('/mnt/memmap/OldVivaldiDataOutput.csv');
+%m = tabularTextDatastore('/mnt/memmap/OldVivaldiDataOutput.csv', 'TreatAsMissing', '0');
+%DATA = m.Data;
+
+%specify the csv file here
+%DATA = csvread('\mnt\memmap\OldVivaldiDataOutput.csv');
+
+
+ds = tabularTextDatastore('/mnt/memmap/OldVivaldiDataOutput.csv');
+
+% ds.TreatAsMissing = '0';
+
+DATA = tall(ds);
+
+
+% load('data_matrix.mat');
 % PL: 169 * 169 PlanetLa data set
 % Toread: 355 * 355 PlanetLab data set (collected in Mar.-Apr. 2010, 
 %   used in our ACM ReArch'10 paper 'Taming the Triangle Inequality Violations with Network Coordinate System on Real Internet',
@@ -42,7 +61,7 @@ load('data_matrix.mat');
 %   used in many Network Coordinate papers
 
 % DATA = PL; % PlanetLab data set (small)
-DATA = Toread; % PlanetLab data set (big)
+% DATA = Toread; % PlanetLab data set (big)
 % DATA = king_matrix; % King data set
 
 
