@@ -84,24 +84,26 @@ ides_option = 0;
 %   (IEEE Transactions on Network and Service Management, 2011, Vol. 8, Issue 4)
 %   1 - IDES (SVD)
 %   2 - IDES(NMF)
-
-fprintf('\nNCSim (%d Nodes)\n', length(DATA));
+                    %CHANGED all occurances of "length" to "width" for 
+                    %"tall table" compatability
+                    %change seems okay, the table is symmetrical
+fprintf('\nNCSim (%d Nodes)\n', width(DATA));
 
 
 if (re_cdf_on == 1)
     %CDF of relative error (RE)
 
-    fprintf('\nCDF of relative error (RE): \n\n', length(DATA));
+    fprintf('\nCDF of relative error (RE): \n\n', width(DATA));
     total_re_phoenix = []; total_rank_accuracy_phoenix = [];
     total_re_vivaldi = []; total_rank_accuracy_vivaldi = [];
     total_re_dmf = []; total_rank_accuracy_dmf = [];
     total_re_ides = []; total_rank_accuracy_ides = [];
     
-    N = length(DATA);
+    N = width(DATA);
 
     for round = 1:max_round
         % NC: Phoenix      
-        [out_all, in_all, fpre_newhost, fpre_flashcrowd] = NCS_phoenix(DATA, default_dimension, length(DATA), 32, 5, 0, []);        
+        [out_all, in_all, fpre_newhost, fpre_flashcrowd] = NCS_phoenix(DATA, default_dimension, width(DATA), 32, 5, 0, []);        
         predicted_matrix = out_all * in_all; real_matrix = DATA; rerr = relative_error(predicted_matrix, DATA);        
         output_re = store_re(rerr', 1, 1000); total_re_phoenix = [total_re_phoenix; output_re];        
         fprintf('Phoenix: %.2f ', NPRE(rerr));
@@ -111,7 +113,7 @@ if (re_cdf_on == 1)
         % NC: Vivaldi
    
         % 0- basic Vivaldi, 1- Vivaldi (height), 2-Vivaldi TIV aware
-        predicted_matrix = NCS_vivaldi_all(DATA, default_dimension, length(DATA), 32, vivaldi_option); 
+        predicted_matrix = NCS_vivaldi_all(DATA, default_dimension, width(DATA), 32, vivaldi_option); 
         rerr = relative_error(predicted_matrix, DATA);        
         output_re = store_re(rerr', 1, 1000); total_re_vivaldi = [total_re_vivaldi; output_re];
         fprintf('Vivaldi: %.2f ', NPRE(rerr));           
@@ -160,7 +162,7 @@ if (re_cdf_on == 1)
     xlabel('Relative Error', 'FontSize', 16);ylabel('Cumulative Distribution Function', 'FontSize', 16);axis([0 1 0 1]);
     h5=legend('Phoenix', 'Vivaldi', 'DMFSGD', 'IDES', 'Location', 'SouthEast');set(h5, 'FontSize', 16);
     RE_filename = 'NCSim_RECDF_';
-    tmp_size = length(DATA);
+    tmp_size = width(DATA);
     RE_filename = strcat(RE_filename, num2str(tmp_size));
     saveas(gcf, RE_filename, 'eps');
 
@@ -176,7 +178,7 @@ if (re_cdf_on == 1)
     axis([1/100*0.9 1 0 1]);
     h5=legend('Phoenix', 'Vivaldi', 'DMFSGD', 'IDES',  'Location', 'SouthEast');set(h5, 'FontSize', 16);
     RE_filename = 'Ranking_Accuracy_';
-    tmp_size = length(DATA);
+    tmp_size = width(DATA);
     RE_filename = strcat(RE_filename, num2str(tmp_size));
     saveas(gcf, RE_filename, 'eps');
 
