@@ -53,6 +53,7 @@ DATA = tall(ds);
 
 
 % load('data_matrix.mat');
+% load('data_matrix.mat');
 % PL: 169 * 169 PlanetLa data set
 % Toread: 355 * 355 PlanetLab data set (collected in Mar.-Apr. 2010, 
 %   used in our ACM ReArch'10 paper 'Taming the Triangle Inequality Violations with Network Coordinate System on Real Internet',
