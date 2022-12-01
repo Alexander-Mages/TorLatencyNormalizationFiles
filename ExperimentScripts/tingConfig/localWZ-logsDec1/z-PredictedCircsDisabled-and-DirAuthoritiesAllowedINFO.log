@@ -1,0 +1,972 @@
+Dec 01 10:45:08.000 [notice] Tor 0.2.4.22 (git-2ee56e4c2c841a45) opening new log file.
+Dec 01 10:45:08.000 [info] tor_lockfile_lock(): Locking "/users/magesap/tingWithWZ/tor/data/z/lock"
+Dec 01 10:45:08.000 [info] or_state_load(): Loaded state from "/users/magesap/tingWithWZ/tor/data/z/state"
+Dec 01 10:45:08.000 [info] read_file_to_str(): Could not open "/users/magesap/tingWithWZ/tor/data/z/router-stability": No such file or directory
+Dec 01 10:45:08.000 [info] cell_ewma_set_scale_factor(): Disabled cell_ewma algorithm because of value in Default value
+Dec 01 10:45:08.000 [info] geoip_load_file(): Failed to open GEOIP file /usr/local/share/tor/geoip.  
+Dec 01 10:45:08.000 [info] geoip_load_file(): Failed to open GEOIP file /usr/local/share/tor/geoip6.  
+Dec 01 10:45:08.000 [info] mark_my_descriptor_dirty(): Decided to publish new relay descriptor: config change
+Dec 01 10:45:08.000 [info] crypto_global_init(): OpenSSL version matches version from headers (1000207f: OpenSSL 1.0.2g  1 Mar 2016).
+Dec 01 10:45:08.000 [info] crypto_global_init(): NOT using OpenSSL engine support.
+Dec 01 10:45:08.000 [info] evaluate_evp_for_aes(): This version of OpenSSL has a known-good EVP counter-mode implementation. Using it.
+Dec 01 10:45:08.000 [info] crypto_strongest_rand(): Reading entropy from "/dev/urandom"
+Dec 01 10:45:08.000 [info] configure_nameservers(): Parsing resolver configuration in '/etc/resolv.conf'
+Dec 01 10:45:08.000 [info] eventdns: Parsing resolv.conf file /etc/resolv.conf
+Dec 01 10:45:08.000 [info] eventdns: Added nameserver 192.168.252.1:53 as 0x55e92415f2a0
+Dec 01 10:45:08.000 [info] eventdns: Setting maximum allowed timeouts to 16
+Dec 01 10:45:08.000 [info] eventdns: Setting timeout to 10
+Dec 01 10:45:08.000 [info] init_keys(): Reading/making identity key "/users/magesap/tingWithWZ/tor/data/z/keys/secret_id_key"...
+Dec 01 10:45:08.000 [info] init_keys(): Reading/making onion key "/users/magesap/tingWithWZ/tor/data/z/keys/secret_onion_key"...
+Dec 01 10:45:08.000 [info] mark_my_descriptor_dirty(): Decided to publish new relay descriptor: set onion key
+Dec 01 10:45:08.000 [info] tor_tls_init(): OpenSSL OpenSSL 1.0.2g  1 Mar 2016 looks like version 0.9.8m or later; I will try SSL_OP to enable renegotiation
+Dec 01 10:45:08.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:08.000 [info] init_keys(): Dumping fingerprint to "/users/magesap/tingWithWZ/tor/data/z/fingerprint"...
+Dec 01 10:45:08.000 [notice] Your Tor server's identity key fingerprint is 'tingBPz AF56FE113620E480E4BC71F0C459E1D9BC9FB459'
+Dec 01 10:45:08.000 [info] Bootstrapped 0%: Starting.
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority gabelmoo with signing key B0794B84C7868261D06C3A9FE683D3C9FE804065
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority dizum with signing key 0B5340CE4134B252118CFBECC491F98F107798C4
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority urras with signing key 6C29F33BA94B5F9D8EC0EE9EB7144BDFF876AA52
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority dannenberg with signing key 02958C9BE542EEA43130E54FE6634B6E874B196D
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority tor26 with signing key 4A69B937C66923151A7B98F091135E5E7529F375
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority maatuska with signing key 150B11E2A7AF42CB1AAF00CC2B4F5578B1F1BBE4
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority Faravahar with signing key 21FB228258F9A729F88E86D83AB77F88C272C75D
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority turtles with signing key FB278C1EA2D7B055A82DB62346D29F26EDCFE682
+Dec 01 10:45:08.000 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority moria1 with signing key 77F15C774A523FBB0E49A44773A0B0D9EAF4F13A
+Dec 01 10:45:08.000 [info] Consensus includes unrecognized authority 'longclaw' at 199.58.81.140:80 (contact Riseup Networks <collective at riseup dot net> - 1nNzekuHGGzBYRzyjfjFEfeisNvxkn4RT; identity 23D15D965BC35114467363C165C4F724B64B4F66)
+Dec 01 10:45:08.000 [info] Consensus includes unrecognized authority 'bastet' at 204.13.164.118:80 (contact stefani <nocat at readthefinemanual dot net> 4096/F4B863AD6642E7EE; identity 27102BC123E7AF1D4741AE047E160C91ADC76B21)
+Dec 01 10:45:08.000 [info] Consensus does not include configured authority 'turtles' at 76.73.17.194:9030 (identity 27B6B5996C426270A5C95488AA5BCEB6BCC86956)
+Dec 01 10:45:08.000 [info] Consensus does not include configured authority 'dannenberg' at 193.23.244.244:80 (identity 585769C78764D58426B8B52B6651A5A71137189A)
+Dec 01 10:45:08.000 [info] Consensus does not include configured authority 'urras' at 208.83.223.34:443 (identity 80550987E1D626E3EBA5E5E75A458DE0626D088C)
+Dec 01 10:45:08.000 [info] A consensus needs 5 good signatures from recognized authorities for us to accept it. This one has 6 (tor26 maatuska moria1 dizum gabelmoo Faravahar). 1 (dannenberg) of the authorities we know didn't sign it. It has 2 signatures from authorities we don't recognize.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:08.000 [info] update_consensus_networkstatus_fetch_time_impl(): Live ns consensus will be the most recent until 2022-12-01 11:00:00 and will expire at 2022-12-01 13:00:00; fetching the next one at 2022-12-01 11:19:37.
+Dec 01 10:45:08.000 [info] update_consensus_networkstatus_fetch_time_impl(): No live microdesc consensus; we should fetch one immediately.
+Dec 01 10:45:08.000 [info] cell_ewma_set_scale_factor(): Enabled cell_ewma algorithm because of value in CircuitPriorityHalflifeMsec in consensus; scale factor is 0.793701 per 10 seconds
+Dec 01 10:45:08.000 [info] read_file_to_str(): Could not open "/users/magesap/tingWithWZ/tor/data/z/unverified-consensus": No such file or directory
+Dec 01 10:45:08.000 [info] read_file_to_str(): Could not open "/users/magesap/tingWithWZ/tor/data/z/cached-microdesc-consensus": No such file or directory
+Dec 01 10:45:08.000 [info] read_file_to_str(): Could not open "/users/magesap/tingWithWZ/tor/data/z/unverified-microdesc-consensus": No such file or directory
+Dec 01 10:45:08.000 [info] authority_certs_fetch_missing(): No current certificate known for authority turtles (ID digest 27B6B5996C426270A5C95488AA5BCEB6BCC86956); launching request.
+Dec 01 10:45:08.000 [info] authority_certs_fetch_missing(): No current certificate known for authority dannenberg (ID digest 585769C78764D58426B8B52B6651A5A71137189A); launching request.
+Dec 01 10:45:08.000 [info] authority_certs_fetch_missing(): No current certificate known for authority urras (ID digest 80550987E1D626E3EBA5E5E75A458DE0626D088C); launching request.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:08.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:08.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:08.000 [warn] Please upgrade! This version of Tor (0.2.4.22) is obsolete, according to the directory authorities. Recommended versions are: 0.4.5.5-rc,0.4.5.6,0.4.5.7,0.4.5.8,0.4.5.9,0.4.5.10,0.4.5.11,0.4.5.12,0.4.5.14,0.4.7.1-alpha,0.4.7.2-alpha,0.4.7.3-alpha,0.4.7.4-alpha,0.4.7.5-alpha,0.4.7.6-rc,0.4.7.7,0.4.7.8,0.4.7.10,0.4.7.11
+Dec 01 10:45:08.000 [info] tor_mmap_file(): Could not open "/users/magesap/tingWithWZ/tor/data/z/cached-microdescs" for mmap(): No such file or directory
+Dec 01 10:45:08.000 [info] read_file_to_str(): Could not open "/users/magesap/tingWithWZ/tor/data/z/cached-microdescs.new": No such file or directory
+Dec 01 10:45:08.000 [info] microdesc_cache_reload(): Reloaded microdescriptor cache. Found 0 descriptors.
+Dec 01 10:45:10.000 [info] router_load_routers_from_string(): 6126 elements to add
+Dec 01 10:45:10.000 [info] router_load_routers_from_string(): 0 elements to add
+Dec 01 10:45:10.000 [info] routerlist_remove_old_routers(): We have 5607 live routers and 0 old router descriptors.
+Dec 01 10:45:10.000 [info] router_load_extrainfo_from_string(): 6125 elements to add
+Dec 01 10:45:10.000 [info] router_load_extrainfo_from_string(): 0 elements to add
+Dec 01 10:45:10.000 [notice] We now have enough directory information to build circuits.
+Dec 01 10:45:10.000 [notice] Bootstrapped 80%: Connecting to the Tor network.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] update_consensus_router_descriptor_downloads(): 553 router descriptors downloadable. 0 delayed; 5607 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] launch_descriptor_downloads(): Launching 6 requests for 553 routerdescs, 96 at a time
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:10.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:10.000 [info] router_pick_published_address(): No hints from directory headers either. Will try again later.
+Dec 01 10:45:10.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5607 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [notice] Guessed our IP address as 206.117.25.79 (source: 171.25.193.9).
+Dec 01 10:45:11.000 [info] mark_my_descriptor_dirty(): Decided to publish new relay descriptor: IP address changed
+Dec 01 10:45:11.000 [info] connection_dir_client_reached_eof(): Received authority certificates (size 6349) from server '171.25.193.9:443'
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Skipping downloaded certificate for turtles that we already have.
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Got a certificate for turtles, but we already have it. Maybe they haven't updated it. Waiting for a while.
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Skipping downloaded certificate for dannenberg that we already have.
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Got a certificate for dannenberg, but we already have it. Maybe they haven't updated it. Waiting for a while.
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Skipping downloaded certificate for urras that we already have.
+Dec 01 10:45:11.000 [info] trusted_dirs_load_certs_from_string(): Got a certificate for urras, but we already have it. Maybe they haven't updated it. Waiting for a while.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:11.000 [info] router_rebuild_descriptor(): Rebuilding relay descriptor
+Dec 01 10:45:11.000 [info] extrainfo_dump_to_string(): Adding stats to extra-info descriptor.
+Dec 01 10:45:11.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5607 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:45:11.000 [info] connection_dir_client_reached_eof(): Successfully loaded certificates from fetch.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] connection_dir_client_reached_eof(): Received server info (size 355306) from server '128.31.0.39:9131'
+Dec 01 10:45:11.000 [info] router_load_routers_from_string(): 96 elements to add
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:11.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5607 with present ei, 0 delaying, 0 pending, 96 downloadable.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:11.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:11.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:11.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Dec 01 10:45:11.000 [info] onion_pick_cpath_exit(): Using requested exit node '$24E2F139121D4394C54B5BCC368B3B411857C413~bastet at 204.13.164.118'
+Dec 01 10:45:11.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:45:11.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:45:11.000 [info] connection_dir_client_reached_eof(): Received 96/96 router descriptors requested from 128.31.0.39:9131
+Dec 01 10:45:11.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:11.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:11.000 [notice] Bootstrapped 85%: Finishing handshake with first hop.
+Dec 01 10:45:11.000 [info] connection_tls_continue_handshake(): Client got a v3 cert!  Moving on to v3 handshake with ciphersuite ECDHE-RSA-AES128-GCM-SHA256
+Dec 01 10:45:11.000 [info] channel_tls_process_versions_cell(): Negotiated version 4 with [scrubbed]:443; Sending cells: CERTS
+Dec 01 10:45:11.000 [info] channel_tls_process_certs_cell(): Got some good certificates from [scrubbed]:443: Authenticated it.
+Dec 01 10:45:11.000 [info] channel_tls_process_auth_challenge_cell(): Got an AUTH_CHALLENGE cell from [scrubbed]:443: Sending authentication
+Dec 01 10:45:11.000 [info] circuit_send_next_onion_skin(): First hop: finished sending CREATE cell to '$24E2F139121D4394C54B5BCC368B3B411857C413~bastet at 204.13.164.118'
+Dec 01 10:45:11.000 [info] channel_tls_process_netinfo_cell(): Got good NETINFO cell from [scrubbed]:443; OR connection is now open, using protocol version 4. Its ID digest is 24E2F139121D4394C54B5BCC368B3B411857C413. Our address is apparently 206.117.25.79.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 5703 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 457 in progress.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5607 with present ei, 0 delaying, 96 pending, 0 downloadable.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:45:12.000 [info] routerlist_remove_old_routers(): We have 5703 live routers and 0 old router descriptors.
+Dec 01 10:45:12.000 [info] update_consensus_networkstatus_downloads(): Launching microdesc networkstatus consensus download.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:8443 ...
+Dec 01 10:45:12.000 [info] onion_pick_cpath_exit(): Using requested exit node '$E81635E5F2280F4CADD0F8DDB23068A5EF216E58~tor70IPConnectINFO2 at 194.5.96.70'
+Dec 01 10:45:12.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:45:12.000 [info] directory_send_command(): Downloading consensus from 194.5.96.70:8443 using /tor/status-vote/current/consensus-microdesc/14C131+27B6B5+49015F+585769+805509+D586D1+E8A9C4+ED03BB+EFCBE7.z
+Dec 01 10:45:12.000 [info] authority_certs_fetch_missing(): No current certificate known for authority turtles (ID digest 27B6B5996C426270A5C95488AA5BCEB6BCC86956); launching request.
+Dec 01 10:45:12.000 [info] authority_certs_fetch_missing(): No current certificate known for authority dannenberg (ID digest 585769C78764D58426B8B52B6651A5A71137189A); launching request.
+Dec 01 10:45:12.000 [info] authority_certs_fetch_missing(): No current certificate known for authority urras (ID digest 80550987E1D626E3EBA5E5E75A458DE0626D088C); launching request.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:45:12.000 [info] onion_pick_cpath_exit(): Using requested exit node '$A22B1C2EF2255987F8AB8AA0B1A8E23F5023EEB8~Init6TorRelay at 65.21.85.98'
+Dec 01 10:45:12.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:45:12.000 [info] circuit_predict_and_launch_new(): Have 0 clean circs (0 internal), need another exit circ.
+Dec 01 10:45:12.000 [info] choose_good_exit_server_general(): Found 1291 servers that might support 0/0 pending connections.
+Dec 01 10:45:12.000 [info] choose_good_exit_server_general(): Chose exit server '$6E7E956AC8D07E5F7AE7F14DE4136BE271E6974E~THINKINGTITAN at 62.182.86.239'
+Dec 01 10:45:12.000 [info] add_an_entry_guard(): Chose $B70629C29A032979E5AD00CC51D2330845AAFD6A~Biverse at 178.63.97.34 as new entry guard.
+Dec 01 10:45:12.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact),Biverse [B70629C29A032979E5AD00CC51D2330845AAFD6A] (up never-contacted)
+Dec 01 10:45:12.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:45:12.000 [info] or_state_save(): Saved state to "/users/magesap/tingWithWZ/tor/data/z/state"
+Dec 01 10:45:12.000 [info] circuit_finish_handshake(): Finished building circuit hop:
+Dec 01 10:45:12.000 [info] internal circ (length 1, last hop bastet): $24E2F139121D4394C54B5BCC368B3B411857C413(open)
+Dec 01 10:45:12.000 [info] circuit_send_next_onion_skin(): circuit built!
+Dec 01 10:45:12.000 [info] internal circ (length 1): $24E2F139121D4394C54B5BCC368B3B411857C413(open)
+Dec 01 10:45:12.000 [info] link_apconn_to_circ(): Looks like completed circuit to [scrubbed] does allow optimistic data for connection to [scrubbed]
+Dec 01 10:45:12.000 [info] connection_ap_handshake_send_begin(): Sending relay cell 1 to begin stream 26158.
+Dec 01 10:45:12.000 [info] connection_ap_handshake_send_begin(): Address/port sent, ap socket -1, n_circ_id 2147489957
+Dec 01 10:45:12.000 [info] connection_ap_handshake_send_begin(): Sending up to 3993 + 0 bytes of queued-up data
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:45:12.000 [info] connection_edge_process_relay_cell_not_open(): 'connected' received after 0 seconds.
+Dec 01 10:45:12.000 [info] internal circ (length 1): $24E2F139121D4394C54B5BCC368B3B411857C413(open)
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] connection_dir_client_reached_eof(): Received server info (size 332166) from server '193.23.244.244:80'
+Dec 01 10:45:12.000 [info] router_load_routers_from_string(): 96 elements to add
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5607 with present ei, 0 delaying, 96 pending, 96 downloadable.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:45:12.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Dec 01 10:45:12.000 [info] internal circ (length 1): $24E2F139121D4394C54B5BCC368B3B411857C413(open)
+Dec 01 10:45:12.000 [info] link_apconn_to_circ(): Looks like completed circuit to [scrubbed] does allow optimistic data for connection to [scrubbed]
+Dec 01 10:45:12.000 [info] connection_ap_handshake_send_begin(): Sending relay cell 1 to begin stream 26159.
+Dec 01 10:45:12.000 [info] connection_ap_handshake_send_begin(): Address/port sent, ap socket -1, n_circ_id 2147489957
+Dec 01 10:45:12.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:45:12.000 [info] connection_dir_client_reached_eof(): Received 96/96 router descriptors requested from 193.23.244.244:80
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for connect response' state. Sending it anyway. package_partial=0, buflen=3993
+Dec 01 10:45:12.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for connect response' state. Sending it anyway. package_partial=1, buflen=9
+Dec 01 10:45:12.000 [info] connection_edge_process_relay_cell(): -1: end cell (closed normally) for stream 26158. Removing stream.
+Dec 01 10:45:12.000 [info] connection_free_(): Freeing linked Socks connection [open] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:12.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:12.000 [info] connection_dir_client_reached_eof(): Received extra server info (size 224287) from server '204.13.164.118:443'
+Dec 01 10:45:12.000 [info] router_load_extrainfo_from_string(): 96 elements to add
+Dec 01 10:45:13.000 [info] connection_dir_client_reached_eof(): Received 96/96 extra-info documents requested from 204.13.164.118:443
+Dec 01 10:45:13.000 [info] connection_free_(): Freeing linked Directory connection [client finished] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:45:13.000 [info] connection_edge_process_relay_cell_not_open(): 'connected' received after 1 seconds.
+Dec 01 10:45:13.000 [info] internal circ (length 1): $24E2F139121D4394C54B5BCC368B3B411857C413(open)
+Dec 01 10:45:13.000 [info] circuit_predict_and_launch_new(): Have 1 clean circs (0 internal), need another exit circ.
+Dec 01 10:45:13.000 [info] choose_good_exit_server_general(): Found 1315 servers that might support 0/0 pending connections.
+Dec 01 10:45:13.000 [info] choose_good_exit_server_general(): Chose exit server '$0A83F86563528007E42D0A58695C811F59A95863~PrivateAlps at 179.43.187.43'
+Dec 01 10:45:13.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:45:13.000 [info] connection_edge_process_relay_cell(): -1: end cell (closed normally) for stream 26159. Removing stream.
+Dec 01 10:45:13.000 [info] connection_free_(): Freeing linked Socks connection [open] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:45:13.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:45:13.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:45:13.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:45:13.000 [info] connection_dir_client_reached_eof(): Received extra server info (size 217204) from server '204.13.164.118:443'
+Dec 01 10:45:13.000 [info] router_load_extrainfo_from_string(): 96 elements to add
+Dec 01 10:45:13.000 [info] connection_dir_client_reached_eof(): Received 96/96 extra-info documents requested from 204.13.164.118:443
+Dec 01 10:45:13.000 [info] connection_free_(): Freeing linked Directory connection [client finished] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:45:14.000 [info] circuit_predict_and_launch_new(): Have 2 clean circs (0 uptime-internal, 0 internal), need another hidden service circ.
+Dec 01 10:45:14.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:45:15.000 [info] circuit_predict_and_launch_new(): Have 3 clean circs (1 uptime-internal, 1 internal), need another hidden service circ.
+Dec 01 10:45:15.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:46:14.000 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 361 in progress.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:46:14.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:46:14.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9005 ...
+Dec 01 10:46:14.000 [info] onion_pick_cpath_exit(): Using requested exit node '$0CA3F4D95BCF24964FC4623588A3F17E2EE216DE~lodrich2 at 85.195.253.5'
+Dec 01 10:46:14.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:46:14.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:46:14.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:46:14.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:46:14.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:46:14.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:46:14.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:46:14.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:47:13.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:8443. Giving up. (waiting for circuit)
+Dec 01 10:47:13.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9001. Giving up. (waiting for circuit)
+Dec 01 10:47:13.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 150 bytes on inbuf, 0 on outbuf.
+Dec 01 10:47:13.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 176 bytes on inbuf, 0 on outbuf.
+Dec 01 10:47:13.000 [info] dns_launch_wildcard_checks(): Launching checks to see whether our nameservers like to hijack DNS failures.
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "nbissopcmf.invalid"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925bdf640, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "rns2z5lg2nve.test"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925bdf7b0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "hn3j3csca3sgjvb"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925bdf920, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "pomlx3pifrokc7y.com"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925be3de0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "5lyztgx2xjy.org"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925be3f50, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "xu5kiybr6y3fynpv.net"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925be40c0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "ay2io73niey.invalid"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925be4230, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "cx4tsydd.test"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90260, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "5pxzomdxulewftvp"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d903d0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "6mmqxm2vkoxsyqa.com"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90540, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "kclrzginqn442jfz.org"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d906b0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "ypspw6s234l.net"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90820, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "ffiy6my7.invalid"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90990, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "al.test"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90b00, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "3h6sc25pywvhf"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90c60, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "rvahs4t5.com"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90dd0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "bydjlgjwgw.org"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d90f40, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "tzi7esbjbl6a3.net"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d910b0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "7dxg4ioc5q.invalid"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d91220, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "655i7tspx.test"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d91390, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "bsrewx7wjpw6"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d91500, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "u4zf64fww.com"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d91670, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "j4whfeuhy.org"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d917e0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] launch_wildcard_check(): Testing whether our DNS server is hijacking nonexistent domains with request for bogus hostname "t4auna6ihsurptup.net"
+Dec 01 10:47:13.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:13.000 [info] eventdns: Setting timeout for request 0x55e925d91950, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:13.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:47:13.000 [info] update_consensus_networkstatus_downloads(): Launching microdesc networkstatus consensus download.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:47:13.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:47:13.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:47:13.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:47:13.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:47:13.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:47:13.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:47:13.000 [info] onion_pick_cpath_exit(): Using requested exit node '$7D55F879ADE1E7AC49BCD40D7F68293308233F18~Unnamed at 51.77.140.69'
+Dec 01 10:47:13.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:47:13.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:47:13.000 [info] directory_send_command(): Downloading consensus from 51.77.140.69:9001 using /tor/status-vote/current/consensus-microdesc/14C131+27B6B5+49015F+585769+805509+D586D1+E8A9C4+ED03BB+EFCBE7.z
+Dec 01 10:47:13.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:47:13.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:47:13.000 [info] connection_dir_request_failed(): Giving up on certificate fetch from directory server at '65.21.85.98'; retrying
+Dec 01 10:47:13.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:47:13.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:47:13.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d917e0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925be3f50
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d906b0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90f40
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d910b0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925be40c0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90540
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925be3de0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90dd0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90820
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d91950
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d91670
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925bdf7b0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925be4230
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90260
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925bdf640
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d903d0
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90c60
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90990
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d91500
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d90b00
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925bdf920
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d91220
+Dec 01 10:47:13.000 [info] eventdns: Removing timeout for request 0x55e925d91390
+Dec 01 10:47:15.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:47:15.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:47:15.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:47:15.000 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 361 in progress.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:47:15.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:47:15.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:47:15.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:47:15.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:47:15.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:47:15.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:47:15.000 [info] buf_shrink_freelists(): Cleaned freelist for 4096-byte chunks: original length 27, kept 9, dropped 18.
+Dec 01 10:47:15.000 [info] buf_shrink_freelists(): Cleaned freelist for 8192-byte chunks: original length 26, kept 4, dropped 22.
+Dec 01 10:47:21.000 [info] connection_handle_write_impl(): in-progress connect failed. Removing. (Connection timed out)
+Dec 01 10:47:21.000 [info] connection_close_immediate(): fd 18, type Directory, state connecting, 3047 bytes on outbuf.
+Dec 01 10:47:21.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '131.188.40.189'; retrying
+Dec 01 10:47:21.000 [info] connection_handle_write_impl(): in-progress connect failed. Removing. (Connection timed out)
+Dec 01 10:47:21.000 [info] connection_close_immediate(): fd 17, type Directory, state connecting, 3987 bytes on outbuf.
+Dec 01 10:47:21.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '45.66.33.45'; retrying
+Dec 01 10:47:21.000 [info] connection_handle_write_impl(): in-progress connect failed. Removing. (Connection timed out)
+Dec 01 10:47:21.000 [info] connection_close_immediate(): fd 16, type Directory, state connecting, 3993 bytes on outbuf.
+Dec 01 10:47:21.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '76.73.17.194'; retrying
+Dec 01 10:47:21.000 [info] connection_handle_write_impl(): in-progress connect failed. Removing. (Connection timed out)
+Dec 01 10:47:21.000 [info] connection_close_immediate(): fd 14, type Directory, state connecting, 3990 bytes on outbuf.
+Dec 01 10:47:21.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '154.35.175.225'; retrying
+Dec 01 10:47:21.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 1; recommendation ignore)
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] entry_guard_register_connect_status(): Connection to never-contacted entry guard 'Biverse' (B70629C29A032979E5AD00CC51D2330845AAFD6A) failed. Removing from the list. 0/3 entry guards usable/new.
+Dec 01 10:47:21.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact)
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:47:21.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 2; recommendation ignore)
+Dec 01 10:47:21.000 [info] 1 connections have failed:
+Dec 01 10:47:21.000 [info]  1 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:47:21.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 3; recommendation ignore)
+Dec 01 10:47:21.000 [info] 2 connections have failed:
+Dec 01 10:47:21.000 [info]  2 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:47:21.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:47:21.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:47:21.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:47:22.000 [info] circuit_predict_and_launch_new(): Have 0 clean circs (0 internal), need another exit circ.
+Dec 01 10:47:22.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:47:22.000 [info] choose_good_exit_server_general(): Chose exit server '$DB9A2B8876A2C418E3C60145DE8B790340003C1D~hogman7 at 86.104.194.121'
+Dec 01 10:47:22.000 [info] add_an_entry_guard(): Chose $C5B8FBC0237F4A04F2055128F257DFF6E9C145B7~Doedelkiste23 at 89.163.128.25 as new entry guard.
+Dec 01 10:47:22.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact),Doedelkiste23 [C5B8FBC0237F4A04F2055128F257DFF6E9C145B7] (up never-contacted)
+Dec 01 10:47:22.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:47:23.000 [info] circuit_predict_and_launch_new(): Have 1 clean circs (0 internal), need another exit circ.
+Dec 01 10:47:23.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:47:23.000 [info] choose_good_exit_server_general(): Chose exit server '$5E82D5E2C21D1D1632BD61DF78C77ACB02D18CCE~EO at 23.129.64.223'
+Dec 01 10:47:23.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:47:24.000 [info] circuit_predict_and_launch_new(): Have 2 clean circs (0 uptime-internal, 0 internal), need another hidden service circ.
+Dec 01 10:47:24.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:47:25.000 [info] circuit_predict_and_launch_new(): Have 3 clean circs (1 uptime-internal, 1 internal), need another hidden service circ.
+Dec 01 10:47:25.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:47:43.000 [info] launch_test_addresses(): Launching checks to see whether our nameservers like to hijack *everything*.
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925be0b00, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925d6bd50, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925d7d620, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925d7d790, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925be3060, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925be31f0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925cba8b0, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] evdns_log_cb(): eventdns: Resolve requested.
+Dec 01 10:47:43.000 [info] eventdns: Setting timeout for request 0x55e925cbaa40, sent to nameserver 0x55e92415f2a0
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925d6bd50
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925be0b00
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925cbaa40
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925cba8b0
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925d7d620
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925d7d790
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925be31f0
+Dec 01 10:47:43.000 [info] eventdns: Removing timeout for request 0x55e925be3060
+Dec 01 10:48:15.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9005. Giving up. (waiting for circuit)
+Dec 01 10:48:15.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 65 bytes on inbuf, 0 on outbuf.
+Dec 01 10:48:15.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:48:15.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '85.195.253.5'; retrying
+Dec 01 10:48:15.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] update_consensus_router_descriptor_downloads(): 361 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] launch_descriptor_downloads(): Launching 4 requests for 361 routerdescs, 96 at a time
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:48:16.000 [info] onion_pick_cpath_exit(): Using requested exit node '$16824F885D72B4FA7A5090E08D877E5404BC214D~guidemenow at 62.216.54.29'
+Dec 01 10:48:16.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:48:16.000 [info] onion_pick_cpath_exit(): Using requested exit node '$6DA5D1B9B239501838E19CC0ACBAFAE737AEEC5B~dbonline at 2.66.27.123'
+Dec 01 10:48:16.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:48:16.000 [info] onion_pick_cpath_exit(): Using requested exit node '$131C2E46F47DE274857DF55C756161AA32A08D7D~apollo at 74.83.80.254'
+Dec 01 10:48:16.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Dec 01 10:48:16.000 [info] onion_pick_cpath_exit(): Using requested exit node '$B56B9FE93F83B4FA69234B17A060E8A8E7446D19~Paphos at 62.210.205.228'
+Dec 01 10:48:16.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:48:16.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:48:16.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:48:16.000 [info] authority_certs_fetch_missing(): No current certificate known for authority turtles (ID digest 27B6B5996C426270A5C95488AA5BCEB6BCC86956); launching request.
+Dec 01 10:48:16.000 [info] authority_certs_fetch_missing(): No current certificate known for authority dannenberg (ID digest 585769C78764D58426B8B52B6651A5A71137189A); launching request.
+Dec 01 10:48:16.000 [info] authority_certs_fetch_missing(): No current certificate known for authority urras (ID digest 80550987E1D626E3EBA5E5E75A458DE0626D088C); launching request.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:48:16.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:48:16.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:59001 ...
+Dec 01 10:48:16.000 [info] onion_pick_cpath_exit(): Using requested exit node '$ACBF3D504CFF3D74D1991AFDF6AC070606232B10~centorLyon at 82.64.20.171'
+Dec 01 10:48:16.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:48:16.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:48:16.000 [info] buf_shrink_freelists(): Cleaned freelist for 4096-byte chunks: original length 9, kept 8, dropped 1.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:16.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:48:23.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 4; recommendation ignore)
+Dec 01 10:48:23.000 [info] 3 connections have failed:
+Dec 01 10:48:23.000 [info]  3 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:48:23.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:48:23.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:48:23.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:49:14.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9001. Giving up. (waiting for circuit)
+Dec 01 10:49:14.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 151 bytes on inbuf, 0 on outbuf.
+Dec 01 10:49:14.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:49:14.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:49:17.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:49:17.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:49:17.000 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 361 in progress.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:49:17.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:49:17.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:49:17.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:49:17.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:49:17.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:49:17.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:49:22.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 5; recommendation ignore)
+Dec 01 10:49:22.000 [info] 4 connections have failed:
+Dec 01 10:49:22.000 [info]  4 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:49:22.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:49:22.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:49:22.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:49:32.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 6; recommendation ignore)
+Dec 01 10:49:32.000 [info] 5 connections have failed:
+Dec 01 10:49:32.000 [info]  5 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:49:32.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:49:32.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:49:32.000 [info] entry_guard_register_connect_status(): Connection to never-contacted entry guard 'Doedelkiste23' (C5B8FBC0237F4A04F2055128F257DFF6E9C145B7) failed. Removing from the list. 0/3 entry guards usable/new.
+Dec 01 10:49:32.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact)
+Dec 01 10:49:32.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:49:32.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:49:32.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:49:32.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:49:32.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:49:32.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:49:32.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:49:33.000 [info] circuit_predict_and_launch_new(): Have 0 clean circs (0 internal), need another exit circ.
+Dec 01 10:49:33.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:49:33.000 [info] choose_good_exit_server_general(): Chose exit server '$F20C346711744A639AEB69E6AEC941F876C81DB2~Komodotto at 185.248.101.215'
+Dec 01 10:49:33.000 [info] add_an_entry_guard(): Chose $BBEAFF24A9D3406DCC95484DEB3B7DDF98A99980~Liberation at 87.236.199.239 as new entry guard.
+Dec 01 10:49:33.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact),Liberation [BBEAFF24A9D3406DCC95484DEB3B7DDF98A99980] (up never-contacted)
+Dec 01 10:49:33.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:49:34.000 [info] circuit_predict_and_launch_new(): Have 1 clean circs (0 internal), need another exit circ.
+Dec 01 10:49:34.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:49:34.000 [info] choose_good_exit_server_general(): Chose exit server '$29BDC0DB5ACBA985B2B3A5FACF4BD8199194282A~KeKoUSW10Gbps at 141.193.68.57'
+Dec 01 10:49:34.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:49:35.000 [info] circuit_predict_and_launch_new(): Have 2 clean circs (0 uptime-internal, 0 internal), need another hidden service circ.
+Dec 01 10:49:35.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:49:36.000 [info] circuit_predict_and_launch_new(): Have 3 clean circs (1 uptime-internal, 1 internal), need another hidden service circ.
+Dec 01 10:49:36.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:50:17.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:59001. Giving up. (waiting for circuit)
+Dec 01 10:50:17.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9001. Giving up. (waiting for circuit)
+Dec 01 10:50:17.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9001. Giving up. (waiting for circuit)
+Dec 01 10:50:17.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:9001. Giving up. (waiting for circuit)
+Dec 01 10:50:17.000 [info] connection_ap_expire_beginning(): Tried for 120 seconds to get a connection to [scrubbed]:443. Giving up. (waiting for circuit)
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 178 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 3051 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 3993 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 3992 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Socks connection [waiting for circuit] with 3993 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:50:17.000 [info] connection_dir_request_failed(): Giving up on certificate fetch from directory server at '82.64.20.171'; retrying
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:50:17.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '62.210.205.228'; retrying
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:50:17.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '74.83.80.254'; retrying
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:50:17.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '2.66.27.123'; retrying
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:17.000 [info] connection_dir_client_reached_eof(): 'fetch' response not all here, but we're at eof. Closing.
+Dec 01 10:50:17.000 [info] connection_dir_request_failed(): Giving up on serverdesc/extrainfo fetch from directory server at '62.216.54.29'; retrying
+Dec 01 10:50:17.000 [info] connection_free_(): Freeing linked Directory connection [client reading] with 0 bytes on inbuf, 0 on outbuf.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] update_consensus_router_descriptor_downloads(): 361 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] launch_descriptor_downloads(): Launching 4 requests for 361 routerdescs, 96 at a time
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:50:18.000 [info] onion_pick_cpath_exit(): Using requested exit node '$9776F349C7237CE0DF00E40E952A83B832BEAA01~privacydevNet at 198.98.52.25'
+Dec 01 10:50:18.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:50:18.000 [info] onion_pick_cpath_exit(): Using requested exit node '$A99B0D9E5FD5BC3C8F2D006EC91F8C7F40E09CB8~A99B0D9E5FD5BC3C8F2 at 46.4.78.148'
+Dec 01 10:50:18.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Dec 01 10:50:18.000 [info] onion_pick_cpath_exit(): Using requested exit node '$AE1D386BCAD5704BB873008509402C457981C8F8~Gayming01 at 74.208.203.175'
+Dec 01 10:50:18.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:443 ...
+Dec 01 10:50:18.000 [info] onion_pick_cpath_exit(): Using requested exit node '$C7946D9A192BBE44C1C8A926A8B135AC495D6636~t0adwarri0r at 198.50.238.128'
+Dec 01 10:50:18.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:50:18.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:50:18.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:50:18.000 [info] update_consensus_networkstatus_downloads(): Launching microdesc networkstatus consensus download.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:50:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:50:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:9001 ...
+Dec 01 10:50:18.000 [info] onion_pick_cpath_exit(): Using requested exit node '$4CD4DFFEF3971C902A22100D911CAC639BE2EF5C~4CD4DFFEF3971C902A2 at 143.178.111.120'
+Dec 01 10:50:18.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:50:18.000 [info] connection_ap_make_link(): ... application connection created and linked.
+Dec 01 10:50:18.000 [info] directory_send_command(): Downloading consensus from 143.178.111.120:9001 using /tor/status-vote/current/consensus-microdesc/14C131+27B6B5+49015F+585769+805509+D586D1+E8A9C4+ED03BB+EFCBE7.z
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:18.000 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Dec 01 10:50:26.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 7; recommendation ignore)
+Dec 01 10:50:26.000 [info] 6 connections have failed:
+Dec 01 10:50:26.000 [info]  6 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:50:26.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:50:26.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:50:26.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:50:26.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 8; recommendation ignore)
+Dec 01 10:50:26.000 [info] 7 connections have failed:
+Dec 01 10:50:26.000 [info]  7 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:50:26.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:50:26.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:50:26.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:50:26.000 [info] control_event_bootstrap_problem(): Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 9; recommendation ignore)
+Dec 01 10:50:26.000 [info] 8 connections have failed:
+Dec 01 10:50:26.000 [info]  8 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:50:26.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:50:26.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:50:26.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:50:26.000 [warn] Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 10; recommendation warn)
+Dec 01 10:50:26.000 [warn] 9 connections have failed:
+Dec 01 10:50:26.000 [warn]  9 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:50:26.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:50:26.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:50:26.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:50:26.000 [warn] Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 11; recommendation warn)
+Dec 01 10:50:26.000 [warn] 10 connections have failed:
+Dec 01 10:50:26.000 [warn]  10 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:50:26.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:50:26.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:50:26.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:51:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:51:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:51:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:51:18.000 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 5799 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 361 in progress.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:51:18.000 [info] router_pick_published_address(): Could not determine our address locally. Checking if directory headers provide any hints.
+Dec 01 10:51:18.000 [info] router_pick_published_address(): Success: chose address '206.117.25.79'.
+Dec 01 10:51:18.000 [info] update_extrainfo_downloads(): Extrainfo download status: 0 router with no ei, 5799 with present ei, 0 delaying, 0 pending, 0 downloadable.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Guessed local hostname 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to a private IP address (192.168.1.101). Trying something else.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Interface IP address '192.168.1.101' is a private address too. Ignoring.
+Dec 01 10:51:18.000 [info] resolve_my_address(): Address 'client.tingwithlocalwandz.torlatency.isi.deterlab.net' resolves to private IP address '192.168.1.101'. Tor servers that use the default DirAuthorities must have public IP addresses.
+Dec 01 10:51:18.000 [info] check_descriptor_ipaddress_changed(): options->Address didn't resolve into an IP.
+Dec 01 10:51:18.000 [info] routerlist_remove_old_routers(): We have 5799 live routers and 0 old router descriptors.
+Dec 01 10:51:18.000 [info] buf_shrink_freelists(): Cleaned freelist for 4096-byte chunks: original length 9, kept 8, dropped 1.
+Dec 01 10:51:43.000 [warn] Problem bootstrapping. Stuck at 85%: Finishing handshake with first hop. (Connection timed out; TIMEOUT; count 12; recommendation warn)
+Dec 01 10:51:43.000 [warn] 11 connections have failed:
+Dec 01 10:51:43.000 [warn]  11 connections died in state connect()ing with SSL state (No SSL object)
+Dec 01 10:51:43.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:51:43.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:51:43.000 [info] entry_guard_register_connect_status(): Connection to never-contacted entry guard 'Liberation' (BBEAFF24A9D3406DCC95484DEB3B7DDF98A99980) failed. Removing from the list. 0/3 entry guards usable/new.
+Dec 01 10:51:43.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact)
+Dec 01 10:51:43.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:51:43.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:51:43.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:51:43.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:51:43.000 [info] circuit_n_chan_done(): Channel failed; closing circ.
+Dec 01 10:51:43.000 [info] circuit_build_failed(): Our circuit died before the first hop with no connection
+Dec 01 10:51:43.000 [info] connection_or_note_state_when_broken(): Connection died in state 'connect()ing with SSL state (No SSL object)'
+Dec 01 10:51:44.000 [info] circuit_predict_and_launch_new(): Have 0 clean circs (0 internal), need another exit circ.
+Dec 01 10:51:44.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:51:44.000 [info] choose_good_exit_server_general(): Chose exit server '$3A05E35BB1E59F318B684A7470B742785AEB0783~artikel10buc03 at 185.100.87.192'
+Dec 01 10:51:44.000 [info] add_an_entry_guard(): Chose $1E64DACE137A4A6223E7A4A73060A22ECA46D7B3~Doedelkiste16 at 91.143.87.51 as new entry guard.
+Dec 01 10:51:44.000 [info] log_entry_guards(): SmallStupidDonkey [C07BD6F20C2A5110E15D63E4B16A98FF57D0BFBF] (unreachable, made-contact),Logforme3 [8F6A78B1EA917F2BF221E87D14361C050A70CCC3] (unreachable, made-contact),freeassange [BA13324719485DC3B5FF258C21603287F1AFFD06] (unreachable, made-contact),Doedelkiste16 [1E64DACE137A4A6223E7A4A73060A22ECA46D7B3] (up never-contacted)
+Dec 01 10:51:44.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting.
+Dec 01 10:51:45.000 [info] circuit_predict_and_launch_new(): Have 1 clean circs (0 internal), need another exit circ.
+Dec 01 10:51:45.000 [info] choose_good_exit_server_general(): Found 1314 servers that might support 0/0 pending connections.
+Dec 01 10:51:45.000 [info] choose_good_exit_server_general(): Chose exit server '$081A5BAF9775499CAF7CCCAB2AF7765494F3B99F~KeKoUSC at 74.208.141.239'
+Dec 01 10:51:45.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:51:46.000 [info] circuit_predict_and_launch_new(): Have 2 clean circs (0 uptime-internal, 0 internal), need another hidden service circ.
+Dec 01 10:51:46.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
+Dec 01 10:51:47.000 [info] circuit_predict_and_launch_new(): Have 3 clean circs (1 uptime-internal, 1 internal), need another hidden service circ.
+Dec 01 10:51:47.000 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Connection in progress; waiting.
