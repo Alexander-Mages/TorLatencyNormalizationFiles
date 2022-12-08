@@ -1,4 +1,5 @@
-T=readtable('OldVivaldiDataOutput.csv');
-p=T{:,1};
-q=T{:,2};
-save('OldVivaldiDataset.mat','p','q')
+ds = tabularTextDatastore('OldVivaldiDataOutput.csv');
+tt = tall(ds);
+write('/mnt/memmap/result',tt);
+%writeall(ds,'OldVivaldiDataset.mat','OutputFormat','mat');
+%save('OldVivaldiDataset.mat','p','q')
