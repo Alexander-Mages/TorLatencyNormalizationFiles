@@ -1,5 +1,5 @@
 % a simplified Phoenix NC system without considering node churn, distance variation, etc
-function [out_host, in_host, fpre_newhost, fpre_flashcrowd] = NCS_phoenix(D, dim, N, K, C, converge_on, new_hosts)
+function [out_host, in_host, fpre_newhost, fpre_flashcrowd] = phoenix(D, dim, N, K, C, converge_on, new_hosts)
 
 % N: Number of nodes
 % K: Number of Neighbors
@@ -126,7 +126,7 @@ for round = 1:round_bound
         node_weight_count = zeros(1, N);
         %%%%%%%%%%%%
     end
-    if (converge_on == 1 && round == floor(round_bound/2));
+    if (converge_on == 1 & round == floor(round_bound/2));
 %        rand_seq = randperm(N);
 %        new_hosts =  rand_seq(1:new_host_scale);
         % Remove the NC values of the 10 new hosts        
@@ -154,13 +154,13 @@ for round = 1:round_bound
         % K: number of landmarks
         % w: Kxd, h: dxK. The position vectors of all landmarks
 
-%         if (round == 1 && i < K)
+%         if (round == 1 & i < K)
 %             continue; % Already has NC
 %         end
 
         new_hit = 0; % if a new joining host in convergence test
         
-        if (converge_on == 1 && round == floor(round_bound/2))
+        if (converge_on == 1 & round == floor(round_bound/2))
             for kk = 1:new_host_scale
                 if (new_hosts(kk) == i)
                     new_hit = 1;
@@ -169,7 +169,7 @@ for round = 1:round_bound
             end
         end
         
-        if (round == 1 || new_hit == 1) % Initial NC Calculation
+        if (round == 1 | new_hit == 1) % Initial NC Calculation
             target_host = neighbor(i, :);
             %target_host = reference_hosts(i, :);
             target_host = target_host(find(target_host>0));
@@ -316,12 +316,12 @@ for round = 1:round_bound
     end;
     
     % Stat %
-%     if (converge_on == 1 && round <= floor(round_bound/2))
+%     if (converge_on == 1 & round <= floor(round_bound/2))
 %         predicted_matrix = out_host*in_host;
 %         rerr = absolute_error(predicted_matrix, D);        
 %         fpre_flashcrowd = [fpre_flashcrowd; median(rerr)];
 %     end
-    if (converge_on == 1 && round >= floor(round_bound/2))
+    if (converge_on == 1 & round >= floor(round_bound/2))
         %predicted_matrix = out_host*in_host;
         predicted_matrix = out_host(new_hosts, :) * in_host(:, :);
         rerr = absolute_error(predicted_matrix, D(new_hosts, :));

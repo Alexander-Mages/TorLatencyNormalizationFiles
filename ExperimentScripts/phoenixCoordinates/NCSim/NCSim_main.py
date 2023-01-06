@@ -1,14 +1,10 @@
 # Generated with SMOP  0.41-beta
 from smop.libsmop import *
 # NCSim_main.m
-from NCS_phoenix import phoenix as NCS_phoenix
-from relative_error import relative_error
-import time
 
-
+    
 @function
 def NCSim_main(*args,**kwargs):
-    time.sleep(10)
     varargin = NCSim_main.varargin
     nargin = NCSim_main.nargin
 
@@ -43,11 +39,8 @@ def NCSim_main(*args,**kwargs):
     
     # raw distance matrix #
     
-    #clear
-    DATA = load('data_matrix.mat')
-    print(sorted(DATA.keys()))
-    print(DATA["king_matrix"])
-    print("test")
+    clear
+    load('data_matrix.mat')
     # PL: 169 * 169 PlanetLa data set
 # Toread: 355 * 355 PlanetLab data set (collected in Mar.-Apr. 2010, 
 #   used in our ACM ReArch'10 paper 'Taming the Triangle Inequality Violations with Network Coordinate System on Real Internet',
@@ -56,7 +49,7 @@ def NCSim_main(*args,**kwargs):
 #   used in many Network Coordinate papers
     
     # DATA = PL; # PlanetLab data set (small)
-    #DATA=copy(Toread)
+    DATA=copy(Toread)
 # NCSim_main.m:45
     
     # DATA = king_matrix; # King data set
@@ -112,18 +105,13 @@ def NCSim_main(*args,**kwargs):
 # NCSim_main.m:80
         for round in arange(1,max_round).reshape(-1):
             # NC: Phoenix
-            out_all,in_all,fpre_newhost,fpre_flashcrowd = NCS_phoenix(DATA,default_dimension,length(DATA),32,5,0,[],nargout=4)
+            out_all,in_all,fpre_newhost,fpre_flashcrowd=NCS_phoenix(DATA,default_dimension,length(DATA),32,5,0,[],nargout=4)
 # NCSim_main.m:84
             predicted_matrix=dot(out_all,in_all)
 # NCSim_main.m:85
             real_matrix=copy(DATA)
 # NCSim_main.m:85
-
-
-
-            #DEBUG CHANGE
-            #changing DATA to DATA[king_matrix]. Assuming that real_matrix is the king_matrix
-            rerr=relative_error(predicted_matrix,DATA['king_matrix'])
+            rerr=relative_error(predicted_matrix,DATA)
 # NCSim_main.m:85
             output_re=store_re(rerr.T,1,1000)
 # NCSim_main.m:86
@@ -281,4 +269,3 @@ def NCSim_main(*args,**kwargs):
         fprintf('\n50th Percentile RE: %.3f %.3f %.3f %.3f\n',vivaldi_fpre,ides_fpre,dmf_fpre,phoenix_fpre)
         fprintf('90th Percentile RE: %.3f %.3f %.3f %.3f\n',vivaldi_npre,ides_npre,dmf_npre,phoenix_npre)
     
-NCSim_main()
