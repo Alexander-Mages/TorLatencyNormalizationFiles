@@ -1,0 +1,6 @@
+src/app/main/tor_main.o: src/app/main/tor_main.c \
+ /usr/include/stdc-predef.h orconfig.h
+
+/usr/include/stdc-predef.h:
+
+orconfig.h:

@@ -1,19 +1,52 @@
-# Tor state file last generated on 2023-01-12 13:36:01 local time
+# Tor state file last generated on 2023-01-12 14:29:54 local time
 # Other times below are in UTC
 # You *do not* need to edit this file.
 
-BWHistoryReadEnds 2023-01-12 21:25:54
-BWHistoryReadValues 0,0,0,0,8192,0
-BWHistoryReadMaxima 0,0,0,0,0,0
-BWHistoryWriteEnds 2023-01-12 21:25:54
-BWHistoryWriteValues 0,0,0,0,4096,0
-BWHistoryWriteMaxima 0,0,0,0,0,0
-BWHistoryDirReadEnds 2023-01-12 20:10:54
-BWHistoryDirReadValues 0
+BWHistoryDirReadEnds 2023-01-13 19:55:54
+BWHistoryDirReadInterval 86400
 BWHistoryDirReadMaxima 0
-BWHistoryDirWriteEnds 2023-01-12 20:10:54
-BWHistoryDirWriteValues 0
+BWHistoryDirReadValues 0
+BWHistoryDirWriteEnds 2023-01-13 19:55:54
+BWHistoryDirWriteInterval 86400
 BWHistoryDirWriteMaxima 0
-TorVersion Tor 0.2.4.22 (git-2ee56e4c2c841a45)
+BWHistoryDirWriteValues 0
+BWHistoryIPv6ReadEnds 2023-01-13 22:11:04
+BWHistoryIPv6ReadInterval 86400
+BWHistoryIPv6ReadMaxima 0
+BWHistoryIPv6ReadValues 0
+BWHistoryIPv6WriteEnds 2023-01-13 22:11:04
+BWHistoryIPv6WriteInterval 86400
+BWHistoryIPv6WriteMaxima 0
+BWHistoryIPv6WriteValues 0
+BWHistoryReadEnds 2023-01-13 19:55:54
+BWHistoryReadInterval 86400
+BWHistoryReadMaxima 702464
+BWHistoryReadValues 35287040
+BWHistoryWriteEnds 2023-01-13 19:55:54
+BWHistoryWriteInterval 86400
+BWHistoryWriteMaxima 61440
+BWHistoryWriteValues 2658304
+Dormant 0
+Guard in=default rsa_id=DA284A125990ABD7BD8AEE367D88C784A5EBBB20 nickname=flowjob00 sampled_on=2023-01-01T09:02:00 sampled_idx=0 sampled_by=0.4.7.9 listed=1 confirmed_on=2023-01-11T20:35:05 confirmed_idx=1 pb_circ_attempts=2.000000 pb_circ_successes=2.000000 pb_successful_circuits_closed=2.000000
+Guard in=default rsa_id=B34D07BFCBBF179CD6D0F440293A17778893EB76 nickname=bonkers sampled_on=2023-01-01T08:15:29 sampled_idx=1 sampled_by=0.4.7.9 listed=1 confirmed_on=2023-01-03T09:28:59 confirmed_idx=0 pb_circ_attempts=3.000000 pb_circ_successes=3.000000 pb_successful_circuits_closed=3.000000
+Guard in=default rsa_id=67F5AC35DBA20D22A0178BFB6F4AC076C3B16829 nickname=hubble sampled_on=2023-01-02T06:59:17 sampled_idx=2 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=A3DD40B348A75F394C8DAF11ACA106ECF73168E7 nickname=crabshack sampled_on=2023-01-03T19:53:51 sampled_idx=3 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=FDBA8FB4809975350AF8365988A37300D09103F5 nickname=RDPdotSH sampled_on=2023-01-09T17:33:47 sampled_idx=4 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=B39BDC0A4A7C81EF7B3F35097DC4149F09056BBC nickname=Tarmac sampled_on=2023-01-10T23:58:12 sampled_idx=5 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=4745ACB16234385EF1694D530E109F7A573E30C6 nickname=tweinode3 sampled_on=2023-01-03T18:54:11 sampled_idx=6 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=DB6AC7DFB25C9CFC7036B53C78F91D8E3A9279CD nickname=sauberesache sampled_on=2023-01-08T17:11:35 sampled_idx=7 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=38F732DD349A2E59078434651162A2F4201934A5 nickname=mixminion sampled_on=2023-01-05T22:27:06 sampled_idx=8 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=EE2A621042994B29452C12FF3B6F62D9E957758C nickname=Unnamed sampled_on=2023-01-11T05:22:05 sampled_idx=9 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=CC701FCE86D6AF95FC3D5B71645D3430794910C1 nickname=sutsuj sampled_on=2023-01-02T05:11:23 sampled_idx=10 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=5CDEC940C15EA7DABBFA8F58CD8945B875DA80C6 nickname=kikimora sampled_on=2023-01-12T21:51:23 sampled_idx=11 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=2062C6FE40ED6329F02EAC8FB8DE3B682F9910EC nickname=EpicTor4 sampled_on=2023-01-07T00:36:08 sampled_idx=12 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=8F9CD937D0177BE8AC9E27D18604F93216DFA6A9 nickname=GTUniversdeMagie sampled_on=2023-01-09T19:12:09 sampled_idx=13 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=7C22E89AB620E77DF1B4A33787A5EC3F2AB4A8D1 nickname=ZKP1984 sampled_on=2023-01-05T18:31:40 sampled_idx=14 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=D8F79C6CF386DCFC5B692E13C508989460507B71 nickname=tor2tor sampled_on=2023-01-03T03:20:33 sampled_idx=15 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=7265075D62051D8125661309062B92AE136BB216 nickname=baronCV3 sampled_on=2023-01-08T14:57:31 sampled_idx=16 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=5B75FF72B991957FBF1DD18ED734F08570B5A805 nickname=dhrly25 sampled_on=2023-01-01T14:06:05 sampled_idx=17 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=DF6E417594AAB291981404632A6EDA84EB2F1CEA nickname=ChomelesIonos6 sampled_on=2023-01-06T17:55:11 sampled_idx=18 sampled_by=0.4.7.9 listed=1
+Guard in=default rsa_id=950E02DB326D28101E29286044C5714A204F3222 nickname=cello sampled_on=2023-01-02T05:45:23 sampled_idx=19 sampled_by=0.4.7.9 listed=1
 LastRotatedOnionKey 2023-01-12 19:55:54
-LastWritten 2023-01-12 21:36:01
+LastWritten 2023-01-12 22:29:54
+TorVersion Tor 0.4.7.9
