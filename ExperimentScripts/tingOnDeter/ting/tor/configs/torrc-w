@@ -1,0 +1,18 @@
+AvoidDiskWrites 1
+ControlPort 9151
+CookieAuthentication 1
+
+LearnCircuitBuildTimeout 0
+DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/data/w
+ORPort 9001
+DirReqStatistics 0
+UseMicroDescriptors 0
+DownloadExtraInfo 1
+Log notice file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/w.log
+SocksListenAddress 127.0.0.1
+SocksPort 9150
+WarnUnsafeSocks 0
+ExitPolicyRejectPrivate 0
+Exitpolicy accept 206.117.25.79:10006,reject *:*
+RunAsDaemon 1
+PublishServerDescriptor 1

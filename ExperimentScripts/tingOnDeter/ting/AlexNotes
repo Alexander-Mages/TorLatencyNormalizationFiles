@@ -1,0 +1,19 @@
+didn't use configure.sh, rather did everything manually.
+
+in other words, these are the instructions to achieve the first version/commit of Ting in this repo
+
+also, im not including "mkdir" commands or cd commands. the configure script's still in the repo to look at
+
+
+-Installed dependencies (did something different installing pip, I think it was because pip3 was needed) (also had to install libevent-dev and upgrade openssl & libssl-dev on duplicate DETER machine)
+
+-built both Tor versions according to configure.sh
+
+-pasted all 3 torrc's (with w&z's exit policy being the echo_server's IP/port via NAT settings)
+
+-pasted torrc
+
+
+
+
+LATER CHANGES:

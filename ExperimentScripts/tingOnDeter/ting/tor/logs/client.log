@@ -1,0 +1,9 @@
+Jan 12 11:55:11.000 [notice] Tor 0.2.3.25 (git-17c24b3118224d65) opening new log file.
+Jan 12 11:55:11.000 [notice] This version of OpenSSL has a known-good EVP counter-mode implementation. Using it.
+Jan 12 11:55:11.000 [notice] OpenSSL OpenSSL 1.0.2g  1 Mar 2016 looks like version 0.9.8m or later; I will try SSL_OP to enable renegotiation
+Jan 12 11:55:11.000 [notice] Your Tor server's identity key fingerprint is 'Unnamed 040363ACF2856C1223AD7A15F79DA4245A0E652E'
+Jan 12 11:55:11.000 [notice] Reloaded microdescriptor cache.  Found 0 descriptors.
+Jan 12 11:55:11.000 [notice] I learned some more directory information, but not enough to build a circuit: We have no usable consensus.
+Jan 12 11:57:23.000 [warn] Received http status code 404 ("Consensus not signed by sufficient number of requested authorities") from server '128.31.0.39:9131' while fetching consensus directory.
+Jan 12 11:57:23.000 [warn] Received http status code 404 ("Consensus not signed by sufficient number of requested authorities") from server '171.25.193.9:443' while fetching consensus directory.
+Jan 12 11:59:17.000 [warn] Received http status code 404 ("Consensus not signed by sufficient number of requested authorities") from server '193.23.244.244:80' while fetching consensus directory.
