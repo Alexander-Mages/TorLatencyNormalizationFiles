@@ -15,4 +15,4 @@ SocksListenAddress 127.0.0.1
 SocksPort 9050
 WarnUnsafeSocks 0
 PublishServerDescriptor 0
-RunAsDaemon 1
+RunAsDaemon 0

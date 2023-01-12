@@ -1,13 +1,13 @@
-# Tor state file last generated on 2023-01-12 12:06:43 local time
+# Tor state file last generated on 2023-01-12 13:36:01 local time
 # Other times below are in UTC
 # You *do not* need to edit this file.
 
-BWHistoryReadEnds 2023-01-12 20:10:54
-BWHistoryReadValues 0
-BWHistoryReadMaxima 0
-BWHistoryWriteEnds 2023-01-12 20:10:54
-BWHistoryWriteValues 0
-BWHistoryWriteMaxima 0
+BWHistoryReadEnds 2023-01-12 21:25:54
+BWHistoryReadValues 0,0,0,0,8192,0
+BWHistoryReadMaxima 0,0,0,0,0,0
+BWHistoryWriteEnds 2023-01-12 21:25:54
+BWHistoryWriteValues 0,0,0,0,4096,0
+BWHistoryWriteMaxima 0,0,0,0,0,0
 BWHistoryDirReadEnds 2023-01-12 20:10:54
 BWHistoryDirReadValues 0
 BWHistoryDirReadMaxima 0
@@ -16,4 +16,4 @@ BWHistoryDirWriteValues 0
 BWHistoryDirWriteMaxima 0
 TorVersion Tor 0.2.4.22 (git-2ee56e4c2c841a45)
 LastRotatedOnionKey 2023-01-12 19:55:54
-LastWritten 2023-01-12 20:06:43
+LastWritten 2023-01-12 21:36:01
