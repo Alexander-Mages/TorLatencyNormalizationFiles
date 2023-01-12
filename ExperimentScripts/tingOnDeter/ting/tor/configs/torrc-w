@@ -8,7 +8,7 @@ ORPort 9001
 DirReqStatistics 0
 UseMicroDescriptors 0
 DownloadExtraInfo 1
-Log notice file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/w.log
+Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/w.log
 SocksListenAddress 127.0.0.1
 SocksPort 9150
 WarnUnsafeSocks 0
