@@ -4,13 +4,13 @@
 ### DEPENDENCIES ###
 ####################
 
-sudo apt-get install -y python-pip
-sudo pip install stem 
-sudo apt-get install -y libevent-dev openssl libssl-dev
+#sudo apt-get install -y python-pip
+#sudo pip install stem 
+#sudo apt-get install -y libevent-dev openssl libssl-dev
 
 # Get our public ip address
-MY_PUBLIC_IP=$(wget http://ipinfo.io/ip -qO -)
-
+#MY_PUBLIC_IP=$(wget http://ipinfo.io/ip -qO -)
+MY_PUBLIC_IP="206.117.25.79"
 # Setup dirs
 mkdir cache results
 

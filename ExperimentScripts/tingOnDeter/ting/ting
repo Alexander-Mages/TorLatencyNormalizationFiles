@@ -350,6 +350,10 @@ class TingClient():
 						trial[name] = {}
 						log("Tinging " + name)
 						start_build = time.time()
+                                                #ADDED BY ME
+                                                print("Debug: ")
+                                                print(circ)
+                                                #
 						cid = self.build_circuits(circ)
 						self.curr_cid = cid
 						trial[name]['build_time'] = round((time.time() - start_build), 5)
@@ -413,6 +417,10 @@ def main():
 		pair = l.strip().split()
 		
 		try:
+			#debug
+			#print(pair[0])
+			#print(pair[1])
+			#
 			config[pair[0]] = int(pair[1])
 		except ValueError:
 			config[pair[0]] = pair[1]

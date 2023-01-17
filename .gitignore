@@ -1,0 +1,8 @@
+/ExperimentScripts/tingOnDeter/ting/tor/tor-*
+/ExperimentScripts/tingOnDeter/ting/libs/**
+/ExperimentScripts/tingOnDeter/ting/cache/**
+/ExperimentScripts/tingOnDeter/ting/tor/logs/**
+/ExperimentScripts/tingOnDeter/ting/tor/data/**
+
+*.o
+*.Po
