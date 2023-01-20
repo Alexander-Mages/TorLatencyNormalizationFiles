@@ -9,6 +9,7 @@ DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/ting
 
 #CUSTOM NAT SETTINGS
 Address 206.117.25.79
+<<<<<<< HEAD
 OutboundBindAddress 192.168.1.83
 ORPort 206.117.25.79:10004 NoListen
 ORPort 192.168.1.83:9001 NoAdvertise
@@ -16,16 +17,32 @@ ORPort 192.168.1.83:9001 NoAdvertise
 #attempting to resolve Stuck at 10%: Finishing handshake with directory server. (DONE; DONE; count 10; recommendation warn; host [host] at xxx.xxx.xxx.xx:xxx
 #DirAuthority bastet 204.13.164.118:443 24E2F139121D4394C54B5BCC368B3B411857C413
 #
+=======
+#OutboundBindAddress 192.168.1.179
+#OutboundBindAddress 206.117.25.79
+#ORPort 206.117.25.79:10004
+ORPort 206.117.25.79:10004 NoListen
+ORPort 192.168.1.179:9001 NoAdvertise
+
+>>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
 
 
 DirReqStatistics 0
 UseMicroDescriptors 0
 DownloadExtraInfo 1
+<<<<<<< HEAD
 Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/w.log
+=======
+Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.w.log
+>>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
 SocksListenAddress 127.0.0.1
 SocksPort 9150
 WarnUnsafeSocks 0
 ExitPolicyRejectPrivate 0
 Exitpolicy accept 206.117.25.79:10006,reject *:*
+<<<<<<< HEAD
 RunAsDaemon 0
+=======
+RunAsDaemon 1
+>>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
 PublishServerDescriptor 1
