@@ -11,16 +11,21 @@ from numpy import genfromtxt
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]
 whattest = sys.argv[3]
+format = sys.argv[4]
 
-if not arg1 or not arg2 or not whattest:
-    print("usage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test/mannwhitneyu)")
+if not arg1 or not arg2 or not whattest or not format:
+    print("usage: t-test.py sample1.csv sample2.csv (t-test/ks-test/mannwhitneyu) (csv/line-seperated)")
 
-a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
-b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
 
-#deals with line or space seperated numbers
-#a = np.genfromtxt(sys.argv[1])
-#b = np.genfromtxt(sys.argv[2])
+if format == "csv":
+	a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
+	b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
+elif format == "line-seperated"
+	#deals with line or space seperated numbers
+	a = np.genfromtxt(sys.argv[1])
+	b = np.genfromtxt(sys.argv[2])
+else:
+    print("format is invalid. Specified format:" + format)
 
 if whattest == "t-test":
     t, p = ttest_ind(a, b, equal_var=False)
