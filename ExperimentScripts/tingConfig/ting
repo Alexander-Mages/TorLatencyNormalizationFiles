@@ -384,6 +384,9 @@ class TingClient():
 						log("Ting complete, min for this circuit: %fms" % min(ting))
 
 					trial['rtt'] = min(trial['xy']['measurements']) - (min(trial['x']['measurements']) / 2) - (min(trial['y']['measurements']) / 2)
+					print(trial['xy'])
+					print(trial['x'])
+					print(trial['y'])
 					success("Predicted RTT between {0}->{1}: {2}ms".format(x, y, trial['rtt']))
 					result['trials'].append(trial)
 				consecutive_fails = 0
