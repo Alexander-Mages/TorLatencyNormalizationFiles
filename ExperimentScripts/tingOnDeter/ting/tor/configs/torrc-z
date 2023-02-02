@@ -15,8 +15,12 @@ ORPort 192.168.1.83:9002 NoAdvertise
 =======
 #OutboundBindAddress 192.168.1.179
 ORPort 206.117.25.79:10002 NoListen
+<<<<<<< HEAD
 ORPort 192.168.1.179:9002 NoAdvertise
 >>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
+=======
+ORPort 192.168.1.53:9002 NoAdvertise
+>>>>>>> 9993c64664de0596592bec0221d6526f1c147eb9
 #
 
 

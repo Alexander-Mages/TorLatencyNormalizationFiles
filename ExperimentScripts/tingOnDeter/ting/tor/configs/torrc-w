@@ -22,7 +22,7 @@ ORPort 192.168.1.83:9001 NoAdvertise
 #OutboundBindAddress 206.117.25.79
 #ORPort 206.117.25.79:10004
 ORPort 206.117.25.79:10004 NoListen
-ORPort 192.168.1.179:9001 NoAdvertise
+ORPort 192.168.1.53:9001 NoAdvertise
 
 >>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
 
