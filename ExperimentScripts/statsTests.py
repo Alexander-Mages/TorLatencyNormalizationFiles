@@ -1,6 +1,6 @@
 from __future__ import print_function
 import numpy as np
-from scipy.stats import ttest_ind, ttest_ind_from_stats, ks_2samp, mannwhitneyu
+from scipy.stats import ttest_ind, ttest_ind_from_stats, ks_2samp, mannwhitneyu, wilcoxon
 from scipy.special import stdtr
 import sys
 import time
@@ -20,10 +20,14 @@ if not arg1 or not arg2 or not whattest or not format:
 if format == "csv":
 	a = pd.read_csv(arg1, skiprows=2, usecols=['Latency (difference)'])
 	b = pd.read_csv(arg2, skiprows=2, usecols=['Latency (difference)'])
-elif format == "line-seperated"
+elif format == "line-seperated":
 	#deals with line or space seperated numbers
 	a = np.genfromtxt(sys.argv[1])
 	b = np.genfromtxt(sys.argv[2])
+#	print(a)#
+#	print("B:")
+#	print(b)
+
 else:
     print("format is invalid. Specified format:" + format)
 
@@ -34,7 +38,10 @@ elif whattest == "ks-test":
     x = ks_2samp(a, b)
     print(x)
 elif whattest == "mannwhitneyu":
-    x = mannwhitneyu(a, b)
+    x = mannwhitneyu(a, b, nan_policy='raise')
+    print(x)
+elif whattest == "wilcoxon":
+    x = wilcoxon(a, b, nan_policy='raise')
     print(x)
 else:
     print("invalid test type\nusage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test)")
