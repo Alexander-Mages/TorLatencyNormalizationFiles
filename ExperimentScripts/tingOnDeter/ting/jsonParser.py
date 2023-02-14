@@ -34,26 +34,18 @@ with open(filename) as file:
 
 if (jsonLineNumber is None) & (len(resultList) > 1):
     print("file contains multiple JSON objects. Please specify line # of intended JSON object via --jsonLineNumber")
-elif (jsonLineNumber is not None):
-
-else:
-    print("")
+elif (jsonLineNumber is not None) & (len(resultList) > 1):
+    result = resultList[(jsonLineNumber - 1)]
+elif (seeOrSave == "save") & (jsonLineNumber is None) & (len(resultList) > 1):
+    print("cannot save as theres two json objects")
 
 
 if seeOrSave == "save":
-    save()
-else:
-    see()
-
-
-def see():
-    for result in resultList:
-        print("\ny: " + result["y"]["ip"] + "\nx: " + result["x"]["ip"])
-        print(result["trials"][0]["xy"]["measurements"])
-
-def save():
     print("saving xy data from " + filename + ". RTTs from circuit " + result["y"]["ip"] + "<-->" + result["x"]["ip"])
     print(result["trials"][0]["xy"]["measurements"][199])
     print(result["trials"][0]["xy"]["measurements"][0])
     print(outputFile)
-
+else:
+    for result in resultList:
+        print("\ny: " + result["y"]["ip"] + "\nx: " + result["x"]["ip"])
+        print(result["trials"][0]["xy"]["measurements"])
