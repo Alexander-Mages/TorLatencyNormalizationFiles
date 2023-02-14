@@ -7,14 +7,28 @@ import time
 import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import genfromtxt
+import argparse
+from pathlib import Path
 
-arg1 = sys.argv[1]
-arg2 = sys.argv[2]
-whattest = sys.argv[3]
-format = sys.argv[4]
+parser = argparse.ArgumentParser()
 
-if not arg1 or not arg2 or not whattest or not format:
-    print("usage: t-test.py sample1.csv sample2.csv (t-test/ks-test/mannwhitneyu) (csv/line-seperated)")
+parser.add_argument("sample1")
+parser.add_argument("sample2")
+parser.add_argument("statsTest")
+parser.add_argument("format")
+
+args = parser.parse_args()
+
+#if len(args) < 4:
+#^TypeError, parse_args() returns a namespace, but doesn't depopulate sys.argv[]. Using that instead.
+if len(sys.argv) < 4:
+    print("usage: python statsTest.py sample1 sample2 (t-test,ks-test,mannwhitneyu,wilcoxon) (line-seperated,csv)")
+else:
+    arg1 = args.sample1
+    arg2 = args.sample2
+    whattest = args.statsTest
+    format = args.format
+
 
 
 if format == "csv":
@@ -44,10 +58,8 @@ elif whattest == "wilcoxon":
     x = wilcoxon(a, b, nan_policy='raise')
     print(x)
 else:
-    print("invalid test type\nusage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test)")
-
-
-
+    print("invalid test type\n")
+    print("usage: python statsTest.py sample1 sample2 (t-test,ks-test,mannwhitneyu,wilcoxon) (line-seperated,csv)")
 
 # plt.style.use('seaborn-deep')
 #
