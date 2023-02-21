@@ -10,7 +10,7 @@ DirPort 9030
 DirReqStatistics 0
 UseMicrodescriptors 0
 ExitPolicy reject *:*
-Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.client.log
+Log info file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.client.log
 SocksListenAddress 127.0.0.1
 SocksPort 9050
 WarnUnsafeSocks 0

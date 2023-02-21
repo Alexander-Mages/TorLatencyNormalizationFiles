@@ -13,14 +13,14 @@ Address 206.117.25.79
 #OutboundBindAddress 206.117.25.79
 #ORPort 206.117.25.79:10004
 ORPort 206.117.25.79:10004 NoListen
-ORPort 192.168.1.53:9001 NoAdvertise
+ORPort 192.168.1.189:9001 NoAdvertise
 
 
 
 DirReqStatistics 0
 UseMicroDescriptors 0
 DownloadExtraInfo 1
-Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.w.log
+Log info file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.w.log
 SocksListenAddress 127.0.0.1
 SocksPort 9150
 WarnUnsafeSocks 0
