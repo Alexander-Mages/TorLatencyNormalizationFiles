@@ -46,7 +46,7 @@ else:
     print("format is invalid. Specified format:" + format)
 
 if whattest == "t-test":
-    t, p = ttest_ind(a, b, equal_var=False)
+    t, p = ttest_ind(a, b, equal_var=False, alternative='two-sided')
     print("t-test: t= %g\np=%g" % (t,p))
 elif whattest == "ks-test":
     x = ks_2samp(a, b)
