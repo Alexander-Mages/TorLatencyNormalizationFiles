@@ -1,34 +1,20 @@
 from __future__ import print_function
 import numpy as np
-from scipy.stats import ttest_ind, ttest_ind_from_stats, ks_2samp, mannwhitneyu, wilcoxon
+from scipy.stats import ttest_ind, ttest_ind_from_stats, ks_2samp, mannwhitneyu
 from scipy.special import stdtr
 import sys
 import time
 import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import genfromtxt
-import argparse
-from pathlib import Path
 
-parser = argparse.ArgumentParser()
+arg1 = sys.argv[1]
+arg2 = sys.argv[2]
+whattest = sys.argv[3]
+format = sys.argv[4]
 
-parser.add_argument("sample1")
-parser.add_argument("sample2")
-parser.add_argument("statsTest")
-parser.add_argument("format")
-
-args = parser.parse_args()
-
-#if len(args) < 4:
-#^TypeError, parse_args() returns a namespace, but doesn't depopulate sys.argv[]. Using that instead.
-if len(sys.argv) < 4:
-    print("usage: python statsTest.py sample1 sample2 (t-test,ks-test,mannwhitneyu,wilcoxon) (line-seperated,csv)")
-else:
-    arg1 = args.sample1
-    arg2 = args.sample2
-    whattest = args.statsTest
-    format = args.format
-
+if not arg1 or not arg2 or not whattest or not format:
+    print("usage: t-test.py sample1.csv sample2.csv (t-test/ks-test/mannwhitneyu) (csv/line-seperated)")
 
 
 if format == "csv":
@@ -38,10 +24,6 @@ elif format == "line-seperated":
 	#deals with line or space seperated numbers
 	a = np.genfromtxt(sys.argv[1])
 	b = np.genfromtxt(sys.argv[2])
-#	print(a)#
-#	print("B:")
-#	print(b)
-
 else:
     print("format is invalid. Specified format:" + format)
 
@@ -52,14 +34,13 @@ elif whattest == "ks-test":
     x = ks_2samp(a, b)
     print(x)
 elif whattest == "mannwhitneyu":
-    x = mannwhitneyu(a, b, nan_policy='raise')
-    print(x)
-elif whattest == "wilcoxon":
-    x = wilcoxon(a, b, nan_policy='raise')
+    x = mannwhitneyu(a, b)
     print(x)
 else:
-    print("invalid test type\n")
-    print("usage: python statsTest.py sample1 sample2 (t-test,ks-test,mannwhitneyu,wilcoxon) (line-seperated,csv)")
+    print("invalid test type\nusage: t-test.py sample1.csv sample2.csv test-type(t-test/ks-test)")
+
+
+
 
 # plt.style.use('seaborn-deep')
 #

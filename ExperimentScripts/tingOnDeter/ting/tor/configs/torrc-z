@@ -8,39 +8,21 @@ DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/ting
 
 #CUSTOM NAT SETTINGS
 Address 206.117.25.79
-<<<<<<< HEAD
-OutboundBindAddress 192.168.1.83
-ORPort 206.117.25.79:10002 NoListen
-ORPort 192.168.1.83:9002 NoAdvertise
-=======
 #OutboundBindAddress 192.168.1.179
 ORPort 206.117.25.79:10002 NoListen
-<<<<<<< HEAD
-ORPort 192.168.1.179:9002 NoAdvertise
->>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
-=======
-ORPort 192.168.1.53:9002 NoAdvertise
->>>>>>> 9993c64664de0596592bec0221d6526f1c147eb9
+ORPort 192.168.1.79:9002 NoAdvertise
 #
 
 
 DirReqStatistics 0
 UseMicroDescriptors 0
 DownloadExtraInfo 1
-<<<<<<< HEAD
-Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/z.log
-=======
-Log debug file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.z.log
->>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
+Log info file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.z.log
 SocksListenAddress 127.0.0.1
 SocksPort 9250
 WarnUnsafeSocks 0
 ExitPolicyRejectPrivate 0
 Exitpolicy accept 206.117.25.79:10006, reject *:*
-<<<<<<< HEAD
-RunAsDaemon 0
-=======
 RunAsDaemon 1
->>>>>>> dcd394ca6bda137e788310fa99c322d654b766f3
 PublishServerDescriptor 1
 
