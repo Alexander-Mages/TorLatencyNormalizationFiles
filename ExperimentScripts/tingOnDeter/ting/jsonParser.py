@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("filename")
 parser.add_argument("desiredData")
-parser.add_argument("monkeySeeOrMonkeyDo")
+parser.add_argument("monkeySeeOrMonkeyDo", choices=['see','save'])
 parser.add_argument("--outputFile")
 parser.add_argument("--jsonLineNumber")
 
@@ -24,6 +24,7 @@ else:
     outputFile = args.outputFile
     objInFile = args.objInFile
 
+#make filename last argument
 
 #read line-by-line to extract multiple json objects
 resultList = []
@@ -37,7 +38,7 @@ if (jsonLineNumber is None) & (len(resultList) > 1):
 elif (jsonLineNumber is not None) & (len(resultList) > 1):
     result = resultList[(jsonLineNumber - 1)]
 elif (seeOrSave == "save") & (jsonLineNumber is None) & (len(resultList) > 1):
-    print("cannot save as theres two json objects")
+    print("cannot save as there's two json objects")
 
 
 if seeOrSave == "save":
@@ -45,7 +46,9 @@ if seeOrSave == "save":
     print(result["trials"][0]["xy"]["measurements"][199])
     print(result["trials"][0]["xy"]["measurements"][0])
     print(outputFile)
-else:
+elif seeOrSave == "see":
     for result in resultList:
         print("\ny: " + result["y"]["ip"] + "\nx: " + result["x"]["ip"])
         print(result["trials"][0]["xy"]["measurements"])
+else:
+    print("something's wrong")
