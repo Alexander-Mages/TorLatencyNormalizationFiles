@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TORRC="/users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/configs/torrc-w"
+TORRC="/users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/configs/torrc-z"
 
 # Get the current IP address
 REMOTE_IP=$(curl -s https://checkip.amazonaws.com)
