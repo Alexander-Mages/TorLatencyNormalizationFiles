@@ -25,6 +25,6 @@ SocksListenAddress 127.0.0.1
 SocksPort 9150
 WarnUnsafeSocks 0
 ExitPolicyRejectPrivate 0
-Exitpolicy accept 206.117.25.79:::::::10006,reject *:*
+Exitpolicy accept 206.117.25.79:10006,reject *:*
 RunAsDaemon 1
 PublishServerDescriptor 1

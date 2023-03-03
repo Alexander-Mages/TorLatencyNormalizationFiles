@@ -74,8 +74,8 @@ sed -E -i "s/(^Address \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMOTE_IP\2/" 
 sed -E -i "s/(^ORPort \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:([0-9]+)( NoListen.*)/\1$REMOTE_IP:\2 \3/" "$TORRCW"
 sed -E -i "s/(^ORPort \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:([0-9]+)( NoListen.*)/\1$REMOTE_IP:\2 \3/" "$TORRCZ"
 
-sed -E -i "s/(^Exitpolicy accept \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMOTE_IP:\2/" "$TORRCW"
-sed -E -i "s/(^Exitpolicy accept \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMOTE_IP:\2/" "$TORRCZ"
+sed -E -i "s/(^Exitpolicy accept \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMOTE_IP\2/" "$TORRCW"
+sed -E -i "s/(^Exitpolicy accept \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMOTE_IP\2/" "$TORRCZ"
 
 
 printf "IPs updated in torrc's: $TORRCW\nand\n$TORRCZ\n"
@@ -87,8 +87,18 @@ printf "IPs updated in torrc's: $TORRCW\nand\n$TORRCZ\n"
 #
 
 #Run W & Z as daemons w/ the new torrc
-printf "Running Tor w/ torrc-w..."
+printf "Running Tor w/ torrc-w...\n\n"
+#note, do not allow user input into eval
+eval "$WZTORBINARY -f $TORRCW"
+printf "\nDaemonized.\n"
+printf "Running Tor w/ torrc-z...\n\n"
+eval "$WZTORBINARY -f $TORRCZ"
+printf "\nDaemonized.\n"
 
-$WZTORBINARY -f $TORRCW
+#run client as daemon using different version & torrc
+printf "Running Tor w/ torrc-client...\n\n"
+eval "$CLIENTTORBINARY -f $TORRCCLIENT"
+printf "\nDaemonized.\n"
 
-printf "Daemonized.\nRunning Tor w/ torrc-z)
+
+eval "ps -aux | grep 'tor -f'"
