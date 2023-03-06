@@ -80,6 +80,16 @@ sed -E -i "s/(^Exitpolicy accept \b)[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\b.*)/\1$REMO
 
 printf "IPs updated in torrc's: $TORRCW\nand\n$TORRCZ\n"
 
+
+
+#
+#
+#ECHO SERVER
+#
+#
+#python echo_server 4444
+#might add this later for convenience
+
 #
 #
 #STARTING TOR
