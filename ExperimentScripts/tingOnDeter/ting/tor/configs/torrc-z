@@ -9,9 +9,8 @@ DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/ting
 #CUSTOM NAT SETTINGS
 Address 206.117.25.79
 #OutboundBindAddress 192.168.1.179
-ORPort 206.117.25.79:10002 NoListen
-ORPort 192.168.1.79:9002 NoAdvertise
-#
+ORPort 206.117.25.79:10002  NoListen
+ORPort 192.168.1.194:9002  NoAdvertise
 
 
 DirReqStatistics 0

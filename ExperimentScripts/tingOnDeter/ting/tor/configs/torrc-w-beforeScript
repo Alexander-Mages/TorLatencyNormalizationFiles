@@ -12,8 +12,8 @@ Address 206.117.25.79
 #OutboundBindAddress 192.168.1.179
 #OutboundBindAddress 206.117.25.79
 #ORPort 206.117.25.79:10004
-ORPort 206.117.25.79:10004  NoListen
-ORPort 192.168.1.194:9001  NoAdvertise
+ORPort 206.117.25.79:10004 NoListen
+ORPort 192.168.1.194:9001 NoAdvertise
 
 
 
