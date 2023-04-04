@@ -1,0 +1,1009 @@
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file LTinputFileAPResearch --config-file ./tingrc
+2023-03-26 11:31:40.675521 Read config file ./tingrc
+2023-03-26 11:31:40.683594 Found list of relays in cache that is 0 hours old. Using that...
+2023-03-26 11:31:40.818668 There are 5611 currently running Tor nodes.
+2023-03-26 11:31:40.882780 Controller initialized on port 9051. Talking to Tor on port 9050.
+Collect mode selected : input_file=LTinputFileAPResearch
+185.25.51.97
+78.60.180.159
+{'y': {'fp': '4AD749C18594B880CBF8318CA281744A3C30D9B5', 'ip': '78.60.180.159'}, 'x': {'fp': '999B4A9F837A345EAA6BC11C2F1F701C5D11E3DC', 'ip': '185.25.51.97'}}
+2023-03-26 11:31:40.885092 Measuring new pair: 185.25.51.97->78.60.180.159
+2023-03-26 11:31:40.885162 Iteration 1
+2023-03-26 11:31:40.885249 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '999B4A9F837A345EAA6BC11C2F1F701C5D11E3DC', '4AD749C18594B880CBF8318CA281744A3C30D9B5', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:31:40.885368 Building circuit...
+2023-03-26 11:31:41.935648 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:34:12.583320 Ting complete, min for this circuit: 579.546930ms
+2023-03-26 11:34:12.583612 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '999B4A9F837A345EAA6BC11C2F1F701C5D11E3DC', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:34:12.583705 Building circuit...
+2023-03-26 11:34:13.474875 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:36:08.568985 Ting complete, min for this circuit: 397.862910ms
+2023-03-26 11:36:08.569444 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '4AD749C18594B880CBF8318CA281744A3C30D9B5', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:36:08.569554 Building circuit...
+2023-03-26 11:36:09.134617 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:37:51.043345 Ting complete, min for this circuit: 381.565090ms
+2023-03-26 11:37:51.043522 Predicted RTT between 185.25.51.97->78.60.180.159: 189.83293ms
+46.166.162.57
+176.223.141.106
+{'y': {'fp': '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'ip': '176.223.141.106'}, 'x': {'fp': 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'ip': '46.166.162.57'}}
+2023-03-26 11:37:51.052241 Measuring new pair: 46.166.162.57->176.223.141.106
+2023-03-26 11:37:51.052311 Iteration 1
+2023-03-26 11:37:51.052475 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:37:51.052600 Building circuit...
+2023-03-26 11:37:51.945011 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:40:01.125242 Ting complete, min for this circuit: 376.507040ms
+2023-03-26 11:40:01.125582 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:40:01.125801 Building circuit...
+2023-03-26 11:40:01.806051 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:41:47.043135 Ting complete, min for this circuit: 380.032060ms
+2023-03-26 11:41:47.043576 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:41:47.043670 Building circuit...
+2023-03-26 11:41:57.946296 Circuit failed to be created: TIMEOUT
+2023-03-26 11:41:57.946396 Building circuit...
+2023-03-26 11:42:07.965420 Circuit failed to be created: TIMEOUT
+2023-03-26 11:42:07.965534 Building circuit...
+2023-03-26 11:42:18.975861 Circuit failed to be created: TIMEOUT
+2023-03-26 11:42:18.975978 Building circuit...
+2023-03-26 11:42:29.984892 Circuit failed to be created: TIMEOUT
+2023-03-26 11:42:29.985004 Building circuit...
+2023-03-26 11:42:39.991950 Circuit failed to be created: TIMEOUT
+2023-03-26 11:42:39.992055 Building circuit...
+2023-03-26 11:42:50.017738 Circuit failed to be created: TIMEOUT
+2023-03-26 11:42:50.017843 Building circuit...
+2023-03-26 11:43:00.024620 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:00.024738 Building circuit...
+2023-03-26 11:43:10.046719 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:10.046830 Building circuit...
+2023-03-26 11:43:21.055928 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:21.056038 Building circuit...
+2023-03-26 11:43:32.064789 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:32.064894 Building circuit...
+2023-03-26 11:43:43.073735 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:43.073839 Building circuit...
+2023-03-26 11:43:54.082934 Circuit failed to be created: TIMEOUT
+2023-03-26 11:43:54.083045 Building circuit...
+2023-03-26 11:43:55.472079 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.472221 Building circuit...
+2023-03-26 11:43:55.527086 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.527198 Building circuit...
+2023-03-26 11:43:55.582153 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.582267 Building circuit...
+2023-03-26 11:43:55.637061 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.637203 Building circuit...
+2023-03-26 11:43:55.692328 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.692471 Building circuit...
+2023-03-26 11:43:55.747341 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.747453 Building circuit...
+2023-03-26 11:43:55.802429 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.802543 Building circuit...
+2023-03-26 11:43:55.857557 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.857670 Building circuit...
+2023-03-26 11:43:55.912712 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.912825 Building circuit...
+2023-03-26 11:43:55.967459 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:55.967573 Building circuit...
+2023-03-26 11:43:56.022571 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:56.022680 Building circuit...
+2023-03-26 11:43:56.077623 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:56.077738 Building circuit...
+2023-03-26 11:43:56.132536 Circuit failed to be created: DESTROYED
+2023-03-26 11:43:56.132679 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 11:43:56.132727 Cooling down for five seconds...
+78.60.180.159
+213.252.245.202
+{'y': {'fp': '96275921105DC2D41B79AD75804A301738B51E47', 'ip': '213.252.245.202'}, 'x': {'fp': '4AD749C18594B880CBF8318CA281744A3C30D9B5', 'ip': '78.60.180.159'}}
+2023-03-26 11:44:01.146452 Measuring new pair: 78.60.180.159->213.252.245.202
+2023-03-26 11:44:01.146503 Iteration 1
+2023-03-26 11:44:01.146572 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '4AD749C18594B880CBF8318CA281744A3C30D9B5', '96275921105DC2D41B79AD75804A301738B51E47', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:44:01.146654 Building circuit...
+2023-03-26 11:44:01.902109 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:45:22.145736 Ting complete, min for this circuit: 382.381200ms
+2023-03-26 11:45:22.145821 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '4AD749C18594B880CBF8318CA281744A3C30D9B5', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:45:22.145908 Building circuit...
+2023-03-26 11:45:22.855851 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:46:44.271283 Ting complete, min for this circuit: 360.172990ms
+2023-03-26 11:46:44.271748 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '96275921105DC2D41B79AD75804A301738B51E47', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:46:44.272503 Building circuit...
+2023-03-26 11:46:44.818611 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 11:48:09.065762 Ting complete, min for this circuit: 384.784940ms
+2023-03-26 11:48:09.065906 Predicted RTT between 78.60.180.159->213.252.245.202: 9.902235ms
+84.240.60.234
+5.199.162.76
+{'y': {'fp': 'BD3D15319E778565E30992C3CE541BA5B9048CA1', 'ip': '5.199.162.76'}, 'x': {'fp': '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'ip': '84.240.60.234'}}
+2023-03-26 11:48:09.073895 Measuring new pair: 84.240.60.234->5.199.162.76
+2023-03-26 11:48:09.073941 Iteration 1
+2023-03-26 11:48:09.074008 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'BD3D15319E778565E30992C3CE541BA5B9048CA1', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:48:09.074097 Building circuit...
+2023-03-26 11:48:27.316585 Circuit failed to be created: TIMEOUT
+2023-03-26 11:48:27.316680 Building circuit...
+2023-03-26 11:48:45.340198 Circuit failed to be created: TIMEOUT
+2023-03-26 11:48:45.340302 Building circuit...
+2023-03-26 11:49:03.363436 Circuit failed to be created: TIMEOUT
+2023-03-26 11:49:03.363592 Building circuit...
+2023-03-26 11:49:21.371177 Circuit failed to be created: TIMEOUT
+2023-03-26 11:49:21.371283 Building circuit...
+2023-03-26 11:49:39.394565 Circuit failed to be created: TIMEOUT
+2023-03-26 11:49:39.394690 Building circuit...
+2023-03-26 11:49:57.417856 Circuit failed to be created: TIMEOUT
+2023-03-26 11:49:57.417981 Building circuit...
+2023-03-26 11:50:15.441453 Circuit failed to be created: TIMEOUT
+2023-03-26 11:50:15.441558 Building circuit...
+2023-03-26 11:50:20.487934 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.488057 Building circuit...
+2023-03-26 11:50:20.542845 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.542948 Building circuit...
+2023-03-26 11:50:20.598039 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.598140 Building circuit...
+2023-03-26 11:50:20.652885 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.652986 Building circuit...
+2023-03-26 11:50:20.708012 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.708117 Building circuit...
+2023-03-26 11:50:20.762925 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.763027 Building circuit...
+2023-03-26 11:50:20.817831 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.817936 Building circuit...
+2023-03-26 11:50:20.872588 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.872689 Building circuit...
+2023-03-26 11:50:20.927436 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.927580 Building circuit...
+2023-03-26 11:50:20.982156 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:20.982260 Building circuit...
+2023-03-26 11:50:21.037295 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.037396 Building circuit...
+2023-03-26 11:50:21.092435 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.092538 Building circuit...
+2023-03-26 11:50:21.147701 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.147806 Building circuit...
+2023-03-26 11:50:21.202881 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.202985 Building circuit...
+2023-03-26 11:50:21.257770 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.257887 Building circuit...
+2023-03-26 11:50:21.312902 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.313025 Building circuit...
+2023-03-26 11:50:21.367809 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.367914 Building circuit...
+2023-03-26 11:50:21.422617 Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.422758 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 11:50:21.422802 Cooling down for five seconds...
+80.209.228.224
+78.56.22.82
+{'y': {'fp': 'DBED99999FD4EEE81D03972922700771718AFF51', 'ip': '78.56.22.82'}, 'x': {'fp': '1D89ECC530773C447926FAF623FD0C19BB4126BD', 'ip': '80.209.228.224'}}
+2023-03-26 11:50:26.433878 Measuring new pair: 80.209.228.224->78.56.22.82
+2023-03-26 11:50:26.433925 Iteration 1
+2023-03-26 11:50:26.433990 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '1D89ECC530773C447926FAF623FD0C19BB4126BD', 'DBED99999FD4EEE81D03972922700771718AFF51', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:50:26.434076 Building circuit...
+2023-03-26 11:50:44.468432 Circuit failed to be created: TIMEOUT
+2023-03-26 11:50:44.468524 Building circuit...
+2023-03-26 11:51:02.509365 Circuit failed to be created: TIMEOUT
+2023-03-26 11:51:02.509470 Building circuit...
+2023-03-26 11:51:20.517029 Circuit failed to be created: TIMEOUT
+2023-03-26 11:51:20.517139 Building circuit...
+2023-03-26 11:51:38.540591 Circuit failed to be created: TIMEOUT
+2023-03-26 11:51:38.540701 Building circuit...
+2023-03-26 11:51:56.583203 Circuit failed to be created: TIMEOUT
+2023-03-26 11:51:56.583310 Building circuit...
+2023-03-26 11:52:14.583549 Circuit failed to be created: TIMEOUT
+2023-03-26 11:52:14.583663 Building circuit...
+2023-03-26 11:52:32.607298 Circuit failed to be created: TIMEOUT
+2023-03-26 11:52:32.607408 Building circuit...
+2023-03-26 11:52:35.650054 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.650157 Building circuit...
+2023-03-26 11:52:35.705413 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.705516 Building circuit...
+2023-03-26 11:52:35.760212 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.760376 Building circuit...
+2023-03-26 11:52:35.815174 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.815278 Building circuit...
+2023-03-26 11:52:35.870281 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.870385 Building circuit...
+2023-03-26 11:52:35.925427 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.925568 Building circuit...
+2023-03-26 11:52:35.984370 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:35.984481 Building circuit...
+2023-03-26 11:52:36.039292 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.039406 Building circuit...
+2023-03-26 11:52:36.093967 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.094076 Building circuit...
+2023-03-26 11:52:36.148760 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.148872 Building circuit...
+2023-03-26 11:52:36.203659 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.203772 Building circuit...
+2023-03-26 11:52:36.259060 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.259198 Building circuit...
+2023-03-26 11:52:36.313938 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.314051 Building circuit...
+2023-03-26 11:52:36.369050 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.369162 Building circuit...
+2023-03-26 11:52:36.424161 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.424277 Building circuit...
+2023-03-26 11:52:36.479067 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.479181 Building circuit...
+2023-03-26 11:52:36.533860 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.533973 Building circuit...
+2023-03-26 11:52:36.588952 Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.589102 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 11:52:36.589145 Cooling down for five seconds...
+5.199.162.114
+141.98.11.131
+{'y': {'fp': 'F22A238894E85D2D25036553A4601961EBFC2F03', 'ip': '141.98.11.131'}, 'x': {'fp': '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'ip': '5.199.162.114'}}
+2023-03-26 11:52:41.599891 Measuring new pair: 5.199.162.114->141.98.11.131
+2023-03-26 11:52:41.599941 Iteration 1
+2023-03-26 11:52:41.600005 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'F22A238894E85D2D25036553A4601961EBFC2F03', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:52:41.600149 Building circuit...
+2023-03-26 11:52:59.646480 Circuit failed to be created: TIMEOUT
+2023-03-26 11:52:59.646579 Building circuit...
+2023-03-26 11:53:17.670664 Circuit failed to be created: TIMEOUT
+2023-03-26 11:53:17.670776 Building circuit...
+2023-03-26 11:53:35.694645 Circuit failed to be created: TIMEOUT
+2023-03-26 11:53:35.694806 Building circuit...
+2023-03-26 11:53:41.728756 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:41.728870 Building circuit...
+2023-03-26 11:53:42.135507 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:42.135648 Building circuit...
+2023-03-26 11:53:42.542281 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:42.542397 Building circuit...
+2023-03-26 11:53:42.930241 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:42.930354 Building circuit...
+2023-03-26 11:53:43.318441 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:43.318554 Building circuit...
+2023-03-26 11:53:43.706892 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:43.707008 Building circuit...
+2023-03-26 11:53:44.095108 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:44.095224 Building circuit...
+2023-03-26 11:53:44.483162 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:44.483270 Building circuit...
+2023-03-26 11:53:44.871340 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:44.871452 Building circuit...
+2023-03-26 11:53:45.278052 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:45.278164 Building circuit...
+2023-03-26 11:53:45.666112 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:45.666254 Building circuit...
+2023-03-26 11:53:46.054262 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:46.054370 Building circuit...
+2023-03-26 11:53:46.449884 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:46.449997 Building circuit...
+2023-03-26 11:53:46.856843 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:46.856953 Building circuit...
+2023-03-26 11:53:47.244687 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:47.244799 Building circuit...
+2023-03-26 11:53:47.647937 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:47.648048 Building circuit...
+2023-03-26 11:53:48.055775 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:48.055886 Building circuit...
+2023-03-26 11:53:48.451658 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:48.451771 Building circuit...
+2023-03-26 11:53:48.839583 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:48.839697 Building circuit...
+2023-03-26 11:53:49.227897 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:49.228054 Building circuit...
+2023-03-26 11:53:49.634469 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:49.634575 Building circuit...
+2023-03-26 11:53:50.042608 Circuit failed to be created: DESTROYED
+2023-03-26 11:53:50.042786 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 11:53:50.042888 Cooling down for five seconds...
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 141.98.11.131 5.199.162.114 --config-file ./tingrc
+2023-03-26 11:54:22.339973 Read config file ./tingrc
+2023-03-26 11:54:22.350545 Found list of relays in cache that is 0 hours old. Using that...
+2023-03-26 11:54:22.481737 There are 5611 currently running Tor nodes.
+2023-03-26 11:54:22.546547 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (141.98.11.131,5.199.162.114)
+141.98.11.131
+5.199.162.114
+{'y': {'fp': '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'ip': '5.199.162.114'}, 'x': {'fp': 'F22A238894E85D2D25036553A4601961EBFC2F03', 'ip': '141.98.11.131'}}
+2023-03-26 11:54:22.547111 Measuring new pair: 141.98.11.131->5.199.162.114
+2023-03-26 11:54:22.547192 Iteration 1
+2023-03-26 11:54:22.547275 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'F22A238894E85D2D25036553A4601961EBFC2F03', '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:54:22.547398 Building circuit...
+2023-03-26 11:54:40.746924 Circuit failed to be created: TIMEOUT
+2023-03-26 11:54:40.747043 Building circuit...
+2023-03-26 11:54:58.789333 Circuit failed to be created: TIMEOUT
+2023-03-26 11:54:58.789437 Building circuit...
+2023-03-26 11:55:16.813328 Circuit failed to be created: TIMEOUT
+2023-03-26 11:55:16.813434 Building circuit...
+2023-03-26 11:55:34.814085 Circuit failed to be created: TIMEOUT
+2023-03-26 11:55:34.814194 Building circuit...
+^C^C^C
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ 
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file inputFiles/LTinputFileAPResearch --config-file ./tingrc
+2023-03-26 11:59:26.374241 Read config file ./tingrc
+2023-03-26 11:59:26.385170 Found list of relays in cache that is 0 hours old. Using that...
+2023-03-26 11:59:26.517612 There are 5611 currently running Tor nodes.
+2023-03-26 11:59:26.585659 Controller initialized on port 9051. Talking to Tor on port 9050.
+Collect mode selected : input_file=inputFiles/LTinputFileAPResearch
+46.166.162.57
+176.223.141.106
+{'y': {'fp': '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'ip': '176.223.141.106'}, 'x': {'fp': 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'ip': '46.166.162.57'}}
+2023-03-26 11:59:26.587753 Measuring new pair: 46.166.162.57->176.223.141.106
+2023-03-26 11:59:26.587823 Iteration 1
+2023-03-26 11:59:26.587912 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 11:59:26.588039 Building circuit...
+2023-03-26 11:59:27.569433 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:01:59.213898 Ting complete, min for this circuit: 601.487160ms
+2023-03-26 12:01:59.214252 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:01:59.214512 Building circuit...
+2023-03-26 12:02:00.203791 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:04:37.716138 Ting complete, min for this circuit: 587.315080ms
+2023-03-26 12:04:37.716222 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '5262556D44A7F2434990FDE1AE7973C67DF49E58', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:04:37.716308 Building circuit...
+2023-03-26 12:04:48.424868 Circuit failed to be created: TIMEOUT
+2023-03-26 12:04:48.424965 Building circuit...
+2023-03-26 12:04:58.451287 Circuit failed to be created: TIMEOUT
+2023-03-26 12:04:58.451440 Building circuit...
+2023-03-26 12:05:09.460510 Circuit failed to be created: TIMEOUT
+2023-03-26 12:05:09.460617 Building circuit...
+2023-03-26 12:05:20.469932 Circuit failed to be created: TIMEOUT
+2023-03-26 12:05:20.470034 Building circuit...
+2023-03-26 12:05:30.477907 Circuit failed to be created: TIMEOUT
+2023-03-26 12:05:30.478019 Building circuit...
+2023-03-26 12:05:40.503765 Circuit failed to be created: TIMEOUT
+2023-03-26 12:05:40.503868 Building circuit...
+2023-03-26 12:05:51.512517 Circuit failed to be created: TIMEOUT
+2023-03-26 12:05:51.512622 Building circuit...
+2023-03-26 12:06:01.519644 Circuit failed to be created: TIMEOUT
+2023-03-26 12:06:01.519747 Building circuit...
+2023-03-26 12:06:11.545167 Circuit failed to be created: TIMEOUT
+2023-03-26 12:06:11.545272 Building circuit...
+2023-03-26 12:06:22.554583 Circuit failed to be created: TIMEOUT
+2023-03-26 12:06:22.554686 Building circuit...
+2023-03-26 12:06:33.563108 Circuit failed to be created: TIMEOUT
+2023-03-26 12:06:33.563213 Building circuit...
+2023-03-26 12:06:44.572423 Circuit failed to be created: TIMEOUT
+2023-03-26 12:06:44.572526 Building circuit...
+2023-03-26 12:06:47.615333 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.615438 Building circuit...
+2023-03-26 12:06:47.670216 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.670319 Building circuit...
+2023-03-26 12:06:47.725422 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.725560 Building circuit...
+2023-03-26 12:06:47.780178 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.780280 Building circuit...
+2023-03-26 12:06:47.835354 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.835459 Building circuit...
+2023-03-26 12:06:47.890415 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.890526 Building circuit...
+2023-03-26 12:06:47.945587 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:47.945688 Building circuit...
+2023-03-26 12:06:48.000808 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.000911 Building circuit...
+2023-03-26 12:06:48.055657 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.055771 Building circuit...
+2023-03-26 12:06:48.110698 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.110800 Building circuit...
+2023-03-26 12:06:48.165523 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.165633 Building circuit...
+2023-03-26 12:06:48.220787 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.220898 Building circuit...
+2023-03-26 12:06:48.275641 Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.275772 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 12:06:48.275815 Cooling down for five seconds...
+84.240.60.234
+5.199.162.76
+{'y': {'fp': 'BD3D15319E778565E30992C3CE541BA5B9048CA1', 'ip': '5.199.162.76'}, 'x': {'fp': '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'ip': '84.240.60.234'}}
+2023-03-26 12:06:53.288324 Measuring new pair: 84.240.60.234->5.199.162.76
+2023-03-26 12:06:53.288415 Iteration 1
+2023-03-26 12:06:53.288481 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'BD3D15319E778565E30992C3CE541BA5B9048CA1', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:06:53.288577 Building circuit...
+2023-03-26 12:07:11.614279 Circuit failed to be created: TIMEOUT
+2023-03-26 12:07:11.614373 Building circuit...
+2023-03-26 12:07:29.637711 Circuit failed to be created: TIMEOUT
+2023-03-26 12:07:29.637825 Building circuit...
+2023-03-26 12:07:47.661144 Circuit failed to be created: TIMEOUT
+2023-03-26 12:07:47.661258 Building circuit...
+2023-03-26 12:08:05.684521 Circuit failed to be created: TIMEOUT
+2023-03-26 12:08:05.684633 Building circuit...
+2023-03-26 12:08:23.691597 Circuit failed to be created: TIMEOUT
+2023-03-26 12:08:23.691703 Building circuit...
+2023-03-26 12:08:41.715128 Circuit failed to be created: TIMEOUT
+2023-03-26 12:08:41.715234 Building circuit...
+2023-03-26 12:08:59.757387 Circuit failed to be created: TIMEOUT
+2023-03-26 12:08:59.757508 Building circuit...
+2023-03-26 12:09:02.783838 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:02.783955 Building circuit...
+2023-03-26 12:09:02.838725 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:02.838865 Building circuit...
+2023-03-26 12:09:02.893756 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:02.894015 Building circuit...
+2023-03-26 12:09:02.948601 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:02.948739 Building circuit...
+2023-03-26 12:09:03.003582 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.003845 Building circuit...
+2023-03-26 12:09:03.058553 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.058689 Building circuit...
+2023-03-26 12:09:03.113452 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.113711 Building circuit...
+2023-03-26 12:09:03.168303 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.168461 Building circuit...
+2023-03-26 12:09:03.223349 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.223611 Building circuit...
+2023-03-26 12:09:03.278217 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.278354 Building circuit...
+2023-03-26 12:09:03.333222 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.333490 Building circuit...
+2023-03-26 12:09:03.388091 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.388228 Building circuit...
+2023-03-26 12:09:03.442980 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.443116 Building circuit...
+2023-03-26 12:09:03.497941 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.498077 Building circuit...
+2023-03-26 12:09:03.552962 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.553096 Building circuit...
+2023-03-26 12:09:03.607710 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.607844 Building circuit...
+2023-03-26 12:09:03.662655 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.662789 Building circuit...
+2023-03-26 12:09:03.717617 Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.717806 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 12:09:03.717939 Cooling down for five seconds...
+80.209.228.224
+78.56.22.82
+{'y': {'fp': 'DBED99999FD4EEE81D03972922700771718AFF51', 'ip': '78.56.22.82'}, 'x': {'fp': '1D89ECC530773C447926FAF623FD0C19BB4126BD', 'ip': '80.209.228.224'}}
+2023-03-26 12:09:08.728962 Measuring new pair: 80.209.228.224->78.56.22.82
+2023-03-26 12:09:08.729058 Iteration 1
+2023-03-26 12:09:08.729173 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '1D89ECC530773C447926FAF623FD0C19BB4126BD', 'DBED99999FD4EEE81D03972922700771718AFF51', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:09:08.729366 Building circuit...
+2023-03-26 12:09:26.773777 Circuit failed to be created: TIMEOUT
+2023-03-26 12:09:26.773869 Building circuit...
+2023-03-26 12:09:44.797978 Circuit failed to be created: TIMEOUT
+2023-03-26 12:09:44.798094 Building circuit...
+2023-03-26 12:10:02.839670 Circuit failed to be created: TIMEOUT
+2023-03-26 12:10:02.839792 Building circuit...
+2023-03-26 12:10:20.846956 Circuit failed to be created: TIMEOUT
+2023-03-26 12:10:20.847075 Building circuit...
+2023-03-26 12:10:38.870004 Circuit failed to be created: TIMEOUT
+2023-03-26 12:10:38.870116 Building circuit...
+2023-03-26 12:10:56.893721 Circuit failed to be created: TIMEOUT
+2023-03-26 12:10:56.893833 Building circuit...
+2023-03-26 12:11:14.917254 Circuit failed to be created: TIMEOUT
+2023-03-26 12:11:14.917359 Building circuit...
+2023-03-26 12:11:17.959896 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:17.960000 Building circuit...
+2023-03-26 12:11:18.015150 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.015255 Building circuit...
+2023-03-26 12:11:18.070220 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.070323 Building circuit...
+2023-03-26 12:11:18.125379 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.125481 Building circuit...
+2023-03-26 12:11:18.180768 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.180870 Building circuit...
+2023-03-26 12:11:18.235717 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.235820 Building circuit...
+2023-03-26 12:11:18.290499 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.290601 Building circuit...
+2023-03-26 12:11:18.345286 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.345387 Building circuit...
+2023-03-26 12:11:18.400224 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.400397 Building circuit...
+2023-03-26 12:11:18.455047 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.455148 Building circuit...
+2023-03-26 12:11:18.510123 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.510228 Building circuit...
+2023-03-26 12:11:18.565046 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.565183 Building circuit...
+2023-03-26 12:11:18.620407 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.620509 Building circuit...
+2023-03-26 12:11:18.675365 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.675470 Building circuit...
+2023-03-26 12:11:18.730424 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.730529 Building circuit...
+2023-03-26 12:11:18.785749 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.785851 Building circuit...
+2023-03-26 12:11:18.840566 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.840668 Building circuit...
+2023-03-26 12:11:18.895720 Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.895874 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 12:11:18.895919 Cooling down for five seconds...
+5.199.162.114
+141.98.11.131
+{'y': {'fp': 'F22A238894E85D2D25036553A4601961EBFC2F03', 'ip': '141.98.11.131'}, 'x': {'fp': '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'ip': '5.199.162.114'}}
+2023-03-26 12:11:23.908220 Measuring new pair: 5.199.162.114->141.98.11.131
+2023-03-26 12:11:23.908267 Iteration 1
+2023-03-26 12:11:23.908335 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '1331D4F20F9679FEA9F1AAFA2EA9C992AC6F172E', 'F22A238894E85D2D25036553A4601961EBFC2F03', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:11:23.908501 Building circuit...
+2023-03-26 12:11:41.952815 Circuit failed to be created: TIMEOUT
+2023-03-26 12:11:41.952907 Building circuit...
+2023-03-26 12:11:59.976692 Circuit failed to be created: TIMEOUT
+2023-03-26 12:11:59.976805 Building circuit...
+2023-03-26 12:12:18.001386 Circuit failed to be created: TIMEOUT
+2023-03-26 12:12:18.001531 Building circuit...
+2023-03-26 12:12:36.025309 Circuit failed to be created: TIMEOUT
+2023-03-26 12:12:36.025422 Building circuit...
+2023-03-26 12:12:36.563113 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:36.563218 Building circuit...
+2023-03-26 12:12:36.976858 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:36.976971 Building circuit...
+2023-03-26 12:12:37.384138 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:37.384253 Building circuit...
+2023-03-26 12:12:37.790470 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:37.790581 Building circuit...
+2023-03-26 12:12:38.197035 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:38.197143 Building circuit...
+2023-03-26 12:12:38.584600 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:38.584742 Building circuit...
+2023-03-26 12:12:38.972054 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:38.972205 Building circuit...
+2023-03-26 12:12:39.378457 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:39.378563 Building circuit...
+2023-03-26 12:12:39.766528 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:39.766634 Building circuit...
+2023-03-26 12:12:40.154572 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:40.154677 Building circuit...
+2023-03-26 12:12:40.557962 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:40.558069 Building circuit...
+2023-03-26 12:12:40.964400 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:40.964514 Building circuit...
+2023-03-26 12:12:41.351946 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:41.352056 Building circuit...
+2023-03-26 12:12:41.739659 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:41.739768 Building circuit...
+2023-03-26 12:12:42.134796 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:42.134902 Building circuit...
+2023-03-26 12:12:42.522225 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:42.522330 Building circuit...
+2023-03-26 12:12:42.910106 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:42.910209 Building circuit...
+2023-03-26 12:12:43.316409 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:43.316517 Building circuit...
+2023-03-26 12:12:43.722714 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:43.722817 Building circuit...
+2023-03-26 12:12:44.110615 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:44.110719 Building circuit...
+2023-03-26 12:12:44.498384 Circuit failed to be created: DESTROYED
+2023-03-26 12:12:44.498525 CircuitExtensionFailed: Circuit failed to be created: DESTROYED
+2023-03-26 12:12:44.498568 Cooling down for five seconds...
+^Cmagesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file inputFiles/LTinputFileAPResearch --config-file ./tingrc^C
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 46.166.162.57
+2023-03-26 12:16:16.267578 Read config file tingrc
+2023-03-26 12:16:16.278418 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:16:16.410838 There are 5611 currently running Tor nodes.
+2023-03-26 12:16:16.479392 Controller initialized on port 9051. Talking to Tor on port 9050.
+^Cmagesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 46.166.162.57 84.240.60.234
+2023-03-26 12:16:55.610466 Read config file tingrc
+2023-03-26 12:16:55.618617 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:16:55.754058 There are 5611 currently running Tor nodes.
+2023-03-26 12:16:55.816284 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (46.166.162.57,84.240.60.234)
+46.166.162.57
+84.240.60.234
+{'y': {'fp': '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'ip': '84.240.60.234'}, 'x': {'fp': 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'ip': '46.166.162.57'}}
+2023-03-26 12:16:55.816744 Measuring new pair: 46.166.162.57->84.240.60.234
+2023-03-26 12:16:55.816785 Iteration 1
+2023-03-26 12:16:55.816837 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:16:55.816916 Building circuit...
+2023-03-26 12:16:56.755678 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:19:44.614666 Ting complete, min for this circuit: 512.764220ms
+2023-03-26 12:19:44.614751 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:19:44.614862 Building circuit...
+2023-03-26 12:19:45.546174 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:22:29.813224 Ting complete, min for this circuit: 603.206870ms
+2023-03-26 12:22:29.813315 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:22:29.813514 Building circuit...
+2023-03-26 12:22:40.758161 Circuit failed to be created: TIMEOUT
+2023-03-26 12:22:40.758310 Building circuit...
+2023-03-26 12:22:50.784093 Circuit failed to be created: TIMEOUT
+2023-03-26 12:22:50.784213 Building circuit...
+2023-03-26 12:23:01.793090 Circuit failed to be created: TIMEOUT
+2023-03-26 12:23:01.793212 Building circuit...
+2023-03-26 12:23:12.803753 Circuit failed to be created: TIMEOUT
+2023-03-26 12:23:12.803873 Building circuit...
+2023-03-26 12:23:23.812543 Circuit failed to be created: TIMEOUT
+2023-03-26 12:23:23.812659 Building circuit...
+2023-03-26 12:23:33.819256 Circuit failed to be created: TIMEOUT
+2023-03-26 12:23:33.819360 Building circuit...
+^C^[[A^C^C^C^C^C^C^C^Cc
+^Cmagesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 46.166.162.57 213.252.245.202
+2023-03-26 12:23:54.765433 Read config file tingrc
+2023-03-26 12:23:54.776213 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:23:54.911642 There are 5611 currently running Tor nodes.
+2023-03-26 12:23:54.977797 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (46.166.162.57,213.252.245.202)
+46.166.162.57
+213.252.245.202
+{'y': {'fp': '96275921105DC2D41B79AD75804A301738B51E47', 'ip': '213.252.245.202'}, 'x': {'fp': 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'ip': '46.166.162.57'}}
+2023-03-26 12:23:54.978358 Measuring new pair: 46.166.162.57->213.252.245.202
+2023-03-26 12:23:54.978436 Iteration 1
+2023-03-26 12:23:54.978523 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', '96275921105DC2D41B79AD75804A301738B51E47', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:23:54.978643 Building circuit...
+2023-03-26 12:23:55.940884 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:26:03.952311 Ting complete, min for this circuit: 388.617990ms
+2023-03-26 12:26:03.952433 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:26:03.952520 Building circuit...
+2023-03-26 12:26:04.884057 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:28:51.436617 Ting complete, min for this circuit: 614.910840ms
+2023-03-26 12:28:51.437062 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '96275921105DC2D41B79AD75804A301738B51E47', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:28:51.437160 Building circuit...
+2023-03-26 12:28:52.221343 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:31:35.187163 Ting complete, min for this circuit: 604.055170ms
+2023-03-26 12:31:35.187312 Predicted RTT between 46.166.162.57->213.252.245.202: -220.865015ms
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ 
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 46.166.162.57 84.240.60.234
+2023-03-26 12:33:19.118388 Read config file tingrc
+2023-03-26 12:33:19.129439 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:33:19.264938 There are 5611 currently running Tor nodes.
+2023-03-26 12:33:19.327705 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (46.166.162.57,84.240.60.234)
+46.166.162.57
+84.240.60.234
+{'y': {'fp': '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'ip': '84.240.60.234'}, 'x': {'fp': 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'ip': '46.166.162.57'}}
+2023-03-26 12:33:19.328273 Measuring new pair: 46.166.162.57->84.240.60.234
+2023-03-26 12:33:19.328346 Iteration 1
+2023-03-26 12:33:19.328467 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:33:19.328588 Building circuit...
+2023-03-26 12:33:20.303982 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:36:01.839400 Ting complete, min for this circuit: 613.473890ms
+2023-03-26 12:36:01.839492 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E3F717E076D8FFFE31C5BE98D7461C9D544BF601', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:36:01.839695 Building circuit...
+2023-03-26 12:36:02.801761 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:39:37.385559 Ting complete, min for this circuit: 627.151970ms
+2023-03-26 12:39:37.385643 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '37535409102DFFE92F3DAC809E470E62BC27F1DF', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:39:37.385731 Building circuit...
+2023-03-26 12:39:47.963681 Circuit failed to be created: TIMEOUT
+2023-03-26 12:39:47.963807 Building circuit...
+2023-03-26 12:39:57.989460 Circuit failed to be created: TIMEOUT
+2023-03-26 12:39:57.989568 Building circuit...
+2023-03-26 12:40:08.998085 Circuit failed to be created: TIMEOUT
+2023-03-26 12:40:08.998199 Building circuit...
+2023-03-26 12:40:20.007292 Circuit failed to be created: TIMEOUT
+2023-03-26 12:40:20.007402 Building circuit...
+2023-03-26 12:40:31.016136 Circuit failed to be created: TIMEOUT
+2023-03-26 12:40:31.016258 Building circuit...
+^C^Cmagesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 139.28.4.173 139.28.4.188  
+2023-03-26 12:41:20.983076 Read config file tingrc
+2023-03-26 12:41:20.993602 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:41:21.127465 There are 5611 currently running Tor nodes.
+2023-03-26 12:41:21.195027 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (139.28.4.173,139.28.4.188)
+139.28.4.173
+139.28.4.188
+{'y': {'fp': 'E04DB4BEC4F5513D71A18C817A588F22180CAA37', 'ip': '139.28.4.188'}, 'x': {'fp': 'DD9B7AE0B59BAEDEA937A9CD1E5CDFBCD55B0429', 'ip': '139.28.4.173'}}
+2023-03-26 12:41:21.195587 Measuring new pair: 139.28.4.173->139.28.4.188
+2023-03-26 12:41:21.195653 Iteration 1
+2023-03-26 12:41:21.195738 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'DD9B7AE0B59BAEDEA937A9CD1E5CDFBCD55B0429', 'E04DB4BEC4F5513D71A18C817A588F22180CAA37', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:41:21.195860 Building circuit...
+2023-03-26 12:41:22.406392 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+^Cmagesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 139.28.4.173 139.28.4.188
+2023-03-26 12:42:07.746915 Read config file tingrc
+2023-03-26 12:42:07.754945 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:42:07.888849 There are 5611 currently running Tor nodes.
+2023-03-26 12:42:07.951250 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (139.28.4.173,139.28.4.188)
+139.28.4.173
+139.28.4.188
+{'y': {'fp': 'E04DB4BEC4F5513D71A18C817A588F22180CAA37', 'ip': '139.28.4.188'}, 'x': {'fp': 'DD9B7AE0B59BAEDEA937A9CD1E5CDFBCD55B0429', 'ip': '139.28.4.173'}}
+2023-03-26 12:42:07.951808 Measuring new pair: 139.28.4.173->139.28.4.188
+2023-03-26 12:42:07.951874 Iteration 1
+2023-03-26 12:42:07.951959 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'DD9B7AE0B59BAEDEA937A9CD1E5CDFBCD55B0429', 'E04DB4BEC4F5513D71A18C817A588F22180CAA37', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:42:07.952080 Building circuit...
+2023-03-26 12:42:09.049565 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:44:33.656029 Ting complete, min for this circuit: 474.869970ms
+2023-03-26 12:44:33.656125 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'DD9B7AE0B59BAEDEA937A9CD1E5CDFBCD55B0429', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:44:33.656324 Building circuit...
+2023-03-26 12:44:34.664116 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:47:22.412800 Ting complete, min for this circuit: 651.880030ms
+2023-03-26 12:47:22.412883 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E04DB4BEC4F5513D71A18C817A588F22180CAA37', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:47:22.412970 Building circuit...
+2023-03-26 12:47:23.315030 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:50:02.091139 Ting complete, min for this circuit: 623.340850ms
+2023-03-26 12:50:02.091635 Predicted RTT between 139.28.4.173->139.28.4.188: -162.74047ms
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting 91.213.233.138 176.126.164.93
+2023-03-26 12:50:53.290000 Read config file tingrc
+2023-03-26 12:50:53.300962 Found list of relays in cache that is 1 hours old. Using that...
+2023-03-26 12:50:53.436080 There are 5611 currently running Tor nodes.
+2023-03-26 12:50:53.504063 Controller initialized on port 9051. Talking to Tor on port 9050.
+Ting mode selected : (91.213.233.138,176.126.164.93)
+91.213.233.138
+176.126.164.93
+{'y': {'fp': '20517AD593E0BA52DF25A4A87D0BB2DBD7F8B48F', 'ip': '176.126.164.93'}, 'x': {'fp': '04EE5E1B23127D26A36F71C66810D88B0B80BB91', 'ip': '91.213.233.138'}}
+2023-03-26 12:50:53.504752 Measuring new pair: 91.213.233.138->176.126.164.93
+2023-03-26 12:50:53.504822 Iteration 1
+2023-03-26 12:50:53.504907 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '04EE5E1B23127D26A36F71C66810D88B0B80BB91', '20517AD593E0BA52DF25A4A87D0BB2DBD7F8B48F', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:50:53.505027 Building circuit...
+2023-03-26 12:50:54.835311 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+^[[2~2023-03-26 12:54:18.964445 Ting complete, min for this circuit: 743.269210ms
+2023-03-26 12:54:18.964901 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '04EE5E1B23127D26A36F71C66810D88B0B80BB91', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:54:18.965040 Building circuit...
+2023-03-26 12:54:20.224951 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 12:57:35.631429 Ting complete, min for this circuit: 741.322040ms
+2023-03-26 12:57:35.631519 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '20517AD593E0BA52DF25A4A87D0BB2DBD7F8B48F', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 12:57:35.631722 Building circuit...
+2023-03-26 12:57:37.731678 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:00:33.134007 Ting complete, min for this circuit: 581.588030ms
+2023-03-26 13:00:33.134191 Predicted RTT between 91.213.233.138->176.126.164.93: 81.814175ms
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file inputFiles/TRinputFileAPResearch --config-file ./tingrc
+2023-03-26 13:06:16.325029 Read config file ./tingrc
+2023-03-26 13:06:16.335856 Found list of relays in cache that is 2 hours old. Using that...
+2023-03-26 13:06:16.470845 There are 5611 currently running Tor nodes.
+2023-03-26 13:06:16.539110 Controller initialized on port 9051. Talking to Tor on port 9050.
+Collect mode selected : input_file=inputFiles/TRinputFileAPResearch
+213.238.182.114
+78.135.73.151
+{'y': {'fp': '96933A0BA9C6312A8E3BD500DE29C5266AD25658', 'ip': '78.135.73.151'}, 'x': {'fp': 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', 'ip': '213.238.182.114'}}
+2023-03-26 13:06:16.542527 Measuring new pair: 213.238.182.114->78.135.73.151
+2023-03-26 13:06:16.542595 Iteration 1
+2023-03-26 13:06:16.542681 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', '96933A0BA9C6312A8E3BD500DE29C5266AD25658', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:06:16.542796 Building circuit...
+2023-03-26 13:06:18.149628 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:08:53.580847 Ting complete, min for this circuit: 547.683000ms
+2023-03-26 13:08:53.580931 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:08:53.581045 Building circuit...
+2023-03-26 13:08:54.404651 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:11:08.172421 Ting complete, min for this circuit: 515.062090ms
+2023-03-26 13:11:08.172886 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '96933A0BA9C6312A8E3BD500DE29C5266AD25658', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:11:08.173070 Building circuit...
+2023-03-26 13:11:08.969645 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:13:52.463470 Ting complete, min for this circuit: 559.053180ms
+2023-03-26 13:13:52.463833 Predicted RTT between 213.238.182.114->78.135.73.151: 10.625365ms
+185.33.24.15
+91.151.93.46
+{'y': {'fp': '73D5E9C3C85A36EB3C1A6A23C2FF00BF7FE03446', 'ip': '91.151.93.46'}, 'x': {'fp': '6933B9605419618DF00A9B1C6F6669B62DC135A1', 'ip': '185.33.24.15'}}
+2023-03-26 13:13:52.473837 Measuring new pair: 185.33.24.15->91.151.93.46
+2023-03-26 13:13:52.473887 Iteration 1
+2023-03-26 13:13:52.473956 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '6933B9605419618DF00A9B1C6F6669B62DC135A1', '73D5E9C3C85A36EB3C1A6A23C2FF00BF7FE03446', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:13:52.474047 Building circuit...
+2023-03-26 13:13:53.475699 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:16:17.935150 Ting complete, min for this circuit: 516.667130ms
+2023-03-26 13:16:17.935243 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '6933B9605419618DF00A9B1C6F6669B62DC135A1', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:16:17.935345 Building circuit...
+2023-03-26 13:16:18.683480 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:18:23.495970 Ting complete, min for this circuit: 432.970050ms
+2023-03-26 13:18:23.496062 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '73D5E9C3C85A36EB3C1A6A23C2FF00BF7FE03446', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:18:23.496262 Building circuit...
+2023-03-26 13:18:24.419948 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:20:50.578101 Ting complete, min for this circuit: 498.372080ms
+2023-03-26 13:20:50.578475 Predicted RTT between 185.33.24.15->91.151.93.46: 50.996065ms
+213.238.182.114
+78.135.73.174
+{'y': {'fp': '368F40E89ACC7457E46B4F4F4EBE2128A101B9BD', 'ip': '78.135.73.174'}, 'x': {'fp': 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', 'ip': '213.238.182.114'}}
+2023-03-26 13:20:50.587639 Measuring new pair: 213.238.182.114->78.135.73.174
+2023-03-26 13:20:50.587705 Iteration 1
+2023-03-26 13:20:50.587808 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', '368F40E89ACC7457E46B4F4F4EBE2128A101B9BD', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:20:50.587912 Building circuit...
+2023-03-26 13:20:51.532026 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:22:27.333647 Failed to connect using the given circuit: timed out
+Closing connection.
+2023-03-26 13:22:27.333999 CircuitConnectionException: 
+2023-03-26 13:22:27.334141 Cooling down for five seconds...
+78.135.73.180
+193.169.250.229
+{'y': {'fp': 'F2C59029BCDB94E9E2DA20D6852B7D20B67669C7', 'ip': '193.169.250.229'}, 'x': {'fp': '65D94DCEFDC234D95D1F3404C58B4DEDB4685CE6', 'ip': '78.135.73.180'}}
+2023-03-26 13:22:32.346393 Measuring new pair: 78.135.73.180->193.169.250.229
+2023-03-26 13:22:32.346465 Iteration 1
+2023-03-26 13:22:32.346558 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '65D94DCEFDC234D95D1F3404C58B4DEDB4685CE6', 'F2C59029BCDB94E9E2DA20D6852B7D20B67669C7', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:22:32.346684 Building circuit...
+2023-03-26 13:22:33.626208 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:23:34.422453 Failed to connect using the given circuit: timed out
+Closing connection.
+2023-03-26 13:23:34.422811 CircuitConnectionException: 
+2023-03-26 13:23:34.422950 Cooling down for five seconds...
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file inputFiles/TRinputFileAPResearch --config-file ./tingrc
+2023-03-26 13:28:43.346141 Read config file ./tingrc
+2023-03-26 13:28:43.356699 Found list of relays in cache that is 2 hours old. Using that...
+2023-03-26 13:28:43.491557 There are 5611 currently running Tor nodes.
+2023-03-26 13:28:43.557909 Controller initialized on port 9051. Talking to Tor on port 9050.
+Collect mode selected : input_file=inputFiles/TRinputFileAPResearch
+213.238.182.114
+78.135.73.174
+{'y': {'fp': '368F40E89ACC7457E46B4F4F4EBE2128A101B9BD', 'ip': '78.135.73.174'}, 'x': {'fp': 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', 'ip': '213.238.182.114'}}
+2023-03-26 13:28:43.559870 Measuring new pair: 213.238.182.114->78.135.73.174
+2023-03-26 13:28:43.559936 Iteration 1
+2023-03-26 13:28:43.560021 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', '368F40E89ACC7457E46B4F4F4EBE2128A101B9BD', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:28:43.560145 Building circuit...
+2023-03-26 13:28:44.709231 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:31:43.378997 Ting complete, min for this circuit: 631.376980ms
+2023-03-26 13:31:43.379081 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'E8B88CE36E776B6D009D9D0CCEB76EBE93AB516D', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:31:43.379168 Building circuit...
+2023-03-26 13:31:44.359056 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:34:08.912919 Ting complete, min for this circuit: 507.959130ms
+2023-03-26 13:34:08.913358 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '368F40E89ACC7457E46B4F4F4EBE2128A101B9BD', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:34:08.913456 Building circuit...
+2023-03-26 13:34:09.724579 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:36:36.315107 Ting complete, min for this circuit: 523.332830ms
+2023-03-26 13:36:36.315254 Predicted RTT between 213.238.182.114->78.135.73.174: 115.731ms
+78.135.73.180
+193.169.250.229
+{'y': {'fp': 'F2C59029BCDB94E9E2DA20D6852B7D20B67669C7', 'ip': '193.169.250.229'}, 'x': {'fp': '65D94DCEFDC234D95D1F3404C58B4DEDB4685CE6', 'ip': '78.135.73.180'}}
+2023-03-26 13:36:36.322047 Measuring new pair: 78.135.73.180->193.169.250.229
+2023-03-26 13:36:36.322096 Iteration 1
+2023-03-26 13:36:36.322163 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '65D94DCEFDC234D95D1F3404C58B4DEDB4685CE6', 'F2C59029BCDB94E9E2DA20D6852B7D20B67669C7', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:36:36.322253 Building circuit...
+2023-03-26 13:36:37.377577 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:39:32.370420 Ting complete, min for this circuit: 655.795810ms
+2023-03-26 13:39:32.370514 Tinging x
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '65D94DCEFDC234D95D1F3404C58B4DEDB4685CE6', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:39:32.370716 Building circuit...
+2023-03-26 13:39:33.370544 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:42:09.315404 Ting complete, min for this circuit: 537.451030ms
+2023-03-26 13:42:09.315486 Tinging y
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', 'F2C59029BCDB94E9E2DA20D6852B7D20B67669C7', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:42:09.315571 Building circuit...
+2023-03-26 13:42:10.225117 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
+2023-03-26 13:45:00.935520 Ting complete, min for this circuit: 644.359830ms
+2023-03-26 13:45:00.935702 Predicted RTT between 78.135.73.180->193.169.250.229: 64.89038ms
+magesap@client:~/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting$ python ting --input-file inputFiles/FIinputFileAPResearch --config-file ./tingrc
+2023-03-26 13:50:02.569131 Read config file ./tingrc
+2023-03-26 13:50:02.579665 Found list of relays in cache that is 2 hours old. Using that...
+2023-03-26 13:50:02.714517 There are 5611 currently running Tor nodes.
+2023-03-26 13:50:02.782253 Controller initialized on port 9051. Talking to Tor on port 9050.
+Collect mode selected : input_file=inputFiles/FIinputFileAPResearch
+95.217.227.216
+65.108.46.76
+{'y': {'fp': 'F50A8F16C555ADFF3E5827B0DD035CE86F71A0E9', 'ip': '65.108.46.76'}, 'x': {'fp': '286C6A3E5E1A4F956BF0061E02A284D76FA2B39D', 'ip': '95.217.227.216'}}
+2023-03-26 13:50:02.784335 Measuring new pair: 95.217.227.216->65.108.46.76
+2023-03-26 13:50:02.784450 Iteration 1
+2023-03-26 13:50:02.784539 Tinging xy
+Debug: 
+['8BDBE498180C41249D3230FC5092CB3EB5A62482', '286C6A3E5E1A4F956BF0061E02A284D76FA2B39D', 'F50A8F16C555ADFF3E5827B0DD035CE86F71A0E9', 'A0B5B5906EB13F213D7CA9AFEC91934BE3A5930F']
+2023-03-26 13:50:02.784661 Building circuit...
+2023-03-26 13:50:03.750457 Circuit built successfully.
+	Trying to connect..
+	Connected successfully!
