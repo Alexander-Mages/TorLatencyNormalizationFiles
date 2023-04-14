@@ -3,7 +3,7 @@ ControlPort 9151
 CookieAuthentication 1
 
 LearnCircuitBuildTimeout 0
-DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/data/w
+DataDirectory /home/apmages/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/data/w
 #ORPort 9001
 
 
@@ -13,14 +13,14 @@ Address 206.117.25.79
 #OutboundBindAddress 206.117.25.79
 #ORPort 206.117.25.79:10004
 ORPort 206.117.25.79:10004  NoListen
-ORPort 192.168.1.108:9001  NoAdvertise
+ORPort 192.168.254.2:9001  NoAdvertise
 
 
 
 DirReqStatistics 0
 UseMicroDescriptors 0
 DownloadExtraInfo 1
-Log info file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.w.log
+Log info file /home/apmages/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.w.log
 SocksListenAddress 127.0.0.1
 SocksPort 9150
 WarnUnsafeSocks 0

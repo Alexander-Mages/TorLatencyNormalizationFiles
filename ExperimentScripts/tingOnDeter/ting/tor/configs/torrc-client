@@ -5,12 +5,12 @@ CookieAuthentication 1
 
 CircuitBuildTimeout 10
 LearnCircuitBuildTimeout 0
-DataDirectory /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/data/client
+DataDirectory /home/apmages/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/data/client
 DirPort 9030
 DirReqStatistics 0
 UseMicrodescriptors 0
 ExitPolicy reject *:*
-Log info file /users/magesap/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.client.log
+Log info file /home/apmages/TorLatencyNormalizationFiles/ExperimentScripts/tingOnDeter/ting/tor/logs/gitIgnore.client.log
 SocksListenAddress 127.0.0.1
 SocksPort 9050
 WarnUnsafeSocks 0
