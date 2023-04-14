@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("filename")
 #parser.add_argument("desiredData") Parsing the calculated RTT is as simple as adding more if statements. Not needed currently.
 parser.add_argument("monkeySeeOrMonkeyDo", choices=['see','save'])
-parser.add_argument("--outputFile")
+parser.add_argument("--outputFilePrefix")
 parser.add_argument("--jsonLineNumber", default=None)
 
 args = parser.parse_args()
@@ -21,7 +21,7 @@ else:
     filename = args.filename
     #desiredData = args.desiredData
     seeOrSave = args.monkeySeeOrMonkeyDo
-    outputFile = args.outputFile
+    outputFilePrefix = args.outputFilePrefix
     jsonLineNumber = args.jsonLineNumber
 
 #make filename last argument
@@ -30,12 +30,12 @@ else:
 resultList = []
 with open(filename, 'rU') as file:
     lines = file.readlines()
-    print(lines)
+    #print(lines)
     for jsonObj in lines:
         resultDict = json.loads(jsonObj) #json.loads() reads from string, json.load() reads from file object
         resultList.append(resultDict)
 	#DEBUG START
-        print("appending line")
+        #print("appending line")
 	#DEBUG END
 
 
@@ -55,17 +55,23 @@ else:
 
 if seeOrSave == "save":
     print("saving xy data from " + filename + ". RTTs from circuit " + result["y"]["ip"] + "<-->" + result["x"]["ip"])
-
-    with open(outputFile, 'w') as file:
+    filename = outputFilePrefix + "_" + result["y"]["ip"] + "-" + result["x"]["ip"]
+    try:
+        resultTest = result["trials"][0]["xy"]["measurements"]
+    except IndexError:
+        filename = "Err" + filename
+    with open(filename, 'w') as file:
+        print(filename)
         for latency in result["trials"][0]["xy"]["measurements"]:
             file.write("%s\n" % latency)
-        print("done. Saved to " + outputFile)
+        print("done. Saved to " + filename)
 elif seeOrSave == "see":
     for result in resultList:
         print("\ny: " + result["y"]["ip"] + "\nx: " + result["x"]["ip"] + "\n")
 	#DEBUG START
-        print(result)
+        #print(result)
 	#DEBUG END
         print(result["trials"][0]["xy"]["measurements"])
 else:
     print("something's wrong")
+print(filename)
